@@ -9,7 +9,7 @@ dependencies:
   flutter_web: any
   flutter_web_ui: any
   rxdart: ^0.22.0
-  bloc: ^0.13.0
+  bloc: ^0.14.0
   equatable: ^0.2.6
   flutter_bloc:
     git:

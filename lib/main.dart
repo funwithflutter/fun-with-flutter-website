@@ -10,7 +10,7 @@ import 'blocs/bloc.dart';
 import 'blocs/simple_bloc_delegate.dart';
 
 void main() {
-  BlocSupervisor().delegate = SimpleBlocDelegate();
+  BlocSupervisor.delegate = SimpleBlocDelegate();
   runApp(MyApp());
 }
 
@@ -19,14 +19,20 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      bloc: blogBloc..dispatch(Fetch()), //Load the Blog data
+      builder: (context) {
+        return blogBloc..dispatch(Fetch());
+      }, //Load the Blog data
       child: BlocProviderTree(
         blocProviders: [
           BlocProvider<FilteredBlogBloc>(
-            bloc: FilteredBlogBloc(blogBloc: blogBloc),
+            builder: (context) {
+              return FilteredBlogBloc(blogBloc: blogBloc);
+            },
           ),
           BlocProvider<PageBloc>(
-            bloc: PageBloc(),
+            builder: (context) {
+              return PageBloc();
+            },
           )
         ],
         child: MaterialApp(
