@@ -30,12 +30,12 @@ class _PostCardState extends State<PostCard> {
           padding = 16;
         });
       },
-      child: Card(
-        child: Container(
-          width: 400,
-          height: 400,
-          child: Padding(
-            padding: EdgeInsets.all(padding),
+      child: Padding(
+        padding: EdgeInsets.all(padding),
+        child: Card(
+          child: Container(
+            width: 400,
+            height: 400,
             child: Column(
               children: <Widget>[
                 Text(

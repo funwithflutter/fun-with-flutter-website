@@ -4,7 +4,7 @@ import 'package:fun_with_flutter/blocs/filtered_blog/filtered_blog.dart';
 import 'package:fun_with_flutter/blocs/page/page.dart';
 import 'package:fun_with_flutter/components/menu_drawer.dart';
 import 'package:fun_with_flutter/themes/app_colors.dart';
-import 'package:fun_with_flutter/widgets/post_card.dart';
+import 'package:fun_with_flutter/components/post_card.dart';
 
 class HomeScreen extends StatefulWidget {
   HomeScreen({Key key}) : super(key: key);
