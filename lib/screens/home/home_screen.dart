@@ -3,6 +3,7 @@ import 'package:flutter_web/material.dart';
 import 'package:fun_with_flutter/blocs/filtered_blog/filtered_blog.dart';
 import 'package:fun_with_flutter/blocs/page/page.dart';
 import 'package:fun_with_flutter/components/menu_drawer.dart';
+import 'package:fun_with_flutter/logic/tag_name_generator.dart';
 import 'package:fun_with_flutter/themes/app_colors.dart';
 import 'package:fun_with_flutter/components/post_card.dart';
 
@@ -135,7 +136,7 @@ class _FilteredPosts extends StatefulWidget {
 class _FilteredPostsState extends State<_FilteredPosts>
     with SingleTickerProviderStateMixin {
   AnimationController _animationController;
-  Tween<double> _paddingTween = Tween<double>(begin: 64, end: 32);
+  Tween<double> _paddingTween = Tween<double>(begin: 32, end: 0);
   Animation<double> _paddingAnimation;
   AnimationStatus _animationStatus;
   @override
@@ -183,25 +184,40 @@ class _FilteredPostsState extends State<_FilteredPosts>
         }
         if (state is FilteredBlogLoaded) {
           _restartAnimation();
-          return AnimatedBuilder(
-            animation: _paddingAnimation,
-            builder: (context, child) {
-              return Padding(
-                padding:
-                    EdgeInsets.symmetric(vertical: _paddingAnimation.value),
-                child: GridView.extent(
-                  maxCrossAxisExtent: 400,
-                  padding: const EdgeInsets.all(16),
-                  physics: bouncingScrollPhysics,
-                  children: <Widget>[
-                    for (var page in state.filteredBlog.pages)
-                      PostCard(
-                        post: page,
-                      )
-                  ],
+          return Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              Padding(
+                padding: const EdgeInsets.only(left: 32, top: 16.0),
+                child: Text(
+                  TagDisplayNameGenerator.mapTagToDisplayName(state.tagFilter),
+                  style: Theme.of(context).textTheme.display1,
                 ),
-              );
-            },
+              ),
+              AnimatedBuilder(
+                animation: _paddingAnimation,
+                builder: (context, child) {
+                  return Expanded(
+                    child: Padding(
+                      padding: EdgeInsets.symmetric(
+                          vertical: _paddingAnimation.value),
+                      child: GridView.extent(
+                        maxCrossAxisExtent: 400,
+                        padding: const EdgeInsets.all(16),
+                        physics: bouncingScrollPhysics,
+                        children: <Widget>[
+                          for (var page in state.filteredBlog.pages)
+                            PostCard(
+                              post: page,
+                            )
+                        ],
+                      ),
+                    ),
+                  );
+                },
+              ),
+            ],
           );
         }
         return Text('Something went wrong');
