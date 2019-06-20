@@ -137,13 +137,13 @@ class _FilteredPostsState extends State<_FilteredPosts>
   AnimationController _animationController;
   Tween<double> _paddingTween = Tween<double>(begin: 64, end: 32);
   Animation<double> _paddingAnimation;
-
+  AnimationStatus _animationStatus;
   @override
   void initState() {
     _animationController = AnimationController(
       vsync: this,
-      duration: Duration(milliseconds: 250),
-    );
+      duration: Duration(milliseconds: 300),
+    )..addStatusListener(_animationStatusListener);
     _paddingAnimation = _paddingTween.animate(CurvedAnimation(
       curve: Curves.easeOut,
       parent: _animationController,
@@ -151,6 +151,17 @@ class _FilteredPostsState extends State<_FilteredPosts>
     _animationController.forward();
 
     super.initState();
+  }
+
+  void _animationStatusListener(AnimationStatus status) {
+    _animationStatus = status;
+  }
+
+  // Only restarts the animation if it is already completed, to avoid jittery behaviour on screen resize
+  void _restartAnimation() {
+    if (_animationStatus == AnimationStatus.completed) {
+      _animationController.forward(from: 0);
+    }
   }
 
   @override
@@ -161,6 +172,7 @@ class _FilteredPostsState extends State<_FilteredPosts>
 
   @override
   Widget build(BuildContext context) {
+    var bouncingScrollPhysics = BouncingScrollPhysics();
     return BlocBuilder(
       bloc: BlocProvider.of<FilteredBlogBloc>(context),
       builder: (BuildContext context, FilteredBlogState state) {
@@ -170,30 +182,27 @@ class _FilteredPostsState extends State<_FilteredPosts>
           );
         }
         if (state is FilteredBlogLoaded) {
-          _animationController.forward(from: 0);
-          // if (state.tagFilter.isNotEmpty) {
-          return Center(
-            child: SingleChildScrollView(
-              child: AnimatedBuilder(
-                animation: _paddingAnimation,
-                builder: (context, child) {
-                  return Padding(
-                    padding: EdgeInsets.all(_paddingAnimation.value),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
-                      children: <Widget>[
-                        for (var page in state.filteredBlog.pages)
-                          PostCard(post: page),
-                      ],
-                    ),
-                  );
-                },
-              ),
-            ),
+          _restartAnimation();
+          return AnimatedBuilder(
+            animation: _paddingAnimation,
+            builder: (context, child) {
+              return Padding(
+                padding:
+                    EdgeInsets.symmetric(vertical: _paddingAnimation.value),
+                child: GridView.extent(
+                  maxCrossAxisExtent: 400,
+                  padding: const EdgeInsets.all(16),
+                  physics: bouncingScrollPhysics,
+                  children: <Widget>[
+                    for (var page in state.filteredBlog.pages)
+                      PostCard(
+                        post: page,
+                      )
+                  ],
+                ),
+              );
+            },
           );
-          // } else {
-          //   return Center(child: Text('Home'));
-          // }
         }
         return Text('Something went wrong');
       },
