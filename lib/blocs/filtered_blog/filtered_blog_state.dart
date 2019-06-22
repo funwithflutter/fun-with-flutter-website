@@ -23,13 +23,12 @@ class FilteredBlogLoading extends FilteredBlogState {
 }
 
 class FilteredBlogLoaded extends FilteredBlogState {
-  final Blog filteredBlog;
-  // final List<PostData> posts;
-  // final List<String> availableTags;
-  final String tagFilter;
-
   FilteredBlogLoaded(this.filteredBlog, this.tagFilter)
       : super([filteredBlog, tagFilter]);
+
+  final Blog filteredBlog;
+  final String tagFilter;
+
   @override
   String toString() {
     return 'FilteredBlogLoaded { filteredBlog: $filteredBlog, singleTagFilter: $tagFilter}';

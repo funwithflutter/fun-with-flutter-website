@@ -8,10 +8,10 @@ abstract class PageEvent extends Equatable {
 }
 
 class UpdatePage extends PageEvent {
-  final PageState page;
-
   UpdatePage(this.page) : super([page]);
 
+  final PageState page;
+
   @override
-  String toString() => "UpdatePage {page: $page}";
+  String toString() => 'UpdatePage {page: $page}';
 }

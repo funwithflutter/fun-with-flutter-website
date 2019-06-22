@@ -19,10 +19,10 @@ class BlogError extends BlogState {
 }
 
 class BlogLoaded extends BlogState {
+  BlogLoaded(this.blog, this.tags) : super([blog, tags]);
+
   final Blog blog;
   final List<String> tags;
-
-  BlogLoaded(this.blog, this.tags): super([blog, tags]);
 
   @override
   String toString() => 'BlogLoaded';

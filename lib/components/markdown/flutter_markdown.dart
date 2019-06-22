@@ -1,14 +1,10 @@
 import 'package:flutter_web/material.dart';
 
-//TODO Remove this if not used
+// TODO(Anyone): Remove this if not used
 
 Widget header1(String val) {
   return Text(val, style: TextStyle(fontFamily: 'WorkSans', fontSize: 28));
 }
-
-// Widget body1(String val,) {
-//   return Text(val, style: TextStyle(fontFamily: 'WorkSans', fontSize: 18));
-// }
 
 Widget body1(String val, {FontWeight weight = FontWeight.normal}) {
   return Text(val,

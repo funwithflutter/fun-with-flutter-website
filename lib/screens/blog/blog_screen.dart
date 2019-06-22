@@ -8,24 +8,24 @@ class BlogScreen extends StatelessWidget {
     return Scaffold(
       body: Center(
           child: FutureBuilder(
-        future: BlogApi("assets/data/tags_test_data.json").fetchSummaryData(),
+        future: BlogApi('assets/data/tags_test_data.json').fetchSummaryData(),
         builder: (context, AsyncSnapshot<Blog> snapshot) {
           switch (snapshot.connectionState) {
             case ConnectionState.none:
-              return new Text('Input a URL to start');
+              return const Text('Input a URL to start');
             case ConnectionState.waiting:
-              return new Center(child: new CircularProgressIndicator());
+              return const Center(child: CircularProgressIndicator());
             case ConnectionState.active:
-              return new Text('');
+              return const Text('');
             case ConnectionState.done:
               if (snapshot.hasError) {
-                return new Text(
+                return Text(
                   '${snapshot.error}',
                   style: TextStyle(color: Colors.red),
                 );
               } else {
-                return new ListView(
-                    children: <Widget>[new Text(snapshot.data.tags[0].name)]);
+                return ListView(
+                    children: <Widget>[Text(snapshot.data.tags[0].name)]);
               }
           }
         },

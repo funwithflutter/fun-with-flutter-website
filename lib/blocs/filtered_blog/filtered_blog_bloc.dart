@@ -8,9 +8,6 @@ import 'filtered_blog_event.dart';
 import 'filtered_blog_state.dart';
 
 class FilteredBlogBloc extends Bloc<FilteredBlogEvent, FilteredBlogState> {
-  final BlogBloc blogBloc;
-  StreamSubscription _blogSubscription;
-
   FilteredBlogBloc({@required this.blogBloc}) {
     _blogSubscription = blogBloc.state.listen((blogState) {
       if (blogState is BlogLoaded) {
@@ -20,11 +17,13 @@ class FilteredBlogBloc extends Bloc<FilteredBlogEvent, FilteredBlogState> {
     });
   }
 
+  final BlogBloc blogBloc;
+  StreamSubscription _blogSubscription;
+
   @override
   FilteredBlogState get initialState {
     if (blogBloc.currentState is BlogLoaded) {
-      return FilteredBlogLoaded((blogBloc.currentState as BlogLoaded).blog,
-           "");
+      return FilteredBlogLoaded((blogBloc.currentState as BlogLoaded).blog, '');
     } else {
       return FilteredBlogLoading();
     }
@@ -50,7 +49,8 @@ class FilteredBlogBloc extends Bloc<FilteredBlogEvent, FilteredBlogState> {
   Stream<FilteredBlogState> _mapTagFilterToState(FilterByTag event) async* {
     if (blogBloc.currentState is BlogLoaded) {
       if (currentState is FilteredBlogLoaded) {
-        String currentTag = (currentState as FilteredBlogLoaded).tagFilter;
+        final String currentTag =
+            (currentState as FilteredBlogLoaded).tagFilter;
         // Test if this filter has already been applied. If yes clear filters and return.
         if (currentTag == event.tagFilter) {
           yield* _mapUpdateFilterToState();
@@ -64,8 +64,8 @@ class FilteredBlogBloc extends Bloc<FilteredBlogEvent, FilteredBlogState> {
   }
 
   Blog _mapTagFilterToFilteredBlog(Blog blog, String tagFilter) {
-    Tag filteredTag = blog.tags.firstWhere((tag) {
-      return (tag.name == tagFilter);
+    final Tag filteredTag = blog.tags.firstWhere((tag) {
+      return tag.name == tagFilter;
     });
     return blog.copyWith(pages: filteredTag.pages);
   }

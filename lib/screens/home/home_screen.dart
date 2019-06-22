@@ -16,7 +16,7 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen>
     with SingleTickerProviderStateMixin {
-  static final double menuSize = 300;
+  static const double menuSize = 300;
 
   final Duration animationDuration = Duration(milliseconds: 100);
   AnimationController _controller;
@@ -83,13 +83,13 @@ class _HomeScreenState extends State<HomeScreen>
               if (menuVisible)
                 Transform.translate(
                   offset: Offset(-menuSize + menuAnimation.value, 0),
-                  child: MenuDrawer(
+                  child: const MenuDrawer(
                     width: menuSize,
                   ),
                 ),
               Row(
                 children: <Widget>[
-                  _EmptyContainerPusher(menuAnimation.value),
+                  _emptyContainerPusher(menuAnimation.value),
                   BlocBuilder(
                     bloc: BlocProvider.of<PageBloc>(context),
                     builder: (BuildContext context, PageState state) {
@@ -100,13 +100,13 @@ class _HomeScreenState extends State<HomeScreen>
                           child: _FilteredPosts(),
                         );
                       } else if (state == PageState.widget) {
-                        return Expanded(child: Text('Todo widgets'));
+                        return const Expanded(child: Text('Todo widgets'));
                       } else if (state == PageState.about) {
-                        return Expanded(child: Text('Todo about'));
+                        return const Expanded(child: Text('Todo about'));
                       } else {
-                        return Expanded(
-                          child: (Text(
-                              "Whoops you found something that's not yet implemented.")),
+                        return const Expanded(
+                          child: Text(
+                              "Whoops you found something that's not yet implemented."),
                         );
                       }
                     },
@@ -124,7 +124,7 @@ class _HomeScreenState extends State<HomeScreen>
 class _Home extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Placeholder();
+    return const Placeholder();
   }
 }
 
@@ -136,7 +136,7 @@ class _FilteredPosts extends StatefulWidget {
 class _FilteredPostsState extends State<_FilteredPosts>
     with SingleTickerProviderStateMixin {
   AnimationController _animationController;
-  Tween<double> _paddingTween = Tween<double>(begin: 32, end: 0);
+  final Tween<double> _paddingTween = Tween<double>(begin: 32, end: 0);
   Animation<double> _paddingAnimation;
   AnimationStatus _animationStatus;
   @override
@@ -173,12 +173,12 @@ class _FilteredPostsState extends State<_FilteredPosts>
 
   @override
   Widget build(BuildContext context) {
-    var bouncingScrollPhysics = BouncingScrollPhysics();
+    const bouncingScrollPhysics = BouncingScrollPhysics();
     return BlocBuilder(
       bloc: BlocProvider.of<FilteredBlogBloc>(context),
       builder: (BuildContext context, FilteredBlogState state) {
         if (state is FilteredBlogLoading) {
-          return Center(
+          return const Center(
             child: CircularProgressIndicator(),
           );
         }
@@ -220,13 +220,13 @@ class _FilteredPostsState extends State<_FilteredPosts>
             ],
           );
         }
-        return Text('Something went wrong');
+        return const Text('Something went wrong');
       },
     );
   }
 }
 
-Container _EmptyContainerPusher(double width) {
+Container _emptyContainerPusher(double width) {
   return Container(
     width: width,
   );

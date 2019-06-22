@@ -13,19 +13,19 @@ class TagsLoading extends TagState {
 }
 
 class TagsLoaded extends TagState {
-  final List<Tag> tags;
-
   TagsLoaded(this.tags) : super([tags]);
+
+  final List<Tag> tags;
 
   @override
   String toString() => 'TagsLoaded';
 }
 
 class TagsFiltered extends TagState {
+  TagsFiltered(this.tags, this.filter) : super([tags, filter]);
+
   final List<Tag> tags;
   final String filter;
-
-  TagsFiltered(this.tags, this.filter) : super([tags, filter]);
 
   @override
   String toString() => 'TagsFiltered';

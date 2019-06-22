@@ -2,9 +2,9 @@ import 'package:flutter_web/material.dart';
 import 'package:fun_with_flutter/models/blog_model.dart';
 
 class PostCard extends StatefulWidget {
-  final PostData post;
-
   PostCard({Key key, this.post}) : super(key: key);
+
+  final PostData post;
 
   @override
   _PostCardState createState() => _PostCardState();
@@ -15,10 +15,10 @@ class _PostCardState extends State<PostCard> {
 
   @override
   Widget build(BuildContext context) {
-    var post = widget.post;
+    final post = widget.post;
     return GestureDetector(
       onTap: () {
-        print('Go to page'); // TODO go to page
+        print('Go to page'); // TODO(Anyone): go to page
       },
       onTapDown: (TapDownDetails details) {
         setState(() {

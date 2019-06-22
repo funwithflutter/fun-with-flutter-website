@@ -35,15 +35,15 @@ class _CategoryPageViewerState extends State<CategoryPageViewer> {
 
   @override
   Widget build(BuildContext context) {
-    var categoryLength = categoryData.length;
+    final categoryLength = categoryData.length;
     return Stack(
       children: <Widget>[
         PageView.builder(
           controller: _pageController,
           itemCount: (categoryLength / 2).round(),
           itemBuilder: (BuildContext context, int index) {
-            var firstIndex = index * 2;
-            var secondIndex = firstIndex + 1;
+            final firstIndex = index * 2;
+            final secondIndex = firstIndex + 1;
             return Row(
               children: <Widget>[
                 _CategoryPanel(
@@ -63,7 +63,7 @@ class _CategoryPageViewerState extends State<CategoryPageViewer> {
           alignment: Alignment.centerLeft,
           child: IconButton(
             iconSize: 48,
-            icon: Icon(
+            icon: const Icon(
               Icons.arrow_back,
               color: primaryColor,
             ),
@@ -76,7 +76,7 @@ class _CategoryPageViewerState extends State<CategoryPageViewer> {
             alignment: Alignment.centerRight,
             child: IconButton(
               iconSize: 48,
-              icon: Icon(
+              icon: const Icon(
                 Icons.arrow_forward,
                 color: secondaryColor,
               ),
@@ -91,14 +91,14 @@ class _CategoryPageViewerState extends State<CategoryPageViewer> {
 }
 
 class _CategoryPanel extends StatelessWidget {
-  final CategoryModel categoryModel;
-  final Color backgroundColor;
-
   const _CategoryPanel(
       {Key key,
       @required this.categoryModel,
       this.backgroundColor = Colors.white})
       : super(key: key);
+
+  final CategoryModel categoryModel;
+  final Color backgroundColor;
 
   @override
   Widget build(BuildContext context) {

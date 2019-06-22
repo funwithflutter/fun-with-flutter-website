@@ -8,18 +8,18 @@ abstract class FilteredBlogEvent extends Equatable {
 }
 
 class UpdateFilteredBlog extends FilteredBlogEvent {
-  final Blog blog;
-
   UpdateFilteredBlog(this.blog) : super([blog]);
+
+  final Blog blog;
 
   @override
   String toString() => 'UpdateFilteredBlog';
 }
 
 class FilterByTag extends FilteredBlogEvent {
-  final String tagFilter;
+  FilterByTag(this.tagFilter) : super([tagFilter]);
 
-  FilterByTag(this.tagFilter): super([tagFilter]);
+  final String tagFilter;
 
   @override
   String toString() => 'FilterByTag';

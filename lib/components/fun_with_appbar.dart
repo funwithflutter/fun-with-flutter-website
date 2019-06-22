@@ -1,8 +1,8 @@
+import 'dart:html' as html;
 import 'package:flutter_web/material.dart';
 import 'package:fun_with_flutter/themes/app_colors.dart';
-import 'dart:html' as html;
 
-//TODO Remove if not used
+// TODO(Anyone): Remove if not used
 class FunWithAppBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -25,28 +25,29 @@ class FunWithAppBar extends StatelessWidget {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: <Widget>[
-                  Spacer(
+                  const Spacer(
                     flex: 14,
                   ),
                   FlatButton(
                     child: Text('Github',
                         style: Theme.of(context).textTheme.title),
                     onPressed: () {
-                      html.window.open(
-                          'https://github.com/funwithflutter', 'Github');
+                      html.window
+                          .open('https://github.com/funwithflutter', 'Github');
                     },
                   ),
-                  Spacer(
+                  const Spacer(
                     flex: 1,
                   ),
                   FlatButton(
-                      child: Text('YouTube',
-                          style: Theme.of(context).textTheme.title),
-                          onPressed: () {
-                            html.window.open(
+                    child: Text('YouTube',
+                        style: Theme.of(context).textTheme.title),
+                    onPressed: () {
+                      html.window.open(
                           'https://www.youtube.com/funwithflutter', 'YouTube');
-                          },),
-                  Spacer(flex: 6),
+                    },
+                  ),
+                  const Spacer(flex: 6),
                 ],
               ),
             ),

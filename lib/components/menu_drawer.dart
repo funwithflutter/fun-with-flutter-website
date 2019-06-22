@@ -4,9 +4,9 @@ import 'package:fun_with_flutter/blocs/bloc.dart';
 import 'package:fun_with_flutter/themes/app_colors.dart';
 
 class MenuDrawer extends StatelessWidget {
-  final double width;
-
   const MenuDrawer({Key key, this.width}) : super(key: key);
+
+  final double width;
 
   @override
   Widget build(BuildContext context) {
@@ -16,7 +16,7 @@ class MenuDrawer extends StatelessWidget {
       width: width,
       child: Column(
         children: <Widget>[
-          SizedBox(
+          const SizedBox(
             height: 16,
           ),
           _menuButton(Icons.widgets, 'Custom Widgets', () {
@@ -29,7 +29,7 @@ class MenuDrawer extends StatelessWidget {
               bloc: filteredBlogBloc,
               builder: (BuildContext context, FilteredBlogState state) {
                 if (state is FilteredBlogLoading) {
-                  return Text('Loading data...');
+                  return const Text('Loading data...');
                 }
                 if (state is FilteredBlogLoaded) {
                   return Column(
@@ -43,7 +43,7 @@ class MenuDrawer extends StatelessWidget {
                     ],
                   );
                 }
-                return Text('Something went wrong');
+                return const Text('Something went wrong');
               },
             ),
           ),
@@ -75,7 +75,7 @@ Widget _menuLable(IconData iconData, String lable) {
         iconData,
         color: fadedBlack,
       ),
-      SizedBox(
+      const SizedBox(
         width: 20,
       ),
       Flexible(
@@ -92,10 +92,10 @@ Widget _menuLable(IconData iconData, String lable) {
 }
 
 class _Tag extends StatelessWidget {
+  const _Tag({Key key, this.tagName, this.currentFilter}) : super(key: key);
+
   final String tagName;
   final String currentFilter;
-
-  const _Tag({Key key, this.tagName, this.currentFilter}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -111,11 +111,11 @@ class _Tag extends StatelessWidget {
 }
 
 class _MenuSection extends StatelessWidget {
-  final Widget child;
-  final String title;
-
   const _MenuSection({Key key, @required this.child, this.title})
       : super(key: key);
+
+  final Widget child;
+  final String title;
 
   @override
   Widget build(BuildContext context) {

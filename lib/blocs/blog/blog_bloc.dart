@@ -1,16 +1,17 @@
 import 'dart:async';
 import 'package:bloc/bloc.dart';
 import 'package:flutter_web/material.dart';
+import 'package:fun_with_flutter/models/blog_model.dart';
 import 'package:fun_with_flutter/repository/blog_repository.dart';
 import 'blog_event.dart';
 import 'blog_state.dart';
 
 class BlogBloc extends Bloc<BlogEvent, BlogState> {
-  final BlogRepository _blogRepository;
-
   BlogBloc({@required BlogRepository blogRepository})
       : assert(blogRepository != null),
         _blogRepository = blogRepository;
+
+  final BlogRepository _blogRepository;
 
   @override
   BlogState get initialState => BlogLoading();
@@ -27,8 +28,8 @@ class BlogBloc extends Bloc<BlogEvent, BlogState> {
   Stream<BlogState> _mapFetchToState() async* {
     try {
       if ((currentState is BlogLoading) || (currentState is BlogError)) {
-        final blog = await _blogRepository.getBlogData();
-        List<String> tags = blog.tags.map((tag) => tag.name).toList();
+        final Blog blog = await _blogRepository.getBlogData();
+        final List<String> tags = blog.tags.map((Tag tag) => tag.name).toList();
         yield BlogLoaded(blog, tags);
         return;
       }

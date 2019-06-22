@@ -15,9 +15,12 @@ Widget aboutIntro() {
       header1('Welcome!'),
       body1('Everything you see was made entirely in Flutter!'),
       paragraph([
-        "I want to expand this more as time goes on and as the Flutter Web project matures. At the time of writing this it is still with Technical Preview",
-        "You might see issues while browsing the site. These might be because I screwed up, or it might be a Flutter for Web issue :)"
-      ], [true,false])
+        'I want to expand this more as time goes on and as the Flutter Web project matures. At the time of writing this it is still with Technical Preview',
+        'You might see issues while browsing the site. These might be because I screwed up, or it might be a Flutter for Web issue :)'
+      ], [
+        true,
+        false
+      ])
     ],
   );
 }
