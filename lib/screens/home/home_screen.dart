@@ -58,7 +58,7 @@ class _HomeScreenState extends State<HomeScreen>
           'Fun with Flutter',
           style: Theme.of(context).textTheme.display1,
         ),
-        backgroundColor: Colors.white,
+        backgroundColor: Colors.transparent,
         leading: IconButton(
           onPressed: () {
             if (menuVisible) {
