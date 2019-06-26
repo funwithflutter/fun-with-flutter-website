@@ -4,6 +4,7 @@ import 'package:fun_with_flutter/blocs/filtered_blog/filtered_blog.dart';
 import 'package:fun_with_flutter/blocs/page/page.dart';
 import 'package:fun_with_flutter/components/menu_drawer.dart';
 import 'package:fun_with_flutter/logic/tag_name_generator.dart';
+import 'package:fun_with_flutter/screens/custom_widgets/custom_widgets.dart';
 import 'package:fun_with_flutter/themes/app_colors.dart';
 import 'package:fun_with_flutter/components/post_card.dart';
 
@@ -100,7 +101,7 @@ class _HomeScreenState extends State<HomeScreen>
                           child: _FilteredPosts(),
                         );
                       } else if (state == PageState.widget) {
-                        return const Expanded(child: Text('Todo widgets'));
+                        return CustomWidgets();
                       } else if (state == PageState.about) {
                         return const Expanded(child: Text('Todo about'));
                       } else {
