@@ -4,10 +4,12 @@ import 'package:fun_with_flutter/screens/custom_widgets/wave_slider/wave_slider.
 class WaveSliderWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: 300,
-      child: WaveSlider(
-        onChanged: (value) {},
+    return Center(
+      child: Container(
+        width: 500,
+        child: WaveSlider(
+          onChanged: (value) {},
+        ),
       ),
     );
   }

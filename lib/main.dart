@@ -1,6 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:flutter_web/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:fun_with_flutter/dataprovider/blog_data_provider.dart';
 import 'package:fun_with_flutter/repository/blog_repository.dart';
 
 import 'package:fun_with_flutter/themes/styles.dart';
@@ -15,9 +16,20 @@ void main() {
 }
 
 class MyApp extends StatelessWidget {
-  final BlogBloc blogBloc = BlogBloc(blogRepository: BlogRepository());
   @override
   Widget build(BuildContext context) {
+    String uri = 'https://fun-with-blog.firebaseapp.com/index.json';
+    assert(() {
+      uri = 'assets/data/tags_test_data.json';
+      return true;
+    }());
+
+    final BlogBloc blogBloc = BlogBloc(
+      blogRepository: BlogRepository(
+        blogDataProvider: BlogDataProvider(uri),
+      ),
+    );
+
     return BlocProvider(
       builder: (context) {
         return blogBloc..dispatch(Fetch());
@@ -67,8 +79,6 @@ class MyApp extends StatelessWidget {
 //   //     ..autoplay = true
 //   //     ..videoHeight  = 200,
 //   //     );
-
-
 
 //   runApp(Directionality(
 //     textDirection: TextDirection.ltr,

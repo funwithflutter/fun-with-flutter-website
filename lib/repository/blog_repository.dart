@@ -3,7 +3,7 @@ import 'package:fun_with_flutter/models/blog_model.dart';
 
 class BlogRepository {
   BlogRepository({BlogDataProvider blogDataProvider})
-      : _blogDataProvider = blogDataProvider ?? BlogDataProvider();
+      : _blogDataProvider = blogDataProvider ?? BlogDataProvider('assets/data/tags_test_data.json');
 
   final BlogDataProvider _blogDataProvider;
 
