@@ -12,48 +12,56 @@ class MenuDrawer extends StatelessWidget {
   Widget build(BuildContext context) {
     final filteredBlogBloc = BlocProvider.of<FilteredBlogBloc>(context);
     final pageBloc = BlocProvider.of<PageBloc>(context);
-    return Container(
-      width: width,
-      child: Column(
-        children: <Widget>[
-          const SizedBox(
-            height: 16,
-          ),
-          _menuButton(Icons.widgets, 'Custom Widgets', () {
-            filteredBlogBloc.dispatch(ClearFilters());
-            pageBloc.dispatch(UpdatePage(PageState.widget));
-          }),
-          _MenuSection(
-            title: 'Tags',
-            child: BlocBuilder(
-              bloc: filteredBlogBloc,
-              builder: (BuildContext context, FilteredBlogState state) {
-                if (state is FilteredBlogLoading) {
-                  return const Text('Loading data...');
-                }
-                if (state is FilteredBlogLoaded) {
-                  return Column(
-                    crossAxisAlignment: CrossAxisAlignment.end,
-                    children: <Widget>[
-                      for (final tag in state.filteredBlog.tags)
-                        _Tag(
-                          tagName: tag.name,
-                          currentFilter: state.tagFilter,
-                        ),
-                    ],
-                  );
-                }
-                return const Text('Something went wrong');
-              },
+    return SingleChildScrollView(
+      child: Container(
+        width: width,
+        child: Column(
+          children: <Widget>[
+            const SizedBox(
+              height: 16,
             ),
-          ),
-          _MenuSection(
-            child: _menuButton(Icons.question_answer, 'About', () {
+            _menuButton(Icons.widgets, 'Custom Widgets', () {
               filteredBlogBloc.dispatch(ClearFilters());
-              pageBloc.dispatch(UpdatePage(PageState.about));
+              pageBloc.dispatch(UpdatePage(PageState.widget));
             }),
-          ),
-        ],
+            _MenuSection(
+              title: 'Tags',
+              child: BlocBuilder(
+                bloc: filteredBlogBloc,
+                builder: (BuildContext context, FilteredBlogState state) {
+                  if (state is FilteredBlogLoading) {
+                    return const Padding(
+                      padding: EdgeInsets.all(8.0),
+                      child: Text('Loading data...'),
+                    );
+                  }
+                  if (state is FilteredBlogLoaded) {
+                    return Column(
+                      crossAxisAlignment: CrossAxisAlignment.end,
+                      children: <Widget>[
+                        for (final tag in state.filteredBlog.tags)
+                          _Tag(
+                            tagName: tag.name,
+                            currentFilter: state.tagFilter,
+                          ),
+                      ],
+                    );
+                  }
+                  return const Padding(
+                    padding: EdgeInsets.all(8.0),
+                    child: Text('Something went wrong'),
+                  );
+                },
+              ),
+            ),
+            _MenuSection(
+              child: _menuButton(Icons.question_answer, 'About', () {
+                filteredBlogBloc.dispatch(ClearFilters());
+                pageBloc.dispatch(UpdatePage(PageState.about));
+              }),
+            ),
+          ],
+        ),
       ),
     );
   }
