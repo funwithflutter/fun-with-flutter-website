@@ -7,22 +7,18 @@ class CustomWidgets extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Expanded(
-      child: Container(
+      child: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: <Widget>[
-            Expanded(
-              child: _CustomWidget(
-                title: 'Splash Tap',
-                child: SplashTapWidget(),
-              ),
+            _CustomWidget(
+              title: 'Splash Tap',
+              child: SplashTapWidget(),
             ),
-            Expanded(
-              child: _CustomWidget(
-                title: 'Wave Slider',
-                child: WaveSliderWidget(),
-              ),
+            _CustomWidget(
+              title: 'Wave Slider',
+              child: WaveSliderWidget(),
             ),
           ],
         ),
@@ -47,49 +43,56 @@ class _CustomWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: Container(
-        width: double.infinity,
-        height: double.infinity,
-        decoration: BoxDecoration(
-            border: Border.all(
-          color: fadedBlack,
-          width: 2,
-        )),
-        child: Column(
-          children: <Widget>[
-            Container(
-              decoration: BoxDecoration(
-                border: Border(
-                  bottom: BorderSide(
-                    color: fadedBlack,
-                    width: 2,
-                  ),
+    return LimitedBox(
+      maxHeight: 300,
+      child: Padding(
+        padding: const EdgeInsets.all(8),
+        child: AspectRatio(
+          aspectRatio: 3 / 2,
+          child: Container(
+            decoration: BoxDecoration(
+              border: Border(
+                top: BorderSide(
+                  color: fadedBlack,
+                  width: 0.5,
                 ),
               ),
-              width: double.infinity,
-              height: 50,
-              child: Row(
-                children: <Widget>[
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Text(title,
-                        style: Theme.of(context)
-                            .textTheme
-                            .headline
-                            .copyWith(color: fadedBlack)),
-                  ),
-                  Expanded(
-                    child: Container(),
-                  ),
-                  const _Link(title: 'Package'),
-                  const _Link(title: 'Video'),
-                ],
-              ),
             ),
-            Expanded(child: child),
-          ],
+            child: Column(
+              children: <Widget>[
+                Container(
+                  decoration: BoxDecoration(
+                    border: Border(
+                      bottom: BorderSide(
+                        color: fadedBlack,
+                        width: 0.5,
+                      ),
+                    ),
+                  ),
+                  width: double.infinity,
+                  height: 50,
+                  child: Row(
+                    children: <Widget>[
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Text(title,
+                            style: Theme.of(context)
+                                .textTheme
+                                .headline
+                                .copyWith(color: fadedBlack)),
+                      ),
+                      Expanded(
+                        child: Container(),
+                      ),
+                      const _Link(title: 'Package'),
+                      const _Link(title: 'Video'),
+                    ],
+                  ),
+                ),
+                Expanded(child: child),
+              ],
+            ),
+          ),
         ),
       ),
     );
@@ -105,7 +108,7 @@ class _Link extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(8),
+      padding: const EdgeInsets.only(right: 16, top: 8, left: 8, bottom: 8),
       child: Text(title),
     );
   }
