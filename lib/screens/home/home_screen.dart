@@ -1,9 +1,11 @@
+import 'dart:html' as html;
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_web/material.dart';
 import 'package:fun_with_flutter/blocs/filtered_blog/filtered_blog.dart';
 import 'package:fun_with_flutter/blocs/page/page.dart';
 import 'package:fun_with_flutter/components/menu_drawer.dart';
 import 'package:fun_with_flutter/logic/tag_name_generator.dart';
+import 'package:fun_with_flutter/screens/about/about_screen.dart';
 import 'package:fun_with_flutter/screens/custom_widgets/custom_widgets.dart';
 import 'package:fun_with_flutter/themes/app_colors.dart';
 import 'package:fun_with_flutter/components/post_card.dart';
@@ -74,6 +76,20 @@ class _HomeScreenState extends State<HomeScreen>
             color: fadedBlack,
           ),
         ),
+        actions: <Widget>[
+          FlatButton(
+            child: Text('Github', style: Theme.of(context).textTheme.title),
+            onPressed: () {
+              html.window.open('https://github.com/funwithflutter', 'Github');
+            },
+          ),
+          FlatButton(
+            child: Text('YouTube', style: Theme.of(context).textTheme.title),
+            onPressed: () {
+              html.window.open('https://youtube.com/funwithflutter', 'YouTube');
+            },
+          ),
+        ],
         elevation: 1,
       ),
       body: AnimatedBuilder(
@@ -90,7 +106,7 @@ class _HomeScreenState extends State<HomeScreen>
                 ),
               Row(
                 children: <Widget>[
-                  _emptyContainerPusher(menuAnimation.value),
+                  SizedBox(width: menuAnimation.value),
                   BlocBuilder(
                     bloc: BlocProvider.of<PageBloc>(context),
                     builder: (BuildContext context, PageState state) {
@@ -103,7 +119,7 @@ class _HomeScreenState extends State<HomeScreen>
                       } else if (state == PageState.widget) {
                         return CustomWidgets();
                       } else if (state == PageState.about) {
-                        return const Expanded(child: Text('Todo about'));
+                        return AboutScreen();
                       } else {
                         return const Expanded(
                           child: Text(
@@ -225,10 +241,4 @@ class _FilteredPostsState extends State<_FilteredPosts>
       },
     );
   }
-}
-
-Container _emptyContainerPusher(double width) {
-  return Container(
-    width: width,
-  );
 }

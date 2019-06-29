@@ -16,6 +16,9 @@ dependencies:
       url: https://github.com/felangel/bloc
       path: packages/flutter_bloc
       ref: flutter_web
+  animated_text_kit:
+    git:
+      url: https://github.com/funwithflutter/Animated-Text-Kit
 
 dev_dependencies:
   build_runner: ^1.4.0

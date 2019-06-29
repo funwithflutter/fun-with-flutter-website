@@ -3,7 +3,7 @@ import 'package:fun_with_flutter/themes/app_colors.dart';
 
 ThemeData theme = ThemeData(
   textTheme: textTheme,
-  fontFamily: 'OpenSans',
+  fontFamily:  'OpenSans',
     
 );
 

@@ -22,5 +22,13 @@
                 "asset": "OpenSans-Regular.ttf"
             }
         ]
+    },
+    {
+        "family": "PermanentMarker",
+        "fonts": [
+            {
+                "asset": "PermanentMarker-Regular.ttf"
+            }
+        ]
     }
 ]
