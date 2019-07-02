@@ -1,4 +1,5 @@
 import 'package:flutter_web/material.dart';
+import 'package:fun_with_flutter/components/link.dart';
 import 'package:fun_with_flutter/screens/custom_widgets/components/splash_tap_widget.dart';
 import 'package:fun_with_flutter/screens/custom_widgets/components/wave_slider_widget.dart';
 import 'package:fun_with_flutter/themes/app_colors.dart';
@@ -17,16 +18,24 @@ class CustomWidgets extends StatelessWidget {
               padding: const EdgeInsets.all(32.0),
               child: Text(
                 'Custom Widgets',
-                style: Theme.of(context).textTheme.display2.copyWith(color: fadedBlack),
+                style: Theme.of(context)
+                    .textTheme
+                    .display1
+                    .copyWith(color: fadedBlack),
               ),
             ),
             _CustomWidget(
               title: 'Splash Tap',
               child: SplashTapWidget(),
+              packageUrl: 'https://pub.dev/packages/splash_tap',
+              youtubeUrl: 'https://www.youtube.com/watch?v=7qkhpeZdD7U',
             ),
             _CustomWidget(
               title: 'Wave Slider',
               child: WaveSliderWidget(),
+              packageUrl: 'https://pub.dev/packages/wave_slider',
+              youtubeUrl:
+                  'https://www.youtube.com/playlist?list=PLjr4ufdmNA4J2-KwMutexAjjf_VmjL1eH',
             ),
           ],
         ),
@@ -92,8 +101,11 @@ class _CustomWidget extends StatelessWidget {
                       Expanded(
                         child: Container(),
                       ),
-                      const _Link(title: 'Package'),
-                      const _Link(title: 'Video'),
+                      Link(title: 'Package', url: packageUrl),
+                      Link(
+                        title: 'Video',
+                        url: youtubeUrl,
+                      ),
                     ],
                   ),
                 ),
@@ -103,21 +115,6 @@ class _CustomWidget extends StatelessWidget {
           ),
         ),
       ),
-    );
-  }
-}
-
-class _Link extends StatelessWidget {
-  const _Link({Key key, @required this.title, this.url}) : super(key: key);
-
-  final String title;
-  final String url;
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.only(right: 16, top: 8, left: 8, bottom: 8),
-      child: Text(title),
     );
   }
 }
