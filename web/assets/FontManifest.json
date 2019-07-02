@@ -24,10 +24,10 @@
         ]
     },
     {
-        "family": "PermanentMarker",
+        "family": "DMSerifDisplay",
         "fonts": [
             {
-                "asset": "PermanentMarker-Regular.ttf"
+                "asset": "DMSerifDisplay-Regular.ttf"
             }
         ]
     }

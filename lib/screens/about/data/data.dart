@@ -11,7 +11,7 @@ const String aboutGoal =
     'The Fun with Website has the opportunity to grow as the Flutter Web framework matures, which serves as a great project to learn new techniques and tools as they become available for Flutter and the Web.';
 
 const String aboutLimitations =
-    'At the point of writing this Flutter for Web is still in technical preview and as a result there are some limitations to be aware of. These I discuss in the videos and the blog.';
+    'Flutter for Web is still in technical preview and as a result there are some limitations to be aware of. These I discuss in the videos and the blog.';
 
 const String aboutConclussion =
     'Anyway, I hope you enjoy the site, contributions are welcome!';

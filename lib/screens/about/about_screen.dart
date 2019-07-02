@@ -25,18 +25,18 @@ class AboutScreen extends StatelessWidget {
                   RotateAnimatedTextKit(
                       onTap: () {},
                       text: const [
-                        'Flutter',
-                        'Tutorials',
-                        'Challenges',
-                        'Resources',
-                        'Code',
+                        'FLUTTER',
+                        'TUTORIALS',
+                        'CHALLENGES',
+                        'RESOURCES',
+                        'CODE',
                         'UI',
-                        'Animation',
+                        'ANIMATION',
                       ],
                       textStyle: const TextStyle(
                         fontSize: 40,
                         color: primaryColor,
-                        fontFamily: 'PermanentMarker'
+                        fontFamily: 'DMSerifDisplay'
                       ),
                       textAlign: TextAlign.start,
                       alignment:
