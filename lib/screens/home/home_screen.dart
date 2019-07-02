@@ -23,7 +23,7 @@ class _HomeScreenState extends State<HomeScreen>
     with SingleTickerProviderStateMixin {
   static const double menuSize = 300;
 
-  final Duration animationDuration = Duration(milliseconds: 250);
+  final Duration animationDuration = Duration(milliseconds: 150);
   AnimationController _controller;
   Animation<double> menuAnimation;
   Tween<double> tween = Tween<double>()
@@ -58,7 +58,7 @@ class _HomeScreenState extends State<HomeScreen>
   }
 
   void _setScreenSize(Size screenSize) {
-    if (screenSize.width < 600) {
+    if (screenSize.width < 750) {
       setState(() {
         isSmallScreen = true;
       });
@@ -207,7 +207,8 @@ class _RecentBlogs extends StatelessWidget {
             child: Padding(
               padding: const EdgeInsets.symmetric(vertical: 16),
               child: GridView.extent(
-                maxCrossAxisExtent: 400,
+                maxCrossAxisExtent: 750,
+                childAspectRatio: 3/2,
                 padding: const EdgeInsets.all(16),
                 physics: const BouncingScrollPhysics(),
                 children: <Widget>[
