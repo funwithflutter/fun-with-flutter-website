@@ -10,8 +10,16 @@ class CustomWidgets extends StatelessWidget {
       child: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisSize: MainAxisSize.max,
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: <Widget>[
+            Padding(
+              padding: const EdgeInsets.all(32.0),
+              child: Text(
+                'Custom Widgets',
+                style: Theme.of(context).textTheme.display2.copyWith(color: fadedBlack),
+              ),
+            ),
             _CustomWidget(
               title: 'Splash Tap',
               child: SplashTapWidget(),
@@ -46,7 +54,7 @@ class _CustomWidget extends StatelessWidget {
     return LimitedBox(
       maxHeight: 300,
       child: Padding(
-        padding: const EdgeInsets.all(8),
+        padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 32),
         child: AspectRatio(
           aspectRatio: 3 / 2,
           child: Container(

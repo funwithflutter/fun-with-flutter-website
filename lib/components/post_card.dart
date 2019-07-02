@@ -30,7 +30,9 @@ class _PostCardState extends State<PostCard> {
           padding = 16;
         });
       },
-      child: Padding(
+      child: AnimatedPadding(
+        duration: Duration(milliseconds: 100),
+        curve: Curves.easeIn,
         padding: EdgeInsets.all(padding),
         child: Card(
           child: Container(

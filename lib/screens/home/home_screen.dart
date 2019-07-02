@@ -1,6 +1,8 @@
 import 'dart:html' as html;
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_web/material.dart';
+import 'package:fun_with_flutter/blocs/blog/blog_bloc.dart';
+import 'package:fun_with_flutter/blocs/blog/blog_state.dart';
 import 'package:fun_with_flutter/blocs/filtered_blog/filtered_blog.dart';
 import 'package:fun_with_flutter/blocs/page/page.dart';
 import 'package:fun_with_flutter/components/menu_drawer.dart';
@@ -55,11 +57,17 @@ class _HomeScreenState extends State<HomeScreen>
 
   @override
   Widget build(BuildContext context) {
+    final pageBloc = BlocProvider.of<PageBloc>(context);
     return Scaffold(
       appBar: AppBar(
-        title: Text(
-          'Fun with Flutter',
-          style: Theme.of(context).textTheme.display1,
+        title: GestureDetector(
+          onTap: () {
+            pageBloc.dispatch(UpdatePage(PageState.home));
+          },
+          child: Text(
+            'Fun with Flutter',
+            style: Theme.of(context).textTheme.display1,
+          ),
         ),
         backgroundColor: Colors.transparent,
         leading: IconButton(
@@ -141,7 +149,56 @@ class _HomeScreenState extends State<HomeScreen>
 class _Home extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    return Column(
+      children: <Widget>[
+        _RecentBlogs(),
+        _CustomWidgets(),
+      ],
+    );
+  }
+}
+
+class _RecentBlogs extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    final blogBloc = BlocProvider.of<BlogBloc>(context);
+    return BlocBuilder(
+      bloc: blogBloc,
+      builder: (BuildContext context, BlogState state) {
+        if (state is BlogLoading) {
+          return const Center(
+            child: CircularProgressIndicator(),
+          );
+        }
+        if (state is BlogLoaded) {
+          return Expanded(
+            child: Padding(
+              padding: const EdgeInsets.symmetric(vertical: 16),
+              child: GridView.extent(
+                maxCrossAxisExtent: 400,
+                padding: const EdgeInsets.all(16),
+                physics: const BouncingScrollPhysics(),
+                children: <Widget>[
+                  for (var page in state.blog.pages)
+                    PostCard(
+                      post: page,
+                    )
+                ],
+              ),
+            ),
+          );
+        }
+      },
+    );
+  }
+}
+
+class _CustomWidgets extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      child: const Text('Some packages that I have made'),
+    );
   }
 }
 
