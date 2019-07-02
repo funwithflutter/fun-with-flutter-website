@@ -19,7 +19,7 @@ class AboutScreen extends StatelessWidget {
                     'Fun with  ',
                     style: Theme.of(context).textTheme.display1.copyWith(
                           color: Colors.black,
-                          fontSize: 30,
+                          fontSize: 36,
                         ),
                   ),
                   RotateAnimatedTextKit(
@@ -69,7 +69,7 @@ Widget _text(String text) {
   return Container(
     child: Text(
       text,
-      style: const TextStyle(fontSize: 22, color: fadedBlack),
+      style: const TextStyle(fontSize: 18, color: fadedBlack),
     ),
   );
 }
