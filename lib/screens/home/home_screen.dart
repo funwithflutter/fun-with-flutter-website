@@ -30,7 +30,8 @@ class _HomeScreenState extends State<HomeScreen>
     ..begin = 0
     ..end = menuSize;
 
-  bool menuVisible = false;
+  bool menuIsVisible = false;
+  bool isSmallScreen = false;
 
   @override
   void initState() {
@@ -43,9 +44,9 @@ class _HomeScreenState extends State<HomeScreen>
 
   void _setMenuVisibleOnAnimationStatusChange(status) {
     if (status == AnimationStatus.forward) {
-      menuVisible = true;
+      menuIsVisible = true;
     } else if (status == AnimationStatus.dismissed) {
-      menuVisible = false;
+      menuIsVisible = false;
     }
   }
 
@@ -55,8 +56,22 @@ class _HomeScreenState extends State<HomeScreen>
     super.dispose();
   }
 
+  void _setScreenSize(Size screenSize) {
+    if (screenSize.width < 600) {
+      setState(() {
+        isSmallScreen = true;
+      });
+    } else if (isSmallScreen == true) {
+      setState(() {
+        isSmallScreen = false;
+      });
+    } // TODO(Anyone): Need to refine this entire process.
+  }
+
   @override
   Widget build(BuildContext context) {
+    final Size screenSize = MediaQuery.of(context).size;
+    _setScreenSize(screenSize);
     final pageBloc = BlocProvider.of<PageBloc>(context);
     return Scaffold(
       appBar: AppBar(
@@ -72,7 +87,7 @@ class _HomeScreenState extends State<HomeScreen>
         backgroundColor: Colors.transparent,
         leading: IconButton(
           onPressed: () {
-            if (menuVisible) {
+            if (menuIsVisible) {
               _controller.reverse();
             } else {
               _controller.forward();
@@ -105,16 +120,12 @@ class _HomeScreenState extends State<HomeScreen>
         builder: (context, widget) {
           return Stack(
             children: <Widget>[
-              if (menuVisible)
-                Transform.translate(
-                  offset: Offset(-menuSize + menuAnimation.value, 0),
-                  child: const MenuDrawer(
-                    width: menuSize,
-                  ),
-                ),
               Row(
                 children: <Widget>[
-                  SizedBox(width: menuAnimation.value),
+                  if (!isSmallScreen)
+                    SizedBox(
+                        width: menuAnimation
+                            .value), // this will push all the widgets to the right as the menu opens
                   BlocBuilder(
                     bloc: BlocProvider.of<PageBloc>(context),
                     builder: (BuildContext context, PageState state) {
@@ -138,6 +149,25 @@ class _HomeScreenState extends State<HomeScreen>
                   ),
                 ],
               ),
+              if (menuIsVisible)
+                Transform.translate(
+                  offset: Offset(-menuSize + menuAnimation.value, 0),
+                  child: Container(
+                    decoration: isSmallScreen ? BoxDecoration(
+                      boxShadow: const [
+                        BoxShadow(
+                          color: Colors.grey,
+                          offset: Offset(5.0, 10.0),
+                          blurRadius: 5.0,
+                          spreadRadius: 2.0,
+                        )
+                      ],
+                    ) : null,
+                    child: const MenuDrawer(
+                      width: menuSize,
+                    ),
+                  ),
+                ),
             ],
           );
         },
@@ -152,7 +182,6 @@ class _Home extends StatelessWidget {
     return Column(
       children: <Widget>[
         _RecentBlogs(),
-        _CustomWidgets(),
       ],
     );
   }
@@ -189,15 +218,6 @@ class _RecentBlogs extends StatelessWidget {
           );
         }
       },
-    );
-  }
-}
-
-class _CustomWidgets extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      child: const Text('Some packages that I have made'),
     );
   }
 }

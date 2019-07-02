@@ -15,6 +15,7 @@ class MenuDrawer extends StatelessWidget {
     return SingleChildScrollView(
       child: Container(
         width: width,
+        color: Colors.grey[50],
         child: Column(
           children: <Widget>[
             const SizedBox(
