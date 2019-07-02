@@ -23,7 +23,7 @@ class _HomeScreenState extends State<HomeScreen>
     with SingleTickerProviderStateMixin {
   static const double menuSize = 300;
 
-  final Duration animationDuration = Duration(milliseconds: 100);
+  final Duration animationDuration = Duration(milliseconds: 250);
   AnimationController _controller;
   Animation<double> menuAnimation;
   Tween<double> tween = Tween<double>()
@@ -36,7 +36,8 @@ class _HomeScreenState extends State<HomeScreen>
   @override
   void initState() {
     _controller = AnimationController(vsync: this, duration: animationDuration);
-    menuAnimation = tween.animate(_controller);
+    menuAnimation = tween
+        .animate(CurvedAnimation(parent: _controller, curve: Curves.easeOut));
     _controller.addStatusListener(_setMenuVisibleOnAnimationStatusChange);
 
     super.initState();
@@ -153,16 +154,18 @@ class _HomeScreenState extends State<HomeScreen>
                 Transform.translate(
                   offset: Offset(-menuSize + menuAnimation.value, 0),
                   child: Container(
-                    decoration: isSmallScreen ? BoxDecoration(
-                      boxShadow: const [
-                        BoxShadow(
-                          color: Colors.grey,
-                          offset: Offset(5.0, 10.0),
-                          blurRadius: 5.0,
-                          spreadRadius: 2.0,
-                        )
-                      ],
-                    ) : null,
+                    decoration: isSmallScreen
+                        ? BoxDecoration(
+                            boxShadow: const [
+                              BoxShadow(
+                                color: Colors.grey,
+                                offset: Offset(5.0, 10.0),
+                                blurRadius: 5.0,
+                                spreadRadius: 2.0,
+                              )
+                            ],
+                          )
+                        : null,
                     child: const MenuDrawer(
                       width: menuSize,
                     ),
