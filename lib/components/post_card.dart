@@ -1,3 +1,4 @@
+import 'dart:html' as html;
 import 'package:flutter_web/material.dart';
 import 'package:fun_with_flutter/models/blog_model.dart';
 import 'package:fun_with_flutter/repository/url_repository.dart';
@@ -19,7 +20,7 @@ class _PostCardState extends State<PostCard> {
     final post = widget.post;
     return GestureDetector(
       onTap: () {
-        print('Go to page'); // TODO(Anyone): go to page
+        html.window.open(post.uri,post.title);
       },
       onTapDown: (TapDownDetails details) {
         setState(() {
