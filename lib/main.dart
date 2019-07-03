@@ -6,6 +6,7 @@ import 'package:fun_with_flutter/repository/blog_repository.dart';
 
 import 'package:fun_with_flutter/themes/styles.dart';
 import 'package:fun_with_flutter/logic/route_generator.dart';
+import 'package:fun_with_flutter/repository/url_repository.dart';
 
 import 'blocs/bloc.dart';
 import 'blocs/simple_bloc_delegate.dart';
@@ -18,12 +19,8 @@ void main() {
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    String uri = 'https://fun-with-blog.firebaseapp.com/index.json';
-    assert(() {
-      uri = 'assets/data/tags_test_data.json';
-      return true;
-    }());
-
+    final String uri = UrlRepository.blogDataUrl();
+    print(uri);
     final BlogBloc blogBloc = BlogBloc(
       blogRepository: BlogRepository(
         blogDataProvider: BlogDataProvider(uri),
@@ -58,30 +55,3 @@ class MyApp extends StatelessWidget {
     );
   }
 }
-
-// Copyright 2018 The Chromium Authors. All rights reserved.
-// Use of this source code is governed by a BSD-style license that can be
-// found in the LICENSE file.
-
-// import 'dart:html';
-
-// import 'package:flutter_web_ui/ui.dart' as ui;
-
-// import 'package:flutter_web/material.dart';
-
-// void main() {
-//   // ui.platformViewRegistry.registerViewFactory(
-//   //     'hello-world-html', (int viewId) => DivElement()..text = 'Hello, World');
-//   ui.platformViewRegistry.registerViewFactory(
-//       'hello-world-html', (int viewId) => IFrameElement()..src = 'https://github.com/flutter/flutter_web/blob/master/examples/html_platform_view/pubspec.yaml');
-//   // ui.platformViewRegistry.registerViewFactory(
-//   //     'hello-world-name-html', (int viewId) => VideoElement( )..src = 'https://www.youtube.com/watch?v=r25IWquxe9s'
-//   //     ..autoplay = true
-//   //     ..videoHeight  = 200,
-//   //     );
-
-//   runApp(Directionality(
-//     textDirection: TextDirection.ltr,
-//     child: HtmlView(viewType: 'hello-world-html'),
-//   ));
-// }

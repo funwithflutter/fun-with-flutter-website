@@ -1,6 +1,5 @@
 import 'dart:html' as html;
 import 'package:flutter_web/material.dart';
-import 'package:fun_with_flutter/themes/app_colors.dart';
 
 class Link extends StatelessWidget {
   const Link(

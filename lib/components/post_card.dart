@@ -38,11 +38,32 @@ class _PostCardState extends State<PostCard> {
           child: Container(
             child: Column(
               children: <Widget>[
-                Text(
-                  post.title,
-                  style: Theme.of(context).textTheme.display1,
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Text(
+                    post.title,
+                    overflow: TextOverflow.ellipsis,
+                    style: Theme.of(context).textTheme.headline,
+                  ),
                 ),
-                Text(post.content),
+                Divider(),
+                Expanded(
+                  child: Image.network(
+                    'http://localhost:1313/${post.thumbnail}',
+                    fit: BoxFit.contain,
+                  ),
+                ),
+                Divider(),
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Container(
+                    constraints: const BoxConstraints(minHeight: 20, maxHeight: 20),
+                    child: Text(
+                      post.content,
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                  ),
+                ),
               ],
             ),
           ),

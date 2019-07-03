@@ -38,14 +38,16 @@ class Tag {
 }
 
 class PostData {
-  PostData(this.content, this.title, this.uri);
+  PostData(this.content, this.title, this.uri, this.thumbnail);
 
   PostData.fromJson(Map<String, dynamic> json)
       : content = json['content'],
         title = json['title'],
-        uri = json['uri'];
+        uri = json['uri'],
+        thumbnail = json['thumbnail'];
 
   final String content;
   final String title;
   final String uri;
+  final String thumbnail;
 }
