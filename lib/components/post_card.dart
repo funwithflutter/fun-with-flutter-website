@@ -32,6 +32,11 @@ class _PostCardState extends State<PostCard> {
           padding = 16;
         });
       },
+      onTapCancel: () {
+        setState(() {
+          padding = 16;
+        });
+      },
       child: AnimatedPadding(
         duration: Duration(milliseconds: 50),
         curve: Curves.easeIn,

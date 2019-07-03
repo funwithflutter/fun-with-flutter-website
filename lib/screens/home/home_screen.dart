@@ -301,7 +301,9 @@ class _FilteredPostsState extends State<_FilteredPosts>
                       padding: EdgeInsets.symmetric(
                           vertical: _paddingAnimation.value),
                       child: GridView.extent(
-                        maxCrossAxisExtent: 400,
+                        maxCrossAxisExtent: 1200,
+                        crossAxisSpacing: 10,
+                        childAspectRatio: 3/2,
                         padding: const EdgeInsets.all(16),
                         physics: bouncingScrollPhysics,
                         children: <Widget>[
