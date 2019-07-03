@@ -1,17 +1,20 @@
-class UrlRepository {
-  static const _blogTestingUrl = 'http://localhost:8000';
-  static const _blogProdUrl = 'https://fun-with-blog.firebaseapp.com';
+const _blogTestingUrl = 'http://localhost:8000';
+const _blogProdUrl = 'https://fun-with-blog.firebaseapp.com';
+const _thumbnailPath = 'thumbnails';
 
-  static String blogBaseUrl() {
-    String url = _blogProdUrl;
-    assert(() {
-      url = _blogTestingUrl;
-      return true;
-    }());
-    return url;
-  }
+String get blogBaseUrl {
+  String url = _blogProdUrl;
+  assert(() {
+    url = _blogTestingUrl;
+    return true;
+  }());
+  return url;
+}
 
-  static String blogDataUrl() {
-    return '${blogBaseUrl()}/index.json';
-  }
+String get blogDataUrl {
+  return '$blogBaseUrl/index.json';
+}
+
+String blogThumbnailUrl(String filename) {
+  return '$blogBaseUrl/$_thumbnailPath/$filename';
 }

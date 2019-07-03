@@ -1,5 +1,6 @@
 import 'package:flutter_web/material.dart';
 import 'package:fun_with_flutter/models/blog_model.dart';
+import 'package:fun_with_flutter/repository/url_repository.dart';
 
 class PostCard extends StatefulWidget {
   PostCard({Key key, this.post}) : super(key: key);
@@ -31,7 +32,7 @@ class _PostCardState extends State<PostCard> {
         });
       },
       child: AnimatedPadding(
-        duration: Duration(milliseconds: 100),
+        duration: Duration(milliseconds: 50),
         curve: Curves.easeIn,
         padding: EdgeInsets.all(padding),
         child: Card(
@@ -49,7 +50,7 @@ class _PostCardState extends State<PostCard> {
                 Divider(),
                 Expanded(
                   child: Image.network(
-                    'http://localhost:1313/${post.thumbnail}',
+                    blogThumbnailUrl(post.thumbnail),
                     fit: BoxFit.contain,
                   ),
                 ),

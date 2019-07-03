@@ -19,8 +19,7 @@ void main() {
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    final String uri = UrlRepository.blogDataUrl();
-    print(uri);
+    final String uri = blogDataUrl;
     final BlogBloc blogBloc = BlogBloc(
       blogRepository: BlogRepository(
         blogDataProvider: BlogDataProvider(uri),
