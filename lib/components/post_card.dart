@@ -61,7 +61,7 @@ class _PostCardState extends State<PostCard> {
                   child: Container(
                     constraints: const BoxConstraints(minHeight: 20, maxHeight: 20),
                     child: Text(
-                      post.content,
+                      post.description,
                       overflow: TextOverflow.ellipsis,
                     ),
                   ),
