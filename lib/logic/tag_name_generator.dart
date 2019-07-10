@@ -6,7 +6,8 @@ class TagDisplayNameGenerator {
     'animation': 'Animation',
     'ui-layout': 'UI Layout',
     'dart': 'Dart',
-    'cheat-sheet': 'Cheat Sheet'
+    'cheat-sheet': 'Cheat Sheet',
+    'flutter-web': 'Flutter Web'
   };
 
   static String mapTagToDisplayName(String tag) {
