@@ -5,7 +5,7 @@ class WaveSlider extends StatefulWidget {
   /// Creates a wave slider.
   /// 
   /// When the state of the slider is changed the widget calls the [onChanged] callback.
-  WaveSlider(
+  const WaveSlider(
       {this.sliderHeight = 50.0,
       this.color = Colors.black,
       this.onChangeEnd,

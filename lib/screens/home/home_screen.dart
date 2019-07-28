@@ -13,7 +13,7 @@ import 'package:fun_with_flutter/themes/app_colors.dart';
 import 'package:fun_with_flutter/components/post_card.dart';
 
 class HomeScreen extends StatefulWidget {
-  HomeScreen({Key key}) : super(key: key);
+  const HomeScreen({Key key}) : super(key: key);
 
   @override
   _HomeScreenState createState() => _HomeScreenState();
@@ -221,6 +221,7 @@ class _RecentBlogs extends StatelessWidget {
             ),
           );
         }
+        return const Text('Content could not be loaded');
       },
     );
   }

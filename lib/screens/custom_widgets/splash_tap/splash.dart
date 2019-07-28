@@ -5,7 +5,7 @@ class Splash extends StatefulWidget {
   ///
   /// The [child] parameter can not be null.
   /// The tap is disabled if the [onTap] parameter is null.
-  Splash({
+  const Splash({
     Key key,
     @required this.onTap,
     @required this.child,
