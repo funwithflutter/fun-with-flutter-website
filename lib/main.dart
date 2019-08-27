@@ -30,8 +30,8 @@ class MyApp extends StatelessWidget {
       builder: (context) {
         return blogBloc..dispatch(Fetch());
       }, //Load the Blog data
-      child: BlocProviderTree(
-        blocProviders: [
+      child: MultiBlocProvider(
+        providers: [
           BlocProvider<FilteredBlogBloc>(
             builder: (context) {
               return FilteredBlogBloc(blogBloc: blogBloc);
