@@ -2,7 +2,7 @@ import 'package:flutter_web/material.dart';
 import 'package:fun_with_flutter/components/link.dart';
 import 'package:fun_with_flutter/screens/custom_widgets/components/splash_tap_widget.dart';
 import 'package:fun_with_flutter/screens/custom_widgets/components/wave_slider_widget.dart';
-import 'package:fun_with_flutter/themes/app_colors.dart';
+import 'package:fun_with_flutter/themes.dart';
 
 class CustomWidgets extends StatelessWidget {
   @override
@@ -16,13 +16,10 @@ class CustomWidgets extends StatelessWidget {
           children: <Widget>[
             Padding(
               padding: const EdgeInsets.all(32.0),
-              child: Text(
-                'Custom Widgets',
-                style: Theme.of(context)
-                    .textTheme
-                    .display1
-                    .copyWith(color: fadedBlack),
-              ),
+              child: Text('Custom Widgets',
+                  style: Theme.of(context).textTheme.display1
+                  // .copyWith(color: AppTheme.fadedBlack),
+                  ),
             ),
             _CustomWidget(
               title: 'Splash Tap',
@@ -70,7 +67,7 @@ class _CustomWidget extends StatelessWidget {
             decoration: BoxDecoration(
               border: Border(
                 top: BorderSide(
-                  color: fadedBlack,
+                  // color: AppTheme.fadedBlack,
                   width: 0.5,
                 ),
               ),
@@ -81,7 +78,7 @@ class _CustomWidget extends StatelessWidget {
                   decoration: BoxDecoration(
                     border: Border(
                       bottom: BorderSide(
-                        color: fadedBlack,
+                        // color: AppTheme.fadedBlack,
                         width: 0.5,
                       ),
                     ),
@@ -92,11 +89,13 @@ class _CustomWidget extends StatelessWidget {
                     children: <Widget>[
                       Padding(
                         padding: const EdgeInsets.all(8.0),
-                        child: Text(title,
-                            style: Theme.of(context)
-                                .textTheme
-                                .headline
-                                .copyWith(color: fadedBlack)),
+                        child: Text(
+                          title,
+                          style: Theme.of(context)
+                              .textTheme
+                              .headline
+                              // .copyWith(color: AppTheme.fadedBlack),
+                        ),
                       ),
                       Expanded(
                         child: Container(),

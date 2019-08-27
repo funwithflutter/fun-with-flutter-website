@@ -1,7 +1,7 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_web/material.dart';
 import 'package:fun_with_flutter/blocs/bloc.dart';
-import 'package:fun_with_flutter/themes/app_colors.dart';
+import 'package:fun_with_flutter/themes.dart';
 
 class MenuDrawer extends StatelessWidget {
   const MenuDrawer({Key key, this.width}) : super(key: key);
@@ -56,10 +56,11 @@ class MenuDrawer extends StatelessWidget {
               ),
             ),
             _MenuSection(
-              child: _menuButton(Icons.question_answer, 'About', () {
-                filteredBlogBloc.dispatch(ClearFilters());
-                pageBloc.dispatch(UpdatePage(PageState.about));
-              }),
+              // child: _menuButton(Icons.question_answer, 'About', () {
+              //   filteredBlogBloc.dispatch(ClearFilters());
+              //   pageBloc.dispatch(UpdatePage(PageState.about));
+              // }),
+              child: Text('hello'),
             ),
           ],
         ),
@@ -82,7 +83,7 @@ Widget _menuLable(IconData iconData, String lable) {
     children: <Widget>[
       Icon(
         iconData,
-        color: fadedBlack,
+        // color: AppTheme.fadedBlack,
       ),
       const SizedBox(
         width: 20,
@@ -91,15 +92,29 @@ Widget _menuLable(IconData iconData, String lable) {
         child: Text(
           lable,
           overflow: TextOverflow.ellipsis,
-          style: TextStyle(
-            color: fadedBlack,
-          ),
         ),
       ),
     ],
   );
 }
 
+// class _MenuButton extends StatelessWidget {
+//   const _MenuButton({Key key}) : super(key: key);
+
+//   @override
+//   Widget build(BuildContext context) {
+//     return Container(
+//       child: FlatButton(
+//     onPressed: () {}),
+//     child: _menuLable(iconData, lable),
+//   );,
+//     );
+//   }
+// }
+
+
+
+@immutable
 class _Tag extends StatelessWidget {
   const _Tag({Key key, this.tagName, this.currentFilter}) : super(key: key);
 
@@ -112,10 +127,11 @@ class _Tag extends StatelessWidget {
     final pageBloc = BlocProvider.of<PageBloc>(context);
     final iconData =
         (tagName == currentFilter) ? Icons.label : Icons.label_outline;
-    return _menuButton(iconData, tagName, () {
-      pageBloc.dispatch(UpdatePage(PageState.tagsFilter));
-      filteredBlogBloc.dispatch(FilterByTag(tagName));
-    });
+    // return _menuButton(iconData, tagName, () {
+    //   pageBloc.dispatch(UpdatePage(PageState.tagsFilter));
+    //   filteredBlogBloc.dispatch(FilterByTag(tagName));
+    // });
+    return Text('hell');
   }
 }
 
@@ -140,7 +156,7 @@ class _MenuSection extends StatelessWidget {
                 )
               : Container(
                   height: 0.1,
-                  color: secondaryColor,
+                  // color: AppTheme.secondaryColor,
                 ), // error in Flutter - not showing the divider unless something is rendered beneath it
         ),
         child

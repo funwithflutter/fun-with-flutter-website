@@ -3,8 +3,8 @@ import 'package:flutter_web/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fun_with_flutter/dataprovider/blog_data_provider.dart';
 import 'package:fun_with_flutter/repository/blog_repository.dart';
+import 'package:fun_with_flutter/themes.dart';
 
-import 'package:fun_with_flutter/themes/styles.dart';
 import 'package:fun_with_flutter/logic/route_generator.dart';
 import 'package:fun_with_flutter/repository/url_repository.dart';
 
@@ -45,7 +45,7 @@ class MyApp extends StatelessWidget {
         ],
         child: MaterialApp(
           title: 'Fun with Flutter',
-          theme: theme,
+          theme: AppTheme.theme(),
           initialRoute: '/',
           onGenerateRoute: RouteGenerator.generateRoute,
           debugShowCheckedModeBanner: false,

@@ -1,6 +1,6 @@
 import 'package:flutter_web/material.dart';
 import 'package:fun_with_flutter/screens/custom_widgets/wave_slider/wave_slider.dart';
-import 'package:fun_with_flutter/themes/app_colors.dart';
+import 'package:fun_with_flutter/themes.dart';
 
 class WaveSliderWidget extends StatefulWidget {
   @override
@@ -27,7 +27,7 @@ class _WaveSliderWidgetState extends State<WaveSliderWidget> {
             style: Theme.of(context).textTheme.display1,
           ),
           WaveSlider(
-            color: fadedBlack,
+            // color: AppTheme.fadedBlack,
             onChanged: (value) {
               _setDipslay(value);
             },

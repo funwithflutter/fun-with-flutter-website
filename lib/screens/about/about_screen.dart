@@ -1,7 +1,7 @@
 import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flutter_web/material.dart';
 import 'package:fun_with_flutter/screens/about/data/data.dart';
-import 'package:fun_with_flutter/themes/app_colors.dart';
+import 'package:fun_with_flutter/themes.dart';
 
 class AboutScreen extends StatelessWidget {
   @override
@@ -35,7 +35,7 @@ class AboutScreen extends StatelessWidget {
                       ],
                       textStyle: const TextStyle(
                         fontSize: 40,
-                        color: primaryColor,
+                        // color: AppTheme.primaryColor,
                         fontFamily: 'DMSerifDisplay'
                       ),
                       textAlign: TextAlign.start,
@@ -69,7 +69,7 @@ Widget _text(String text) {
   return Container(
     child: Text(
       text,
-      style: const TextStyle(fontSize: 18, color: fadedBlack),
+      // style: const TextStyle(fontSize: 18, color: AppTheme.fadedBlack),
     ),
   );
 }
@@ -108,7 +108,7 @@ class _Bullet extends StatelessWidget {
       height: size,
       width: size,
       decoration: const BoxDecoration(
-        color: primaryColor,
+        // color: AppTheme.primaryColor,
         shape: BoxShape.circle,
       ),
     );

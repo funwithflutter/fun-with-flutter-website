@@ -1,13 +1,13 @@
 import 'package:flutter_web/material.dart';
 import 'package:fun_with_flutter/screens/custom_widgets/splash_tap/splash.dart';
-import 'package:fun_with_flutter/themes/app_colors.dart';
+import 'package:fun_with_flutter/themes.dart';
 
 class SplashTapWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Splash(
       onTap: () {},
-      splashColor: fadedBlack,
+      // splashColor: AppTheme.fadedBlack,
       child: Container(
         color: Colors.transparent,
         width: double.infinity,

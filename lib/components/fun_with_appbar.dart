@@ -1,6 +1,7 @@
 import 'dart:html' as html;
 import 'package:flutter_web/material.dart';
-import 'package:fun_with_flutter/themes/app_colors.dart';
+
+import '../themes.dart';
 
 // TODO(Anyone): Remove if not used
 class FunWithAppBar extends StatelessWidget {
@@ -8,7 +9,7 @@ class FunWithAppBar extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: double.infinity,
-      color: secondaryColor,
+      // color: AppTheme.secondaryColor,
       child: Padding(
         padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
         child: Row(

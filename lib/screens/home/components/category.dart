@@ -1,7 +1,7 @@
 import 'package:flutter_web/material.dart';
 import 'package:fun_with_flutter/screens/home/data/category_data.dart';
 import 'package:fun_with_flutter/screens/home/models/CatergoryModel.dart';
-import 'package:fun_with_flutter/themes/app_colors.dart';
+import 'package:fun_with_flutter/themes.dart';
 
 class CategoryPageViewer extends StatefulWidget {
   @override
@@ -48,12 +48,12 @@ class _CategoryPageViewerState extends State<CategoryPageViewer> {
               children: <Widget>[
                 _CategoryPanel(
                   categoryModel: categoryData[index * 2],
-                  backgroundColor: secondaryColor,
+                  // backgroundColor: AppTheme.secondaryColor,
                 ),
                 if (secondIndex < categoryLength)
                   _CategoryPanel(
                     categoryModel: categoryData[index * 2 + 1],
-                    backgroundColor: primaryColor,
+                    // backgroundColor: AppTheme.primaryColor,
                   ),
               ],
             );
@@ -65,7 +65,7 @@ class _CategoryPageViewerState extends State<CategoryPageViewer> {
             iconSize: 48,
             icon: const Icon(
               Icons.arrow_back,
-              color: primaryColor,
+              // color: AppTheme.primaryColor,
             ),
             onPressed: () {
               _onPageLeftPressed();
@@ -78,7 +78,7 @@ class _CategoryPageViewerState extends State<CategoryPageViewer> {
               iconSize: 48,
               icon: const Icon(
                 Icons.arrow_forward,
-                color: secondaryColor,
+                // color: AppTheme.primaryColor,
               ),
               onPressed: () {
                 _onPageRightPressed();
