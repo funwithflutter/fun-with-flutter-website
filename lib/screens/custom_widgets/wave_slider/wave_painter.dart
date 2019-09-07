@@ -1,8 +1,8 @@
 // import 'dart:ui';
-// import 'dart:ui';
-import 'package:flutter_web_ui/ui.dart';
+import 'dart:ui';
+// import 'package:flutter_web_ui/ui.dart';
 
-import 'package:flutter_web/material.dart';
+import 'package:flutter/material.dart';
 import 'package:fun_with_flutter/screens/custom_widgets/wave_slider/wave_slider.dart';
 
 class WavePainter extends CustomPainter {

@@ -1,4 +1,4 @@
-import 'package:flutter_web/material.dart';
+import 'package:flutter/material.dart';
 import 'package:fun_with_flutter/screens/about/about_screen.dart';
 import 'package:fun_with_flutter/screens/blog/blog_screen.dart';
 import 'package:fun_with_flutter/screens/home/home_screen.dart';
