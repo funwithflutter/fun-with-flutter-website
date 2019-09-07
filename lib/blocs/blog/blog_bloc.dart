@@ -1,6 +1,6 @@
 import 'dart:async';
 import 'package:bloc/bloc.dart';
-import 'package:flutter_web/material.dart';
+import 'package:flutter/material.dart';
 import 'package:fun_with_flutter/models/blog_model.dart';
 import 'package:fun_with_flutter/repository/blog_repository.dart';
 import 'blog_event.dart';

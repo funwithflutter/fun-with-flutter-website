@@ -1,5 +1,6 @@
-import 'dart:html' as html;
-import 'package:flutter_web/material.dart';
+// import 'dart:html' as html;
+import 'package:flutter/material.dart';
+import 'package:fun_with_flutter/plugins/url_launcher/url_launcher.dart';
 
 import '../themes.dart';
 
@@ -33,8 +34,7 @@ class FunWithAppBar extends StatelessWidget {
                     child: Text('Github',
                         style: Theme.of(context).textTheme.title),
                     onPressed: () {
-                      html.window
-                          .open('https://github.com/funwithflutter', 'Github');
+                      UrlUtils.open('https://github.com/funwithflutter');
                     },
                   ),
                   const Spacer(
@@ -44,8 +44,8 @@ class FunWithAppBar extends StatelessWidget {
                     child: Text('YouTube',
                         style: Theme.of(context).textTheme.title),
                     onPressed: () {
-                      html.window.open(
-                          'https://www.youtube.com/funwithflutter', 'YouTube');
+                      UrlUtils.open(
+                          'https://www.youtube.com/funwithflutter');
                     },
                   ),
                   const Spacer(flex: 6),
