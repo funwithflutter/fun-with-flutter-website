@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:fun_with_flutter/screens/home/data/category_data.dart';
 import 'package:fun_with_flutter/screens/home/models/CatergoryModel.dart';
-import 'package:fun_with_flutter/themes.dart';
 
 class CategoryPageViewer extends StatefulWidget {
   @override
@@ -25,12 +24,12 @@ class _CategoryPageViewerState extends State<CategoryPageViewer> {
 
   void _onPageLeftPressed() {
     _pageController.previousPage(
-        duration: Duration(milliseconds: 400), curve: Curves.easeIn);
+        duration: const Duration(milliseconds: 400), curve: Curves.easeIn);
   }
 
   void _onPageRightPressed() {
     _pageController.nextPage(
-        duration: Duration(milliseconds: 400), curve: Curves.easeIn);
+        duration: const Duration(milliseconds: 400), curve: Curves.easeIn);
   }
 
   @override

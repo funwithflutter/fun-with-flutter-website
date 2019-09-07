@@ -1,4 +1,3 @@
-// import 'dart:html' as html;
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:fun_with_flutter/blocs/blog/blog_bloc.dart';
@@ -6,7 +5,7 @@ import 'package:fun_with_flutter/blocs/blog/blog_state.dart';
 import 'package:fun_with_flutter/blocs/filtered_blog/filtered_blog.dart';
 import 'package:fun_with_flutter/blocs/page/page.dart';
 import 'package:fun_with_flutter/components/menu_drawer.dart';
-import 'package:fun_with_flutter/logic/tag_name_generator.dart';
+import 'package:fun_with_flutter/utils/tag_name_generator.dart';
 import 'package:fun_with_flutter/plugins/url_launcher/url_launcher.dart';
 import 'package:fun_with_flutter/screens/about/about_screen.dart';
 import 'package:fun_with_flutter/screens/custom_widgets/custom_widgets.dart';
@@ -23,7 +22,7 @@ class _HomeScreenState extends State<HomeScreen>
     with SingleTickerProviderStateMixin {
   static const double menuSize = 300;
 
-  final Duration animationDuration = Duration(milliseconds: 150);
+  final Duration animationDuration = const Duration(milliseconds: 150);
   AnimationController _controller;
   Animation<double> menuAnimation;
   Tween<double> tween = Tween<double>()
@@ -109,7 +108,9 @@ class _HomeScreenState extends State<HomeScreen>
             },
           ),
           FlatButton(
-            child: const Text('YouTube',),
+            child: const Text(
+              'YouTube',
+            ),
             onPressed: () {
               UrlUtils.open('https://youtube.com/funwithflutter');
             },
@@ -156,8 +157,8 @@ class _HomeScreenState extends State<HomeScreen>
                   offset: Offset(-menuSize + menuAnimation.value, 0),
                   child: Container(
                     decoration: isSmallScreen
-                        ? BoxDecoration(
-                            boxShadow: const [
+                        ? const BoxDecoration(
+                            boxShadow: [
                               BoxShadow(
                                 color: Colors.grey,
                                 offset: Offset(5.0, 10.0),
@@ -243,7 +244,7 @@ class _FilteredPostsState extends State<_FilteredPosts>
   void initState() {
     _animationController = AnimationController(
       vsync: this,
-      duration: Duration(milliseconds: 300),
+      duration: const Duration(milliseconds: 300),
     )..addStatusListener(_animationStatusListener);
     _paddingAnimation = _paddingTween.animate(CurvedAnimation(
       curve: Curves.easeOut,

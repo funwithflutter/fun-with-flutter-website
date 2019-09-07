@@ -27,14 +27,14 @@ class PostCard extends StatelessWidget {
                     style: Theme.of(context).textTheme.headline,
                   ),
                 ),
-                Divider(),
+                const Divider(),
                 Expanded(
                   child: Image.network(
                     blogThumbnailUrl(post.thumbnail),
                     fit: BoxFit.contain,
                   ),
                 ),
-                Divider(),
+                const Divider(),
                 Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: Container(

@@ -1,4 +1,3 @@
-// import 'dart:html' as html;
 import 'package:flutter/material.dart';
 import 'package:fun_with_flutter/plugins/url_launcher/url_launcher.dart';
 

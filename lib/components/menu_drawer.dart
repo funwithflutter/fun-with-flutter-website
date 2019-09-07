@@ -1,7 +1,6 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:fun_with_flutter/blocs/bloc.dart';
-import 'package:fun_with_flutter/themes.dart';
 
 class MenuDrawer extends StatelessWidget {
   const MenuDrawer({Key key, this.width}) : super(key: key);
@@ -21,10 +20,6 @@ class MenuDrawer extends StatelessWidget {
             const SizedBox(
               height: 16,
             ),
-            // _menuButton(Icons.widgets, 'Custom Widgets', () {
-            //   filteredBlogBloc.dispatch(ClearFilters());
-            //   pageBloc.dispatch(UpdatePage(PageState.widget));
-            // }),
             _MenuButton(
                 iconData: Icons.widgets,
                 lable: 'Custom Widgets',
@@ -128,42 +123,6 @@ class _MenuLable extends StatelessWidget {
   }
 }
 
-// Widget _menuLable(IconData iconData, String lable) {
-//   return Row(
-//     mainAxisAlignment: MainAxisAlignment.start,
-//     crossAxisAlignment: CrossAxisAlignment.center,
-//     children: <Widget>[
-//       Icon(
-//         iconData,
-//         // color: AppTheme.fadedBlack,
-//       ),
-//       const SizedBox(
-//         width: 20,
-//       ),
-//       Flexible(
-//         child: Text(
-//           lable,
-//           overflow: TextOverflow.ellipsis,
-//         ),
-//       ),
-//     ],
-//   );
-// }
-
-// class _MenuButton extends StatelessWidget {
-//   const _MenuButton({Key key}) : super(key: key);
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return Container(
-//       child: FlatButton(
-//     onPressed: () {}),
-//     child: _menuLable(iconData, lable),
-//   );,
-//     );
-//   }
-// }
-
 @immutable
 class _Tag extends StatelessWidget {
   const _Tag({Key key, this.tagName, this.currentFilter}) : super(key: key);
@@ -188,6 +147,7 @@ class _Tag extends StatelessWidget {
   }
 }
 
+@immutable
 class _MenuSection extends StatelessWidget {
   const _MenuSection({Key key, @required this.child, this.title})
       : super(key: key);

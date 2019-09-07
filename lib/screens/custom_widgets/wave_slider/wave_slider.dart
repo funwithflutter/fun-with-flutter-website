@@ -186,7 +186,7 @@ class WaveSliderController extends ChangeNotifier {
   SliderState get state => _state;
 
   void _startAnimation() {
-    controller.duration = Duration(milliseconds: 500);
+    controller.duration = const Duration(milliseconds: 500);
     controller.forward(from: 0.0);
     notifyListeners();
   }

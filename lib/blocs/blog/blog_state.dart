@@ -4,7 +4,7 @@ import 'package:meta/meta.dart';
 
 @immutable
 abstract class BlogState extends Equatable {
-  BlogState([List props = const []]) : super(props);
+  const BlogState([List props = const []]) : super(props);
 }
 
 /// This is the default state

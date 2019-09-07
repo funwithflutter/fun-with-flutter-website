@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:fun_with_flutter/components/link.dart';
 import 'package:fun_with_flutter/screens/custom_widgets/components/splash_tap_widget.dart';
 import 'package:fun_with_flutter/screens/custom_widgets/components/wave_slider_widget.dart';
-import 'package:fun_with_flutter/themes.dart';
 
 class CustomWidgets extends StatelessWidget {
   @override

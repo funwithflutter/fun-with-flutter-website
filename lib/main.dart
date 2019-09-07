@@ -5,7 +5,7 @@ import 'package:fun_with_flutter/dataprovider/blog_data_provider.dart';
 import 'package:fun_with_flutter/repository/blog_repository.dart';
 import 'package:fun_with_flutter/themes.dart';
 
-import 'package:fun_with_flutter/logic/route_generator.dart';
+import 'package:fun_with_flutter/utils/route_generator.dart';
 import 'package:fun_with_flutter/repository/url_repository.dart';
 
 import 'blocs/bloc.dart';

@@ -50,8 +50,8 @@ class RouteGenerator {
 
   static MaterialPageRoute _errorPage() {
     return MaterialPageRoute(
-      builder: (_) => Scaffold(
-            body: const Center(
+      builder: (_) => const Scaffold(
+            body: Center(
               child: Text('Page does not exist'),
             ),
           ),

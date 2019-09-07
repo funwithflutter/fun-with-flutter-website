@@ -1,4 +1,4 @@
-import 'package:fun_with_flutter/logic/route_generator.dart';
+import 'package:fun_with_flutter/utils/route_generator.dart';
 import 'package:fun_with_flutter/screens/home/models/CatergoryModel.dart';
 
 const String aboutTag = 'aboutTag';

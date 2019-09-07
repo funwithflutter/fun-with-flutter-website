@@ -4,7 +4,7 @@ import 'package:meta/meta.dart';
 
 @immutable
 abstract class FilteredBlogState extends Equatable {
-  FilteredBlogState([List props = const []]) : super(props);
+  const FilteredBlogState([List props = const []]) : super(props);
 }
 
 // class NoFilterBlog extends FilteredBlogState {

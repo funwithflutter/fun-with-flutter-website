@@ -63,7 +63,7 @@ class _SplashState extends State<Splash> with SingleTickerProviderStateMixin {
   @override
   void initState() {
     controller =
-        AnimationController(vsync: this, duration: Duration(milliseconds: 350))
+        AnimationController(vsync: this, duration: const Duration(milliseconds: 350))
           ..addListener(() {
             setState(() {});
           })

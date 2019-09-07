@@ -4,7 +4,7 @@ import 'package:meta/meta.dart';
 
 @immutable
 abstract class FilteredBlogEvent extends Equatable {
-  FilteredBlogEvent([List props = const []]) : super(props);
+  const FilteredBlogEvent([List props = const []]) : super(props);
 }
 
 class UpdateFilteredBlog extends FilteredBlogEvent {
