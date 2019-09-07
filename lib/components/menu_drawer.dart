@@ -91,14 +91,17 @@ class _MenuButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return FlatButton(
       onPressed: onPressed,
-      child: _MenuLable(iconData: iconData, lable: lable,),
+      child: _MenuLable(
+        iconData: iconData,
+        lable: lable,
+      ),
     );
   }
 }
 
 class _MenuLable extends StatelessWidget {
   const _MenuLable({Key key, this.iconData, this.lable}) : super(key: key);
-  
+
   final IconData iconData;
   final String lable;
 
@@ -110,7 +113,6 @@ class _MenuLable extends StatelessWidget {
       children: <Widget>[
         Icon(
           iconData,
-          // color: AppTheme.fadedBlack,
         ),
         const SizedBox(
           width: 20,
@@ -175,10 +177,6 @@ class _Tag extends StatelessWidget {
     final pageBloc = BlocProvider.of<PageBloc>(context);
     final iconData =
         (tagName == currentFilter) ? Icons.label : Icons.label_outline;
-    // return _menuButton(iconData, tagName, () {
-    //   pageBloc.dispatch(UpdatePage(PageState.tagsFilter));
-    //   filteredBlogBloc.dispatch(FilterByTag(tagName));
-    // });
     return _MenuButton(
       iconData: iconData,
       lable: tagName,
@@ -187,8 +185,6 @@ class _Tag extends StatelessWidget {
         filteredBlogBloc.dispatch(FilterByTag(tagName));
       },
     );
-
-    // return Text('hell');
   }
 }
 
@@ -204,19 +200,16 @@ class _MenuSection extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
-        Divider(),
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
-          child: (title != null)
-              ? Text(
-                  title?.toUpperCase(),
-                )
-              : Container(
-                  height: 0.1,
-                  // color: AppTheme.secondaryColor,
-                ), // error in Flutter - not showing the divider unless something is rendered beneath it
-        ),
-        child
+        if (title != null)
+          Padding(
+            padding:
+                const EdgeInsets.symmetric(horizontal: 16.0, vertical: 32.0),
+            child: Text(
+              title?.toUpperCase(),
+            ),
+          ),
+        child,
+        const SizedBox(height: 32,)
       ],
     );
   }

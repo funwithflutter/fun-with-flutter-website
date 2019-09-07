@@ -10,7 +10,6 @@ import 'package:fun_with_flutter/logic/tag_name_generator.dart';
 import 'package:fun_with_flutter/plugins/url_launcher/url_launcher.dart';
 import 'package:fun_with_flutter/screens/about/about_screen.dart';
 import 'package:fun_with_flutter/screens/custom_widgets/custom_widgets.dart';
-import 'package:fun_with_flutter/themes.dart';
 import 'package:fun_with_flutter/components/post_card.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -98,7 +97,6 @@ class _HomeScreenState extends State<HomeScreen>
           icon: AnimatedIcon(
             icon: AnimatedIcons.menu_close,
             progress: menuAnimation,
-            // color: AppTheme.fadedBlack,
           ),
         ),
         actions: <Widget>[

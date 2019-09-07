@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class AppTheme {
-  static const Color primaryColor = Color(0xFF005699);
+  static const Color primaryColor = Colors.black;
   static const Color accentColor = Colors.pink;
   static const Color fadedBlack = Color.fromRGBO(32, 33, 36, 100);
 
@@ -16,11 +16,13 @@ class AppTheme {
   static const fontWeightSemiBold = FontWeight.w600;
   static const fontWeightBold = FontWeight.w700;
 
+  static const double fontSizeMedium = 16;
+
   static ThemeData theme() {
     return ThemeData(
-      primaryColor: Colors.green,
-      accentColor: accentColor,
-      buttonTheme: ButtonThemeData(textTheme: ButtonTextTheme.accent),
+      primaryColor: primaryColor,
+      accentColor: accentColor.withOpacity(0.8),
+      buttonTheme: const ButtonThemeData(textTheme: ButtonTextTheme.normal),
       dividerColor: accentColor,
       textTheme: const TextTheme(
           display1: TextStyle(
@@ -28,22 +30,30 @@ class AppTheme {
             fontFamily: fontFamilyWorkSans,
           ),
           title: TextStyle(
-            fontSize: 16,
+            fontSize: fontSizeMedium,
           ),
           body1: TextStyle(
-            fontSize: 16,
+            fontSize: fontSizeMedium,
           ),
           body2: TextStyle(
-            fontSize: 16,
+            fontSize: fontSizeMedium,
           ),
           button: TextStyle(
-            fontSize: 16,
+            fontSize: fontSizeMedium,
           )),
       fontFamily: fontFamilyDefault,
-      hoverColor: accentColor,
-      accentIconTheme: const IconThemeData(color: Colors.pink, size: 30),
-      primaryIconTheme: const IconThemeData(color: Colors.pink, size: 30),
-      iconTheme: const IconThemeData(color: Colors.pink, size: 30),
+      accentIconTheme: const IconThemeData(
+        color: accentColor,
+        size: 30,
+      ),
+      primaryIconTheme: const IconThemeData(
+        color: accentColor,
+        size: 30,
+      ),
+      iconTheme: const IconThemeData(
+        color: Colors.pink,
+        size: 30,
+      ),
     );
   }
 }
