@@ -30,8 +30,9 @@ class FunWithAppBar extends StatelessWidget {
                     flex: 14,
                   ),
                   FlatButton(
-                    child: Text('Github',
-                        style: Theme.of(context).textTheme.title),
+                    child: const Text(
+                      'Github',
+                    ),
                     onPressed: () {
                       html.window
                           .open('https://github.com/funwithflutter', 'Github');

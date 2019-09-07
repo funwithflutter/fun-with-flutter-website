@@ -102,13 +102,15 @@ class _HomeScreenState extends State<HomeScreen>
         ),
         actions: <Widget>[
           FlatButton(
-            child: Text('Github', style: Theme.of(context).textTheme.title),
+            child: const Text(
+              'Github',
+            ),
             onPressed: () {
               html.window.open('https://github.com/funwithflutter', 'Github');
             },
           ),
           FlatButton(
-            child: Text('YouTube', style: Theme.of(context).textTheme.title),
+            child: const Text('YouTube',),
             onPressed: () {
               html.window.open('https://youtube.com/funwithflutter', 'YouTube');
             },
@@ -208,7 +210,7 @@ class _RecentBlogs extends StatelessWidget {
               padding: const EdgeInsets.symmetric(vertical: 16),
               child: GridView.extent(
                 maxCrossAxisExtent: 750,
-                childAspectRatio: 3/2,
+                childAspectRatio: 3 / 2,
                 padding: const EdgeInsets.all(16),
                 physics: const BouncingScrollPhysics(),
                 children: <Widget>[
@@ -304,7 +306,7 @@ class _FilteredPostsState extends State<_FilteredPosts>
                       child: GridView.extent(
                         maxCrossAxisExtent: 1200,
                         crossAxisSpacing: 10,
-                        childAspectRatio: 3/2,
+                        childAspectRatio: 3 / 2,
                         padding: const EdgeInsets.all(16),
                         physics: bouncingScrollPhysics,
                         children: <Widget>[
