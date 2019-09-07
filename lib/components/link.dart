@@ -1,5 +1,6 @@
-import 'dart:html' as html;
-import 'package:flutter_web/material.dart';
+// import 'dart:html' as html;
+import 'package:flutter/material.dart';
+import 'package:fun_with_flutter/plugins/url_launcher/url_launcher.dart';
 
 class Link extends StatelessWidget {
   const Link(
@@ -30,7 +31,7 @@ class Link extends StatelessWidget {
         ),
       ),
       onTap: () {
-        html.window.open(url, name);
+        UrlUtils.open(url);
       },
     );
   }

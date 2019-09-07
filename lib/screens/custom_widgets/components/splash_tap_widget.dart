@@ -1,4 +1,4 @@
-import 'package:flutter_web/material.dart';
+import 'package:flutter/material.dart';
 import 'package:fun_with_flutter/screens/custom_widgets/splash_tap/splash.dart';
 import 'package:fun_with_flutter/themes.dart';
 

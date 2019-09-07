@@ -1,12 +1,13 @@
-import 'dart:html' as html;
+// import 'dart:html' as html;
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_web/material.dart';
+import 'package:flutter/material.dart';
 import 'package:fun_with_flutter/blocs/blog/blog_bloc.dart';
 import 'package:fun_with_flutter/blocs/blog/blog_state.dart';
 import 'package:fun_with_flutter/blocs/filtered_blog/filtered_blog.dart';
 import 'package:fun_with_flutter/blocs/page/page.dart';
 import 'package:fun_with_flutter/components/menu_drawer.dart';
 import 'package:fun_with_flutter/logic/tag_name_generator.dart';
+import 'package:fun_with_flutter/plugins/url_launcher/url_launcher.dart';
 import 'package:fun_with_flutter/screens/about/about_screen.dart';
 import 'package:fun_with_flutter/screens/custom_widgets/custom_widgets.dart';
 import 'package:fun_with_flutter/themes.dart';
@@ -106,13 +107,13 @@ class _HomeScreenState extends State<HomeScreen>
               'Github',
             ),
             onPressed: () {
-              html.window.open('https://github.com/funwithflutter', 'Github');
+              UrlUtils.open('https://github.com/funwithflutter');
             },
           ),
           FlatButton(
             child: const Text('YouTube',),
             onPressed: () {
-              html.window.open('https://youtube.com/funwithflutter', 'YouTube');
+              UrlUtils.open('https://youtube.com/funwithflutter');
             },
           ),
         ],
