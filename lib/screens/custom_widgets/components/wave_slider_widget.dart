@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:fun_with_flutter/screens/custom_widgets/wave_slider/wave_slider.dart';
+import 'package:wave_slider/wave_slider.dart';
 
 class WaveSliderWidget extends StatefulWidget {
   @override
