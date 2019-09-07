@@ -64,10 +64,9 @@ class _CustomWidget extends StatelessWidget {
         child: AspectRatio(
           aspectRatio: 3 / 2,
           child: Container(
-            decoration: BoxDecoration(
+            decoration: const BoxDecoration(
               border: Border(
                 top: BorderSide(
-                  // color: AppTheme.fadedBlack,
                   width: 0.5,
                 ),
               ),
@@ -75,10 +74,9 @@ class _CustomWidget extends StatelessWidget {
             child: Column(
               children: <Widget>[
                 Container(
-                  decoration: BoxDecoration(
+                  decoration: const BoxDecoration(
                     border: Border(
                       bottom: BorderSide(
-                        // color: AppTheme.fadedBlack,
                         width: 0.5,
                       ),
                     ),
@@ -94,7 +92,6 @@ class _CustomWidget extends StatelessWidget {
                           style: Theme.of(context)
                               .textTheme
                               .headline
-                              // .copyWith(color: AppTheme.fadedBlack),
                         ),
                       ),
                       Expanded(

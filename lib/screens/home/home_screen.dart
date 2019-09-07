@@ -10,7 +10,6 @@ import 'package:fun_with_flutter/logic/tag_name_generator.dart';
 import 'package:fun_with_flutter/plugins/url_launcher/url_launcher.dart';
 import 'package:fun_with_flutter/screens/about/about_screen.dart';
 import 'package:fun_with_flutter/screens/custom_widgets/custom_widgets.dart';
-import 'package:fun_with_flutter/themes.dart';
 import 'package:fun_with_flutter/components/post_card.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -98,18 +97,19 @@ class _HomeScreenState extends State<HomeScreen>
           icon: AnimatedIcon(
             icon: AnimatedIcons.menu_close,
             progress: menuAnimation,
-            // color: AppTheme.fadedBlack,
           ),
         ),
         actions: <Widget>[
           FlatButton(
-            child: Text('Github', style: Theme.of(context).textTheme.title),
+            child: const Text(
+              'Github',
+            ),
             onPressed: () {
               UrlUtils.open('https://github.com/funwithflutter');
             },
           ),
           FlatButton(
-            child: Text('YouTube', style: Theme.of(context).textTheme.title),
+            child: const Text('YouTube',),
             onPressed: () {
               UrlUtils.open('https://youtube.com/funwithflutter');
             },
@@ -209,7 +209,7 @@ class _RecentBlogs extends StatelessWidget {
               padding: const EdgeInsets.symmetric(vertical: 16),
               child: GridView.extent(
                 maxCrossAxisExtent: 750,
-                childAspectRatio: 3/2,
+                childAspectRatio: 3 / 2,
                 padding: const EdgeInsets.all(16),
                 physics: const BouncingScrollPhysics(),
                 children: <Widget>[
@@ -305,7 +305,7 @@ class _FilteredPostsState extends State<_FilteredPosts>
                       child: GridView.extent(
                         maxCrossAxisExtent: 1200,
                         crossAxisSpacing: 10,
-                        childAspectRatio: 3/2,
+                        childAspectRatio: 3 / 2,
                         padding: const EdgeInsets.all(16),
                         physics: bouncingScrollPhysics,
                         children: <Widget>[

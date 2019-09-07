@@ -21,10 +21,17 @@ class MenuDrawer extends StatelessWidget {
             const SizedBox(
               height: 16,
             ),
-            _menuButton(Icons.widgets, 'Custom Widgets', () {
-              filteredBlogBloc.dispatch(ClearFilters());
-              pageBloc.dispatch(UpdatePage(PageState.widget));
-            }),
+            // _menuButton(Icons.widgets, 'Custom Widgets', () {
+            //   filteredBlogBloc.dispatch(ClearFilters());
+            //   pageBloc.dispatch(UpdatePage(PageState.widget));
+            // }),
+            _MenuButton(
+                iconData: Icons.widgets,
+                lable: 'Custom Widgets',
+                onPressed: () {
+                  filteredBlogBloc.dispatch(ClearFilters());
+                  pageBloc.dispatch(UpdatePage(PageState.widget));
+                }),
             _MenuSection(
               title: 'Tags',
               child: BlocBuilder(
@@ -56,11 +63,14 @@ class MenuDrawer extends StatelessWidget {
               ),
             ),
             _MenuSection(
-              // child: _menuButton(Icons.question_answer, 'About', () {
-              //   filteredBlogBloc.dispatch(ClearFilters());
-              //   pageBloc.dispatch(UpdatePage(PageState.about));
-              // }),
-              child: Text('hello'),
+              child: _MenuButton(
+                iconData: Icons.question_answer,
+                lable: 'About',
+                onPressed: () {
+                  filteredBlogBloc.dispatch(ClearFilters());
+                  pageBloc.dispatch(UpdatePage(PageState.about));
+                },
+              ),
             ),
           ],
         ),
@@ -69,34 +79,76 @@ class MenuDrawer extends StatelessWidget {
   }
 }
 
-Widget _menuButton(IconData iconData, String lable, Function() onPressed) {
-  return FlatButton(
-    onPressed: onPressed,
-    child: _menuLable(iconData, lable),
-  );
+class _MenuButton extends StatelessWidget {
+  const _MenuButton({Key key, this.onPressed, this.iconData, this.lable})
+      : super(key: key);
+
+  final VoidCallback onPressed;
+  final IconData iconData;
+  final String lable;
+
+  @override
+  Widget build(BuildContext context) {
+    return FlatButton(
+      onPressed: onPressed,
+      child: _MenuLable(
+        iconData: iconData,
+        lable: lable,
+      ),
+    );
+  }
 }
 
-Widget _menuLable(IconData iconData, String lable) {
-  return Row(
-    mainAxisAlignment: MainAxisAlignment.start,
-    crossAxisAlignment: CrossAxisAlignment.center,
-    children: <Widget>[
-      Icon(
-        iconData,
-        // color: AppTheme.fadedBlack,
-      ),
-      const SizedBox(
-        width: 20,
-      ),
-      Flexible(
-        child: Text(
-          lable,
-          overflow: TextOverflow.ellipsis,
+class _MenuLable extends StatelessWidget {
+  const _MenuLable({Key key, this.iconData, this.lable}) : super(key: key);
+
+  final IconData iconData;
+  final String lable;
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.start,
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: <Widget>[
+        Icon(
+          iconData,
         ),
-      ),
-    ],
-  );
+        const SizedBox(
+          width: 20,
+        ),
+        Flexible(
+          child: Text(
+            lable,
+            overflow: TextOverflow.ellipsis,
+          ),
+        ),
+      ],
+    );
+  }
 }
+
+// Widget _menuLable(IconData iconData, String lable) {
+//   return Row(
+//     mainAxisAlignment: MainAxisAlignment.start,
+//     crossAxisAlignment: CrossAxisAlignment.center,
+//     children: <Widget>[
+//       Icon(
+//         iconData,
+//         // color: AppTheme.fadedBlack,
+//       ),
+//       const SizedBox(
+//         width: 20,
+//       ),
+//       Flexible(
+//         child: Text(
+//           lable,
+//           overflow: TextOverflow.ellipsis,
+//         ),
+//       ),
+//     ],
+//   );
+// }
 
 // class _MenuButton extends StatelessWidget {
 //   const _MenuButton({Key key}) : super(key: key);
@@ -112,8 +164,6 @@ Widget _menuLable(IconData iconData, String lable) {
 //   }
 // }
 
-
-
 @immutable
 class _Tag extends StatelessWidget {
   const _Tag({Key key, this.tagName, this.currentFilter}) : super(key: key);
@@ -127,11 +177,14 @@ class _Tag extends StatelessWidget {
     final pageBloc = BlocProvider.of<PageBloc>(context);
     final iconData =
         (tagName == currentFilter) ? Icons.label : Icons.label_outline;
-    // return _menuButton(iconData, tagName, () {
-    //   pageBloc.dispatch(UpdatePage(PageState.tagsFilter));
-    //   filteredBlogBloc.dispatch(FilterByTag(tagName));
-    // });
-    return Text('hell');
+    return _MenuButton(
+      iconData: iconData,
+      lable: tagName,
+      onPressed: () {
+        pageBloc.dispatch(UpdatePage(PageState.tagsFilter));
+        filteredBlogBloc.dispatch(FilterByTag(tagName));
+      },
+    );
   }
 }
 
@@ -147,19 +200,16 @@ class _MenuSection extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
-        Divider(),
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
-          child: (title != null)
-              ? Text(
-                  title?.toUpperCase(),
-                )
-              : Container(
-                  height: 0.1,
-                  // color: AppTheme.secondaryColor,
-                ), // error in Flutter - not showing the divider unless something is rendered beneath it
-        ),
-        child
+        if (title != null)
+          Padding(
+            padding:
+                const EdgeInsets.symmetric(horizontal: 16.0, vertical: 32.0),
+            child: Text(
+              title?.toUpperCase(),
+            ),
+          ),
+        child,
+        const SizedBox(height: 32,)
       ],
     );
   }
