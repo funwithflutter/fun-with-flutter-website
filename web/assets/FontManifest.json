@@ -1,0 +1,34 @@
+[
+    {
+        "family": "MaterialIcons",
+        "fonts": [
+            {
+                "asset": "https://fonts.gstatic.com/s/materialicons/v42/flUhRq6tzZclQEJ-Vdg-IuiaDsNcIhQ8tQ.woff2"
+            }
+        ]
+    },
+    {
+        "family": "WorkSans",
+        "fonts": [
+            {
+                "asset": "WorkSans-Regular.ttf"
+            }
+        ]
+    },
+    {
+        "family": "OpenSans",
+        "fonts": [
+            {
+                "asset": "OpenSans-Regular.ttf"
+            }
+        ]
+    },
+    {
+        "family": "DMSerifDisplay",
+        "fonts": [
+            {
+                "asset": "DMSerifDisplay-Regular.ttf"
+            }
+        ]
+    }
+]
