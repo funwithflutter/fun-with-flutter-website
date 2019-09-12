@@ -1,14 +1,13 @@
-const _blogTestingUrl = 'http://localhost:8000';
-const _blogProdUrl = 'https://fun-with-blog.firebaseapp.com';
-const _thumbnailPath = 'thumbnails';
+import 'package:fun_with_flutter/utils/urls.dart' as url;
+
+const _thumbnailUrlPath = 'thumbnails';
+
 
 String get blogBaseUrl {
-  String url = _blogProdUrl;
-  assert(() {
-    url = _blogTestingUrl;
-    return true;
-  }());
-  return url;
+  if (_isReleaseBuild()) {
+    return url.blogProductionUrl;
+  }
+  return url.blogTestingUrl;
 }
 
 String get blogDataUrl {
@@ -16,5 +15,14 @@ String get blogDataUrl {
 }
 
 String blogThumbnailUrl(String filename) {
-  return '$blogBaseUrl/$_thumbnailPath/$filename';
+  return '$blogBaseUrl/$_thumbnailUrlPath/$filename';
+}
+
+bool _isReleaseBuild() {
+  var isProd = true;
+  assert(() {
+    isProd = false;
+    return true;
+  }());
+  return isProd;
 }

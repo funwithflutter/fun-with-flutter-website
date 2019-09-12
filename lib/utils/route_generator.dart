@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:fun_with_flutter/screens/about/about_screen.dart';
-import 'package:fun_with_flutter/screens/blog/blog_screen.dart';
-import 'package:fun_with_flutter/screens/home/home_screen.dart';
-import 'package:fun_with_flutter/screens/todo/todo_screen.dart';
+import 'package:fun_with_flutter/ui/app/app.dart';
+import 'package:fun_with_flutter/ui/screens/about/about_screen.dart';
+import 'package:fun_with_flutter/ui/screens/blog/blog_screen.dart';
+import 'package:fun_with_flutter/ui/screens/home/home_screen.dart';
+import 'package:fun_with_flutter/ui/screens/todo/todo_screen.dart';
 
+// TODO(gordon): use or remove
 class RouteGenerator {
   static const String homeRoute = '/';
   static const String aboutRoute = '/about';
@@ -17,7 +19,7 @@ class RouteGenerator {
     switch (settings.name) {
       case homeRoute:
         return MaterialPageRoute(
-          builder: (_) => const HomeScreen(),
+          builder: (_) => const App(),
         );
       case aboutRoute:
         return MaterialPageRoute(
@@ -25,7 +27,7 @@ class RouteGenerator {
         );
       case blogRoute:
         return MaterialPageRoute(
-          builder: (_) => BlogScreen(),
+          builder: (_) => FilteredBlogPosts(), // TODO(gordon): change this
         );
       case effectsRoute:
         return MaterialPageRoute(

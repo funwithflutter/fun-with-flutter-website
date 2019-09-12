@@ -1,7 +1,7 @@
 import 'dart:async';
 import 'package:bloc/bloc.dart';
 import 'package:flutter/foundation.dart';
-import 'package:fun_with_flutter/blocs/blog/blog.dart';
+import 'package:fun_with_flutter/blocs/blog/bloc.dart';
 import 'package:fun_with_flutter/models/blog_model.dart';
 
 import 'filtered_blog_event.dart';
@@ -43,23 +43,29 @@ class FilteredBlogBloc extends Bloc<FilteredBlogEvent, FilteredBlogState> {
   Stream<FilteredBlogState> _mapUpdateFilterToState() async* {
     if (blogBloc.currentState is BlogLoaded) {
       yield FilteredBlogLoaded((blogBloc.currentState as BlogLoaded).blog, '');
+    } else if (blogBloc.currentState is BlogError) {
+      yield FilteredBlogError();
     }
   }
 
   Stream<FilteredBlogState> _mapTagFilterToState(FilterByTag event) async* {
-    if (blogBloc.currentState is BlogLoaded) {
-      if (currentState is FilteredBlogLoaded) {
-        final String currentTag =
-            (currentState as FilteredBlogLoaded).tagFilter;
-        // Test if this filter has already been applied. If yes clear filters and return.
-        if (currentTag == event.tagFilter) {
-          yield* _mapUpdateFilterToState();
-          return;
+    try {
+      if (blogBloc.currentState is BlogLoaded) {
+        if (currentState is FilteredBlogLoaded) {
+          final String currentTag =
+              (currentState as FilteredBlogLoaded).tagFilter;
+          // Test if this filter has already been applied. If yes clear filters and return.
+          if (currentTag == event.tagFilter) {
+            yield* _mapUpdateFilterToState();
+            return;
+          }
         }
+        final Blog filteredBlog = _mapTagFilterToFilteredBlog(
+            (blogBloc.currentState as BlogLoaded).blog, event.tagFilter);
+        yield FilteredBlogLoaded(filteredBlog, event.tagFilter);
       }
-      final Blog filteredBlog = _mapTagFilterToFilteredBlog(
-          (blogBloc.currentState as BlogLoaded).blog, event.tagFilter);
-      yield FilteredBlogLoaded(filteredBlog, event.tagFilter);
+    } catch (e) {
+      yield FilteredBlogError();
     }
   }
 

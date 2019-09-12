@@ -12,10 +12,10 @@ abstract class FilteredBlogState extends Equatable {
 //   String toString() => 'NoFilterBlogBloc';
 // }
 
-// class FilteredBlogError extends FilteredBlogState {
-//   @override
-//   String toString() => 'FilteredBlogNotLoaded';
-// }
+class FilteredBlogError extends FilteredBlogState {
+  @override
+  String toString() => 'FilteredBlogError';
+}
 
 class FilteredBlogLoading extends FilteredBlogState {
   @override

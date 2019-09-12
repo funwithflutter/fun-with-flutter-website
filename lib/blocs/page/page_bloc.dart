@@ -1,6 +1,6 @@
 import 'dart:async';
 import 'package:bloc/bloc.dart';
-import './page.dart';
+import './bloc.dart';
 
 class PageBloc extends Bloc<PageEvent, PageState> {
   @override

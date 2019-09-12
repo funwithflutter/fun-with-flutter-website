@@ -3,7 +3,8 @@ import 'package:flutter/material.dart';
 class AppTheme {
   static const Color primaryColor = Colors.black;
   static const Color accentColor = Colors.pink;
-  static const Color fadedBlack = Color.fromRGBO(32, 33, 36, 100);
+  static const Color fadedBlackColor = Color.fromRGBO(32, 33, 36, 100);
+  static Color errorColor = Colors.red[300];
 
   static const fontFamilyWorkSans = 'WorkSans';
   static const fontFamilyOpenSans = 'OpenSans';
@@ -21,26 +22,29 @@ class AppTheme {
   static ThemeData theme() {
     return ThemeData(
       primaryColor: primaryColor,
+      
       accentColor: accentColor.withOpacity(0.8),
       buttonTheme: const ButtonThemeData(textTheme: ButtonTextTheme.normal),
       dividerColor: accentColor,
+      errorColor: errorColor,
       textTheme: const TextTheme(
-          display1: TextStyle(
-            fontSize: 28,
-            fontFamily: fontFamilyWorkSans,
-          ),
-          title: TextStyle(
-            fontSize: fontSizeMedium,
-          ),
-          body1: TextStyle(
-            fontSize: fontSizeMedium,
-          ),
-          body2: TextStyle(
-            fontSize: fontSizeMedium,
-          ),
-          button: TextStyle(
-            fontSize: fontSizeMedium,
-          )),
+        display1: TextStyle(
+          fontSize: 28,
+          fontFamily: fontFamilyWorkSans,
+        ),
+        title: TextStyle(
+          fontSize: fontSizeMedium,
+        ),
+        body1: TextStyle(
+          fontSize: fontSizeMedium,
+        ),
+        body2: TextStyle(
+          fontSize: fontSizeMedium,
+        ),
+        button: TextStyle(
+          fontSize: fontSizeMedium,
+        ),
+      ),
       fontFamily: fontFamilyDefault,
       accentIconTheme: const IconThemeData(
         color: accentColor,

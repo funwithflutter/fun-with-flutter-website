@@ -1,15 +1,21 @@
-import 'package:fun_with_flutter/dataprovider/blog_data_provider.dart';
+import 'package:fun_with_flutter/services/blog_service.dart';
+import 'package:meta/meta.dart';
 import 'package:fun_with_flutter/models/blog_model.dart';
 
+@immutable
 class BlogRepository {
-  BlogRepository({BlogDataProvider blogDataProvider})
-      : _blogDataProvider = blogDataProvider ?? BlogDataProvider('assets/data/tags_test_data.json');
+  const BlogRepository({@required BlogApi blogApi})
+      : _blogApi = blogApi;
 
-  final BlogDataProvider _blogDataProvider;
+  final BlogApi _blogApi;
 
   Future<Blog> getBlogData() async {
-    final data = await _blogDataProvider.fetchData();
-    final blog = Blog.fromJson(data);
-    return blog;
+    try {
+      final data = await _blogApi.fetchData();
+      return Blog.fromJson(data);
+    } catch (e) {
+      print(e);
+      return e;
+    }
   }
 }

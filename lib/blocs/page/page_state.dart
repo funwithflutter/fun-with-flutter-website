@@ -1,1 +1,1 @@
-enum PageState { widget, about, home, tagsFilter }
+enum PageState { customWidgets, about, home, tagsFilter }
