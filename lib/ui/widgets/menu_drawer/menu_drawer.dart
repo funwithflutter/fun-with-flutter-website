@@ -1,6 +1,7 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:fun_with_flutter/blocs/bloc.dart';
+import 'package:fun_with_flutter/themes.dart';
 import 'package:fun_with_flutter/ui/widgets/error/error_widget.dart';
 
 class MenuDrawer extends StatelessWidget {
@@ -15,7 +16,7 @@ class MenuDrawer extends StatelessWidget {
     return SingleChildScrollView(
       child: Container(
         width: width,
-        color: Colors.grey[50],
+        color: Theme.of(context).scaffoldBackgroundColor,
         child: Column(
           children: <Widget>[
             const SizedBox(
@@ -26,12 +27,11 @@ class MenuDrawer extends StatelessWidget {
                 lable: 'Custom Widgets',
                 onPressed: () {
                   filteredBlogBloc.dispatch(ClearFilters());
-                  pageBloc.dispatch(UpdatePage(PageState.customWidgets));
+                  pageBloc.dispatch(UpdatePage(PageState.packages));
                 }),
             _MenuSection(
               title: 'Tags',
-              child: BlocBuilder(
-                bloc: filteredBlogBloc,
+              child: BlocBuilder<FilteredBlogBloc, FilteredBlogState>(
                 builder: (BuildContext context, FilteredBlogState state) {
                   if (state is FilteredBlogLoading) {
                     return const Padding(
@@ -116,6 +116,9 @@ class _MenuLable extends StatelessWidget {
           child: Text(
             lable,
             overflow: TextOverflow.ellipsis,
+            // style: TextStyle(
+            //   color: AppTheme.fadedBlackColor,
+            // ),
           ),
         ),
       ],
@@ -140,7 +143,7 @@ class _Tag extends StatelessWidget {
       iconData: iconData,
       lable: tagName,
       onPressed: () {
-        pageBloc.dispatch(UpdatePage(PageState.tagsFilter));
+        pageBloc.dispatch(UpdatePage(PageState.blog));
         filteredBlogBloc.dispatch(FilterByTag(tagName));
       },
     );
@@ -166,6 +169,7 @@ class _MenuSection extends StatelessWidget {
                 const EdgeInsets.symmetric(horizontal: 16.0, vertical: 32.0),
             child: Text(
               title?.toUpperCase(),
+              // style: TextStyle(color: AppTheme.fadedBlackColor),
             ),
           ),
         child,

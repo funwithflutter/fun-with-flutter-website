@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 
 class AppTheme {
-  static const Color primaryColor = Colors.black;
-  static const Color accentColor = Colors.pink;
-  static const Color fadedBlackColor = Color.fromRGBO(32, 33, 36, 100);
+  static const Color primaryColor = Color.fromRGBO(84, 197, 248, 1);
+  static const Color secondaryColor = Color.fromRGBO(1, 87, 155, 1);
+  static const Color accentColor = Color.fromRGBO(255, 86, 120, 1);
+  static const Color alternateColor = Color.fromRGBO(255, 224, 116, 1);
+  static const Color fadedBlackColor = Color.fromRGBO(32, 33, 36, 1);
   static Color errorColor = Colors.red[300];
 
   static const fontFamilyWorkSans = 'WorkSans';
@@ -22,19 +24,19 @@ class AppTheme {
   static ThemeData theme() {
     return ThemeData(
       primaryColor: primaryColor,
-      
-      accentColor: accentColor.withOpacity(0.8),
+      accentColor: accentColor,
       buttonTheme: const ButtonThemeData(textTheme: ButtonTextTheme.normal),
       dividerColor: accentColor,
       errorColor: errorColor,
+      // scaffoldBackgroundColor: Colors.grey[100],
       textTheme: const TextTheme(
-        display1: TextStyle(
-          fontSize: 28,
-          fontFamily: fontFamilyWorkSans,
-        ),
-        title: TextStyle(
-          fontSize: fontSizeMedium,
-        ),
+        // display1: TextStyle(
+        //   fontSize: 28,
+        //   fontFamily: fontFamilyWorkSans,
+        // ),
+        // title: TextStyle(
+        //   fontFamily: fontFamilyWorkSans
+        // ),
         body1: TextStyle(
           fontSize: fontSizeMedium,
         ),
@@ -55,7 +57,7 @@ class AppTheme {
         size: 30,
       ),
       iconTheme: const IconThemeData(
-        color: Colors.pink,
+        color: accentColor,
         size: 30,
       ),
     );

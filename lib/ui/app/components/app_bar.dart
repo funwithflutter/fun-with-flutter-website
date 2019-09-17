@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fun_with_flutter/blocs/bloc.dart';
 import 'package:fun_with_flutter/plugins/url_launcher/url_launcher.dart';
+import 'package:fun_with_flutter/themes.dart';
 import 'package:fun_with_flutter/utils/urls.dart' as url;
 
 // Todo(gordon): Refactor to encapsulate the animation within this widget
@@ -11,19 +12,27 @@ class FunWithAppBar extends StatelessWidget implements PreferredSizeWidget {
     @required this.animationController,
     @required this.menuAnimation,
     @required this.menuVisible,
-  })  : assert(
-            animationController != null && menuAnimation != null && menuVisible != null),
+    @required this.loginPressed,
+  })  : assert(animationController != null &&
+            menuAnimation != null &&
+            menuVisible != null),
         super(key: key);
 
   final AnimationController animationController;
   final Animation<double> menuAnimation;
   final bool menuVisible;
 
+  final VoidCallback loginPressed;
+
+  void _loginPressed() {
+    if (loginPressed != null) {
+      loginPressed();
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     final pageBloc = BlocProvider.of<PageBloc>(context);
-    final loginBloc = BlocProvider.of<LoginBloc>(context);
-    final authenticationBloc = BlocProvider.of<AuthenticationBloc>(context);
 
     return AppBar(
       title: GestureDetector(
@@ -32,10 +41,11 @@ class FunWithAppBar extends StatelessWidget implements PreferredSizeWidget {
         },
         child: Text(
           'Fun with Flutter',
-          style: Theme.of(context).textTheme.display1,
+          style: Theme.of(context).textTheme.title,
         ),
       ),
       backgroundColor: Colors.transparent,
+      elevation: 0,
       leading: IconButton(
         onPressed: () {
           if (menuVisible) {
@@ -50,69 +60,28 @@ class FunWithAppBar extends StatelessWidget implements PreferredSizeWidget {
         ),
       ),
       actions: <Widget>[
-        FlatButton(
-          child: const Text(
-            'Github',
-          ),
-          onPressed: () {
-            UrlUtils.open(url.funWithGithubUrl);
-          },
-        ),
-        FlatButton(
-          child: const Text(
-            'YouTube',
-          ),
-          onPressed: () {
-            UrlUtils.open(url.funWithYouTubeUrl);
-          },
-        ),
-        FlatButton(
-          onPressed: () {
-            loginBloc.dispatch(
-              LoginWithCredentialsPressed(
-                  email: 'leeza@test.com', password: 'StrongPassword'),
-            );
-          },
-          child: const Text('LoginFalse'),
-        ),
-        FlatButton(
-          onPressed: () {
-            authenticationBloc.dispatch(LoggedOut());
-          },
-          child: const Text('Logout'),
-        ),
-        BlocListener<LoginBloc, LoginState>(
-          listener: (context, state) {
-            if (state.isSuccess) {
-              authenticationBloc.dispatch(LoggedIn());
+        BlocBuilder<AuthenticationBloc, AuthenticationState>(
+          builder: (context, state) {
+            if (state is Authenticated) {
+              return FlatButton(
+                onPressed: () {
+                  BlocProvider.of<AuthenticationBloc>(context)
+                      .dispatch(LoggedOut());
+                },
+                child: const Text('Logout'),
+              );
+            } else {
+              return FlatButton(
+                onPressed: _loginPressed,
+                child: const Text(
+                  'Login',
+                  style: TextStyle(color: AppTheme.accentColor, fontWeight: FontWeight.bold),
+                ),
+              );
             }
           },
-          child: BlocBuilder<AuthenticationBloc, AuthenticationState>(
-            builder: (context, state) {
-              if (state is Unauthenticated) {
-                return FlatButton(
-                  onPressed: () {
-                    loginBloc.dispatch(
-                      LoginWithCredentialsPressed(
-                          email: 'leeza@test.com',
-                          password: 'StrongPassword123'),
-                    );
-                  },
-                  child: const Text('Login'),
-                );
-              }
-              if (state is Authenticated) {
-                return Text(
-                  state.displayName,
-                  style: TextStyle(color: Colors.green),
-                );
-              }
-              return const Text('todo');
-            },
-          ),
         ),
       ],
-      elevation: 1,
     );
   }
 

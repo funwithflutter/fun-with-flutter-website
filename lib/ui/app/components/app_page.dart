@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fun_with_flutter/blocs/bloc.dart';
-import 'package:fun_with_flutter/ui/screens/about/about_screen.dart';
-import 'package:fun_with_flutter/ui/screens/blog/blog_screen.dart';
-import 'package:fun_with_flutter/ui/screens/home/home_screen.dart';
-import 'package:fun_with_flutter/ui/screens/packages/packages.dart';
+import 'package:fun_with_flutter/ui/pages/about/about_page.dart';
+import 'package:fun_with_flutter/ui/pages/blog/blog_page.dart';
+import 'package:fun_with_flutter/ui/pages/home/home_page.dart';
+import 'package:fun_with_flutter/ui/pages/packages/packages_page.dart';
 import 'package:fun_with_flutter/ui/widgets/error/error_widget.dart';
 
 class AppPage extends StatelessWidget {
@@ -14,25 +14,21 @@ class AppPage extends StatelessWidget {
       builder: (BuildContext context, PageState state) {
         switch (state) {
           case PageState.home:
-            return Expanded(child: Home());
+            return HomePage();
             break;
-          case PageState.tagsFilter:
-            return Expanded(
-              child: FilteredBlogPosts(),
-            );
+          case PageState.blog:
+            return FilteredBlogPage();
             break;
-          case PageState.customWidgets:
+          case PageState.packages:
             return PackagesPage();
             break;
           case PageState.about:
-            return AboutScreen();
+            return AboutPage();
             break;
           default:
-            return const Expanded(
-              child: CustomError(
-                errorMessage:
-                    'Whoops, you found something that has not yet been implemented',
-              ),
+            return const CustomError(
+              errorMessage:
+                  'Whoops, you found something that has not yet been implemented',
             );
             break;
         }

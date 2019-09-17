@@ -28,21 +28,21 @@ class ErrorListener extends StatelessWidget {
               }
             },
           ),
-          BlocListener<LoginBloc, LoginState>(
-            listener: (context, state) {
-              if (state.isFailure) {
-                Scaffold.of(context)
-                  ..removeCurrentSnackBar()
-                  ..showSnackBar(
-                    SnackBar(
-                      content: const ErrorSnackbar(
-                        message: 'Error signing in.',
-                      ),
-                    ),
-                  );
-              }
-            },
-          )
+          // BlocListener<LoginBloc, LoginState>(
+          //   listener: (context, state) {
+          //     if (state.isFailure) {
+          //       Scaffold.of(context)
+          //         ..removeCurrentSnackBar()
+          //         ..showSnackBar(
+          //           SnackBar(
+          //             content: const ErrorSnackbar(
+          //               message: 'Error signing in.',
+          //             ),
+          //           ),
+          //         );
+          //     }
+          //   },
+          // )
         ],
         child: child,
       ),

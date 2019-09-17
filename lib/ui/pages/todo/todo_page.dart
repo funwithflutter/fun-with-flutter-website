@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class TodoScreen extends StatelessWidget {
+class TodoPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const Center(

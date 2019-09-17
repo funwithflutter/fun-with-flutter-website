@@ -10,12 +10,12 @@ class UserRepository {
   final Auth _firebaseAuth;
   final GoogleAuthProvider _googleSignIn;
 
-  Future<void> signInWithGoogle() async {
+  Future<UserCredential> signInWithGoogle() async {
     try {
-      await _firebaseAuth.signInWithPopup(_googleSignIn);
+      return await _firebaseAuth.signInWithPopup(_googleSignIn);
     } catch (e) {
       print('Error in sign in with google: $e');
-      return e;
+      throw '$e';
     }
   }
 
@@ -25,26 +25,35 @@ class UserRepository {
       return await _firebaseAuth.signInWithEmailAndPassword(email, password);
     } catch (e) {
       print('Error in sign in with credentials: $e');
-      return e;
+      // return e;
+      throw '$e';
     }
   }
 
-  Future<void> signUp({String email, String password}) async {
+  Future<UserCredential> signUp({String email, String password}) async {
     try {
       return await _firebaseAuth.createUserWithEmailAndPassword(
         email,
         password,
       );
     } catch (e) {
-      print ('Error in sign up with credentials: $e');
-      return e;
+      print('Error siging in with credentials: $e');
+      throw '$e';
+      // throw Error('Error signing up with credentials: $e');
+      // return e;
     }
   }
 
-  Future<void> signOut() async {
-    return Future.wait([
-      _firebaseAuth.signOut(),
-    ]);
+  Future<dynamic> signOut() async {
+    try {
+      return Future.wait([
+        _firebaseAuth.signOut(),
+      ]);
+    } catch (e) {
+      print ('Error signin out: $e');
+      // return e;
+      throw '$e';
+    }
   }
 
   Future<bool> isSignedIn() async {

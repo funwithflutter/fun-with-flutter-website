@@ -1,20 +1,21 @@
 import 'package:flutter/material.dart';
+import 'package:fun_with_flutter/themes.dart';
 
 class RegisterButton extends StatelessWidget {
-  final VoidCallback _onPressed;
-
-  RegisterButton({Key key, VoidCallback onPressed})
+  const RegisterButton({Key key, VoidCallback onPressed})
       : _onPressed = onPressed,
         super(key: key);
 
+  final VoidCallback _onPressed;
+
   @override
   Widget build(BuildContext context) {
-    return RaisedButton(
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(30.0),
-      ),
+    return OutlineButton(
       onPressed: _onPressed,
-      child: Text('Register'),
+      child: const Text('REGISTER'),
+      highlightedBorderColor: AppTheme.primaryColor,
+      splashColor: AppTheme.primaryColor,
+      hoverColor: AppTheme.accentColor,
     );
   }
 }

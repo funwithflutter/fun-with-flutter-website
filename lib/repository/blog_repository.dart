@@ -14,7 +14,6 @@ class BlogRepository {
       final data = await _blogApi.fetchData();
       return Blog.fromJson(data);
     } catch (e) {
-      print(e);
       return e;
     }
   }

@@ -14,17 +14,15 @@ class LoadingSnackbar extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
+        Theme(
+          data: Theme.of(context).copyWith(accentColor: AppTheme.accentColor),
+          child: const CircularProgressIndicator(),
+        ),
+        const SizedBox(width: 16,),
         Text(
           message,
           style: Theme.of(context).textTheme.title,
           overflow: TextOverflow.fade,
-        ),
-        const SizedBox(
-          width: 32,
-        ),
-        Theme(
-          data: Theme.of(context).copyWith(accentColor: AppTheme.accentColor),
-          child: const CircularProgressIndicator(),
         ),
       ],
     );
@@ -40,12 +38,41 @@ class InfoSnackbar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: Text(
-        message,
-        style: Theme.of(context).textTheme.title,
-        overflow: TextOverflow.fade,
-      ),
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: <Widget>[
+        Icon(Icons.info_outline, size: 32, color: AppTheme.accentColor,),
+        const SizedBox(width: 16,),
+        Text(
+          message,
+          style: Theme.of(context).textTheme.title,
+          overflow: TextOverflow.fade,
+        ),
+      ],
+    );
+  }
+}
+
+class SuccessSnackbar extends StatelessWidget {
+  const SuccessSnackbar({Key key, @required this.message})
+      : assert(message != null),
+        super(key: key);
+
+  final String message;
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: <Widget>[
+        Icon(Icons.check, size: 32, color: AppTheme.primaryColor,),
+        const SizedBox(width: 16,),
+        Text(
+          message,
+          style: Theme.of(context).textTheme.title,
+          overflow: TextOverflow.fade,
+        ),
+      ],
     );
   }
 }
@@ -62,6 +89,12 @@ class ErrorSnackbar extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: <Widget>[
+        Icon(
+          Icons.error_outline,
+          size: 32,
+          color: AppTheme.errorColor,
+        ),
+        const SizedBox(width: 16,),
         CustomError(
           errorMessage: message,
         ),

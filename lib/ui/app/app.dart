@@ -1,8 +1,14 @@
-import 'package:flutter/material.dart';
-import 'package:fun_with_flutter/ui/app/components/app_page.dart';
+import 'dart:ui';
 
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+
+import 'package:fun_with_flutter/blocs/bloc.dart';
+import 'package:fun_with_flutter/ui/app/components/app_page.dart';
 import 'package:fun_with_flutter/ui/app/components/error_listener.dart';
 import 'package:fun_with_flutter/ui/app/components/app_bar.dart';
+import 'package:fun_with_flutter/ui/app/components/overlay_panel.dart';
+import 'package:fun_with_flutter/ui/widgets/account/account.dart';
 import 'package:fun_with_flutter/ui/widgets/menu_drawer/menu_drawer.dart';
 
 class App extends StatefulWidget {
@@ -24,6 +30,7 @@ class _AppState extends State<App> with SingleTickerProviderStateMixin {
 
   bool _menuIsVisible = false;
   bool isSmallScreen = false;
+  bool _accountPanelVisible = false;
 
   @override
   void initState() {
@@ -65,6 +72,18 @@ class _AppState extends State<App> with SingleTickerProviderStateMixin {
     } // TODO(Anyone): Need to refine this entire process.
   }
 
+  void _openLoginPannel() {
+    setState(() {
+      _accountPanelVisible = true;
+    });
+  }
+
+  void _closeAccountPanel() {
+    setState(() {
+      _accountPanelVisible = false;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     _setScreenSize(MediaQuery.of(context).size);
@@ -73,47 +92,64 @@ class _AppState extends State<App> with SingleTickerProviderStateMixin {
         animationController: _controller,
         menuAnimation: _menuAnimation,
         menuVisible: _menuIsVisible,
+        loginPressed: _openLoginPannel,
       ),
       body: ErrorListener(
-        child: AnimatedBuilder(
-          animation: _menuAnimation,
-          builder: (context, widget) {
-            return Stack(
-              children: <Widget>[
-                Row(
-                  children: <Widget>[
-                    if (!isSmallScreen)
-                      // this will push all the widgets to the right as the menu opens
-                      SizedBox(width: _menuAnimation.value),
-                    AppPage(),
-                  ],
-                ),
-                if (_menuIsVisible)
-                  Transform.translate(
-                    offset: Offset(-_menuSize + _menuAnimation.value, 0),
-                    child: Container(
-                      decoration: isSmallScreen
-                          ? const BoxDecoration(
-                              boxShadow: [
-                                BoxShadow(
-                                  color: Colors.grey,
-                                  offset: Offset(5.0, 10.0),
-                                  blurRadius: 5.0,
-                                  spreadRadius: 2.0,
-                                )
-                              ],
-                            )
-                          : null,
-                      child: const MenuDrawer(
-                        width: _menuSize,
+        child: BlocListener<AuthenticationBloc, AuthenticationState>(
+          listener: (context, state) {
+            _closeAccountPanel(); // close the account panel on auth state change for usability
+          },
+          child: AnimatedBuilder(
+            animation: _menuAnimation,
+            builder: (context, widget) {
+              return Stack(
+                children: <Widget>[
+                  Row(
+                    children: <Widget>[
+                      if (!isSmallScreen)
+                        // this will push all the widgets to the right as the menu opens
+                        SizedBox(width: _menuAnimation.value),
+                      Expanded(child: AppPage()),
+                    ],
+                  ),
+                  if (_menuIsVisible)
+                    Transform.translate(
+                      offset: Offset(-_menuSize + _menuAnimation.value, 0),
+                      child: Container(
+                        decoration: _menuShadowDecoration(isSmallScreen),
+                        child: const MenuDrawer(
+                          width: _menuSize,
+                        ),
                       ),
                     ),
-                  ),
-              ],
-            );
-          },
+                  if (_accountPanelVisible)
+                    OverlayPannel(
+                      onClosedPressed: _closeAccountPanel,
+                      child: AccountPage(),
+                    )
+                ],
+              );
+            },
+          ),
         ),
       ),
     );
+  }
+}
+
+Decoration _menuShadowDecoration(bool shouldDisplay) {
+  if (shouldDisplay) {
+    return const BoxDecoration(
+      boxShadow: [
+        BoxShadow(
+          color: Colors.grey,
+          offset: Offset(5.0, 10.0),
+          blurRadius: 5.0,
+          spreadRadius: 2.0,
+        )
+      ],
+    );
+  } else {
+    return null;
   }
 }

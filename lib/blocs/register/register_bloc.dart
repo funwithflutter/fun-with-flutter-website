@@ -28,7 +28,8 @@ class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
     final debounceStream = observableStream.where((event) {
       return (event is EmailChanged || event is PasswordChanged);
     }).debounceTime(Duration(milliseconds: 300));
-    return super.transformEvents(nonDebounceStream.mergeWith([debounceStream]), next);
+    return super
+        .transformEvents(nonDebounceStream.mergeWith([debounceStream]), next);
   }
 
   @override
@@ -60,15 +61,23 @@ class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
     String email,
     String password,
   ) async* {
+    RegisterState state;
     yield RegisterState.loading();
-    try {
-      await _userRepository.signUp(
-        email: email,
-        password: password,
-      );
-      yield RegisterState.success();
-    } catch (_) {
-      yield RegisterState.failure();
-    }
+    await _userRepository
+        .signUp(
+      email: email,
+      password: password,
+    )
+        .then(
+      (onValue) {
+        state = RegisterState.success();
+      },
+    ).catchError(
+      (onError) {
+        print(onError);
+        state = RegisterState.failure(onError);
+      },
+    );
+    yield state;
   }
 }

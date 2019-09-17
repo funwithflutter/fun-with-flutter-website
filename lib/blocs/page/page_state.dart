@@ -1,1 +1,1 @@
-enum PageState { customWidgets, about, home, tagsFilter }
+enum PageState { packages, about, home, blog }

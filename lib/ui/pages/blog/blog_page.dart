@@ -5,12 +5,12 @@ import 'package:fun_with_flutter/ui/widgets/blog_post_card/blog_post_card.dart';
 import 'package:fun_with_flutter/ui/widgets/error/error_widget.dart';
 import 'package:fun_with_flutter/utils/tag_name_generator.dart';
 
-class FilteredBlogPosts extends StatefulWidget {
+class FilteredBlogPage extends StatefulWidget {
   @override
-  FilteredBlogPostsState createState() => FilteredBlogPostsState();
+  FilteredBlogPageState createState() => FilteredBlogPageState();
 }
 
-class FilteredBlogPostsState extends State<FilteredBlogPosts>
+class FilteredBlogPageState extends State<FilteredBlogPage>
     with SingleTickerProviderStateMixin {
   static const _bouncingScrollPhysics = BouncingScrollPhysics();
   final Tween<double> _paddingTween = Tween<double>(begin: 32, end: 0);
@@ -53,8 +53,7 @@ class FilteredBlogPostsState extends State<FilteredBlogPosts>
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder(
-      bloc: BlocProvider.of<FilteredBlogBloc>(context),
+    return BlocBuilder<FilteredBlogBloc, FilteredBlogState>(
       builder: (BuildContext context, FilteredBlogState state) {
         if (state is FilteredBlogLoading) {
           return Center(

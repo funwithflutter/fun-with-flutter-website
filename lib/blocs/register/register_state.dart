@@ -7,6 +7,7 @@ class RegisterState {
   final bool isSubmitting;
   final bool isSuccess;
   final bool isFailure;
+  final String errorMessage;
 
   bool get isFormValid => isEmailValid && isPasswordValid;
 
@@ -16,6 +17,7 @@ class RegisterState {
     @required this.isSubmitting,
     @required this.isSuccess,
     @required this.isFailure,
+    this.errorMessage = '',
   });
 
   factory RegisterState.empty() {
@@ -38,13 +40,14 @@ class RegisterState {
     );
   }
 
-  factory RegisterState.failure() {
+  factory RegisterState.failure(String error) {
     return RegisterState(
       isEmailValid: true,
       isPasswordValid: true,
       isSubmitting: false,
       isSuccess: false,
       isFailure: true,
+      errorMessage: error,
     );
   }
 
@@ -78,6 +81,7 @@ class RegisterState {
     bool isSubmitting,
     bool isSuccess,
     bool isFailure,
+    String errorMessage,
   }) {
     return RegisterState(
       isEmailValid: isEmailValid ?? this.isEmailValid,
@@ -85,6 +89,7 @@ class RegisterState {
       isSubmitting: isSubmitting ?? this.isSubmitting,
       isSuccess: isSuccess ?? this.isSuccess,
       isFailure: isFailure ?? this.isFailure,
+      errorMessage: errorMessage ?? this.errorMessage,
     );
   }
 
@@ -96,6 +101,7 @@ class RegisterState {
       isSubmitting: $isSubmitting,
       isSuccess: $isSuccess,
       isFailure: $isFailure,
+      errorMessage: $errorMessage,
     }''';
   }
 }

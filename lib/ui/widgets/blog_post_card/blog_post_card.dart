@@ -19,6 +19,15 @@ class BlogPostCard extends StatelessWidget {
           child: Container(
             child: Column(
               children: <Widget>[
+                Expanded(
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Image.network(
+                      url_repository.blogThumbnailUrl(post.thumbnail),
+                      fit: BoxFit.contain,
+                    ),
+                  ),
+                ),
                 Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: Text(
@@ -27,19 +36,11 @@ class BlogPostCard extends StatelessWidget {
                     style: Theme.of(context).textTheme.headline,
                   ),
                 ),
-                const Divider(),
-                Expanded(
-                  child: Image.network(
-                    url_repository.blogThumbnailUrl(post.thumbnail),
-                    fit: BoxFit.contain,
-                  ),
-                ),
-                const Divider(),
                 Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: Container(
                     constraints:
-                        const BoxConstraints(minHeight: 20, maxHeight: 20),
+                        const BoxConstraints(minHeight: 30, maxHeight: 60),
                     child: Text(
                       post.description,
                       overflow: TextOverflow.ellipsis,

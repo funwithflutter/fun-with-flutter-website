@@ -43,11 +43,11 @@ class LoginWithGooglePressed extends LoginEvent {
 }
 
 class LoginWithCredentialsPressed extends LoginEvent {
-  final String email;
-  final String password;
-
   LoginWithCredentialsPressed({@required this.email, @required this.password})
       : super([email, password]);
+
+  final String email;
+  final String password;
 
   @override
   String toString() {

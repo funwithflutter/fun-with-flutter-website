@@ -35,7 +35,6 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
 
   @override
   Stream<LoginState> mapEventToState(LoginEvent event) async* {
-    print('here');
     if (event is EmailChanged) {
       yield* _mapEmailChangedToState(event.email);
     } else if (event is PasswordChanged) {
@@ -67,7 +66,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
     await _userRepository.signInWithGoogle().then((onValue) {
       state = LoginState.success();
     }).catchError((onError) {
-      state = LoginState.failure();
+      state = LoginState.failure(onError);
     });
     yield state;
   }
@@ -83,7 +82,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
         .then((onValue) {
       state = LoginState.success();
     }).catchError((onError) {
-      state = LoginState.failure();
+      state = LoginState.failure(onError);
     });
     yield state;
   }

@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:fun_with_flutter/ui/app/app.dart';
-import 'package:fun_with_flutter/ui/screens/about/about_screen.dart';
-import 'package:fun_with_flutter/ui/screens/blog/blog_screen.dart';
-import 'package:fun_with_flutter/ui/screens/home/home_screen.dart';
-import 'package:fun_with_flutter/ui/screens/todo/todo_screen.dart';
+import 'package:fun_with_flutter/ui/pages/about/about_page.dart';
+import 'package:fun_with_flutter/ui/pages/blog/blog_page.dart';
+import 'package:fun_with_flutter/ui/pages/todo/todo_page.dart';
 
 // TODO(gordon): use or remove
 class RouteGenerator {
@@ -23,27 +22,27 @@ class RouteGenerator {
         );
       case aboutRoute:
         return MaterialPageRoute(
-          builder: (_) => AboutScreen(),
+          builder: (_) => AboutPage(),
         );
       case blogRoute:
         return MaterialPageRoute(
-          builder: (_) => FilteredBlogPosts(), // TODO(gordon): change this
+          builder: (_) => FilteredBlogPage(), // TODO(gordon): change this
         );
       case effectsRoute:
         return MaterialPageRoute(
-          builder: (_) => TodoScreen(),
+          builder: (_) => TodoPage(),
         );
       case designRoute:
         return MaterialPageRoute(
-          builder: (_) => TodoScreen(),
+          builder: (_) => TodoPage(),
         );
       case packagesRoute:
         return MaterialPageRoute(
-          builder: (_) => TodoScreen(),
+          builder: (_) => TodoPage(),
         );
       case snippetsRoute:
         return MaterialPageRoute(
-          builder: (_) => TodoScreen(),
+          builder: (_) => TodoPage(),
         );
       default:
         return _errorPage();
