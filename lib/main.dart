@@ -12,22 +12,23 @@ import 'package:fun_with_flutter/repository/url_repository.dart'
 import 'package:fun_with_flutter/repository/user_repository.dart';
 import 'package:fun_with_flutter/services/blog_service.dart';
 import 'package:fun_with_flutter/themes.dart';
-import 'package:fun_with_flutter/utils/route_generator.dart';
 import 'package:fun_with_flutter/blocs/bloc.dart';
 import 'package:fun_with_flutter/blocs/simple_bloc_delegate.dart';
 
-
 void main() {
-  fb.initializeApp(
-    apiKey: 'AIzaSyD8JoU_58xKlQFvva7nS7VHTKc1vUkaosk',
-    authDomain: 'fun-with.firebaseapp.com',
-    databaseURL: 'https://fun-with.firebaseio.com',
-    projectId: 'fun-with',
-    storageBucket: 'fun-with.appspot.com',
-    messagingSenderId: '1006728819313',
-  );
+  assert(() {
+    fb.initializeApp(
+      apiKey: 'AIzaSyD8JoU_58xKlQFvva7nS7VHTKc1vUkaosk',
+      authDomain: 'fun-with.firebaseapp.com',
+      databaseURL: 'https://fun-with.firebaseio.com',
+      projectId: 'fun-with',
+      storageBucket: 'fun-with.appspot.com',
+      messagingSenderId: '1006728819313',
+    );
+    BlocSupervisor.delegate = SimpleBlocDelegate();
+    return true;
+  }());
 
-  BlocSupervisor.delegate = SimpleBlocDelegate();
   runApp(AppInjector());
 }
 

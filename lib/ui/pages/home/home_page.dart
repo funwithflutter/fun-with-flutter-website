@@ -42,10 +42,10 @@ class _HomePageState extends State<HomePage> {
                 child: Center(
                   child: AnimatedOpacity(
                     opacity: _opacity,
-                    duration: Duration(milliseconds: 400),
-                    child: Image(
-                      image: const AssetImage(
-                          'assets/fun_with_flutter_grey_icon.png'),
+                    duration: const Duration(milliseconds: 400),
+                    child: const Image(
+                      image:
+                          AssetImage('assets/fun_with_flutter_grey_icon.png'),
                     ),
                   ),
                 ),
@@ -63,13 +63,14 @@ class _HomePageState extends State<HomePage> {
                         child: HeaderWidget('Recent blog posts'),
                       ),
                       if (state is BlogLoading)
-                        const SliverToBoxAdapter(child: Center(child: CircularProgressIndicator())),
+                        const SliverToBoxAdapter(
+                            child: Center(child: CircularProgressIndicator())),
                       if (state is BlogLoaded)
                         SliverGrid.extent(
                           maxCrossAxisExtent: 750,
                           childAspectRatio: 3 / 2,
                           children: <Widget>[
-                            for (var i = 0; i < 4; i++)
+                            for (var i = 0; i < state.blog.pages.length; i++)
                               BlogPostCard(
                                 post: state.blog.pages[i],
                               )
@@ -148,7 +149,8 @@ class _LogoLoaderState extends State<LogoLoader>
     _flutterImage.image.resolve(const ImageConfiguration()).addListener(
       ImageStreamListener(
         (ImageInfo info, bool _) {
-          _controller.forward(); // start the animation on once the image is loaded
+          _controller
+              .forward(); // start the animation on once the image is loaded
         },
       ),
     );

@@ -40,7 +40,7 @@ class FunWithAppBar extends StatelessWidget implements PreferredSizeWidget {
           pageBloc.dispatch(UpdatePage(PageState.home));
         },
         child: Text(
-          'Fun with Flutter',
+          'FUN WITH FLUTTER',
           style: Theme.of(context).textTheme.title,
         ),
       ),

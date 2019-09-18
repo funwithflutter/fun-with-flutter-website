@@ -31,7 +31,7 @@ class BlogPostCard extends StatelessWidget {
                 Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: Text(
-                    post.title,
+                    post?.title,
                     overflow: TextOverflow.ellipsis,
                     style: Theme.of(context).textTheme.headline,
                   ),
@@ -42,7 +42,7 @@ class BlogPostCard extends StatelessWidget {
                     constraints:
                         const BoxConstraints(minHeight: 30, maxHeight: 60),
                     child: Text(
-                      post.description,
+                      post?.description,
                       overflow: TextOverflow.ellipsis,
                     ),
                   ),

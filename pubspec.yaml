@@ -56,6 +56,7 @@ flutter:
    - assets/fun_with_flutter_icon.png
    - assets/fun_with_flutter_grey_icon.png
    - assets/fun_with_flutter_grey_icon.png
+   - assets/images/funwith_favicon.png
    - assets/confetti.gif
   #  - images/a_dot_ham.jpeg
 

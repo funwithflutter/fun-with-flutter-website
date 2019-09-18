@@ -12,9 +12,11 @@ class BlogRepository {
   Future<Blog> getBlogData() async {
     try {
       final data = await _blogApi.fetchData();
-      return Blog.fromJson(data);
+      final blog = Blog.fromJson(data);
+      return blog;
     } catch (e) {
-      return e;
+      print(e);
+      rethrow;
     }
   }
 }

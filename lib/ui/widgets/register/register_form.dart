@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fun_with_flutter/blocs/authentication/bloc.dart';
 import 'package:fun_with_flutter/blocs/register/bloc.dart';
+import 'package:fun_with_flutter/themes.dart';
 import 'package:fun_with_flutter/ui/components/snackbar.dart';
 import 'package:fun_with_flutter/ui/widgets/register/regsiter_button.dart';
 
@@ -35,6 +36,47 @@ class _RegisterFormState extends State<RegisterForm> {
     _passwordController.addListener(_onPasswordChanged);
   }
 
+  Future<void> _neverSatisfied() async {
+    return showDialog<void>(
+      context: context,
+      barrierDismissible: false, // user must tap button!
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: const Text('Legend'),
+          content: SingleChildScrollView(
+            child: ListBody(
+              children: const <Widget>[
+                Text(
+                  'Thank you for signing up!',
+                  style: TextStyle(color: AppTheme.accentColor),
+                ),
+                Text(
+                    'The YouTube channel that has provided me with the best Flutter content is...'),
+                Text(
+                  'Reso Coder',
+                  style: TextStyle(color: AppTheme.secondaryColor),
+                ),
+                Text(
+                    "I'd provide you with a link but I'm too lazy to code it."),
+                Text(
+                  "Stay on my website instead, why don't you.",
+                ),
+              ],
+            ),
+          ),
+          actions: <Widget>[
+            FlatButton(
+              child: const Text('Close'),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+        );
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return BlocListener<RegisterBloc, RegisterState>(
@@ -52,15 +94,15 @@ class _RegisterFormState extends State<RegisterForm> {
         }
         if (state.isSuccess) {
           BlocProvider.of<AuthenticationBloc>(context).dispatch(LoggedIn());
-          Scaffold.of(context)
-            ..hideCurrentSnackBar()
-            ..showSnackBar(
-              const SnackBar(
-                content: SuccessSnackbar(
-                  message: 'Registration succesful',
-                ),
-              ),
-            );
+          Scaffold.of(context)..hideCurrentSnackBar();
+          //   ..showSnackBar(
+          //     const SnackBar(
+          //       content: SuccessSnackbar(
+          //         message: 'Registration succesful',
+          //       ),
+          //     ),
+          //   );
+          _neverSatisfied();
         }
         if (state.isFailure) {
           Scaffold.of(context)

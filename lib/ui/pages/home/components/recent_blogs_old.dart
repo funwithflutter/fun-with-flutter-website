@@ -6,7 +6,7 @@ import 'package:fun_with_flutter/ui/widgets/error/error_widget.dart';
 
 class RecentBlogs extends StatelessWidget {
   const RecentBlogs({Key key, this.numberOfPosts = 4})
-      : assert(numberOfPosts != null && numberOfPosts > 0),
+      : assert(numberOfPosts != null && numberOfPosts > 0), // TODO(Gordon): use or lose
         super(key: key);
 
   final int numberOfPosts;
@@ -38,7 +38,7 @@ class RecentBlogs extends StatelessWidget {
                   padding: const EdgeInsets.all(16),
                   physics: const BouncingScrollPhysics(),
                   children: <Widget>[
-                    for (var i = 0; i < numberOfPosts; i++)
+                    for (var i = 0; i < state.blog.pages.length; i++)
                       BlogPostCard(
                         post: state.blog.pages[i],
                       )
