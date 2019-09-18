@@ -26,6 +26,8 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   double _opacity = 0;
+  
+  int _numberOfBlogsToLoad = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -54,32 +56,35 @@ class _HomePageState extends State<HomePage> {
           ),
           BlocBuilder<BlogBloc, BlogState>(
             builder: (BuildContext context, BlogState state) {
-              return Center(
-                child: Container(
-                  child: CustomScrollView(
-                    slivers: <Widget>[
-                      const SliverIntroductionHeader(),
-                      const SliverToBoxAdapter(
-                        child: HeaderWidget('Recent blog posts'),
-                      ),
-                      if (state is BlogLoading)
+              if (state is BlogLoaded) 
+                _numberOfBlogsToLoad = (state.blog.pages.length >=  3) ? 3: state.blog.pages.length;
+                return Center(
+                  child: Container(
+                    child: CustomScrollView(
+                      slivers: <Widget>[
+                        const SliverIntroductionHeader(),
                         const SliverToBoxAdapter(
-                            child: Center(child: CircularProgressIndicator())),
-                      if (state is BlogLoaded)
-                        SliverGrid.extent(
-                          maxCrossAxisExtent: 750,
-                          childAspectRatio: 3 / 2,
-                          children: <Widget>[
-                            for (var i = 0; i < state.blog.pages.length; i++)
-                              BlogPostCard(
-                                post: state.blog.pages[i],
-                              )
-                          ],
+                          child: HeaderWidget('Recent blog posts'),
                         ),
-                    ],
+                        if (state is BlogLoading)
+                          const SliverToBoxAdapter(
+                              child:
+                                  Center(child: CircularProgressIndicator())),
+                        if (state is BlogLoaded)
+                          SliverGrid.extent(
+                            maxCrossAxisExtent: 750,
+                            childAspectRatio: 3 / 2,
+                            children: <Widget>[
+                              for (var i = 0; i < _numberOfBlogsToLoad; i++)
+                                BlogPostCard(
+                                  post: state.blog.pages[i],
+                                )
+                            ],
+                          ),
+                      ],
+                    ),
                   ),
-                ),
-              );
+                );
             },
           ),
           const LogoLoader(),
