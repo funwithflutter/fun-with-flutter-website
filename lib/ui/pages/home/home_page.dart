@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fun_with_flutter/blocs/bloc.dart';
+import 'package:fun_with_flutter/themes.dart';
 import 'package:fun_with_flutter/ui/pages/home/components/sliver_home_header.dart';
 import 'package:fun_with_flutter/ui/widgets/blog_post_card/blog_post_card.dart';
 import 'package:provider/provider.dart';
@@ -26,8 +27,10 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   double _opacity = 0;
-  
+
   int _numberOfBlogsToLoad = 0;
+
+  bool _isAuthenticated = false;
 
   @override
   Widget build(BuildContext context) {
@@ -54,15 +57,27 @@ class _HomePageState extends State<HomePage> {
               );
             },
           ),
-          BlocBuilder<BlogBloc, BlogState>(
-            builder: (BuildContext context, BlogState state) {
-              if (state is BlogLoaded) 
-                _numberOfBlogsToLoad = (state.blog.pages.length >=  3) ? 3: state.blog.pages.length;
+          BlocListener<AuthenticationBloc, AuthenticationState>(
+            listener: (BuildContext context, AuthenticationState state) {
+              if (state is Authenticated) {
+                _isAuthenticated = true;
+              }
+              if (state is Unauthenticated) {
+                _isAuthenticated = false;
+              }
+            },
+            child: BlocBuilder<BlogBloc, BlogState>(
+              builder: (BuildContext context, BlogState state) {
+                if (state is BlogLoaded)
+                  _numberOfBlogsToLoad = (state.blog.pages.length >= 3)
+                      ? 3
+                      : state.blog.pages.length;
                 return Center(
                   child: Container(
                     child: CustomScrollView(
                       slivers: <Widget>[
                         const SliverIntroductionHeader(),
+                        if (_isAuthenticated) const SliverRevealSecret(),
                         const SliverToBoxAdapter(
                           child: HeaderWidget('Recent blog posts'),
                         ),
@@ -85,7 +100,8 @@ class _HomePageState extends State<HomePage> {
                     ),
                   ),
                 );
-            },
+              },
+            ),
           ),
           const LogoLoader(),
         ],
@@ -219,6 +235,72 @@ class HeaderWidget extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.all(16.0),
       child: Text(text, style: Theme.of(context).textTheme.display1),
+    );
+  }
+}
+
+class SliverRevealSecret extends StatefulWidget {
+  const SliverRevealSecret({Key key}) : super(key: key);
+
+  @override
+  _SliverRevealSecretState createState() => _SliverRevealSecretState();
+}
+
+class _SliverRevealSecretState extends State<SliverRevealSecret> {
+  Future<void> _neverSatisfied() async {
+    return showDialog<void>(
+      context: context,
+      barrierDismissible: false, // user must tap button!
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: const Text('Legend'),
+          content: SingleChildScrollView(
+            child: ListBody(
+              children: const <Widget>[
+                Text(
+                  'Thank you for signing up!',
+                  style: TextStyle(color: AppTheme.accentColor),
+                ),
+                Text(
+                    'The YouTube channel that has provided me with the best Flutter content is...'),
+                Text(
+                  'Reso Coder',
+                  style: TextStyle(color: AppTheme.secondaryColor),
+                ),
+                Text(
+                    "I'd provide you with a link but I'm too lazy to code it."),
+                Text(
+                  "Stay on my website instead, why don't you.",
+                ),
+              ],
+            ),
+          ),
+          actions: <Widget>[
+            FlatButton(
+              child: const Text('Close'),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+        );
+      },
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return SliverToBoxAdapter(
+      child: Container(
+        child: FlatButton(
+          onPressed: () {
+            _neverSatisfied();
+          },
+          child: const Text(
+            'Click me to reveal my secret',
+          ),
+        ),
+      ),
     );
   }
 }
