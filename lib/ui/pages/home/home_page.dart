@@ -78,6 +78,7 @@ class _HomePageState extends State<HomePage> {
                       slivers: <Widget>[
                         const SliverIntroductionHeader(),
                         if (_isAuthenticated) const SliverRevealSecret(),
+                        if (!_isAuthenticated) const SliverMotivateLogin(),
                         const SliverToBoxAdapter(
                           child: HeaderWidget('Recent blog posts'),
                         ),
@@ -301,6 +302,17 @@ class _SliverRevealSecretState extends State<SliverRevealSecret> {
           ),
         ),
       ),
+    );
+  }
+}
+
+class SliverMotivateLogin extends StatelessWidget {
+  const SliverMotivateLogin({Key key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return const SliverToBoxAdapter(
+      child: Center(child: Text('Sign in to reveal which YouTube channel I think currently provides the best Flutter content.')),
     );
   }
 }
