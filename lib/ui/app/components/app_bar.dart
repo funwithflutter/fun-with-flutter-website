@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fun_with_flutter/blocs/bloc.dart';
-import 'package:fun_with_flutter/plugins/url_launcher/url_launcher.dart';
 import 'package:fun_with_flutter/themes.dart';
-import 'package:fun_with_flutter/utils/urls.dart' as url;
 
 // Todo(gordon): Refactor to encapsulate the animation within this widget
 class FunWithAppBar extends StatelessWidget implements PreferredSizeWidget {

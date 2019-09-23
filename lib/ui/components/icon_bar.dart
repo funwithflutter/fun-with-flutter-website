@@ -1,6 +1,7 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:fun_with_flutter/plugins/url_launcher/url_launcher.dart';
+// import 'package:fun_with_flutter/plugins/url_launcher/url_launcher.dart';
+import 'package:universal_html/prefer_universal/html.dart' as html;
 import 'package:fun_with_flutter/themes.dart';
 import 'package:fun_with_flutter/utils/custom_icons_icons.dart';
 import 'package:fun_with_flutter/utils/urls.dart' as url;
@@ -55,7 +56,8 @@ class _IconBarButtonState extends State<_IconBarButton> {
   Color _color = _stationaryColor;
 
   void _onTap() {
-    UrlUtils.open(widget.url);
+    // UrlUtils.open(widget.url);
+     html.window.open(widget.url, null);
   }
 
   void _changeButtonColor(Color color) {
