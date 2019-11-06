@@ -47,7 +47,7 @@ class AppInjector extends StatelessWidget {
       providers: [
         BlocProvider<AuthenticationBloc>(builder: (context) {
           return AuthenticationBloc(userRepository: _userRepository)
-            ..dispatch(AppStarted());
+            ..add(AppStarted());
         }),
         BlocProvider<LoginBloc>(builder: (context) {
           return LoginBloc(userRepository: _userRepository);
@@ -59,7 +59,7 @@ class AppInjector extends StatelessWidget {
         ),
         BlocProvider<BlogBloc>(
           builder: (context) {
-            return _blogBloc..dispatch(Fetch());
+            return _blogBloc..add(Fetch());
           },
         ),
         BlocProvider<FilteredBlogBloc>(

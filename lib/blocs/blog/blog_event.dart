@@ -3,7 +3,10 @@ import 'package:meta/meta.dart';
 
 @immutable
 abstract class BlogEvent extends Equatable {
-  const BlogEvent([List props = const []]) : super(props);
+  const BlogEvent();
+
+  @override
+  List<Object> get props => null;
 }
 
 class Fetch extends BlogEvent {

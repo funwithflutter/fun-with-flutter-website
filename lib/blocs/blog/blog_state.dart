@@ -4,7 +4,10 @@ import 'package:meta/meta.dart';
 
 @immutable
 abstract class BlogState extends Equatable {
-  const BlogState([List props = const []]) : super(props);
+  const BlogState();
+
+  @override
+  List<Object> get props => null;
 }
 
 /// This is the default state
@@ -19,7 +22,7 @@ class BlogError extends BlogState {
 }
 
 class BlogLoaded extends BlogState {
-  BlogLoaded(this.blog, this.tags) : super([blog, tags]);
+  const BlogLoaded(this.blog, this.tags) : super();
 
   final Blog blog;
   final List<String> tags;

@@ -7,11 +7,11 @@ import 'package:rxdart/rxdart.dart';
 import './bloc.dart';
 
 class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
-  final UserRepository _userRepository;
-
   RegisterBloc({@required UserRepository userRepository})
       : assert(userRepository != null),
         _userRepository = userRepository;
+
+  final UserRepository _userRepository;
 
   @override
   RegisterState get initialState => RegisterState.empty();
@@ -23,10 +23,10 @@ class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
   ) {
     final observableStream = events as Observable<RegisterEvent>;
     final nonDebounceStream = observableStream.where((event) {
-      return (event is! EmailChanged && event is! PasswordChanged);
+      return event is! EmailChanged && event is! PasswordChanged;
     });
     final debounceStream = observableStream.where((event) {
-      return (event is EmailChanged || event is PasswordChanged);
+      return event is EmailChanged || event is PasswordChanged;
     }).debounceTime(Duration(milliseconds: 300));
     return super
         .transformEvents(nonDebounceStream.mergeWith([debounceStream]), next);
@@ -46,13 +46,13 @@ class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
   }
 
   Stream<RegisterState> _mapEmailChangedToState(String email) async* {
-    yield currentState.update(
+    yield state.update(
       isEmailValid: Validators.isValidEmail(email),
     );
   }
 
   Stream<RegisterState> _mapPasswordChangedToState(String password) async* {
-    yield currentState.update(
+    yield state.update(
       isPasswordValid: Validators.isValidPassword(password),
     );
   }

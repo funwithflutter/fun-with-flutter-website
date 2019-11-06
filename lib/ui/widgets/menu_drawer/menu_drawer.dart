@@ -26,8 +26,8 @@ class MenuDrawer extends StatelessWidget {
                 iconData: Icons.widgets,
                 lable: 'Custom Widgets',
                 onPressed: () {
-                  filteredBlogBloc.dispatch(ClearFilters());
-                  pageBloc.dispatch(UpdatePage(PageState.packages));
+                  filteredBlogBloc.add(ClearFilters());
+                  pageBloc.add(UpdatePage(PageState.packages));
                 }),
             _MenuSection(
               title: 'Tags',
@@ -62,8 +62,8 @@ class MenuDrawer extends StatelessWidget {
                 iconData: Icons.question_answer,
                 lable: 'About',
                 onPressed: () {
-                  filteredBlogBloc.dispatch(ClearFilters());
-                  pageBloc.dispatch(UpdatePage(PageState.about));
+                  filteredBlogBloc.add(ClearFilters());
+                  pageBloc.add(UpdatePage(PageState.about));
                 },
               ),
             ),
@@ -143,8 +143,8 @@ class _Tag extends StatelessWidget {
       iconData: iconData,
       lable: tagName,
       onPressed: () {
-        pageBloc.dispatch(UpdatePage(PageState.blog));
-        filteredBlogBloc.dispatch(FilterByTag(tagName));
+        pageBloc.add(UpdatePage(PageState.blog));
+        filteredBlogBloc.add(FilterByTag(tagName));
       },
     );
   }

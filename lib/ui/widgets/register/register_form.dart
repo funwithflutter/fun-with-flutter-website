@@ -52,7 +52,7 @@ class _RegisterFormState extends State<RegisterForm> {
             );
         }
         if (state.isSuccess) {
-          BlocProvider.of<AuthenticationBloc>(context).dispatch(LoggedIn());
+          BlocProvider.of<AuthenticationBloc>(context).add(LoggedIn());
           Scaffold.of(context)
             ..hideCurrentSnackBar()
             ..showSnackBar(
@@ -142,19 +142,19 @@ class _RegisterFormState extends State<RegisterForm> {
   }
 
   void _onEmailChanged() {
-    _registerBloc.dispatch(
+    _registerBloc.add(
       EmailChanged(email: _emailController.text),
     );
   }
 
   void _onPasswordChanged() {
-    _registerBloc.dispatch(
+    _registerBloc.add(
       PasswordChanged(password: _passwordController.text),
     );
   }
 
   void _onFormSubmitted() {
-    _registerBloc.dispatch(
+    _registerBloc.add(
       Submitted(
         email: _emailController.text,
         password: _passwordController.text,

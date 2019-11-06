@@ -35,7 +35,7 @@ class FunWithAppBar extends StatelessWidget implements PreferredSizeWidget {
     return AppBar(
       title: GestureDetector(
         onTap: () {
-          pageBloc.dispatch(UpdatePage(PageState.home));
+          pageBloc.add(UpdatePage(PageState.home));
         },
         child: Text(
           'FUN WITH FLUTTER',
@@ -64,7 +64,7 @@ class FunWithAppBar extends StatelessWidget implements PreferredSizeWidget {
               return FlatButton(
                 onPressed: () {
                   BlocProvider.of<AuthenticationBloc>(context)
-                      .dispatch(LoggedOut());
+                      .add(LoggedOut());
                 },
                 child: const Text('Logout'),
               );

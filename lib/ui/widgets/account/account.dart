@@ -23,7 +23,7 @@ class _AccountPageState extends State<AccountPage> {
       if (state is Authenticated) {
         return FlatButton(
           onPressed: () {
-            BlocProvider.of<AuthenticationBloc>(context).dispatch(LoggedOut());
+            BlocProvider.of<AuthenticationBloc>(context).add(LoggedOut());
           },
           child: const Text('Sign out'),
         );

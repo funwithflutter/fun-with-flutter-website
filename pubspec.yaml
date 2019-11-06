@@ -19,11 +19,11 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  flutter_bloc: ^0.21.0
-  bloc: ^0.15.0
+  flutter_bloc: ^2.0.0
+  bloc: ^2.0.0
   animated_text_kit: ^1.3.1
   universal_html: ^1.1.1
-  equatable: ^0.5.1
+  equatable: ^0.6.1
   http: ^0.12.0+2
   wave_slider: ^0.1.0
   splash_tap: ^0.1.2

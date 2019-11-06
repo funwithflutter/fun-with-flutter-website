@@ -4,11 +4,14 @@ import 'package:meta/meta.dart';
 
 @immutable
 abstract class PageEvent extends Equatable {
-  const PageEvent([List props = const []]) : super(props);
+  const PageEvent();
+
+  @override
+  List<Object> get props => null;
 }
 
 class UpdatePage extends PageEvent {
-  UpdatePage(this.page) : super([page]);
+  const UpdatePage(this.page);
 
   final PageState page;
 

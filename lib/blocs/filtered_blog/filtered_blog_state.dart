@@ -4,13 +4,11 @@ import 'package:meta/meta.dart';
 
 @immutable
 abstract class FilteredBlogState extends Equatable {
-  const FilteredBlogState([List props = const []]) : super(props);
-}
+  const FilteredBlogState();
 
-// class NoFilterBlog extends FilteredBlogState {
-//   @override
-//   String toString() => 'NoFilterBlogBloc';
-// }
+  @override
+  List<Object> get props => null;
+}
 
 class FilteredBlogError extends FilteredBlogState {
   @override
@@ -23,8 +21,7 @@ class FilteredBlogLoading extends FilteredBlogState {
 }
 
 class FilteredBlogLoaded extends FilteredBlogState {
-  FilteredBlogLoaded(this.filteredBlog, this.tagFilter)
-      : super([filteredBlog, tagFilter]);
+  const FilteredBlogLoaded(this.filteredBlog, this.tagFilter);
 
   final Blog filteredBlog;
   final String tagFilter;

@@ -9,7 +9,7 @@ class GoogleLoginButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return OutlineButton(
       onPressed: () {
-        BlocProvider.of<LoginBloc>(context).dispatch(
+        BlocProvider.of<LoginBloc>(context).add(
           LoginWithGooglePressed(),
         );
       },

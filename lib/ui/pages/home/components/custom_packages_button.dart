@@ -41,8 +41,8 @@ class _CustomPackagesButtonState extends State<CustomPackagesButton> {
         onPointerExit: _onPointerExit,
         child: GestureDetector(
           onTap: () {
-            BlocProvider.of<PageBloc>(context).dispatch(
-              UpdatePage(PageState.packages),
+            BlocProvider.of<PageBloc>(context).add(
+              const UpdatePage(PageState.packages),
             );
           },
           child: Container(
@@ -59,7 +59,9 @@ class _CustomPackagesButtonState extends State<CustomPackagesButton> {
                 'Custom\nPackages',
                 textAlign: TextAlign.center,
                 style: Theme.of(context).textTheme.button.copyWith(
-                    color: Colors.white, fontSize: 18, fontWeight: FontWeight.bold),
+                    color: Colors.white,
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold),
               ),
             ),
           ),

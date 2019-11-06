@@ -9,10 +9,10 @@ import 'filtered_blog_state.dart';
 
 class FilteredBlogBloc extends Bloc<FilteredBlogEvent, FilteredBlogState> {
   FilteredBlogBloc({@required this.blogBloc}) {
-    _blogSubscription = blogBloc.state.listen((blogState) {
+    _blogSubscription = blogBloc.listen((blogState) {
       if (blogState is BlogLoaded) {
-        dispatch(
-            UpdateFilteredBlog((blogBloc.currentState as BlogLoaded).blog));
+        add(
+            UpdateFilteredBlog((blogBloc.state as BlogLoaded).blog));
       }
     });
   }
@@ -22,8 +22,8 @@ class FilteredBlogBloc extends Bloc<FilteredBlogEvent, FilteredBlogState> {
 
   @override
   FilteredBlogState get initialState {
-    if (blogBloc.currentState is BlogLoaded) {
-      return FilteredBlogLoaded((blogBloc.currentState as BlogLoaded).blog, '');
+    if (blogBloc.state is BlogLoaded) {
+      return FilteredBlogLoaded((blogBloc.state as BlogLoaded).blog, '');
     } else {
       return FilteredBlogLoading();
     }
@@ -41,19 +41,19 @@ class FilteredBlogBloc extends Bloc<FilteredBlogEvent, FilteredBlogState> {
   }
 
   Stream<FilteredBlogState> _mapUpdateFilterToState() async* {
-    if (blogBloc.currentState is BlogLoaded) {
-      yield FilteredBlogLoaded((blogBloc.currentState as BlogLoaded).blog, '');
-    } else if (blogBloc.currentState is BlogError) {
+    if (blogBloc.state is BlogLoaded) {
+      yield FilteredBlogLoaded((blogBloc.state as BlogLoaded).blog, '');
+    } else if (blogBloc.state is BlogError) {
       yield FilteredBlogError();
     }
   }
 
   Stream<FilteredBlogState> _mapTagFilterToState(FilterByTag event) async* {
     try {
-      if (blogBloc.currentState is BlogLoaded) {
-        if (currentState is FilteredBlogLoaded) {
+      if (blogBloc.state is BlogLoaded) {
+        if (state is FilteredBlogLoaded) {
           final String currentTag =
-              (currentState as FilteredBlogLoaded).tagFilter;
+              (state as FilteredBlogLoaded).tagFilter;
           // Test if this filter has already been applied. If yes clear filters and return.
           if (currentTag == event.tagFilter) {
             yield* _mapUpdateFilterToState();
@@ -61,7 +61,7 @@ class FilteredBlogBloc extends Bloc<FilteredBlogEvent, FilteredBlogState> {
           }
         }
         final Blog filteredBlog = _mapTagFilterToFilteredBlog(
-            (blogBloc.currentState as BlogLoaded).blog, event.tagFilter);
+            (blogBloc.state as BlogLoaded).blog, event.tagFilter);
         yield FilteredBlogLoaded(filteredBlog, event.tagFilter);
       }
     } catch (e) {
@@ -77,8 +77,8 @@ class FilteredBlogBloc extends Bloc<FilteredBlogEvent, FilteredBlogState> {
   }
 
   @override
-  void dispose() {
+  Future<void> close() {
     _blogSubscription.cancel();
-    super.dispose();
+    return super.close();
   }
 }

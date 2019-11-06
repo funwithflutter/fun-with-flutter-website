@@ -27,7 +27,7 @@ class BlogBloc extends Bloc<BlogEvent, BlogState> {
 
   Stream<BlogState> _mapFetchToState() async* {
     try {
-      if ((currentState is BlogLoading) || (currentState is BlogError)) {
+      if ((state is BlogLoading) || (state is BlogError)) {
         final Blog blog = await _blogRepository.getBlogData();
         final List<String> tags = blog.tags.map((Tag tag) => tag.name).toList();
         yield BlogLoaded(blog, tags);
