@@ -1,16 +1,12 @@
 import 'package:meta/meta.dart';
-import 'package:equatable/equatable.dart';
 
 @immutable
-abstract class LoginEvent extends Equatable {
-  const LoginEvent();
-
-  @override
-  List<Object> get props => null;
+abstract class LoginEvent {
+  LoginEvent();
 }
 
 class EmailChanged extends LoginEvent {
-  const EmailChanged({@required this.email});
+  EmailChanged({@required this.email});
 
   final String email;
 
@@ -19,7 +15,7 @@ class EmailChanged extends LoginEvent {
 }
 
 class PasswordChanged extends LoginEvent {
-  const PasswordChanged({@required this.password});
+  PasswordChanged({@required this.password});
   
   final String password;
 
@@ -29,7 +25,7 @@ class PasswordChanged extends LoginEvent {
 }
 
 class Submitted extends LoginEvent {
-  const Submitted({@required this.email, @required this.password});
+  Submitted({@required this.email, @required this.password});
   
   final String email;
   final String password;
@@ -47,7 +43,7 @@ class LoginWithGooglePressed extends LoginEvent {
 }
 
 class LoginWithCredentialsPressed extends LoginEvent {
-  const LoginWithCredentialsPressed({@required this.email, @required this.password});
+  LoginWithCredentialsPressed({@required this.email, @required this.password});
 
   final String email;
   final String password;

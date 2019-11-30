@@ -1,13 +1,9 @@
-import 'package:equatable/equatable.dart';
 import 'package:fun_with_flutter/models/blog_model.dart';
 import 'package:meta/meta.dart';
 
 @immutable
-abstract class BlogState extends Equatable {
-  const BlogState();
-
-  @override
-  List<Object> get props => null;
+abstract class BlogState {
+  BlogState();
 }
 
 /// This is the default state
@@ -22,7 +18,7 @@ class BlogError extends BlogState {
 }
 
 class BlogLoaded extends BlogState {
-  const BlogLoaded(this.blog, this.tags) : super();
+  BlogLoaded(this.blog, this.tags) : super();
 
   final Blog blog;
   final List<String> tags;

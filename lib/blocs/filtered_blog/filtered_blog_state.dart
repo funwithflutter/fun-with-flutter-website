@@ -1,13 +1,9 @@
-import 'package:equatable/equatable.dart';
 import 'package:fun_with_flutter/models/blog_model.dart';
 import 'package:meta/meta.dart';
 
 @immutable
-abstract class FilteredBlogState extends Equatable {
-  const FilteredBlogState();
-
-  @override
-  List<Object> get props => null;
+abstract class FilteredBlogState  {
+  FilteredBlogState();
 }
 
 class FilteredBlogError extends FilteredBlogState {
@@ -21,7 +17,7 @@ class FilteredBlogLoading extends FilteredBlogState {
 }
 
 class FilteredBlogLoaded extends FilteredBlogState {
-  const FilteredBlogLoaded(this.filteredBlog, this.tagFilter);
+  FilteredBlogLoaded(this.filteredBlog, this.tagFilter);
 
   final Blog filteredBlog;
   final String tagFilter;

@@ -1,16 +1,12 @@
-import 'package:equatable/equatable.dart';
 import 'package:meta/meta.dart';
 
 @immutable
-abstract class RegisterEvent extends Equatable {
-  const RegisterEvent();
-
-  @override
-  List<Object> get props => null;
+abstract class RegisterEvent {
+  RegisterEvent();
 }
 
 class EmailChanged extends RegisterEvent {
-  const EmailChanged({@required this.email});
+  EmailChanged({@required this.email});
 
   final String email;
 
@@ -19,7 +15,7 @@ class EmailChanged extends RegisterEvent {
 }
 
 class PasswordChanged extends RegisterEvent {
-  const PasswordChanged({@required this.password});
+  PasswordChanged({@required this.password});
 
   final String password;
 
@@ -28,7 +24,7 @@ class PasswordChanged extends RegisterEvent {
 }
 
 class Submitted extends RegisterEvent {
-  const Submitted({@required this.email, @required this.password});
+  Submitted({@required this.email, @required this.password});
 
   final String email;
   final String password;

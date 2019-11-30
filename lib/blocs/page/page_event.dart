@@ -1,17 +1,13 @@
-import 'package:equatable/equatable.dart';
 import 'package:fun_with_flutter/blocs/page/page_state.dart';
 import 'package:meta/meta.dart';
 
 @immutable
-abstract class PageEvent extends Equatable {
-  const PageEvent();
-
-  @override
-  List<Object> get props => null;
+abstract class PageEvent {
+  PageEvent();
 }
 
 class UpdatePage extends PageEvent {
-  const UpdatePage(this.page);
+  UpdatePage(this.page);
 
   final PageState page;
 

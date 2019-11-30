@@ -42,7 +42,7 @@ class _CustomPackagesButtonState extends State<CustomPackagesButton> {
         child: GestureDetector(
           onTap: () {
             BlocProvider.of<PageBloc>(context).add(
-              const UpdatePage(PageState.packages),
+              UpdatePage(PageState.packages),
             );
           },
           child: Container(

@@ -1,33 +1,32 @@
-import 'package:equatable/equatable.dart';
 import 'package:meta/meta.dart';
 
 @immutable
-abstract class AuthenticationState extends Equatable {
-  const AuthenticationState(this.displayName);
+abstract class AuthenticationState {
+  AuthenticationState(this.displayName);
   
   final String displayName;
 
-  @override
-  List<Object> get props => null;
+  // @override
+  // List<Object> get props => [];
 
 }
 
 class Uninitialized extends AuthenticationState {
-  const Uninitialized(): super('');
+  Uninitialized(): super('');
 
   @override
   String toString() => 'Uninitialized';
 }
 
 class Authenticated extends AuthenticationState {
-  const Authenticated(displayName) : super(displayName);
+  Authenticated(displayName) : super(displayName);
 
   @override
   String toString() => 'Authenticated { displayName: $displayName }';
 }
 
 class Unauthenticated extends AuthenticationState {
-  const Unauthenticated(): super('');
+  Unauthenticated(): super('');
 
   @override
   String toString() => 'Unauthenticated';

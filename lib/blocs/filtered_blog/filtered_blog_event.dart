@@ -1,17 +1,13 @@
-import 'package:equatable/equatable.dart';
 import 'package:fun_with_flutter/models/blog_model.dart';
 import 'package:meta/meta.dart';
 
 @immutable
-abstract class FilteredBlogEvent extends Equatable {
-  const FilteredBlogEvent();
-
-  @override
-  List<Object> get props => null;
+abstract class FilteredBlogEvent {
+  FilteredBlogEvent();
 }
 
 class UpdateFilteredBlog extends FilteredBlogEvent {
-  const UpdateFilteredBlog(this.blog);
+  UpdateFilteredBlog(this.blog);
 
   final Blog blog;
 
@@ -20,7 +16,7 @@ class UpdateFilteredBlog extends FilteredBlogEvent {
 }
 
 class FilterByTag extends FilteredBlogEvent {
-  const FilterByTag(this.tagFilter);
+  FilterByTag(this.tagFilter);
 
   final String tagFilter;
 
