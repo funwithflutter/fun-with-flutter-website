@@ -1,7 +1,4 @@
-import 'package:confetti/confetti.dart';
 import 'package:flutter/material.dart';
-import 'package:fun_with_flutter/themes.dart';
-import 'package:confetti/confetti.dart';
 import 'package:fun_with_flutter/ui/components/link.dart';
 import 'package:fun_with_flutter/ui/pages/packages/components/splash_tap_widget.dart';
 import 'package:fun_with_flutter/ui/pages/packages/components/wave_slider_widget.dart';
