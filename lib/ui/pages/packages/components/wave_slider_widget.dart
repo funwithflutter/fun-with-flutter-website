@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:wave_slider/wave_slider.dart';
 
-class WaveSliderWidget extends StatefulWidget {
+class WaveSliderExample extends StatefulWidget {
   @override
-  _WaveSliderWidgetState createState() => _WaveSliderWidgetState();
+  _WaveSliderExampleState createState() => _WaveSliderExampleState();
 }
 
-class _WaveSliderWidgetState extends State<WaveSliderWidget> {
+class _WaveSliderExampleState extends State<WaveSliderExample> {
   String display = 'Drag the slider';
 
   void _setDipslay(double value) {

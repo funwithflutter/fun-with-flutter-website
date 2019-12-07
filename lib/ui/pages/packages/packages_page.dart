@@ -1,9 +1,13 @@
+import 'package:confetti/confetti.dart';
 import 'package:flutter/material.dart';
 import 'package:fun_with_flutter/themes.dart';
+import 'package:confetti/confetti.dart';
 import 'package:fun_with_flutter/ui/components/link.dart';
 import 'package:fun_with_flutter/ui/pages/packages/components/splash_tap_widget.dart';
 import 'package:fun_with_flutter/ui/pages/packages/components/wave_slider_widget.dart';
 import 'package:fun_with_flutter/utils/urls.dart' as url;
+
+import 'components/confetti_widget.dart';
 
 class PackagesPage extends StatelessWidget {
   @override
@@ -19,34 +23,26 @@ class PackagesPage extends StatelessWidget {
             child: Text('Custom Widgets',
                 style: Theme.of(context).textTheme.display1),
           ),
-          _CustomWidget(
-            title: 'Splash Tap',
-            child: SplashTapWidget(),
-            pubUrl: url.splashTapPackage.pubUrl,
-            youtubeUrl: url.splashTapPackage.youtubeUrl,
-          ),
-          _CustomWidget(
-            title: 'Wave Slider',
-            child: WaveSliderWidget(),
-            pubUrl: url.waveSliderPackage.pubUrl,
-            youtubeUrl: url.waveSliderPackage.youtubeUrl,
-          ),
-          _CustomWidget(
+          _ExampleWidget(
             title: 'Confetti',
-            child: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Container(
-                child: Text(
-                  'The package is not currently working on Flutter Web. Check out the repository and the video instead.',
-                  style: TextStyle(
-                    fontSize: 18,
-                    color: AppTheme.fadedBlackColor,
-                  ),
-                ),
-              ),
+            child: const Padding(
+              padding: EdgeInsets.all(8.0),
+              child: ConfettiExample(),
             ),
             pubUrl: url.confettiPackage.pubUrl,
             youtubeUrl: url.confettiPackage.youtubeUrl,
+          ),
+          _ExampleWidget(
+            title: 'Splash Tap',
+            child: SplashTapExample(),
+            pubUrl: url.splashTapPackage.pubUrl,
+            youtubeUrl: url.splashTapPackage.youtubeUrl,
+          ),
+          _ExampleWidget(
+            title: 'Wave Slider',
+            child: WaveSliderExample(),
+            pubUrl: url.waveSliderPackage.pubUrl,
+            youtubeUrl: url.waveSliderPackage.youtubeUrl,
           ),
         ],
       ),
@@ -54,8 +50,8 @@ class PackagesPage extends StatelessWidget {
   }
 }
 
-class _CustomWidget extends StatelessWidget {
-  const _CustomWidget(
+class _ExampleWidget extends StatelessWidget {
+  const _ExampleWidget(
       {Key key,
       @required this.title,
       this.pubUrl,

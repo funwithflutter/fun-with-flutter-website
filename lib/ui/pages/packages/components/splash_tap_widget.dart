@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:fun_with_flutter/themes.dart';
 import 'package:splash_tap/splash_tap.dart';
 
-class SplashTapWidget extends StatelessWidget {
+class SplashTapExample extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Splash(
