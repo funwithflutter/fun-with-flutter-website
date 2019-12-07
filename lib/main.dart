@@ -17,14 +17,16 @@ import 'package:fun_with_flutter/blocs/simple_bloc_delegate.dart';
 
 void main() {
   assert(() {
-    fb.initializeApp(
-      apiKey: 'AIzaSyD8JoU_58xKlQFvva7nS7VHTKc1vUkaosk',
-      authDomain: 'fun-with.firebaseapp.com',
-      databaseURL: 'https://fun-with.firebaseio.com',
-      projectId: 'fun-with',
-      storageBucket: 'fun-with.appspot.com',
-      messagingSenderId: '1006728819313',
-    );
+    if (fb.apps.isEmpty) {
+      fb.initializeApp(
+        apiKey: 'AIzaSyD8JoU_58xKlQFvva7nS7VHTKc1vUkaosk',
+        authDomain: 'fun-with.firebaseapp.com',
+        databaseURL: 'https://fun-with.firebaseio.com',
+        projectId: 'fun-with',
+        storageBucket: 'fun-with.appspot.com',
+        messagingSenderId: '1006728819313',
+      );
+    }
     BlocSupervisor.delegate = SimpleBlocDelegate();
     return true;
   }());
