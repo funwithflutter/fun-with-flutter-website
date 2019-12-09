@@ -68,37 +68,63 @@ class _HomePageState extends State<HomePage> {
             },
             child: BlocBuilder<BlogBloc, BlogState>(
               builder: (BuildContext context, BlogState state) {
+                int crossAxisCount = 1;
+                final width = MediaQuery.of(context).size.width;
+                double maxWidth = 1200;
+                if (width >= 1200) {
+                  crossAxisCount = 3;
+                  maxWidth = 1200;
+                } else if (width >= 800) {
+                  crossAxisCount = 2;
+                  maxWidth = 800;
+                } else {
+                  crossAxisCount = 1;
+                  maxWidth = 700;
+                }
                 if (state is BlogLoaded)
                   _numberOfBlogsToLoad = (state.blog.pages.length >= 3)
                       ? 3
                       : state.blog.pages.length;
                 return Center(
-                  child: Container(
-                    child: CustomScrollView(
-                      slivers: <Widget>[
-                        const SliverIntroductionHeader(),
-                        if (_isAuthenticated) const SliverRevealSecret(),
-                        if (!_isAuthenticated) const SliverMotivateLogin(),
+                  child: CustomScrollView(
+                    slivers: <Widget>[
+                      const SliverIntroductionHeader(),
+                      if (_isAuthenticated)
+                        const SliverRevealSecret(),
+                      if (!_isAuthenticated)
+                        const SliverMotivateLogin(),
+                      const SliverToBoxAdapter(
+                        child: Center(child: HeaderWidget('Recent blog posts')),
+                      ),
+                      if (state is BlogLoading)
                         const SliverToBoxAdapter(
-                          child: HeaderWidget('Recent blog posts'),
-                        ),
-                        if (state is BlogLoading)
-                          const SliverToBoxAdapter(
-                              child:
-                                  Center(child: CircularProgressIndicator())),
-                        if (state is BlogLoaded)
-                          SliverGrid.extent(
-                            maxCrossAxisExtent: 750,
-                            childAspectRatio: 3 / 2,
-                            children: <Widget>[
-                              for (var i = 0; i < _numberOfBlogsToLoad; i++)
-                                BlogPostCard(
-                                  post: state.blog.pages[i],
-                                )
-                            ],
+                            child: Center(child: CircularProgressIndicator())),
+                      if (state is BlogLoaded)
+                        SliverToBoxAdapter(
+                          child: ConstrainedBox(
+                            constraints: BoxConstraints(maxWidth: maxWidth),
+                            child: Wrap(
+                              alignment: WrapAlignment.center,
+                              children: <Widget>[
+                                for (var i = 0; i < _numberOfBlogsToLoad; i++)
+                                  BlogPostCard(
+                                    post: state.blog.pages[i],
+                                  )
+                              ],
+                            ),
                           ),
-                      ],
-                    ),
+                        )
+                      // SliverGrid.count(
+                      //   crossAxisCount: crossAxisCount,
+                      //   childAspectRatio: 10/9,
+                      //   children: <Widget>[
+                      //     for (var i = 0; i < _numberOfBlogsToLoad; i++)
+                      //       BlogPostCard(
+                      //         post: state.blog.pages[i],
+                      //       )
+                      //   ],
+                      // ),
+                    ],
                   ),
                 );
               },
@@ -312,7 +338,9 @@ class SliverMotivateLogin extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const SliverToBoxAdapter(
-      child: Center(child: Text('Sign in to reveal which YouTube channel I think currently provides the best Flutter content.')),
+      child: Center(
+          child: Text(
+              'Sign in to reveal which YouTube channel I think currently provides the best Flutter content.')),
     );
   }
 }

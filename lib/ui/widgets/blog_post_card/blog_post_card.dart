@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:fun_with_flutter/models/blog_model.dart';
-import 'package:fun_with_flutter/repository/url_repository.dart' as url_repository;
+import 'package:fun_with_flutter/repository/url_repository.dart'
+    as url_repository;
 import 'package:fun_with_flutter/plugins/url_launcher/url_launcher.dart';
 
 class BlogPostCard extends StatelessWidget {
@@ -9,24 +10,20 @@ class BlogPostCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return InkWell(
-      onTap: () {
-        UrlUtils.open(post.uri);
-      },
-      child: Padding(
-        padding: const EdgeInsets.all(16),
-        child: Card(
-          child: Container(
+    return SizedBox(
+      width: 400,
+      child: InkWell(
+        onTap: () {
+          UrlUtils.open(post.uri);
+        },
+        child: Padding(
+          padding: const EdgeInsets.all(16),
+          child: Card(
             child: Column(
               children: <Widget>[
-                Expanded(
-                  child: Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Image.network(
-                      url_repository.blogThumbnailUrl(post.thumbnail),
-                      fit: BoxFit.contain,
-                    ),
-                  ),
+                Image.network(
+                  url_repository.blogThumbnailUrl(post.thumbnail),
+                  fit: BoxFit.contain,
                 ),
                 Padding(
                   padding: const EdgeInsets.all(8.0),
