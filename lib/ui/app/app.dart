@@ -2,6 +2,7 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:fun_with_flutter/blocs/app_state/bloc.dart';
 
 import 'package:fun_with_flutter/blocs/bloc.dart';
 import 'package:fun_with_flutter/ui/app/components/app_page.dart';
@@ -30,7 +31,6 @@ class _AppState extends State<App> with SingleTickerProviderStateMixin {
 
   bool _menuIsVisible = false;
   bool isSmallScreen = false;
-  bool _accountPanelVisible = false;
 
   @override
   void initState() {
@@ -61,27 +61,15 @@ class _AppState extends State<App> with SingleTickerProviderStateMixin {
   }
 
   void _setScreenSize(Size screenSize) {
-    if (screenSize.width < 750) {
+    if (screenSize.width < 750 && isSmallScreen != true) {
       setState(() {
         isSmallScreen = true;
       });
-    } else if (isSmallScreen == true) {
+    } else if (screenSize.width >= 750 && isSmallScreen == true) {
       setState(() {
         isSmallScreen = false;
       });
     } // TODO(Anyone): Need to refine this entire process.
-  }
-
-  void _openLoginPannel() {
-    setState(() {
-      _accountPanelVisible = true;
-    });
-  }
-
-  void _closeAccountPanel() {
-    setState(() {
-      _accountPanelVisible = false;
-    });
   }
 
   @override
@@ -92,12 +80,13 @@ class _AppState extends State<App> with SingleTickerProviderStateMixin {
         animationController: _controller,
         menuAnimation: _menuAnimation,
         menuVisible: _menuIsVisible,
-        loginPressed: _openLoginPannel,
       ),
       body: ErrorListener(
         child: BlocListener<AuthenticationBloc, AuthenticationState>(
           listener: (context, state) {
-            _closeAccountPanel(); // close the account panel on auth state change for usability
+            BlocProvider.of<AppStateBloc>(context).add(
+              UpdateState(AppState.normal),
+            );
           },
           child: AnimatedBuilder(
             animation: _menuAnimation,
@@ -122,11 +111,17 @@ class _AppState extends State<App> with SingleTickerProviderStateMixin {
                         ),
                       ),
                     ),
-                  if (_accountPanelVisible)
-                    OverlayPannel(
-                      onClosedPressed: _closeAccountPanel,
-                      child: AccountPage(),
-                    )
+                  BlocBuilder<AppStateBloc, AppState>(
+                    builder: (_, state) {
+                      if (state == AppState.account) {
+                        return OverlayPannel(
+                          child: AccountPage(),
+                        );
+                      } else {
+                        return Container();
+                      }
+                    },
+                  )
                 ],
               );
             },

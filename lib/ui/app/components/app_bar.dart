@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:fun_with_flutter/blocs/app_state/bloc.dart';
 import 'package:fun_with_flutter/blocs/bloc.dart';
 import 'package:fun_with_flutter/themes.dart';
 
@@ -10,7 +11,6 @@ class FunWithAppBar extends StatelessWidget implements PreferredSizeWidget {
     @required this.animationController,
     @required this.menuAnimation,
     @required this.menuVisible,
-    @required this.loginPressed,
   })  : assert(animationController != null &&
             menuAnimation != null &&
             menuVisible != null),
@@ -19,14 +19,6 @@ class FunWithAppBar extends StatelessWidget implements PreferredSizeWidget {
   final AnimationController animationController;
   final Animation<double> menuAnimation;
   final bool menuVisible;
-
-  final VoidCallback loginPressed;
-
-  void _loginPressed() {
-    if (loginPressed != null) {
-      loginPressed();
-    }
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -63,17 +55,21 @@ class FunWithAppBar extends StatelessWidget implements PreferredSizeWidget {
             if (state is Authenticated) {
               return FlatButton(
                 onPressed: () {
-                  BlocProvider.of<AuthenticationBloc>(context)
-                      .add(LoggedOut());
+                  BlocProvider.of<AuthenticationBloc>(context).add(LoggedOut());
                 },
                 child: const Text('Logout'),
               );
             } else {
               return FlatButton(
-                onPressed: _loginPressed,
+                onPressed: () {
+                  BlocProvider.of<AppStateBloc>(context).add(
+                    UpdateState(AppState.account),
+                  );
+                },
                 child: const Text(
                   'Login',
-                  style: TextStyle(color: AppTheme.accentColor, fontWeight: FontWeight.bold),
+                  style: TextStyle(
+                      color: AppTheme.accentColor, fontWeight: FontWeight.bold),
                 ),
               );
             }
@@ -84,5 +80,5 @@ class FunWithAppBar extends StatelessWidget implements PreferredSizeWidget {
   }
 
   @override
-  Size get preferredSize => Size.fromHeight(56.0);
+  Size get preferredSize => const Size.fromHeight(56.0);
 }

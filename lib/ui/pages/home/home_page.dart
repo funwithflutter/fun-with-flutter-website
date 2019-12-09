@@ -49,8 +49,9 @@ class _HomePageState extends State<HomePage> {
                     opacity: _opacity,
                     duration: const Duration(milliseconds: 400),
                     child: const Image(
-                      image:
-                          AssetImage('assets/fun_with_flutter_grey_icon.png'),
+                      image: AssetImage(
+                        'assets/fun_with_flutter_grey_icon.png',
+                      ),
                     ),
                   ),
                 ),
@@ -82,8 +83,8 @@ class _HomePageState extends State<HomePage> {
                   maxWidth = 700;
                 }
                 if (state is BlogLoaded)
-                  _numberOfBlogsToLoad = (state.blog.pages.length >= 3)
-                      ? 3
+                  _numberOfBlogsToLoad = (state.blog.pages.length >= 5)
+                      ? 5
                       : state.blog.pages.length;
                 return Center(
                   child: CustomScrollView(
@@ -108,6 +109,7 @@ class _HomePageState extends State<HomePage> {
                               children: <Widget>[
                                 for (var i = 0; i < _numberOfBlogsToLoad; i++)
                                   BlogPostCard(
+                                    key: ValueKey(state.blog.pages[i].title),
                                     post: state.blog.pages[i],
                                   )
                               ],
@@ -197,8 +199,7 @@ class _LogoLoaderState extends State<LogoLoader>
     _flutterImage.image.resolve(const ImageConfiguration()).addListener(
       ImageStreamListener(
         (ImageInfo info, bool _) {
-          _controller
-              .forward(); // start the animation on once the image is loaded
+          _controller.forward(); // start the animation once the image is loaded
         },
       ),
     );
@@ -214,13 +215,14 @@ class _LogoLoaderState extends State<LogoLoader>
 
   void _statusListener(AnimationStatus status) {
     if (status == AnimationStatus.completed) {
+      print('completed');
       setState(
         () {
           _animationFinished = true;
-          Provider.of<LogoAnimationNotifier>(context, listen: false)
-              .setAnimationFinished();
         },
       );
+      Provider.of<LogoAnimationNotifier>(context, listen: false)
+          .setAnimationFinished();
     }
   }
 

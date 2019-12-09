@@ -15,6 +15,8 @@ import 'package:fun_with_flutter/themes.dart';
 import 'package:fun_with_flutter/blocs/bloc.dart';
 import 'package:fun_with_flutter/blocs/simple_bloc_delegate.dart';
 
+import 'blocs/app_state/app_state_bloc.dart';
+
 void main() {
   assert(() {
     if (fb.apps.isEmpty) {
@@ -44,7 +46,6 @@ class AppInjector extends StatelessWidget {
     );
     final UserRepository _userRepository = UserRepository();
 
-    // Dependecy Injection
     return MultiBlocProvider(
       providers: [
         BlocProvider<AuthenticationBloc>(builder: (context) {
@@ -73,7 +74,10 @@ class AppInjector extends StatelessWidget {
           builder: (context) {
             return PageBloc();
           },
-        )
+        ),
+        BlocProvider<AppStateBloc> (builder: (contect) {
+          return AppStateBloc();
+        },)
       ],
       child: MaterialApp(
         title: 'Fun with Flutter',
