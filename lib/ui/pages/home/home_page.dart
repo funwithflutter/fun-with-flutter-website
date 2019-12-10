@@ -7,19 +7,19 @@ import 'package:fun_with_flutter/ui/pages/home/components/sliver_home_header.dar
 import 'package:fun_with_flutter/ui/widgets/blog_post_card/blog_post_card.dart';
 import 'package:provider/provider.dart';
 
-class LogoAnimationNotifier extends ChangeNotifier {
-  LogoAnimationNotifier(bool isAnimating) {
-    _animationFinished = isAnimating;
-  }
-  bool _animationFinished = false;
+// class LogoAnimationNotifier extends ChangeNotifier {
+//   LogoAnimationNotifier(bool isAnimating) {
+//     _animationFinished = isAnimating;
+//   }
+//   bool _animationFinished = false;
 
-  void setAnimationFinished() {
-    _animationFinished = true;
-    notifyListeners();
-  }
+//   void setAnimationFinished() {
+//     _animationFinished = true;
+//     notifyListeners();
+//   }
 
-  bool get isAnimationFinished => _animationFinished;
-}
+//   bool get isAnimationFinished => _animationFinished;
+// }
 
 class HomePage extends StatefulWidget {
   @override
@@ -35,286 +35,208 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider(
-      builder: (_) => LogoAnimationNotifier(false),
-      child: Stack(
-        children: <Widget>[
-          Consumer<LogoAnimationNotifier>(
-            builder: (context, state, child) {
-              if (state.isAnimationFinished) {
-                _opacity = 1;
-              }
-              return Container(
-                child: Center(
-                  child: AnimatedOpacity(
-                    opacity: _opacity,
-                    duration: const Duration(milliseconds: 400),
-                    child: const Image(
-                      image: AssetImage(
-                        'assets/fun_with_flutter_grey_icon.png',
-                      ),
-                    ),
-                  ),
+    return BlocListener<AuthenticationBloc, AuthenticationState>(
+      listener: (BuildContext context, AuthenticationState state) {
+        if (state is Authenticated) {
+          setState(() {
+            _isAuthenticated = true;
+          });
+        }
+        if (state is Unauthenticated) {
+          setState(() {
+            _isAuthenticated = false;
+          });
+        }
+      },
+      child: BlocBuilder<BlogBloc, BlogState>(
+        builder: (BuildContext context, BlogState state) {
+          int crossAxisCount = 1;
+          final width = MediaQuery.of(context).size.width;
+          double maxWidth = 1200;
+          if (width >= 1200) {
+            crossAxisCount = 3;
+            maxWidth = 1200;
+          } else if (width >= 900) {
+            crossAxisCount = 2;
+            maxWidth = 800;
+          } else if (width >= 420) {
+            crossAxisCount = 1;
+            maxWidth = 400;
+          } else {
+            maxWidth = width;
+          }
+          if (state is BlogLoaded)
+            _numberOfBlogsToLoad = (state.blog.pages.length >= 5)
+                ? 6
+                : state.blog.pages.length;
+          return Center(
+            child: CustomScrollView(
+              slivers: <Widget>[
+                const SliverIntroductionHeader(),
+                if (_isAuthenticated)
+                  const SliverRevealSecret(),
+                if (!_isAuthenticated)
+                  const SliverMotivateLogin(),
+                const SliverToBoxAdapter(
+                  child: Center(child: HeaderWidget('Recent blog posts')),
                 ),
-              );
-            },
-          ),
-          BlocListener<AuthenticationBloc, AuthenticationState>(
-            listener: (BuildContext context, AuthenticationState state) {
-              if (state is Authenticated) {
-                setState(() {
-                  _isAuthenticated = true;
-                });
-              }
-              if (state is Unauthenticated) {
-                setState(() {
-                  _isAuthenticated = false;
-                });
-              }
-            },
-            child: BlocBuilder<BlogBloc, BlogState>(
-              builder: (BuildContext context, BlogState state) {
-                int crossAxisCount = 1;
-                final width = MediaQuery.of(context).size.width;
-                double maxWidth = 1200;
-                if (width >= 1200) {
-                  crossAxisCount = 3;
-                  maxWidth = 1200;
-                } else if (width >= 900) {
-                  crossAxisCount = 2;
-                  maxWidth = 800;
-                } else if (width >= 420) {
-                  crossAxisCount = 1;
-                  maxWidth = 400;
-                } else {
-                  maxWidth = width;
-                }
+                if (state is BlogLoading)
+                  const SliverToBoxAdapter(
+                      child: Center(child: CircularProgressIndicator())),
                 if (state is BlogLoaded)
-                  _numberOfBlogsToLoad = (state.blog.pages.length >= 5)
-                      ? 6
-                      : state.blog.pages.length;
-                return Center(
-                  child: CustomScrollView(
-                    slivers: <Widget>[
-                      const SliverIntroductionHeader(),
-                      if (_isAuthenticated)
-                        const SliverRevealSecret(),
-                      if (!_isAuthenticated)
-                        const SliverMotivateLogin(),
-                      const SliverToBoxAdapter(
-                        child: Center(child: HeaderWidget('Recent blog posts')),
-                      ),
-                      if (state is BlogLoading)
-                        const SliverToBoxAdapter(
-                            child: Center(child: CircularProgressIndicator())),
-                      if (state is BlogLoaded)
-                        SliverLayoutBuilder(
-                          builder: (context, constraints) {
-                            print(constraints.crossAxisExtent);
-                            return SliverPadding(
-                              padding: EdgeInsets.symmetric(
-                                horizontal: (MediaQuery.of(context).size.width -
-                                        maxWidth) /
-                                    2,
-                              ),
-                              sliver: SliverGrid(
-                                delegate: SliverChildBuilderDelegate(
-                                  (context, index) {
-                                    return BlogPostCard(
-                                      key: ValueKey(
-                                          state.blog.pages[index].title),
-                                      post: state.blog.pages[index],
-                                    );
-                                  },
-                                  childCount: _numberOfBlogsToLoad,
-                                ),
-                                gridDelegate:
-                                    SliverGridDelegateWithFixedCrossAxisCount(
-                                        crossAxisCount: crossAxisCount,
-                                        childAspectRatio: 10 / 9
-                                        // maxCrossAxisExtent: 400,
-                                        ),
-                              ),
-                            );
-                          },
-                        )
-                      // SliverToBoxAdapter(
-                      //   child: Container(
-                      //     width: 100, height: 100, color: Colors.blue,
-                      //   )
-                      //   // child: FittedBox(
-                      //   //   child: Center(
-                      //   //     child: Container(
-                      //   //       width: 400,
-                      //   //         // constraints: BoxConstraints(
-                      //   //         //   maxWidth: 1200,
-                      //   //         //   minWidth: 400,
-                      //   //         //   maxHeight: 300,
-                      //   //         //   // maxHeight: double.infinity,
-                      //   //         // ),
-                      //   //         child: Container(
-                      //   //           color: Colors.blue,
-                      //   //         )
-                      //   //         // child: FittedBox(
-                      //   //         //   fit: BoxFit.contain,
-                      //   //         //   child: Container(
-                      //   //         //     color: Colors.red,
-                      //   //         // child: Wrap(
-                      //   //         //   alignment: WrapAlignment.center,
-                      //   //         //   children: <Widget>[
-                      //   //         //     for (var i = 0;
-                      //   //         //         i < _numberOfBlogsToLoad;
-                      //   //         //         i++)
-                      //   //         //       BlogPostCard(
-                      //   //         //         key:
-                      //   //         //             ValueKey(state.blog.pages[i].title),
-                      //   //         //         post: state.blog.pages[i],
-                      //   //         //       )
-                      //   //         //   ],
-                      //   //         // ),
-                      //   //         //   ),
-                      //   //         // ),
-                      //   //         ),
-                      //   //   ),
-                      //   // ),
-                      // )
-                      // SliverGrid.count(
-                      //   crossAxisCount: crossAxisCount,
-                      //   childAspectRatio: 10/9,
-                      //   children: <Widget>[
-                      //     for (var i = 0; i < _numberOfBlogsToLoad; i++)
-                      //       BlogPostCard(
-                      //         post: state.blog.pages[i],
-                      //       )
-                      //   ],
-                      // ),
-                    ],
-                  ),
-                );
-              },
+                  SliverLayoutBuilder(
+                    builder: (context, constraints) {
+                      print(constraints.crossAxisExtent);
+                      return SliverPadding(
+                        padding: EdgeInsets.symmetric(
+                          horizontal: (MediaQuery.of(context).size.width -
+                                  maxWidth) /
+                              2,
+                        ),
+                        sliver: SliverGrid(
+                          delegate: SliverChildBuilderDelegate(
+                            (context, index) {
+                              return BlogPostCard(
+                                key:
+                                    ValueKey(state.blog.pages[index].title),
+                                post: state.blog.pages[index],
+                              );
+                            },
+                            childCount: _numberOfBlogsToLoad,
+                          ),
+                          gridDelegate:
+                              SliverGridDelegateWithFixedCrossAxisCount(
+                                  crossAxisCount: crossAxisCount,
+                                  childAspectRatio: 10 / 9
+                                  // maxCrossAxisExtent: 400,
+                                  ),
+                        ),
+                      );
+                    },
+                  )
+              ],
             ),
-          ),
-          const LogoLoader(),
-        ],
-      ),
-    );
-  }
-}
-
-class LogoLoader extends StatefulWidget {
-  const LogoLoader({Key key}) : super(key: key);
-
-  @override
-  _LogoLoaderState createState() => _LogoLoaderState();
-}
-
-class _LogoLoaderState extends State<LogoLoader>
-    with SingleTickerProviderStateMixin {
-  AnimationController _controller;
-  Animation<double> _scaleAnimation;
-  Animation<double> _scaleDownAnimation;
-  Animation<double> _opacityDownAnimation;
-  Animation<double> _opacityUpAnimation;
-
-  double _scale = 0.7;
-  double _opacity = 0;
-
-  bool _animationFinished = false;
-
-  final _flutterImage = Image.asset(
-    'assets/fun_with_flutter_icon.png',
-  );
-
-  @override
-  void initState() {
-    _controller = AnimationController(
-      vsync: this,
-      duration: const Duration(milliseconds: 1500),
-    );
-    _scaleAnimation = Tween<double>(begin: 0.9, end: 1.5).animate(
-      CurvedAnimation(
-        parent: _controller,
-        curve: Interval(0, 0.6, curve: Curves.ease),
-      ),
-    );
-    _scaleDownAnimation = Tween<double>(begin: 0, end: 0.5).animate(
-      CurvedAnimation(
-        parent: _controller,
-        curve: Interval(0.6, 1, curve: Curves.easeInOut),
-      ),
-    );
-    _opacityDownAnimation = Tween<double>(begin: 0, end: 0.8).animate(
-      CurvedAnimation(
-        parent: _controller,
-        curve: Interval(0.8, 1, curve: Curves.easeInOut),
-      ),
-    );
-    _opacityUpAnimation = Tween<double>(begin: 0, end: 1).animate(
-      CurvedAnimation(
-        parent: _controller,
-        curve: Interval(0, 0.5, curve: Curves.ease),
-      ),
-    );
-    _controller.addListener(_animationListener);
-    _controller.addStatusListener(_statusListener);
-
-    _flutterImage.image.resolve(const ImageConfiguration()).addListener(
-      ImageStreamListener(
-        (ImageInfo info, bool _) {
-          _controller.forward(); // start the animation once the image is loaded
+          );
         },
       ),
     );
-    super.initState();
-  }
-
-  void _animationListener() {
-    setState(() {
-      _scale = _scaleAnimation.value - _scaleDownAnimation.value;
-      _opacity = _opacityUpAnimation.value - _opacityDownAnimation.value;
-    });
-  }
-
-  void _statusListener(AnimationStatus status) {
-    if (status == AnimationStatus.completed) {
-      print('completed');
-      setState(
-        () {
-          _animationFinished = true;
-        },
-      );
-      Provider.of<LogoAnimationNotifier>(context, listen: false)
-          .setAnimationFinished();
-    }
-  }
-
-  @override
-  void dispose() {
-    _controller.dispose();
-    super.dispose();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    if (!_animationFinished)
-      return IgnorePointer(
-        child: Container(
-          child: Opacity(
-            opacity: _opacity,
-            child: Transform.scale(
-              scale: _scale,
-              child: Container(
-                child: Center(
-                  child: _flutterImage,
-                ),
-              ),
-            ),
-          ),
-        ),
-      );
-    return Container();
   }
 }
+
+// class LogoLoader extends StatefulWidget {
+//   const LogoLoader({Key key}) : super(key: key);
+
+//   @override
+//   _LogoLoaderState createState() => _LogoLoaderState();
+// }
+
+// class _LogoLoaderState extends State<LogoLoader>
+//     with SingleTickerProviderStateMixin {
+//   AnimationController _controller;
+//   Animation<double> _scaleAnimation;
+//   Animation<double> _scaleDownAnimation;
+//   Animation<double> _opacityDownAnimation;
+//   Animation<double> _opacityUpAnimation;
+
+//   double _scale = 0.7;
+//   double _opacity = 0;
+
+//   bool _animationFinished = false;
+
+//   final _flutterImage = Image.asset(
+//     'assets/fun_with_flutter_icon.png',
+//   );
+
+//   @override
+//   void initState() {
+//     _controller = AnimationController(
+//       vsync: this,
+//       duration: const Duration(milliseconds: 1500),
+//     );
+//     _scaleAnimation = Tween<double>(begin: 0.9, end: 1.5).animate(
+//       CurvedAnimation(
+//         parent: _controller,
+//         curve: Interval(0, 0.6, curve: Curves.ease),
+//       ),
+//     );
+//     _scaleDownAnimation = Tween<double>(begin: 0, end: 0.5).animate(
+//       CurvedAnimation(
+//         parent: _controller,
+//         curve: Interval(0.6, 1, curve: Curves.easeInOut),
+//       ),
+//     );
+//     _opacityDownAnimation = Tween<double>(begin: 0, end: 0.8).animate(
+//       CurvedAnimation(
+//         parent: _controller,
+//         curve: Interval(0.8, 1, curve: Curves.easeInOut),
+//       ),
+//     );
+//     _opacityUpAnimation = Tween<double>(begin: 0, end: 1).animate(
+//       CurvedAnimation(
+//         parent: _controller,
+//         curve: Interval(0, 0.5, curve: Curves.ease),
+//       ),
+//     );
+//     _controller.addListener(_animationListener);
+//     _controller.addStatusListener(_statusListener);
+
+//     _flutterImage.image.resolve(const ImageConfiguration()).addListener(
+//       ImageStreamListener(
+//         (ImageInfo info, bool _) {
+//           _controller.forward(); // start the animation once the image is loaded
+//         },
+//       ),
+//     );
+//     super.initState();
+//   }
+
+//   void _animationListener() {
+//     setState(() {
+//       _scale = _scaleAnimation.value - _scaleDownAnimation.value;
+//       _opacity = _opacityUpAnimation.value - _opacityDownAnimation.value;
+//     });
+//   }
+
+//   void _statusListener(AnimationStatus status) {
+//     if (status == AnimationStatus.completed) {
+//       print('completed');
+//       setState(
+//         () {
+//           _animationFinished = true;
+//         },
+//       );
+//       Provider.of<LogoAnimationNotifier>(context, listen: false)
+//           .setAnimationFinished();
+//     }
+//   }
+
+//   @override
+//   void dispose() {
+//     _controller.dispose();
+//     super.dispose();
+//   }
+
+//   @override
+//   Widget build(BuildContext context) {
+//     if (!_animationFinished)
+//       return IgnorePointer(
+//         child: Container(
+//           child: Opacity(
+//             opacity: _opacity,
+//             child: Transform.scale(
+//               scale: _scale,
+//               child: Container(
+//                 child: Center(
+//                   child: _flutterImage,
+//                 ),
+//               ),
+//             ),
+//           ),
+//         ),
+//       );
+//     return Container();
+//   }
+// }
 
 class HeaderWidget extends StatelessWidget {
   const HeaderWidget(this.text);

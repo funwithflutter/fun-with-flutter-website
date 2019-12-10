@@ -15,8 +15,8 @@
   <!-- <script src="/__/firebase/6.6.0/firebase-app.js"></script> -->
 
 
-  <script src="https://www.gstatic.com/firebasejs/6.6.0/firebase-app.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/6.6.0/firebase-auth.js"></script>
+  <!-- <script src="https://www.gstatic.com/firebasejs/6.6.0/firebase-app.js"></script> -->
+  <!-- <script src="https://www.gstatic.com/firebasejs/6.6.0/firebase-auth.js"></script> -->
   <!-- <script src="https://www.gstatic.com/firebasejs/6.6.0/firebase-database.js"></script> -->
 
   <!-- Add Firebase products that you want to use -->
@@ -31,12 +31,12 @@
 
   <!-- Initialize Performance Monitoring and get a reference to the service -->
   <script>
-    //document.addEventListener('keydown', function (event) {
-    //  // console.log('event key'+event.code);
-    //  if (event.code == 'Tab') {
-    //    event.preventDefault();
-    //  }
-    //});
+    document.addEventListener('keydown', function (event) {
+      // console.log('event key'+event.code);
+      if (event.code == 'Tab') {
+        event.preventDefault();
+      }
+    });
     var perf = firebase.performance();
     //firebase.initializeApp(firebaseConfig);
     // ...

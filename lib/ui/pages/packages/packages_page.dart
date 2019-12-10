@@ -9,39 +9,41 @@ import 'components/confetti_widget.dart';
 class PackagesPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        mainAxisSize: MainAxisSize.max,
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        children: <Widget>[
-          Padding(
-            padding: const EdgeInsets.all(32.0),
-            child: Text('Custom Widgets',
-                style: Theme.of(context).textTheme.display1),
-          ),
-          _ExampleWidget(
-            title: 'Confetti',
-            child: const Padding(
-              padding: EdgeInsets.all(8.0),
-              child: ConfettiExample(),
+    return Center(
+      child: SingleChildScrollView(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisSize: MainAxisSize.max,
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: <Widget>[
+            Padding(
+              padding: const EdgeInsets.all(32.0),
+              child: Text('Custom Widgets',
+                  style: Theme.of(context).textTheme.display1),
             ),
-            pubUrl: url.confettiPackage.pubUrl,
-            youtubeUrl: url.confettiPackage.youtubeUrl,
-          ),
-          _ExampleWidget(
-            title: 'Splash Tap',
-            child: SplashTapExample(),
-            pubUrl: url.splashTapPackage.pubUrl,
-            youtubeUrl: url.splashTapPackage.youtubeUrl,
-          ),
-          _ExampleWidget(
-            title: 'Wave Slider',
-            child: WaveSliderExample(),
-            pubUrl: url.waveSliderPackage.pubUrl,
-            youtubeUrl: url.waveSliderPackage.youtubeUrl,
-          ),
-        ],
+            _ExampleWidget(
+              title: 'Confetti',
+              child: const Padding(
+                padding: EdgeInsets.all(8.0),
+                child: ConfettiExample(),
+              ),
+              pubUrl: url.confettiPackage.pubUrl,
+              youtubeUrl: url.confettiPackage.youtubeUrl,
+            ),
+            _ExampleWidget(
+              title: 'Splash Tap',
+              child: SplashTapExample(),
+              pubUrl: url.splashTapPackage.pubUrl,
+              youtubeUrl: url.splashTapPackage.youtubeUrl,
+            ),
+            _ExampleWidget(
+              title: 'Wave Slider',
+              child: WaveSliderExample(),
+              pubUrl: url.waveSliderPackage.pubUrl,
+              youtubeUrl: url.waveSliderPackage.youtubeUrl,
+            ),
+          ],
+        ),
       ),
     );
   }
