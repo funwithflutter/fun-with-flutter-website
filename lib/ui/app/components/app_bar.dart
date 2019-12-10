@@ -27,7 +27,7 @@ class FunWithAppBar extends StatelessWidget implements PreferredSizeWidget {
     return AppBar(
       title: GestureDetector(
         onTap: () {
-          pageBloc.add(UpdatePage(PageState.home));
+          pageBloc.add(const UpdatePage(PageState.home));
         },
         child: Text(
           'FUN WITH FLUTTER',

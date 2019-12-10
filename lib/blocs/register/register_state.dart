@@ -2,16 +2,7 @@ import 'package:meta/meta.dart';
 
 @immutable
 class RegisterState {
-  final bool isEmailValid;
-  final bool isPasswordValid;
-  final bool isSubmitting;
-  final bool isSuccess;
-  final bool isFailure;
-  final String errorMessage;
-
-  bool get isFormValid => isEmailValid && isPasswordValid;
-
-  RegisterState({
+  const RegisterState({
     @required this.isEmailValid,
     @required this.isPasswordValid,
     @required this.isSubmitting,
@@ -21,7 +12,7 @@ class RegisterState {
   });
 
   factory RegisterState.empty() {
-    return RegisterState(
+    return const RegisterState(
       isEmailValid: true,
       isPasswordValid: true,
       isSubmitting: false,
@@ -31,7 +22,7 @@ class RegisterState {
   }
 
   factory RegisterState.loading() {
-    return RegisterState(
+    return const RegisterState(
       isEmailValid: true,
       isPasswordValid: true,
       isSubmitting: true,
@@ -52,7 +43,7 @@ class RegisterState {
   }
 
   factory RegisterState.success() {
-    return RegisterState(
+    return const RegisterState(
       isEmailValid: true,
       isPasswordValid: true,
       isSubmitting: false,
@@ -60,6 +51,15 @@ class RegisterState {
       isFailure: false,
     );
   }
+
+  final bool isEmailValid;
+  final bool isPasswordValid;
+  final bool isSubmitting;
+  final bool isSuccess;
+  final bool isFailure;
+  final String errorMessage;
+
+  bool get isFormValid => isEmailValid && isPasswordValid;
 
   RegisterState update({
     bool isEmailValid,

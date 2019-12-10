@@ -36,18 +36,17 @@ class _CustomPackagesButtonState extends State<CustomPackagesButton> {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.all(8.0),
-      child: Listener(
-        onPointerEnter: _onPointerEnter,
-        onPointerExit: _onPointerExit,
+      child: MouseRegion(
+        onEnter: _onPointerEnter,
+        onExit: _onPointerExit,
         child: GestureDetector(
           onTap: () {
             BlocProvider.of<PageBloc>(context).add(
-              UpdatePage(PageState.packages),
+              const UpdatePage(PageState.packages),
             );
           },
           child: Container(
             decoration: BoxDecoration(
-              border: Border.all(),
               color: _color,
               borderRadius: const BorderRadius.all(
                 Radius.circular(20),

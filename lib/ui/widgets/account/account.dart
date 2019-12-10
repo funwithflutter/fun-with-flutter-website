@@ -8,6 +8,9 @@ import 'package:fun_with_flutter/ui/widgets/register/register_form.dart';
 enum RegistrationState { login, register }
 
 class AccountPage extends StatefulWidget {
+
+  const AccountPage();
+
   @override
   _AccountPageState createState() => _AccountPageState();
 }

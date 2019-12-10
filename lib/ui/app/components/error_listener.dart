@@ -19,8 +19,8 @@ class ErrorListener extends StatelessWidget {
                 Scaffold.of(context)
                   ..removeCurrentSnackBar()
                   ..showSnackBar(
-                    SnackBar(
-                      content: const ErrorSnackbar(
+                    const SnackBar(
+                      content: ErrorSnackbar(
                         message: 'Could not load blog data.',
                       ),
                     ),

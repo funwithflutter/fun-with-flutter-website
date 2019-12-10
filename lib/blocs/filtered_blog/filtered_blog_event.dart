@@ -3,11 +3,11 @@ import 'package:meta/meta.dart';
 
 @immutable
 abstract class FilteredBlogEvent {
-  FilteredBlogEvent();
+  const FilteredBlogEvent();
 }
 
 class UpdateFilteredBlog extends FilteredBlogEvent {
-  UpdateFilteredBlog(this.blog);
+  const UpdateFilteredBlog(this.blog);
 
   final Blog blog;
 
@@ -16,7 +16,7 @@ class UpdateFilteredBlog extends FilteredBlogEvent {
 }
 
 class FilterByTag extends FilteredBlogEvent {
-  FilterByTag(this.tagFilter);
+  const FilterByTag(this.tagFilter);
 
   final String tagFilter;
 

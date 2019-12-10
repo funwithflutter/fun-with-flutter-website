@@ -64,42 +64,63 @@ class FilteredBlogPageState extends State<FilteredBlogPage>
         }
         if (state is FilteredBlogLoaded) {
           _restartAnimation();
-          return Column(
-            mainAxisSize: MainAxisSize.min,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: <Widget>[
-              Padding(
-                padding: const EdgeInsets.only(left: 32, top: 16.0),
-                child: Text(
-                  TagDisplayNameGenerator.mapTagToDisplayName(state.tagFilter),
-                  style: Theme.of(context).textTheme.display1,
+          int crossAxisCount = 1;
+          final width = MediaQuery.of(context).size.width;
+          double maxWidth = 1200;
+          if (width >= 1200) {
+            crossAxisCount = 3;
+            maxWidth = 1200;
+          } else if (width >= 900) {
+            crossAxisCount = 2;
+            maxWidth = 800;
+          } else if (width >= 420) {
+            crossAxisCount = 1;
+            maxWidth = 400;
+          } else {
+            maxWidth = width;
+          }
+          return Padding(
+            padding: EdgeInsets.symmetric(
+                horizontal: (MediaQuery.of(context).size.width - maxWidth) / 2),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                Padding(
+                  padding: const EdgeInsets.only(left: 32, top: 16.0),
+                  child: Text(
+                    TagDisplayNameGenerator.mapTagToDisplayName(
+                        state.tagFilter),
+                    style: Theme.of(context).textTheme.display1,
+                  ),
                 ),
-              ),
-              AnimatedBuilder(
-                animation: _paddingAnimation,
-                builder: (context, child) {
-                  return Expanded(
-                    child: Padding(
-                      padding: EdgeInsets.symmetric(
-                          vertical: _paddingAnimation.value),
-                      child: GridView.extent(
-                        maxCrossAxisExtent: 1200,
-                        crossAxisSpacing: 10,
-                        childAspectRatio: 3 / 2,
-                        padding: const EdgeInsets.all(16),
-                        physics: _bouncingScrollPhysics,
-                        children: <Widget>[
-                          for (var page in state.filteredBlog.pages)
-                            BlogPostCard(
-                              post: page,
-                            )
-                        ],
+                AnimatedBuilder(
+                  animation: _paddingAnimation,
+                  builder: (context, child) {
+                    return Expanded(
+                      child: Padding(
+                        padding: EdgeInsets.symmetric(
+                          vertical: _paddingAnimation.value,
+                        ),
+                        child: GridView.builder(
+                          gridDelegate:
+                              SliverGridDelegateWithFixedCrossAxisCount(
+                            crossAxisCount: crossAxisCount,
+                            childAspectRatio: 10 / 9,
+                          ),
+                          physics: _bouncingScrollPhysics,
+                          itemCount: state.filteredBlog.pages.length,
+                          itemBuilder: (context, index) {
+                            return BlogPostCard(
+                                post: state.filteredBlog.pages[index]);
+                          },
+                        ),
                       ),
-                    ),
-                  );
-                },
-              ),
-            ],
+                    );
+                  },
+                ),
+              ],
+            ),
           );
         }
         return const CustomError(

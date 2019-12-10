@@ -3,7 +3,7 @@ import 'package:meta/meta.dart';
 
 @immutable
 abstract class BlogState {
-  BlogState();
+  const BlogState();
 }
 
 /// This is the default state
@@ -18,7 +18,7 @@ class BlogError extends BlogState {
 }
 
 class BlogLoaded extends BlogState {
-  BlogLoaded(this.blog, this.tags) : super();
+  const BlogLoaded(this.blog, this.tags) : super();
 
   final Blog blog;
   final List<String> tags;

@@ -2,8 +2,8 @@ import 'package:meta/meta.dart';
 
 @immutable
 abstract class AuthenticationState {
-  AuthenticationState(this.displayName);
-  
+  const AuthenticationState(this.displayName);
+
   final String displayName;
 
   // @override
@@ -12,21 +12,21 @@ abstract class AuthenticationState {
 }
 
 class Uninitialized extends AuthenticationState {
-  Uninitialized(): super('');
+  const Uninitialized() : super('');
 
   @override
   String toString() => 'Uninitialized';
 }
 
 class Authenticated extends AuthenticationState {
-  Authenticated(displayName) : super(displayName);
+  const Authenticated(displayName) : super(displayName);
 
   @override
   String toString() => 'Authenticated { displayName: $displayName }';
 }
 
 class Unauthenticated extends AuthenticationState {
-  Unauthenticated(): super('');
+  const Unauthenticated() : super('');
 
   @override
   String toString() => 'Unauthenticated';

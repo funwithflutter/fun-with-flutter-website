@@ -76,9 +76,9 @@ class _IconBarButtonState extends State<_IconBarButton> {
 
   @override
   Widget build(BuildContext context) {
-    return Listener(
-      onPointerEnter: _onPointerEnter,
-      onPointerExit: _onPointerExit,
+    return MouseRegion(
+      onEnter: _onPointerEnter,
+      onExit: _onPointerExit,
       child: GestureDetector(
         onTap: _onTap,
         child: Container(

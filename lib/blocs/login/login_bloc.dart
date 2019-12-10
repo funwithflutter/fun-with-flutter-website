@@ -28,7 +28,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
     });
     final debounceStream = observableStream.where((event) {
       return event is EmailChanged || event is PasswordChanged;
-    }).debounceTime(Duration(milliseconds: 300));
+    }).debounceTime(const Duration(milliseconds: 300));
     return super
         .transformEvents(nonDebounceStream.mergeWith([debounceStream]), next);
   }

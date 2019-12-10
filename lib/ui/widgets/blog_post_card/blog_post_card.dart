@@ -10,8 +10,12 @@ class BlogPostCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    double width = 400;
+    if (MediaQuery.of(context).size.width < 440) {
+      width = MediaQuery.of(context).size.width * 80;
+    }
     return SizedBox(
-      width: 400,
+      width: width,
       child: InkWell(
         onTap: () {
           UrlUtils.open(post.uri);
@@ -38,9 +42,13 @@ class BlogPostCard extends StatelessWidget {
                   child: Container(
                     constraints:
                         const BoxConstraints(minHeight: 30, maxHeight: 60),
-                    child: Text(
-                      post?.description,
-                      overflow: TextOverflow.ellipsis,
+                    child: Wrap(
+                      children: <Widget>[
+                        Text(
+                          post?.description,
+                          overflow: TextOverflow.ellipsis,
+                        ),
+                      ],
                     ),
                   ),
                 ),

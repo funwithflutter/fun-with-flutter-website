@@ -2,11 +2,11 @@ import 'package:meta/meta.dart';
 
 @immutable
 abstract class LoginEvent {
-  LoginEvent();
+  const LoginEvent();
 }
 
 class EmailChanged extends LoginEvent {
-  EmailChanged({@required this.email});
+  const EmailChanged({@required this.email});
 
   final String email;
 
@@ -15,21 +15,19 @@ class EmailChanged extends LoginEvent {
 }
 
 class PasswordChanged extends LoginEvent {
-  PasswordChanged({@required this.password});
-  
-  final String password;
+  const PasswordChanged({@required this.password});
 
+  final String password;
 
   @override
   String toString() => 'PasswordChanged { password: $password }';
 }
 
 class Submitted extends LoginEvent {
-  Submitted({@required this.email, @required this.password});
-  
+  const Submitted({@required this.email, @required this.password});
+
   final String email;
   final String password;
-
 
   @override
   String toString() {
@@ -43,7 +41,8 @@ class LoginWithGooglePressed extends LoginEvent {
 }
 
 class LoginWithCredentialsPressed extends LoginEvent {
-  LoginWithCredentialsPressed({@required this.email, @required this.password});
+  const LoginWithCredentialsPressed(
+      {@required this.email, @required this.password});
 
   final String email;
   final String password;

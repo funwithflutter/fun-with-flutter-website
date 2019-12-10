@@ -19,7 +19,7 @@ class AppTheme {
   static const fontWeightSemiBold = FontWeight.w600;
   static const fontWeightBold = FontWeight.w700;
 
-  static const double fontSizeMedium = 16;
+  static const double fontSizeMedium = 14;
 
   static ThemeData theme() {
     return ThemeData(
@@ -28,25 +28,6 @@ class AppTheme {
       buttonTheme: const ButtonThemeData(textTheme: ButtonTextTheme.normal),
       dividerColor: accentColor,
       errorColor: errorColor,
-      // scaffoldBackgroundColor: Colors.grey[100],
-      textTheme: const TextTheme(
-        // display1: TextStyle(
-        //   fontSize: 28,
-        //   fontFamily: fontFamilyWorkSans,
-        // ),
-        // title: TextStyle(
-        //   fontFamily: fontFamilyWorkSans
-        // ),
-        body1: TextStyle(
-          fontSize: fontSizeMedium,
-        ),
-        body2: TextStyle(
-          fontSize: fontSizeMedium,
-        ),
-        button: TextStyle(
-          fontSize: fontSizeMedium,
-        ),
-      ),
       fontFamily: fontFamilyDefault,
       accentIconTheme: const IconThemeData(
         color: accentColor,

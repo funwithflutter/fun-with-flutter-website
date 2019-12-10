@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fun_with_flutter/blocs/bloc.dart';
 import 'package:fun_with_flutter/themes.dart';
@@ -61,10 +62,14 @@ class _HomePageState extends State<HomePage> {
           BlocListener<AuthenticationBloc, AuthenticationState>(
             listener: (BuildContext context, AuthenticationState state) {
               if (state is Authenticated) {
-                _isAuthenticated = true;
+                setState(() {
+                  _isAuthenticated = true;
+                });
               }
               if (state is Unauthenticated) {
-                _isAuthenticated = false;
+                setState(() {
+                  _isAuthenticated = false;
+                });
               }
             },
             child: BlocBuilder<BlogBloc, BlogState>(
@@ -75,16 +80,18 @@ class _HomePageState extends State<HomePage> {
                 if (width >= 1200) {
                   crossAxisCount = 3;
                   maxWidth = 1200;
-                } else if (width >= 800) {
+                } else if (width >= 900) {
                   crossAxisCount = 2;
                   maxWidth = 800;
-                } else {
+                } else if (width >= 420) {
                   crossAxisCount = 1;
-                  maxWidth = 700;
+                  maxWidth = 400;
+                } else {
+                  maxWidth = width;
                 }
                 if (state is BlogLoaded)
                   _numberOfBlogsToLoad = (state.blog.pages.length >= 5)
-                      ? 5
+                      ? 6
                       : state.blog.pages.length;
                 return Center(
                   child: CustomScrollView(
@@ -101,21 +108,76 @@ class _HomePageState extends State<HomePage> {
                         const SliverToBoxAdapter(
                             child: Center(child: CircularProgressIndicator())),
                       if (state is BlogLoaded)
-                        SliverToBoxAdapter(
-                          child: ConstrainedBox(
-                            constraints: BoxConstraints(maxWidth: maxWidth),
-                            child: Wrap(
-                              alignment: WrapAlignment.center,
-                              children: <Widget>[
-                                for (var i = 0; i < _numberOfBlogsToLoad; i++)
-                                  BlogPostCard(
-                                    key: ValueKey(state.blog.pages[i].title),
-                                    post: state.blog.pages[i],
-                                  )
-                              ],
-                            ),
-                          ),
+                        SliverLayoutBuilder(
+                          builder: (context, constraints) {
+                            print(constraints.crossAxisExtent);
+                            return SliverPadding(
+                              padding: EdgeInsets.symmetric(
+                                horizontal: (MediaQuery.of(context).size.width -
+                                        maxWidth) /
+                                    2,
+                              ),
+                              sliver: SliverGrid(
+                                delegate: SliverChildBuilderDelegate(
+                                  (context, index) {
+                                    return BlogPostCard(
+                                      key: ValueKey(
+                                          state.blog.pages[index].title),
+                                      post: state.blog.pages[index],
+                                    );
+                                  },
+                                  childCount: _numberOfBlogsToLoad,
+                                ),
+                                gridDelegate:
+                                    SliverGridDelegateWithFixedCrossAxisCount(
+                                        crossAxisCount: crossAxisCount,
+                                        childAspectRatio: 10 / 9
+                                        // maxCrossAxisExtent: 400,
+                                        ),
+                              ),
+                            );
+                          },
                         )
+                      // SliverToBoxAdapter(
+                      //   child: Container(
+                      //     width: 100, height: 100, color: Colors.blue,
+                      //   )
+                      //   // child: FittedBox(
+                      //   //   child: Center(
+                      //   //     child: Container(
+                      //   //       width: 400,
+                      //   //         // constraints: BoxConstraints(
+                      //   //         //   maxWidth: 1200,
+                      //   //         //   minWidth: 400,
+                      //   //         //   maxHeight: 300,
+                      //   //         //   // maxHeight: double.infinity,
+                      //   //         // ),
+                      //   //         child: Container(
+                      //   //           color: Colors.blue,
+                      //   //         )
+                      //   //         // child: FittedBox(
+                      //   //         //   fit: BoxFit.contain,
+                      //   //         //   child: Container(
+                      //   //         //     color: Colors.red,
+                      //   //         // child: Wrap(
+                      //   //         //   alignment: WrapAlignment.center,
+                      //   //         //   children: <Widget>[
+                      //   //         //     for (var i = 0;
+                      //   //         //         i < _numberOfBlogsToLoad;
+                      //   //         //         i++)
+                      //   //         //       BlogPostCard(
+                      //   //         //         key:
+                      //   //         //             ValueKey(state.blog.pages[i].title),
+                      //   //         //         post: state.blog.pages[i],
+                      //   //         //       )
+                      //   //         //   ],
+                      //   //         // ),
+                      //   //         //   ),
+                      //   //         // ),
+                      //   //         ),
+                      //   //   ),
+                      //   // ),
+                      // )
                       // SliverGrid.count(
                       //   crossAxisCount: crossAxisCount,
                       //   childAspectRatio: 10/9,

@@ -22,8 +22,7 @@ class App extends StatefulWidget {
 class _AppState extends State<App> with SingleTickerProviderStateMixin {
   AnimationController _controller;
   Animation<double> _menuAnimation;
-
-  final Duration animationDuration = const Duration(milliseconds: 150);
+  final Duration animationDuration = const Duration(milliseconds: 400);
   static const double _menuSize = 300;
   final Tween<double> _tween = Tween<double>()
     ..begin = 0
@@ -36,7 +35,7 @@ class _AppState extends State<App> with SingleTickerProviderStateMixin {
   void initState() {
     _controller = AnimationController(vsync: this, duration: animationDuration);
     _menuAnimation = _tween
-        .animate(CurvedAnimation(parent: _controller, curve: Curves.easeOut));
+        .animate(CurvedAnimation(parent: _controller, curve: Curves.ease));
     _controller.addStatusListener(_menuVisibilityStatusChange);
 
     super.initState();
@@ -61,11 +60,11 @@ class _AppState extends State<App> with SingleTickerProviderStateMixin {
   }
 
   void _setScreenSize(Size screenSize) {
-    if (screenSize.width < 750 && isSmallScreen != true) {
+    if (screenSize.width < 1800 && isSmallScreen != true) {
       setState(() {
         isSmallScreen = true;
       });
-    } else if (screenSize.width >= 750 && isSmallScreen == true) {
+    } else if (screenSize.width >= 1800 && isSmallScreen == true) {
       setState(() {
         isSmallScreen = false;
       });
@@ -93,14 +92,7 @@ class _AppState extends State<App> with SingleTickerProviderStateMixin {
             builder: (context, widget) {
               return Stack(
                 children: <Widget>[
-                  Row(
-                    children: <Widget>[
-                      if (!isSmallScreen)
-                        // this will push all the widgets to the right as the menu opens
-                        SizedBox(width: _menuAnimation.value),
-                      Expanded(child: AppPage()),
-                    ],
-                  ),
+                  const AppPage(),
                   if (_menuIsVisible)
                     Transform.translate(
                       offset: Offset(-_menuSize + _menuAnimation.value, 0),
@@ -114,7 +106,7 @@ class _AppState extends State<App> with SingleTickerProviderStateMixin {
                   BlocBuilder<AppStateBloc, AppState>(
                     builder: (_, state) {
                       if (state == AppState.account) {
-                        return OverlayPannel(
+                        return const OverlayPannel(
                           child: AccountPage(),
                         );
                       } else {

@@ -1,7 +1,6 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:fun_with_flutter/blocs/bloc.dart';
-import 'package:fun_with_flutter/themes.dart';
 import 'package:fun_with_flutter/ui/widgets/error/error_widget.dart';
 
 class MenuDrawer extends StatelessWidget {
@@ -27,7 +26,7 @@ class MenuDrawer extends StatelessWidget {
                 lable: 'Custom Widgets',
                 onPressed: () {
                   filteredBlogBloc.add(ClearFilters());
-                  pageBloc.add(UpdatePage(PageState.packages));
+                  pageBloc.add(const UpdatePage(PageState.packages));
                 }),
             _MenuSection(
               title: 'Tags',
@@ -63,7 +62,7 @@ class MenuDrawer extends StatelessWidget {
                 lable: 'About',
                 onPressed: () {
                   filteredBlogBloc.add(ClearFilters());
-                  pageBloc.add(UpdatePage(PageState.about));
+                  pageBloc.add(const UpdatePage(PageState.about));
                 },
               ),
             ),
@@ -143,7 +142,7 @@ class _Tag extends StatelessWidget {
       iconData: iconData,
       lable: tagName,
       onPressed: () {
-        pageBloc.add(UpdatePage(PageState.blog));
+        pageBloc.add(const UpdatePage(PageState.blog));
         filteredBlogBloc.add(FilterByTag(tagName));
       },
     );

@@ -3,7 +3,7 @@ import 'package:meta/meta.dart';
 
 @immutable
 abstract class FilteredBlogState  {
-  FilteredBlogState();
+  const FilteredBlogState();
 }
 
 class FilteredBlogError extends FilteredBlogState {
@@ -17,7 +17,7 @@ class FilteredBlogLoading extends FilteredBlogState {
 }
 
 class FilteredBlogLoaded extends FilteredBlogState {
-  FilteredBlogLoaded(this.filteredBlog, this.tagFilter);
+  const FilteredBlogLoaded(this.filteredBlog, this.tagFilter);
 
   final Blog filteredBlog;
   final String tagFilter;

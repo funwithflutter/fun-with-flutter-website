@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fun_with_flutter/blocs/authentication/bloc.dart';
 import 'package:fun_with_flutter/blocs/register/bloc.dart';
-import 'package:fun_with_flutter/themes.dart';
 import 'package:fun_with_flutter/ui/components/snackbar.dart';
 import 'package:fun_with_flutter/ui/widgets/register/regsiter_button.dart';
 
@@ -62,7 +61,6 @@ class _RegisterFormState extends State<RegisterForm> {
                 ),
               ),
             );
-          // _neverSatisfied();
         }
         if (state.isFailure) {
           Scaffold.of(context)

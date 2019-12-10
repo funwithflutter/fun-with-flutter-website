@@ -3,11 +3,11 @@ import 'package:meta/meta.dart';
 
 @immutable
 abstract class PageEvent {
-  PageEvent();
+  const PageEvent();
 }
 
 class UpdatePage extends PageEvent {
-  UpdatePage(this.page);
+  const UpdatePage(this.page);
 
   final PageState page;
 

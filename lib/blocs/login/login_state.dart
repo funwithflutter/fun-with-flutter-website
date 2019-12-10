@@ -2,16 +2,7 @@ import 'package:meta/meta.dart';
 
 @immutable
 class LoginState {
-  final bool isEmailValid;
-  final bool isPasswordValid;
-  final bool isSubmitting;
-  final bool isSuccess;
-  final bool isFailure;
-  final String errorMessage;
-
-  bool get isFormValid => isEmailValid && isPasswordValid;
-
-  LoginState({
+  const LoginState({
     @required this.isEmailValid,
     @required this.isPasswordValid,
     @required this.isSubmitting,
@@ -21,7 +12,7 @@ class LoginState {
   });
 
   factory LoginState.empty() {
-    return LoginState(
+    return const LoginState(
       isEmailValid: true,
       isPasswordValid: true,
       isSubmitting: false,
@@ -31,7 +22,7 @@ class LoginState {
   }
 
   factory LoginState.loading() {
-    return LoginState(
+    return const LoginState(
       isEmailValid: true,
       isPasswordValid: true,
       isSubmitting: true,
@@ -52,7 +43,7 @@ class LoginState {
   }
 
   factory LoginState.success() {
-    return LoginState(
+    return const LoginState(
       isEmailValid: true,
       isPasswordValid: true,
       isSubmitting: false,
@@ -60,6 +51,15 @@ class LoginState {
       isFailure: false,
     );
   }
+
+  final bool isEmailValid;
+  final bool isPasswordValid;
+  final bool isSubmitting;
+  final bool isSuccess;
+  final bool isFailure;
+  final String errorMessage;
+
+  bool get isFormValid => isEmailValid && isPasswordValid;
 
   LoginState update({
     bool isEmailValid,

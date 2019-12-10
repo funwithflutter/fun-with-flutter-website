@@ -11,7 +11,7 @@
 ///      fonts:
 ///       - asset: fonts/CustomIcons.ttf
 ///
-/// 
+///
 /// * Typicons, (c) Stephen Hutchings 2012
 ///         Author:    Stephen Hutchings
 ///         License:   SIL (http://scripts.sil.org/OFL)
@@ -28,10 +28,12 @@ class CustomIcons {
 
   static const _kFontFam = 'CustomIcons';
 
-  static const IconData coffee = const IconData(0xe800, fontFamily: _kFontFam);
-  static const IconData github_circled = const IconData(0xf09b, fontFamily: _kFontFam);
-  static const IconData youtube = const IconData(0xf167, fontFamily: _kFontFam);
-  static const IconData google = const IconData(0xf1a0, fontFamily: _kFontFam);
-  static const IconData medium = const IconData(0xf23a, fontFamily: _kFontFam);
-  static const IconData twitter_squared = const IconData(0xf304, fontFamily: _kFontFam);
+  static const IconData coffee = IconData(0xe800, fontFamily: _kFontFam);
+  static const IconData github_circled =
+      IconData(0xf09b, fontFamily: _kFontFam);
+  static const IconData youtube = IconData(0xf167, fontFamily: _kFontFam);
+  static const IconData google = IconData(0xf1a0, fontFamily: _kFontFam);
+  static const IconData medium = IconData(0xf23a, fontFamily: _kFontFam);
+  static const IconData twitter_squared =
+      IconData(0xf304, fontFamily: _kFontFam);
 }

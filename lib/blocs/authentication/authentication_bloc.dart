@@ -13,7 +13,7 @@ class AuthenticationBloc
   final UserRepository _userRepository;
 
   @override
-  AuthenticationState get initialState => Uninitialized();
+  AuthenticationState get initialState => const Uninitialized();
 
   @override
   Stream<AuthenticationState> mapEventToState(
@@ -35,10 +35,10 @@ class AuthenticationBloc
         final name = await _userRepository.getUser();
         yield Authenticated(name);
       } else {
-        yield Unauthenticated();
+        yield const Unauthenticated();
       }
     } catch (_) {
-      yield Unauthenticated();
+      yield const Unauthenticated();
     }
   }
 
@@ -47,7 +47,7 @@ class AuthenticationBloc
   }
 
   Stream<AuthenticationState> _mapLoggedOutToState() async* {
-    yield Unauthenticated();
+    yield const Unauthenticated();
     _userRepository.signOut();
   }
 }

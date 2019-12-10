@@ -2,7 +2,7 @@ import 'package:meta/meta.dart';
 
 @immutable
 abstract class AuthenticationEvent {
-  AuthenticationEvent();
+  const AuthenticationEvent();
 }
 
 class AppStarted extends AuthenticationEvent {

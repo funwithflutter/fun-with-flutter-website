@@ -8,6 +8,9 @@ import 'package:fun_with_flutter/ui/pages/packages/packages_page.dart';
 import 'package:fun_with_flutter/ui/widgets/error/error_widget.dart';
 
 class AppPage extends StatelessWidget {
+
+  const AppPage();
+
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<PageBloc, PageState>(
