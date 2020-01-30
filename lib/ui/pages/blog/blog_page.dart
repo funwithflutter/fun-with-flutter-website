@@ -108,7 +108,7 @@ class FilteredBlogPageState extends State<FilteredBlogPage>
                             crossAxisCount: crossAxisCount,
                             childAspectRatio: 10 / 9,
                           ),
-                          physics: _bouncingScrollPhysics,
+                          // physics: _bouncingScrollPhysics,
                           itemCount: state.filteredBlog.pages.length,
                           itemBuilder: (context, index) {
                             return BlogPostCard(

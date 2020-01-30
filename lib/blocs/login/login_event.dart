@@ -1,7 +1,8 @@
+import 'package:equatable/equatable.dart';
 import 'package:meta/meta.dart';
 
 @immutable
-abstract class LoginEvent {
+abstract class LoginEvent extends Equatable{
   const LoginEvent();
 }
 
@@ -12,6 +13,9 @@ class EmailChanged extends LoginEvent {
 
   @override
   String toString() => 'EmailChanged { email :$email }';
+
+  @override
+  List<Object> get props => [email];
 }
 
 class PasswordChanged extends LoginEvent {
@@ -21,6 +25,10 @@ class PasswordChanged extends LoginEvent {
 
   @override
   String toString() => 'PasswordChanged { password: $password }';
+
+  @override
+  // TODO: implement props
+  List<Object> get props => throw UnimplementedError();
 }
 
 class Submitted extends LoginEvent {
@@ -33,11 +41,19 @@ class Submitted extends LoginEvent {
   String toString() {
     return 'Submitted { email: $email, password: $password }';
   }
+
+  @override
+  // TODO: implement props
+  List<Object> get props => throw UnimplementedError();
 }
 
 class LoginWithGooglePressed extends LoginEvent {
   @override
   String toString() => 'LoginWithGooglePressed';
+
+  @override
+  // TODO: implement props
+  List<Object> get props => throw UnimplementedError();
 }
 
 class LoginWithCredentialsPressed extends LoginEvent {
@@ -51,4 +67,8 @@ class LoginWithCredentialsPressed extends LoginEvent {
   String toString() {
     return 'LoginWithCredentialsPressed { email: $email, password: $password }';
   }
+
+  @override
+  // TODO: implement props
+  List<Object> get props => throw UnimplementedError();
 }

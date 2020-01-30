@@ -3,8 +3,8 @@ import 'package:bloc/bloc.dart';
 import 'package:fun_with_flutter/utils/validator.dart';
 import 'package:meta/meta.dart';
 import 'package:fun_with_flutter/repository/user_repository.dart';
-import 'package:rxdart/rxdart.dart';
 import './bloc.dart';
+import 'package:rxdart/rxdart.dart';
 
 class LoginBloc extends Bloc<LoginEvent, LoginState> {
   LoginBloc({
@@ -22,7 +22,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
     Stream<LoginEvent> events,
     Stream<LoginState> Function(LoginEvent event) next,
   ) {
-    final observableStream = events as Observable<LoginEvent>;
+    final observableStream = events;
     final nonDebounceStream = observableStream.where((event) {
       return event is! EmailChanged && event is! PasswordChanged;
     });

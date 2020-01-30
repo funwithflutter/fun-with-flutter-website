@@ -48,34 +48,34 @@ class AppInjector extends StatelessWidget {
 
     return MultiBlocProvider(
       providers: [
-        BlocProvider<AuthenticationBloc>(builder: (context) {
+        BlocProvider<AuthenticationBloc>(create: (context) {
           return AuthenticationBloc(userRepository: _userRepository)
             ..add(AppStarted());
         }),
-        BlocProvider<LoginBloc>(builder: (context) {
+        BlocProvider<LoginBloc>(create: (context) {
           return LoginBloc(userRepository: _userRepository);
         }),
         BlocProvider<RegisterBloc>(
-          builder: (context) {
+          create: (context) {
             return RegisterBloc(userRepository: _userRepository);
           },
         ),
         BlocProvider<BlogBloc>(
-          builder: (context) {
+          create: (context) {
             return _blogBloc..add(Fetch());
           },
         ),
         BlocProvider<FilteredBlogBloc>(
-          builder: (context) {
+          create: (context) {
             return FilteredBlogBloc(blogBloc: _blogBloc);
           },
         ),
         BlocProvider<PageBloc>(
-          builder: (context) {
+          create: (context) {
             return PageBloc();
           },
         ),
-        BlocProvider<AppStateBloc> (builder: (contect) {
+        BlocProvider<AppStateBloc> (create: (contect) {
           return AppStateBloc();
         },)
       ],
