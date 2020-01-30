@@ -6,58 +6,122 @@ import 'package:fun_with_flutter/ui/pages/about/data/data.dart';
 class AboutPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(16.0),
-      child: SingleChildScrollView(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            Row(
-              children: <Widget>[
-                Text(
-                  'Fun with  ',
-                  style: Theme.of(context).textTheme.display1.copyWith(
-                        color: Colors.black,
-                        fontSize: 36,
+    return Center(
+      child: Container(
+        margin: EdgeInsets.all(32),
+        constraints: const BoxConstraints(maxWidth: 1200, minWidth: 300),
+        child: SingleChildScrollView(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              Wrap(
+                alignment: WrapAlignment.start,
+                children: <Widget>[
+                  Text(
+                    'Fun with  ',
+                    style: Theme.of(context).textTheme.headline4.copyWith(
+                          color: Colors.black,
+                          fontSize: 36,
+                        ),
+                  ),
+                  RotateAnimatedTextKit(
+                      onTap: () {},
+                      text: const [
+                        'FLUTTER',
+                        'TUTORIALS',
+                        'CHALLENGES',
+                        'RESOURCES',
+                        'CODE',
+                        'UI',
+                        'ANIMATION',
+                      ],
+                      textStyle: const TextStyle(
+                          fontSize: 40,
+                          // color: AppTheme.primaryColor,
+                          fontFamily: 'DMSerifDisplay'),
+                      textAlign: TextAlign.start,
+                      alignment: AlignmentDirectional
+                          .topStart // or Alignment.topLeft
                       ),
-                ),
-                RotateAnimatedTextKit(
-                    onTap: () {},
-                    text: const [
-                      'FLUTTER',
-                      'TUTORIALS',
-                      'CHALLENGES',
-                      'RESOURCES',
-                      'CODE',
-                      'UI',
-                      'ANIMATION',
-                    ],
-                    textStyle: const TextStyle(
-                        fontSize: 40,
-                        // color: AppTheme.primaryColor,
-                        fontFamily: 'DMSerifDisplay'),
-                    textAlign: TextAlign.start,
-                    alignment:
-                        AlignmentDirectional.topStart // or Alignment.topLeft
-                    ),
-              ],
-            ),
-            const IconBar(),
-            const SizedBox(height: 16),
-            _text(aboutIntro),
-            _paragraphBreak(),
-            _text(aboutPurpose0),
-            const _BulletPoint(text: aboutPurpose1),
-            const _BulletPoint(text: aboutPurpose2),
-            _paragraphBreak(),
-            _text(aboutGoal),
-            _paragraphBreak(),
-            _text(aboutLimitations),
-            _paragraphBreak(),
-            _text(aboutConclussion),
-            _paragraphBreak(),
-            _text('- Gordon')
-          ],
+                ],
+              ),
+              const SizedBox(height: 16),
+              Text(aboutIntro),
+              _paragraphBreak(),
+              // _text(aboutPurpose0),
+              // const _BulletPoint(text: aboutPurpose1),
+              // const _BulletPoint(text: aboutPurpose2),
+              // _paragraphBreak(),
+              _text(aboutGoal),
+              // _paragraphBreak(),
+              // _text(aboutLimitations),
+              _paragraphBreak(),
+              _text(aboutConclussion),
+              _paragraphBreak(),
+              _text('- Gordon'),
+              _paragraphBreak(),
+              const IconBar(),
+
+            ],
+          ),
+        ),
+      ),
+    );
+    return Center(
+      child: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: SingleChildScrollView(
+          child: Column(
+            // crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              Row(
+                children: <Widget>[
+                  Text(
+                    'Fun with  ',
+                    style: Theme.of(context).textTheme.display1.copyWith(
+                          color: Colors.black,
+                          fontSize: 36,
+                        ),
+                  ),
+                  RotateAnimatedTextKit(
+                      onTap: () {},
+                      text: const [
+                        'FLUTTER',
+                        'TUTORIALS',
+                        'CHALLENGES',
+                        'RESOURCES',
+                        'CODE',
+                        'UI',
+                        'ANIMATION',
+                      ],
+                      textStyle: const TextStyle(
+                          fontSize: 40,
+                          // color: AppTheme.primaryColor,
+                          fontFamily: 'DMSerifDisplay'),
+                      textAlign: TextAlign.start,
+                      alignment:
+                          AlignmentDirectional.topStart // or Alignment.topLeft
+                      ),
+                ],
+              ),
+              const IconBar(),
+              const SizedBox(height: 16),
+              _text(aboutIntro),
+              _paragraphBreak(),
+              _text(aboutPurpose0),
+              const _BulletPoint(text: aboutPurpose1),
+              const _BulletPoint(text: aboutPurpose2),
+              _paragraphBreak(),
+              _text(aboutGoal),
+              _paragraphBreak(),
+              _text(aboutLimitations),
+              _paragraphBreak(),
+              _text(aboutConclussion),
+              _paragraphBreak(),
+              _text('- Gordon')
+            ],
+          ),
         ),
       ),
     );

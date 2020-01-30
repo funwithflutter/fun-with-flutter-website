@@ -1,5 +1,5 @@
 const String aboutIntro =
-    'Everything you see here (except for the blog) is made entirely in Flutter! Interested in the code - no problem. The entire website is open source and there are a series of videos and blog posts that outline the creation of the site.';
+    'Everything you see here is made entirely in Flutter! The entire website is open source and there are a series of videos and blog posts that outline the creation of the site.';
 
 const String aboutPurpose0 = 'This website serves a dual purpose:';
 const String aboutPurpose1 =
