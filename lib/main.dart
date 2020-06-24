@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
 import 'package:bloc/bloc.dart';
-import 'package:firebase/firebase.dart' as fb;
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fun_with_flutter/ui/app/app.dart';
 
@@ -19,16 +18,16 @@ import 'blocs/app_state/app_state_bloc.dart';
 
 void main() {
   assert(() {
-    if (fb.apps.isEmpty) {
-      fb.initializeApp(
-        apiKey: 'AIzaSyD8JoU_58xKlQFvva7nS7VHTKc1vUkaosk',
-        authDomain: 'fun-with.firebaseapp.com',
-        databaseURL: 'https://fun-with.firebaseio.com',
-        projectId: 'fun-with',
-        storageBucket: 'fun-with.appspot.com',
-        messagingSenderId: '1006728819313',
-      );
-    }
+    // if (fb.apps.isEmpty) {
+    //   fb.initializeApp(
+    //     apiKey: 'AIzaSyD8JoU_58xKlQFvva7nS7VHTKc1vUkaosk',
+    //     authDomain: 'fun-with.firebaseapp.com',
+    //     databaseURL: 'https://fun-with.firebaseio.com',
+    //     projectId: 'fun-with',
+    //     storageBucket: 'fun-with.appspot.com',
+    //     messagingSenderId: '1006728819313',
+    //   );
+    // }
     BlocSupervisor.delegate = SimpleBlocDelegate();
     return true;
   }());
@@ -75,9 +74,11 @@ class AppInjector extends StatelessWidget {
             return PageBloc();
           },
         ),
-        BlocProvider<AppStateBloc> (create: (contect) {
-          return AppStateBloc();
-        },)
+        BlocProvider<AppStateBloc>(
+          create: (contect) {
+            return AppStateBloc();
+          },
+        )
       ],
       child: MaterialApp(
         title: 'Fun with Flutter',

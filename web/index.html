@@ -3,8 +3,10 @@
 
 <head>
   <meta charset="UTF-8">
+  <meta name="google-signin-client_id"
+    content="1006728819313-5sr9q5ph7be2qmsvmi68dvct1vf7lcmt.apps.googleusercontent.com">
   <title></title>
-  <script defer src="main.dart.js" type="application/javascript"></script>
+  <!-- <script defer src="main.dart.js" type="application/javascript"></script> -->
   <link rel="icon" href="/assets/images/funwith_favicon.png">
 </head>
 
@@ -14,33 +16,62 @@
   <!-- Firebase App (the core Firebase SDK) is always required and must be listed first -->
   <!-- <script src="/__/firebase/6.6.0/firebase-app.js"></script> -->
 
+  <!-- Firebase App (the core Firebase SDK) is always required and must be listed first -->
+  <script src="https://www.gstatic.com/firebasejs/7.14.2/firebase-app.js"></script>
 
-  <script src="https://www.gstatic.com/firebasejs/6.6.0/firebase-app.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/6.6.0/firebase-auth.js"></script>
+  <!-- If you enabled Analytics in your project, add the Firebase SDK for Analytics -->
+  <script src="https://www.gstatic.com/firebasejs/7.14.2/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/7.14.2/firebase-analytics.js"></script>
+
+  <!-- Add Firebase products that you want to use -->
+  <script src="https://www.gstatic.com/firebasejs/7.14.2/firebase-performance.js"></script>
+
+
+  <!-- <script src="https://www.gstatic.com/firebasejs/6.6.0/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/6.6.0/firebase-auth.js"></script> -->
   <!-- <script src="https://www.gstatic.com/firebasejs/6.6.0/firebase-database.js"></script> -->
 
   <!-- Add Firebase products that you want to use -->
-  <script src="/__/firebase/6.6.0/firebase-app.js"></script>
-  <script src="/__/firebase/6.6.0/firebase-auth.js"></script>
+  <!-- <script src="/__/firebase/6.6.0/firebase-app.js"></script> -->
+  <!-- <script src="/__/firebase/6.6.0/firebase-auth.js"></script> -->
 
   <!-- Add the Performance Monitoring library -->
-  <script src="/__/firebase/6.6.0/firebase-performance.js"></script>
+  <!-- <script src="/__/firebase/6.6.0/firebase-performance.js"></script> -->
 
   <!-- Initialize Firebase -->
-  <script src="/__/firebase/init.js"></script>
+  <!-- <script src="/__/firebase/init.js"></script> -->
+
+  <script>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', function () {
+        navigator.serviceWorker.register('flutter_service_worker.js');
+      });
+    }
+  </script>
 
   <!-- Initialize Performance Monitoring and get a reference to the service -->
   <script>
-     document.addEventListener('keydown', function (event) {
-     // console.log('event key'+event.code);
-     if (event.code == 'Tab') {
-         event.preventDefault();
-       }
-     });
-    var perf = firebase.performance();
-    //firebase.initializeApp(firebaseConfig);
+    document.addEventListener('keydown', function (event) {
+      // console.log('event key'+event.code);
+      if (event.code == 'Tab') {
+        event.preventDefault();
+      }
+    });
+    const firebaseConfig = {
+      apiKey: "AIzaSyD8JoU_58xKlQFvva7nS7VHTKc1vUkaosk",
+      authDomain: "fuwith.app",
+      databaseURL: "https://fun-with.firebaseio.com",
+      projectId: "fun-with",
+      storageBucket: "fun-with.appspot.com",
+      messagingSenderId: "1006728819313",
+      appId: "1:1006728819313:web:06fd50e3fd92154a"
+    };
+    firebase.initializeApp(firebaseConfig);
+    // var perf = firebase.performance();
     // ...
   </script>
+  <script src="main.dart.js" type="application/javascript"></script>
+
 </body>
 
 </html>

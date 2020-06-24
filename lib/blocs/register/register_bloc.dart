@@ -1,35 +1,39 @@
 import 'dart:async';
 import 'package:bloc/bloc.dart';
+import 'package:fun_with_flutter/blocs/register/bloc.dart';
 import 'package:fun_with_flutter/repository/user_repository.dart';
 import 'package:fun_with_flutter/utils/validator.dart';
 import 'package:meta/meta.dart';
 import 'package:rxdart/rxdart.dart';
-import './bloc.dart';
+// import 'package:flutter_firebase_login/user_repository.dart';
+// import 'package:flutter_firebase_login/register/register.dart';
+// import 'package:flutter_firebase_login/validators.dart';
 
 class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
+  final UserRepository _userRepository;
+
   RegisterBloc({@required UserRepository userRepository})
       : assert(userRepository != null),
         _userRepository = userRepository;
-
-  final UserRepository _userRepository;
 
   @override
   RegisterState get initialState => RegisterState.empty();
 
   @override
-  Stream<RegisterState> transformEvents(
+  Stream<Transition<RegisterEvent, RegisterState>> transformEvents(
     Stream<RegisterEvent> events,
-    Stream<RegisterState> Function(RegisterEvent event) next,
+    TransitionFunction<RegisterEvent, RegisterState> transitionFn,
   ) {
-    final observableStream = events;
-    final nonDebounceStream = observableStream.where((event) {
-      return event is! EmailChanged && event is! PasswordChanged;
+    final nonDebounceStream = events.where((event) {
+      return (event is! EmailChanged && event is! PasswordChanged);
     });
-    final debounceStream = observableStream.where((event) {
-      return event is EmailChanged || event is PasswordChanged;
-    }).debounceTime(const Duration(milliseconds: 300));
-    return super
-        .transformEvents(nonDebounceStream.mergeWith([debounceStream]), next);
+    final debounceStream = events.where((event) {
+      return (event is EmailChanged || event is PasswordChanged);
+    }).debounceTime(Duration(milliseconds: 300));
+    return super.transformEvents(
+      nonDebounceStream.mergeWith([debounceStream]),
+      transitionFn,
+    );
   }
 
   @override
@@ -61,23 +65,15 @@ class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
     String email,
     String password,
   ) async* {
-    RegisterState state;
     yield RegisterState.loading();
-    await _userRepository
-        .signUp(
-      email: email,
-      password: password,
-    )
-        .then(
-      (onValue) {
-        state = RegisterState.success();
-      },
-    ).catchError(
-      (onError) {
-        print(onError);
-        state = RegisterState.failure(onError);
-      },
-    );
-    yield state;
+    try {
+      await _userRepository.signUp(
+        email: email,
+        password: password,
+      );
+      yield RegisterState.success();
+    } on Exception catch (e) {
+      yield RegisterState.failure(e.toString());
+    }
   }
 }

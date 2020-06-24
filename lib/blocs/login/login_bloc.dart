@@ -1,36 +1,39 @@
 import 'dart:async';
 import 'package:bloc/bloc.dart';
+import 'package:fun_with_flutter/repository/user_repository.dart';
 import 'package:fun_with_flutter/utils/validator.dart';
 import 'package:meta/meta.dart';
-import 'package:fun_with_flutter/repository/user_repository.dart';
-import './bloc.dart';
 import 'package:rxdart/rxdart.dart';
 
+import 'login_event.dart';
+import 'login_state.dart';
+
 class LoginBloc extends Bloc<LoginEvent, LoginState> {
+  UserRepository _userRepository;
+
   LoginBloc({
     @required UserRepository userRepository,
   })  : assert(userRepository != null),
         _userRepository = userRepository;
 
-  final UserRepository _userRepository;
-
   @override
   LoginState get initialState => LoginState.empty();
 
   @override
-  Stream<LoginState> transformEvents(
+  Stream<Transition<LoginEvent, LoginState>> transformEvents(
     Stream<LoginEvent> events,
-    Stream<LoginState> Function(LoginEvent event) next,
+    TransitionFunction<LoginEvent, LoginState> transitionFn,
   ) {
-    final observableStream = events;
-    final nonDebounceStream = observableStream.where((event) {
-      return event is! EmailChanged && event is! PasswordChanged;
+    final nonDebounceStream = events.where((event) {
+      return (event is! EmailChanged && event is! PasswordChanged);
     });
-    final debounceStream = observableStream.where((event) {
-      return event is EmailChanged || event is PasswordChanged;
-    }).debounceTime(const Duration(milliseconds: 300));
-    return super
-        .transformEvents(nonDebounceStream.mergeWith([debounceStream]), next);
+    final debounceStream = events.where((event) {
+      return (event is EmailChanged || event is PasswordChanged);
+    }).debounceTime(Duration(milliseconds: 300));
+    return super.transformEvents(
+      nonDebounceStream.mergeWith([debounceStream]),
+      transitionFn,
+    );
   }
 
   @override
@@ -62,13 +65,12 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
   }
 
   Stream<LoginState> _mapLoginWithGooglePressedToState() async* {
-    LoginState state;
-    await _userRepository.signInWithGoogle().then((onValue) {
-      state = LoginState.success();
-    }).catchError((onError) {
-      state = LoginState.failure(onError);
-    });
-    yield state;
+    try {
+      await _userRepository.signInWithGoogle();
+      yield LoginState.success();
+    } on Exception catch (e) {
+      yield LoginState.failure(e.toString());
+    }
   }
 
   Stream<LoginState> _mapLoginWithCredentialsPressedToState({
@@ -76,14 +78,11 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
     String password,
   }) async* {
     yield LoginState.loading();
-    LoginState state;
-    await _userRepository
-        .signInWithCredentials(email, password)
-        .then((onValue) {
-      state = LoginState.success();
-    }).catchError((onError) {
-      state = LoginState.failure(onError);
-    });
-    yield state;
+    try {
+      await _userRepository.signInWithCredentials(email, password);
+      yield LoginState.success();
+    } on Exception catch (e) {
+      yield LoginState.failure(e.toString());
+    }
   }
 }
