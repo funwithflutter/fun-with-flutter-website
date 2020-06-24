@@ -2,7 +2,9 @@ import 'dart:async';
 import 'package:bloc/bloc.dart';
 import 'package:flutter/foundation.dart';
 import 'package:fun_with_flutter/blocs/blog/bloc.dart';
+import 'package:fun_with_flutter/models/blog.dart';
 import 'package:fun_with_flutter/models/blog_model.dart';
+import 'package:fun_with_flutter/models/tag.dart';
 
 import 'filtered_blog_event.dart';
 import 'filtered_blog_state.dart';

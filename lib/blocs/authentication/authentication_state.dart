@@ -19,7 +19,7 @@ class Uninitialized extends AuthenticationState {
 }
 
 class Authenticated extends AuthenticationState {
-  const Authenticated(displayName) : super(displayName);
+  const Authenticated(String displayName) : super(displayName);
 
   @override
   String toString() => 'Authenticated { displayName: $displayName }';

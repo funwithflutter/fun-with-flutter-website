@@ -1,53 +1,56 @@
-class Blog {
-  Blog(this.tags, this.pages);
+// import 'package:fun_with_flutter/models/post_data.dart';
+// import 'package:fun_with_flutter/models/tag.dart';
 
-  factory Blog.fromJson(Map<String, dynamic> json) {
-    final listTags = json['tags'] as List;
-    final List<Tag> tags = listTags.map((i) => Tag.fromJson(i)).toList();
-    final listPages = json['pages'] as List;
-    final List<PostData> posts =
-        listPages.map((i) => PostData.fromJson(i)).toList();
+// class Blog {
+//   Blog(this.tags, this.pages);
 
-    return Blog(tags, posts);
-  }
+//   factory Blog.fromJson(Map<String, dynamic> json) {
+//     final listTags = json['tags'] as List;
+//     final List<Tag> tags = listTags.map((i) => Tag.fromJson(i)).toList();
+//     final listPages = json['pages'] as List;
+//     final List<PostData> posts =
+//         listPages.map((i) => PostData.fromJson(i)).toList();
 
-  final List<Tag> tags;
-  final List<PostData> pages;
+//     return Blog(tags, posts);
+//   }
 
-  Blog copyWith({
-    List<Tag> tags,
-    List<PostData> pages,
-  }) {
-    return Blog(tags ?? this.tags, pages ?? this.pages);
-  }
-}
+//   final List<Tag> tags;
+//   final List<PostData> pages;
 
-class Tag {
-  Tag(this.pages, this.name);
+//   Blog copyWith({
+//     List<Tag> tags,
+//     List<PostData> pages,
+//   }) {
+//     return Blog(tags ?? this.tags, pages ?? this.pages);
+//   }
+// }
 
-  factory Tag.fromJson(Map<String, dynamic> json) {
-    final list = json['pages'] as List;
-    final List<PostData> tagDataList =
-        list.map((i) => PostData.fromJson(i)).toList();
+// // class Tag {
+// //   Tag(this.pages, this.name);
 
-    return Tag(tagDataList, json['name']);
-  }
+// //   factory Tag.fromJson(Map<String, dynamic> json) {
+// //     final list = json['pages'] as List;
+// //     final List<PostData> tagDataList =
+// //         list.map((i) => PostData.fromJson(i)).toList();
 
-  final String name;
-  final List<PostData> pages;
-}
+// //     return Tag(tagDataList, json['name']);
+// //   }
 
-class PostData {
-  PostData(this.description, this.title, this.uri, this.thumbnail);
+// //   final String name;
+// //   final List<PostData> pages;
+// // }
 
-  PostData.fromJson(Map<String, dynamic> json)
-      : description = json['description'],
-        title = json['title'],
-        uri = json['uri'],
-        thumbnail = json['thumbnail'];
+// // class PostData {
+// //   PostData(this.description, this.title, this.uri, this.thumbnail);
 
-  final String description;
-  final String title;
-  final String uri;
-  final String thumbnail;
-}
+// //   PostData.fromJson(Map<String, dynamic> json)
+// //       : description = json['description'],
+// //         title = json['title'],
+// //         uri = json['uri'],
+// //         thumbnail = json['thumbnail'];
+
+// //   final String description;
+// //   final String title;
+// //   final String uri;
+// //   final String thumbnail;
+// // }

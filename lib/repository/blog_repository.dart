@@ -1,6 +1,6 @@
+import 'package:fun_with_flutter/models/blog.dart';
 import 'package:fun_with_flutter/services/blog_service.dart';
 import 'package:meta/meta.dart';
-import 'package:fun_with_flutter/models/blog_model.dart';
 
 @immutable
 class BlogRepository {

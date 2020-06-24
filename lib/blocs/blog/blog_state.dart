@@ -1,4 +1,4 @@
-import 'package:fun_with_flutter/models/blog_model.dart';
+import 'package:fun_with_flutter/models/blog.dart';
 import 'package:meta/meta.dart';
 
 @immutable

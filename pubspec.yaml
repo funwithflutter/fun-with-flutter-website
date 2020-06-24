@@ -34,6 +34,7 @@ dependencies:
   equatable: ^1.0.2
   rxdart: ^0.24.0
   google_sign_in: ^4.5.1
+  freezed_annotation:
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
@@ -42,6 +43,10 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter
+  lint: ^1.2.0
+  build_runner:
+  freezed:
+  json_serializable:
 
 
 # For information on the generic Dart part of this file, see the
