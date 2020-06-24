@@ -18,16 +18,6 @@ import 'blocs/app_state/app_state_bloc.dart';
 
 void main() {
   assert(() {
-    // if (fb.apps.isEmpty) {
-    //   fb.initializeApp(
-    //     apiKey: 'AIzaSyD8JoU_58xKlQFvva7nS7VHTKc1vUkaosk',
-    //     authDomain: 'fun-with.firebaseapp.com',
-    //     databaseURL: 'https://fun-with.firebaseio.com',
-    //     projectId: 'fun-with',
-    //     storageBucket: 'fun-with.appspot.com',
-    //     messagingSenderId: '1006728819313',
-    //   );
-    // }
     BlocSupervisor.delegate = SimpleBlocDelegate();
     return true;
   }());
@@ -38,11 +28,6 @@ void main() {
 class AppInjector extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    final BlogBloc _blogBloc = BlogBloc(
-      blogRepository: BlogRepository(
-        blogApi: BlogApi(uri: url_repository.blogDataUrl),
-      ),
-    );
     final UserRepository _userRepository = UserRepository();
 
     return MultiBlocProvider(
@@ -61,12 +46,16 @@ class AppInjector extends StatelessWidget {
         ),
         BlocProvider<BlogBloc>(
           create: (context) {
-            return _blogBloc..add(Fetch());
+            return BlogBloc(
+              blogRepository: BlogRepository(
+                blogApi: BlogApi(uri: url_repository.blogDataUrl),
+              ),
+            )..add(Fetch());
           },
         ),
         BlocProvider<FilteredBlogBloc>(
           create: (context) {
-            return FilteredBlogBloc(blogBloc: _blogBloc);
+            return FilteredBlogBloc(blogBloc: BlocProvider.of<BlogBloc>(context));
           },
         ),
         BlocProvider<PageBloc>(
