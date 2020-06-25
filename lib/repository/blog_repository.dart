@@ -1,7 +1,8 @@
 import 'package:flutter/cupertino.dart';
-import 'package:fun_with_flutter/models/blog.dart';
-import 'package:fun_with_flutter/services/blog_service.dart';
 import 'package:meta/meta.dart';
+
+import '../models/blog.dart';
+import '../services/blog_service.dart';
 
 @immutable
 class BlogRepository {

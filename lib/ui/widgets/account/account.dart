@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:fun_with_flutter/blocs/bloc.dart';
-import 'package:fun_with_flutter/ui/widgets/error/error_widget.dart';
-import 'package:fun_with_flutter/ui/widgets/login/login_form.dart';
-import 'package:fun_with_flutter/ui/widgets/register/register_form.dart';
+
+import '../../../blocs/bloc.dart';
+import '../error/error_widget.dart';
+import '../login/login_form.dart';
+import '../register/register_form.dart';
 
 enum RegistrationState { login, register }
 

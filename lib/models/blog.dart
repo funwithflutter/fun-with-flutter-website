@@ -1,6 +1,7 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:fun_with_flutter/models/post_data.dart';
-import 'package:fun_with_flutter/models/tag.dart';
+
+import 'post_data.dart';
+import 'tag.dart';
 
 part 'blog.freezed.dart';
 part 'blog.g.dart';

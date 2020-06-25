@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:fun_with_flutter/blocs/bloc.dart';
-import 'package:fun_with_flutter/ui/components/snackbar.dart';
+
+import '../../../blocs/bloc.dart';
+import '../../components/snackbar.dart';
 
 class ErrorListener extends StatelessWidget {
   const ErrorListener({Key key, this.child}) : super(key: key);

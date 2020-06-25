@@ -2,15 +2,15 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:fun_with_flutter/blocs/app_state/bloc.dart';
 
-import 'package:fun_with_flutter/blocs/bloc.dart';
-import 'package:fun_with_flutter/ui/app/components/app_page.dart';
-import 'package:fun_with_flutter/ui/app/components/error_listener.dart';
-import 'package:fun_with_flutter/ui/app/components/app_bar.dart';
-import 'package:fun_with_flutter/ui/app/components/overlay_panel.dart';
-import 'package:fun_with_flutter/ui/widgets/account/account.dart';
-import 'package:fun_with_flutter/ui/widgets/menu_drawer/menu_drawer.dart';
+import '../../blocs/app_state/bloc.dart';
+import '../../blocs/bloc.dart';
+import '../widgets/account/account.dart';
+import '../widgets/menu_drawer/menu_drawer.dart';
+import 'components/app_bar.dart';
+import 'components/app_page.dart';
+import 'components/error_listener.dart';
+import 'components/overlay_panel.dart';
 
 class App extends StatefulWidget {
   const App({Key key}) : super(key: key);

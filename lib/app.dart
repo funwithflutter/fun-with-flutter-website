@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:fun_with_flutter/themes.dart';
-import 'package:fun_with_flutter/ui/app/app.dart';
+
+import 'themes.dart';
+import 'ui/app/app.dart';
 
 class MyApp extends StatelessWidget {
   const MyApp({Key key}) : super(key: key);

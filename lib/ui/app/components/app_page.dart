@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:fun_with_flutter/blocs/bloc.dart';
-import 'package:fun_with_flutter/ui/pages/about/about_page.dart';
-import 'package:fun_with_flutter/ui/pages/blog/blog_page.dart';
-import 'package:fun_with_flutter/ui/pages/home/home_page.dart';
-import 'package:fun_with_flutter/ui/pages/packages/packages_page.dart';
-import 'package:fun_with_flutter/ui/widgets/error/error_widget.dart';
+
+import '../../../blocs/bloc.dart';
+import '../../pages/about/about_page.dart';
+import '../../pages/blog/blog_page.dart';
+import '../../pages/home/home_page.dart';
+import '../../pages/packages/packages_page.dart';
+import '../../widgets/error/error_widget.dart';
 
 class AppPage extends StatelessWidget {
 

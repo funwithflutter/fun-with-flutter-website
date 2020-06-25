@@ -1,7 +1,8 @@
 import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flutter/material.dart';
-import 'package:fun_with_flutter/ui/components/icon_bar.dart';
-import 'package:fun_with_flutter/ui/pages/about/data/data.dart';
+
+import '../../components/icon_bar.dart';
+import 'data/data.dart';
 
 class AboutPage extends StatelessWidget {
   @override

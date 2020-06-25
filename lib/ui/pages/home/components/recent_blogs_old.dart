@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:fun_with_flutter/blocs/bloc.dart';
-import 'package:fun_with_flutter/ui/widgets/blog_post_card/blog_post_card.dart';
-import 'package:fun_with_flutter/ui/widgets/error/error_widget.dart';
+
+import '../../../../blocs/bloc.dart';
+import '../../../widgets/blog_post_card/blog_post_card.dart';
+import '../../../widgets/error/error_widget.dart';
 
 class RecentBlogs extends StatelessWidget {
   const RecentBlogs({Key key, this.numberOfPosts = 4})

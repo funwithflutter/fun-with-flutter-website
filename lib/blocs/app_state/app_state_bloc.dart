@@ -1,6 +1,8 @@
 import 'dart:async';
+
 import 'package:bloc/bloc.dart';
-import 'package:fun_with_flutter/blocs/app_state/bloc.dart';
+
+import 'bloc.dart';
 
 class AppStateBloc extends Bloc<AppStateEvent, AppState> {
   @override

@@ -2,11 +2,11 @@ import 'dart:math';
 
 import 'package:confetti/confetti.dart';
 import 'package:flutter/material.dart';
-import 'package:fun_with_flutter/themes.dart';
-import 'package:fun_with_flutter/ui/widgets/support_the_channel/randomly_positioned.dart';
-
 import 'package:universal_html/prefer_universal/html.dart' as html;
-import 'package:fun_with_flutter/utils/urls.dart' as url;
+
+import '../../../themes.dart';
+import '../../../utils/urls.dart' as url;
+import 'randomly_positioned.dart';
 
 class ThankYou extends StatefulWidget {
   const ThankYou({Key key, @required this.onClosePressed}) : super(key: key);

@@ -1,5 +1,6 @@
-import 'package:fun_with_flutter/blocs/page/page_state.dart';
 import 'package:meta/meta.dart';
+
+import 'page_state.dart';
 
 @immutable
 abstract class PageEvent {

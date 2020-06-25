@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:fun_with_flutter/ui/components/icon_bar.dart';
-import 'package:fun_with_flutter/ui/pages/home/components/custom_packages_button.dart';
+
+import '../../../components/icon_bar.dart';
+import 'custom_packages_button.dart';
 
 class SliverIntroductionHeader extends StatelessWidget {
   const SliverIntroductionHeader({

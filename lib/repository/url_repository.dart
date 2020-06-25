@@ -1,4 +1,4 @@
-import 'package:fun_with_flutter/utils/urls.dart' as url;
+import '../utils/urls.dart' as url;
 
 const _thumbnailUrlPath = 'thumbnails';
 

@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:fun_with_flutter/blocs/authentication/bloc.dart';
-import 'package:fun_with_flutter/blocs/register/bloc.dart';
-import 'package:fun_with_flutter/ui/components/snackbar.dart';
-import 'package:fun_with_flutter/ui/widgets/register/regsiter_button.dart';
+
+import '../../../blocs/authentication/bloc.dart';
+import '../../../blocs/register/bloc.dart';
+import '../../components/snackbar.dart';
+import 'regsiter_button.dart';
 
 class RegisterForm extends StatefulWidget {
   @override

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:fun_with_flutter/blocs/app_state/bloc.dart';
+
+import '../../../blocs/app_state/bloc.dart';
 
 class OverlayPannel extends StatefulWidget {
   const OverlayPannel({

@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:fun_with_flutter/blocs/bloc.dart';
-import 'package:fun_with_flutter/themes.dart';
-import 'package:fun_with_flutter/ui/pages/home/components/sliver_home_header.dart';
-import 'package:fun_with_flutter/ui/widgets/blog_post_card/blog_post_card.dart';
-import 'package:fun_with_flutter/ui/widgets/support_the_channel/thank_you.dart';
-import 'package:fun_with_flutter/ui/widgets/support_the_channel/the_wall_button.dart';
+
+import '../../../blocs/bloc.dart';
+import '../../../themes.dart';
+import '../../widgets/blog_post_card/blog_post_card.dart';
+import '../../widgets/support_the_channel/thank_you.dart';
+import '../../widgets/support_the_channel/the_wall_button.dart';
+import 'components/sliver_home_header.dart';
 
 class HomePage extends StatefulWidget {
   @override

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:fun_with_flutter/themes.dart';
-import 'package:fun_with_flutter/ui/widgets/error/error_widget.dart';
+
+import '../../themes.dart';
+import '../widgets/error/error_widget.dart';
 
 class LoadingSnackbar extends StatelessWidget {
   const LoadingSnackbar({Key key, this.message = 'Loading...'})

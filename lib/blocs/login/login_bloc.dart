@@ -1,10 +1,11 @@
 import 'dart:async';
+
 import 'package:bloc/bloc.dart';
-import 'package:fun_with_flutter/repository/user_repository.dart';
-import 'package:fun_with_flutter/utils/validator.dart';
 import 'package:meta/meta.dart';
 import 'package:rxdart/rxdart.dart';
 
+import '../../repository/user_repository.dart';
+import '../../utils/validator.dart';
 import 'login_event.dart';
 import 'login_state.dart';
 

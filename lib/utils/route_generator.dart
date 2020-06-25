@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:fun_with_flutter/ui/app/app.dart';
-import 'package:fun_with_flutter/ui/pages/about/about_page.dart';
-import 'package:fun_with_flutter/ui/pages/blog/blog_page.dart';
-import 'package:fun_with_flutter/ui/pages/todo/todo_page.dart';
+
+import '../ui/app/app.dart';
+import '../ui/pages/about/about_page.dart';
+import '../ui/pages/blog/blog_page.dart';
+import '../ui/pages/todo/todo_page.dart';
 
 // TODO(gordon): use or remove
 class RouteGenerator {

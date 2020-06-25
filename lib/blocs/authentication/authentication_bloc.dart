@@ -1,7 +1,9 @@
 import 'dart:async';
+
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
-import 'package:fun_with_flutter/repository/user_repository.dart';
+
+import '../../repository/user_repository.dart';
 import 'bloc.dart';
 
 class AuthenticationBloc

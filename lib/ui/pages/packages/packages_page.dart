@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:fun_with_flutter/ui/components/link.dart';
-import 'package:fun_with_flutter/ui/pages/packages/components/splash_tap_widget.dart';
-import 'package:fun_with_flutter/ui/pages/packages/components/wave_slider_widget.dart';
-import 'package:fun_with_flutter/utils/urls.dart' as url;
 
+import '../../../utils/urls.dart' as url;
+import '../../components/link.dart';
 import 'components/confetti_widget.dart';
+import 'components/splash_tap_widget.dart';
+import 'components/wave_slider_widget.dart';
 
 class PackagesPage extends StatelessWidget {
   @override

@@ -1,7 +1,8 @@
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter/material.dart';
-import 'package:fun_with_flutter/blocs/bloc.dart';
-import 'package:fun_with_flutter/ui/widgets/error/error_widget.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+
+import '../../../blocs/bloc.dart';
+import '../error/error_widget.dart';
 
 class MenuDrawer extends StatelessWidget {
   const MenuDrawer({Key key, this.width}) : super(key: key);

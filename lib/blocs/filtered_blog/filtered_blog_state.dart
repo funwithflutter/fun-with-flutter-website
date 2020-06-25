@@ -1,5 +1,6 @@
-import 'package:fun_with_flutter/models/blog.dart';
 import 'package:meta/meta.dart';
+
+import '../../models/blog.dart';
 
 @immutable
 abstract class FilteredBlogState  {
