@@ -2,7 +2,6 @@ import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import 'app.dart';
 import 'application/app_state/app_state_bloc.dart';
 import 'application/authentication/authentication_bloc.dart';
 import 'application/authentication/authentication_event.dart';
@@ -13,11 +12,12 @@ import 'application/blog/blog_event.dart';
 import 'application/filtered_blog/filtered_blog_bloc.dart';
 import 'application/page/page_bloc.dart';
 import 'application/simple_bloc_delegate.dart';
-import 'repository/blog_repository.dart';
-import 'repository/url_repository.dart'
+import 'infrastructure/blog/blog_repository.dart';
+import 'infrastructure/blog/blog_service.dart';
+import 'infrastructure/url_repository.dart'
     as url_repository;
-import 'repository/user_repository.dart';
-import 'services/blog_service.dart';
+import 'infrastructure/user_repository.dart';
+import 'presentation/core/app_widget.dart';
 
 void main() {
   assert(() {

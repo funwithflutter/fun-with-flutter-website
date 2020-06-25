@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:fun_with_flutter/application/authentication/authentication_bloc.dart';
-import 'package:fun_with_flutter/application/authentication/authentication_event.dart';
-import 'package:fun_with_flutter/application/authentication/authentication_state.dart';
 
+import '../../../application/authentication/authentication_bloc.dart';
+import '../../../application/authentication/authentication_event.dart';
+import '../../../application/authentication/authentication_state.dart';
 import '../error/error_widget.dart';
 import '../login/login_form.dart';
 import '../register/register_form.dart';

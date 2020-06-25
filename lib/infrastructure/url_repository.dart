@@ -1,4 +1,4 @@
-import '../utils/urls.dart' as url;
+import 'core/urls.dart' as url;
 
 const _thumbnailUrlPath = 'thumbnails';
 

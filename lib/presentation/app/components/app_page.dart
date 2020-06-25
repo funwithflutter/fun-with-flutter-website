@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:fun_with_flutter/application/page/page_bloc.dart';
-import 'package:fun_with_flutter/application/page/page_state.dart';
 
+import '../../../application/page/page_bloc.dart';
+import '../../../application/page/page_state.dart';
 import '../../pages/about/about_page.dart';
 import '../../pages/blog/blog_page.dart';
 import '../../pages/home/home_page.dart';

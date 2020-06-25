@@ -1,11 +1,11 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:fun_with_flutter/application/page/page_bloc.dart';
-import 'package:fun_with_flutter/application/page/page_event.dart';
-import 'package:fun_with_flutter/application/page/page_state.dart';
 
-import '../../../../themes.dart';
+import '../../../../application/page/page_bloc.dart';
+import '../../../../application/page/page_event.dart';
+import '../../../../application/page/page_state.dart';
+import '../../../themes.dart';
 
 class CustomPackagesButton extends StatefulWidget {
   const CustomPackagesButton({

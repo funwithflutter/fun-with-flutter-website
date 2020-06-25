@@ -1,6 +1,6 @@
 import 'package:meta/meta.dart';
 
-import '../../models/blog.dart';
+import '../../domain/blog/blog.dart';
 
 @immutable
 abstract class FilteredBlogEvent {

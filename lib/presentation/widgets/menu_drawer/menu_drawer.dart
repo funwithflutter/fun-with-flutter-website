@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:fun_with_flutter/application/filtered_blog/filtered_blog_bloc.dart';
-import 'package:fun_with_flutter/application/filtered_blog/filtered_blog_event.dart';
-import 'package:fun_with_flutter/application/filtered_blog/filtered_blog_state.dart';
-import 'package:fun_with_flutter/application/page/page_bloc.dart';
-import 'package:fun_with_flutter/application/page/page_event.dart';
-import 'package:fun_with_flutter/application/page/page_state.dart';
 
+import '../../../application/filtered_blog/filtered_blog_bloc.dart';
+import '../../../application/filtered_blog/filtered_blog_event.dart';
+import '../../../application/filtered_blog/filtered_blog_state.dart';
+import '../../../application/page/page_bloc.dart';
+import '../../../application/page/page_event.dart';
+import '../../../application/page/page_state.dart';
 import '../error/error_widget.dart';
 
 class MenuDrawer extends StatelessWidget {

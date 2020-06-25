@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../../themes.dart';
+import '../../themes.dart';
 
 class LoginButton extends StatelessWidget {
   const LoginButton({Key key, VoidCallback onPressed})

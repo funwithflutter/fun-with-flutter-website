@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../../utils/urls.dart' as url;
+import '../../../infrastructure/core/urls.dart' as url;
 import '../../components/link.dart';
 import 'components/confetti_widget.dart';
 import 'components/splash_tap_widget.dart';

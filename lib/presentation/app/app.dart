@@ -2,12 +2,12 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:fun_with_flutter/application/app_state/app_state_bloc.dart';
-import 'package:fun_with_flutter/application/app_state/app_state_event.dart';
-import 'package:fun_with_flutter/application/app_state/app_state_state.dart';
-import 'package:fun_with_flutter/application/authentication/authentication_bloc.dart';
-import 'package:fun_with_flutter/application/authentication/authentication_state.dart';
 
+import '../../application/app_state/app_state_bloc.dart';
+import '../../application/app_state/app_state_event.dart';
+import '../../application/app_state/app_state_state.dart';
+import '../../application/authentication/authentication_bloc.dart';
+import '../../application/authentication/authentication_state.dart';
 import '../widgets/account/account.dart';
 import '../widgets/menu_drawer/menu_drawer.dart';
 import 'components/app_bar.dart';

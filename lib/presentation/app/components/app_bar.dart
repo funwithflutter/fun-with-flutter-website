@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:fun_with_flutter/application/app_state/app_state_bloc.dart';
-import 'package:fun_with_flutter/application/app_state/bloc.dart';
-import 'package:fun_with_flutter/application/authentication/bloc.dart';
-import 'package:fun_with_flutter/application/page/page_bloc.dart';
-import 'package:fun_with_flutter/application/page/page_event.dart';
-import 'package:fun_with_flutter/application/page/page_state.dart';
 
-import '../../../themes.dart';
+import '../../../application/app_state/app_state_bloc.dart';
+import '../../../application/app_state/bloc.dart';
+import '../../../application/authentication/bloc.dart';
+import '../../../application/page/page_bloc.dart';
+import '../../../application/page/page_event.dart';
+import '../../../application/page/page_state.dart';
+import '../../themes.dart';
 
 // Todo(gordon): Refactor to encapsulate the animation within this widget
 class FunWithAppBar extends StatelessWidget implements PreferredSizeWidget {

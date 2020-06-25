@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
-import '../../../models/post_data.dart';
-import '../../../plugins/url_launcher/url_launcher.dart';
-import '../../../repository/url_repository.dart'
+import '../../../domain/blog/post_data.dart';
+import '../../../infrastructure/url_repository.dart'
     as url_repository;
+import '../../../plugins/url_launcher/url_launcher.dart';
 
 class BlogPostCard extends StatelessWidget {
   const BlogPostCard({Key key, this.post}) : super(key: key);

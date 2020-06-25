@@ -4,8 +4,8 @@ import 'package:confetti/confetti.dart';
 import 'package:flutter/material.dart';
 import 'package:universal_html/prefer_universal/html.dart' as html;
 
-import '../../../themes.dart';
-import '../../../utils/urls.dart' as url;
+import '../../../infrastructure/core/urls.dart' as url;
+import '../../themes.dart';
 import 'randomly_positioned.dart';
 
 class ThankYou extends StatefulWidget {

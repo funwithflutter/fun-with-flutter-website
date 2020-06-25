@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:fun_with_flutter/application/blog/bloc.dart';
 
+import '../../../application/blog/bloc.dart';
 import '../../components/snackbar.dart';
 
 class ErrorListener extends StatelessWidget {

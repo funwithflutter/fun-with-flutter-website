@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:fun_with_flutter/application/authentication/authentication_bloc.dart';
-import 'package:fun_with_flutter/application/authentication/authentication_event.dart';
-import 'package:fun_with_flutter/application/authentication/login/login_bloc.dart';
-import 'package:fun_with_flutter/application/authentication/login/login_event.dart';
-import 'package:fun_with_flutter/application/authentication/login/login_state.dart';
 
+import '../../../application/authentication/authentication_bloc.dart';
+import '../../../application/authentication/authentication_event.dart';
+import '../../../application/authentication/login/login_bloc.dart';
+import '../../../application/authentication/login/login_event.dart';
+import '../../../application/authentication/login/login_state.dart';
 import '../../components/snackbar.dart';
 import 'google_login_button.dart';
 import 'login_button.dart';

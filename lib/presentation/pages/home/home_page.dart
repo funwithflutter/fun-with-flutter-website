@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:fun_with_flutter/application/authentication/bloc.dart';
-import 'package:fun_with_flutter/application/blog/blog_bloc.dart';
-import 'package:fun_with_flutter/application/blog/blog_state.dart';
 
-import '../../../themes.dart';
+import '../../../application/authentication/bloc.dart';
+import '../../../application/blog/blog_bloc.dart';
+import '../../../application/blog/blog_state.dart';
+import '../../themes.dart';
 import '../../widgets/blog_post_card/blog_post_card.dart';
 import '../../widgets/support_the_channel/thank_you.dart';
 import '../../widgets/support_the_channel/the_wall_button.dart';

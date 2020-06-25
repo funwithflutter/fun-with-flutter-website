@@ -4,8 +4,8 @@ import 'package:bloc/bloc.dart';
 import 'package:meta/meta.dart';
 import 'package:rxdart/rxdart.dart';
 
-import '../../../repository/user_repository.dart';
-import '../../../utils/validator.dart';
+import '../../../domain/validator.dart';
+import '../../../infrastructure/user_repository.dart';
 import 'login_event.dart';
 import 'login_state.dart';
 

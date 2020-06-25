@@ -2,9 +2,9 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:universal_html/prefer_universal/html.dart' as html;
 
-import '../../themes.dart';
-import '../../utils/custom_icons_icons.dart';
-import '../../utils/urls.dart' as url;
+import '../../infrastructure/core/urls.dart' as url;
+import '../themes.dart';
+import '../utils/custom_icons_icons.dart';
 
 class IconBar extends StatelessWidget {
   const IconBar({

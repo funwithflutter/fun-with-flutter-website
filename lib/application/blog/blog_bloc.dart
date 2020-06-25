@@ -3,9 +3,9 @@ import 'dart:async';
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
 
-import '../../models/blog.dart';
-import '../../models/tag.dart';
-import '../../repository/blog_repository.dart';
+import '../../domain/blog/blog.dart';
+import '../../domain/blog/tag.dart';
+import '../../infrastructure/blog/blog_repository.dart';
 import 'blog_event.dart';
 import 'blog_state.dart';
 

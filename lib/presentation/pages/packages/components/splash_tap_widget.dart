@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:splash_tap/splash_tap.dart';
 
-import '../../../../themes.dart';
+import '../../../themes.dart';
 
 class SplashTapExample extends StatelessWidget {
   @override

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../themes.dart';
+import '../themes.dart';
 import '../widgets/error/error_widget.dart';
 
 class LoadingSnackbar extends StatelessWidget {

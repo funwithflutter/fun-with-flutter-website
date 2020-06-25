@@ -3,8 +3,8 @@ import 'dart:async';
 import 'package:bloc/bloc.dart';
 import 'package:flutter/foundation.dart';
 
-import '../../models/blog.dart';
-import '../../models/tag.dart';
+import '../../domain/blog/blog.dart';
+import '../../domain/blog/tag.dart';
 import '../blog/bloc.dart';
 import 'filtered_blog_event.dart';
 import 'filtered_blog_state.dart';
