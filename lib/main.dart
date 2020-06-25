@@ -3,10 +3,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'app.dart';
-import 'blocs/app_state/app_state_bloc.dart';
-import 'blocs/bloc.dart';
-import 'blocs/register/bloc.dart';
-import 'blocs/simple_bloc_delegate.dart';
+import 'application/app_state/app_state_bloc.dart';
+import 'application/authentication/authentication_bloc.dart';
+import 'application/authentication/authentication_event.dart';
+import 'application/authentication/login/login_bloc.dart';
+import 'application/authentication/register/register_bloc.dart';
+import 'application/blog/blog_bloc.dart';
+import 'application/blog/blog_event.dart';
+import 'application/filtered_blog/filtered_blog_bloc.dart';
+import 'application/page/page_bloc.dart';
+import 'application/simple_bloc_delegate.dart';
 import 'repository/blog_repository.dart';
 import 'repository/url_repository.dart'
     as url_repository;
