@@ -1,13 +1,17 @@
 import 'dart:async';
 
 import 'package:bloc/bloc.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:meta/meta.dart';
 import 'package:rxdart/rxdart.dart';
 
 import '../../../domain/validator.dart';
 import '../../../infrastructure/user_repository.dart';
-import 'login_event.dart';
-import 'login_state.dart';
+
+part 'login_event.dart';
+part 'login_state.dart';
+
+part 'login_bloc.freezed.dart';
 
 class LoginBloc extends Bloc<LoginEvent, LoginState> {
   final UserRepository _userRepository;
@@ -54,13 +58,13 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
   }
 
   Stream<LoginState> _mapEmailChangedToState(String email) async* {
-    yield state.update(
+    yield state.copyWith(
       isEmailValid: Validators.isValidEmail(email),
     );
   }
 
   Stream<LoginState> _mapPasswordChangedToState(String password) async* {
-    yield state.update(
+    yield state.copyWith(
       isPasswordValid: Validators.isValidPassword(password),
     );
   }

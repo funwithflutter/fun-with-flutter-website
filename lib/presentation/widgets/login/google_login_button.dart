@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../application/authentication/login/login_bloc.dart';
-import '../../../application/authentication/login/login_event.dart';
 import '../../themes.dart';
 import '../../utils/custom_icons_icons.dart';
 
@@ -12,7 +11,7 @@ class GoogleLoginButton extends StatelessWidget {
     return OutlineButton(
       onPressed: () {
         BlocProvider.of<LoginBloc>(context).add(
-          LoginWithGooglePressed(),
+          const LoginWithGooglePressed(),
         );
       },
       highlightedBorderColor: AppTheme.accentColor,

@@ -4,8 +4,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../application/authentication/authentication_bloc.dart';
 import '../../../application/authentication/authentication_event.dart';
 import '../../../application/authentication/login/login_bloc.dart';
-import '../../../application/authentication/login/login_event.dart';
-import '../../../application/authentication/login/login_state.dart';
 import '../../components/snackbar.dart';
 import 'google_login_button.dart';
 import 'login_button.dart';
@@ -85,25 +83,17 @@ class _LoginFormState extends State<LoginForm> {
             child: Form(
               child: Column(
                 children: <Widget>[
-                  RawKeyboardListener(
-                    focusNode: _emailFocus,
-                    onKey: (dynamic key) {
-                      if (key.data.keyCode == 9) {
-                        FocusScope.of(context).requestFocus(_passwordFocus);
-                      }
-                    },
-                    child: TextFormField(
-                      controller: _emailController,
-                      decoration: const InputDecoration(
-                        icon: Icon(Icons.email),
-                        labelText: 'Email',
-                      ),
-                      autovalidate: true,
-                      autocorrect: false,
-                      validator: (_) {
-                        return !state.isEmailValid ? 'Invalid Email' : null;
-                      },
+                  TextFormField(
+                    controller: _emailController,
+                    decoration: const InputDecoration(
+                      icon: Icon(Icons.email),
+                      labelText: 'Email',
                     ),
+                    autovalidate: true,
+                    autocorrect: false,
+                    validator: (_) {
+                      return !state.isEmailValid ? 'Invalid Email' : null;
+                    },
                   ),
                   TextFormField(
                     focusNode: _passwordFocus,
