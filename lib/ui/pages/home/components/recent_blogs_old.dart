@@ -28,7 +28,7 @@ class RecentBlogs extends StatelessWidget {
                 padding: const EdgeInsets.all(16.0),
                 child: Text(
                   'Recent Blogs',
-                  style: Theme.of(context).textTheme.display1,
+                  style: Theme.of(context).textTheme.headline6,
                 ),
               ),
               Expanded(

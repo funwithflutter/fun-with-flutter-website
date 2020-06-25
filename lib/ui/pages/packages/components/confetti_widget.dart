@@ -24,19 +24,16 @@ class _ConfettiExampleState extends State<ConfettiExample> {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: <Widget>[
-        Container(
-          child: ConfettiWidget(
-            confettiController: controller,
-            blastDirection: -pi/2,
-            numberOfParticles: 20,
-          ),
-          
+        ConfettiWidget(
+          confettiController: controller,
+          blastDirection: -pi/2,
+          numberOfParticles: 20,
         ),
         FlatButton(
-          child: const Text('Make it rain'),
           onPressed: () {
             controller.play();
           },
+          child: const Text('Make it rain'),
         )
       ],
     );

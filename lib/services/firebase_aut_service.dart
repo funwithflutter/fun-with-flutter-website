@@ -20,10 +20,6 @@ class User {
 class FirebaseAuthService {
   final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
 
-  FirebaseAuthService() {
-    print('creating firebase auth service');
-  }
-
   User _userFromFirebase(FirebaseUser user) {
     if (user == null) {
       return null;

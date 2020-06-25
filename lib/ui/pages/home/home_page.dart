@@ -95,10 +95,11 @@ class _HomePageState extends State<HomePage>
               } else {
                 maxWidth = width;
               }
-              if (state is BlogLoaded)
+              if (state is BlogLoaded) {
                 _numberOfBlogsToLoad = (state.blog.pages.length >= 5)
                     ? 6
                     : state.blog.pages.length;
+              }
               return Center(
                 child: CustomScrollView(
                   controller: _scrollController,
@@ -161,7 +162,7 @@ class _HomePageState extends State<HomePage>
                 _showSupporters = false;
               });
             },
-            child: ModalBarrier(
+            child: const ModalBarrier(
               color: Colors.black54,
             ),
           ),
@@ -190,7 +191,7 @@ class HeaderWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.all(16.0),
-      child: Text(text, style: Theme.of(context).textTheme.display1),
+      child: Text(text, style: Theme.of(context).textTheme.headline4),
     );
   }
 }
@@ -233,10 +234,10 @@ class _SliverRevealSecretState extends State<SliverRevealSecret> {
           ),
           actions: <Widget>[
             FlatButton(
-              child: const Text('Close'),
               onPressed: () {
                 Navigator.of(context).pop();
               },
+              child: const Text('Close'),
             ),
           ],
         );
@@ -247,14 +248,12 @@ class _SliverRevealSecretState extends State<SliverRevealSecret> {
   @override
   Widget build(BuildContext context) {
     return SliverToBoxAdapter(
-      child: Container(
-        child: FlatButton(
-          onPressed: () {
-            _neverSatisfied();
-          },
-          child: const Text(
-            'Click me to reveal my secret',
-          ),
+      child: FlatButton(
+        onPressed: () {
+          _neverSatisfied();
+        },
+        child: const Text(
+          'Click me to reveal my secret',
         ),
       ),
     );

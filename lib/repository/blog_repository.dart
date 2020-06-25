@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:fun_with_flutter/models/blog.dart';
 import 'package:fun_with_flutter/services/blog_service.dart';
 import 'package:meta/meta.dart';
@@ -15,7 +16,7 @@ class BlogRepository {
       final blog = Blog.fromJson(data);
       return blog;
     } catch (e) {
-      print(e);
+      debugPrint(e.toString());
       rethrow;
     }
   }

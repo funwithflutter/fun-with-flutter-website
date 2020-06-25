@@ -31,7 +31,7 @@ class FunWithAppBar extends StatelessWidget implements PreferredSizeWidget {
         },
         child: Text(
           'FUN WITH FLUTTER',
-          style: Theme.of(context).textTheme.title,
+          style: Theme.of(context).textTheme.headline6,
         ),
       ),
       backgroundColor: Colors.transparent,

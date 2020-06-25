@@ -12,10 +12,10 @@ class RegisterButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return OutlineButton(
       onPressed: _onPressed,
-      child: const Text('REGISTER'),
       highlightedBorderColor: AppTheme.primaryColor,
       splashColor: AppTheme.primaryColor,
       hoverColor: AppTheme.accentColor,
+      child: const Text('REGISTER'),
     );
   }
 }

@@ -12,7 +12,6 @@ class FilteredBlogPage extends StatefulWidget {
 
 class FilteredBlogPageState extends State<FilteredBlogPage>
     with SingleTickerProviderStateMixin {
-  static const _bouncingScrollPhysics = BouncingScrollPhysics();
   final Tween<double> _paddingTween = Tween<double>(begin: 32, end: 0);
 
   AnimationController _animationController;
@@ -91,7 +90,7 @@ class FilteredBlogPageState extends State<FilteredBlogPage>
                   child: Text(
                     TagDisplayNameGenerator.mapTagToDisplayName(
                         state.tagFilter),
-                    style: Theme.of(context).textTheme.display1,
+                    style: Theme.of(context).textTheme.headline6,
                   ),
                 ),
                 AnimatedBuilder(

@@ -14,7 +14,7 @@ class SplashTapExample extends StatelessWidget {
         height: double.infinity,
         child: Center(
           child: Text('Tap anywhere :)',
-              style: Theme.of(context).textTheme.display1),
+              style: Theme.of(context).textTheme.headline4),
         ),
       ),
     );

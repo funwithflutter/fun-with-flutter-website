@@ -13,6 +13,10 @@ class GoogleLoginButton extends StatelessWidget {
           LoginWithGooglePressed(),
         );
       },
+      highlightedBorderColor: AppTheme.accentColor,
+      hoverColor: AppTheme.accentColor,
+      splashColor: AppTheme.primaryColor,
+      color: Colors.redAccent,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: const <Widget>[
@@ -21,10 +25,6 @@ class GoogleLoginButton extends StatelessWidget {
           Text('LOGIN WITH GOOGLE'),
         ],
       ),
-      highlightedBorderColor: AppTheme.accentColor,
-      hoverColor: AppTheme.accentColor,
-      splashColor: AppTheme.primaryColor,
-      color: Colors.redAccent,
     );
   }
 }

@@ -15,8 +15,8 @@ class IconBar extends StatelessWidget {
   Widget build(BuildContext context) {
     return Wrap(
       alignment: WrapAlignment.center,
-      children: <Widget>[
-        const SizedBox(
+      children: const [
+        SizedBox(
           width: 16,
         ),
         _IconBarButton(
@@ -24,11 +24,11 @@ class IconBar extends StatelessWidget {
           url: url.funWithYouTubeUrl,
         ),
         _IconBarButton(
-          iconData: CustomIcons.github_circled,
+          iconData: CustomIcons.githubCircled,
           url: url.funWithGithubUrl,
         ),
         _IconBarButton(
-          iconData: CustomIcons.twitter_squared,
+          iconData: CustomIcons.twitterSquared,
           url: url.funWithTwitter,
         ),
         _IconBarButton(
@@ -81,14 +81,12 @@ class _IconBarButtonState extends State<_IconBarButton> {
       onExit: _onPointerExit,
       child: GestureDetector(
         onTap: _onTap,
-        child: Container(
-          child: Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Icon(
-              widget.iconData,
-              color: _color,
-              size: 64,
-            ),
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Icon(
+            widget.iconData,
+            color: _color,
+            size: 64,
           ),
         ),
       ),

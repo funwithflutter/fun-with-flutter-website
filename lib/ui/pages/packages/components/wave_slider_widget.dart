@@ -23,7 +23,7 @@ class _WaveSliderExampleState extends State<WaveSliderExample> {
         children: <Widget>[
           Text(
             display,
-            style: Theme.of(context).textTheme.display1,
+            style: Theme.of(context).textTheme.headline4,
           ),
           WaveSlider(
             // color: AppTheme.fadedBlack,

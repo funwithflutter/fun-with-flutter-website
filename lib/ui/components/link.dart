@@ -20,6 +20,9 @@ class Link extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
+      onTap: () {
+        UrlUtils.open(url);
+      },
       child: Padding(
         padding: padding,
         child: Text(
@@ -29,9 +32,6 @@ class Link extends StatelessWidget {
           ),
         ),
       ),
-      onTap: () {
-        UrlUtils.open(url);
-      },
     );
   }
 }

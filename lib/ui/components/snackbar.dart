@@ -21,7 +21,7 @@ class LoadingSnackbar extends StatelessWidget {
         const SizedBox(width: 16,),
         Text(
           message,
-          style: Theme.of(context).textTheme.title,
+          style: Theme.of(context).textTheme.headline6,
           overflow: TextOverflow.fade,
         ),
       ],
@@ -41,11 +41,11 @@ class InfoSnackbar extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: <Widget>[
-        Icon(Icons.info_outline, size: 32, color: AppTheme.accentColor,),
+        const Icon(Icons.info_outline, size: 32, color: AppTheme.accentColor,),
         const SizedBox(width: 16,),
         Text(
           message,
-          style: Theme.of(context).textTheme.title,
+          style: Theme.of(context).textTheme.headline6,
           overflow: TextOverflow.fade,
         ),
       ],
@@ -65,11 +65,11 @@ class SuccessSnackbar extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: <Widget>[
-        Icon(Icons.check, size: 32, color: AppTheme.primaryColor,),
+        const Icon(Icons.check, size: 32, color: AppTheme.primaryColor,),
         const SizedBox(width: 16,),
         Text(
           message,
-          style: Theme.of(context).textTheme.title,
+          style: Theme.of(context).textTheme.headline6,
           overflow: TextOverflow.fade,
         ),
       ],

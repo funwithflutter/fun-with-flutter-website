@@ -12,35 +12,33 @@ class PackagesPage extends StatelessWidget {
     return Center(
       child: SingleChildScrollView(
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          mainAxisSize: MainAxisSize.max,
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: <Widget>[
             Padding(
               padding: const EdgeInsets.all(32.0),
               child: Text('Custom Widgets',
-                  style: Theme.of(context).textTheme.display1),
+                  style: Theme.of(context).textTheme.headline4),
             ),
             _ExampleWidget(
               title: 'Confetti',
+              pubUrl: url.confettiPackage.pubUrl,
+              youtubeUrl: url.confettiPackage.youtubeUrl,
               child: const Padding(
                 padding: EdgeInsets.all(8.0),
                 child: ConfettiExample(),
               ),
-              pubUrl: url.confettiPackage.pubUrl,
-              youtubeUrl: url.confettiPackage.youtubeUrl,
             ),
             _ExampleWidget(
               title: 'Splash Tap',
-              child: SplashTapExample(),
               pubUrl: url.splashTapPackage.pubUrl,
               youtubeUrl: url.splashTapPackage.youtubeUrl,
+              child: SplashTapExample(),
             ),
             _ExampleWidget(
               title: 'Wave Slider',
-              child: WaveSliderExample(),
               pubUrl: url.waveSliderPackage.pubUrl,
               youtubeUrl: url.waveSliderPackage.youtubeUrl,
+              child: WaveSliderExample(),
             ),
           ],
         ),
@@ -96,7 +94,7 @@ class _ExampleWidget extends StatelessWidget {
                       Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: Text(title,
-                            style: Theme.of(context).textTheme.headline),
+                            style: Theme.of(context).textTheme.headline5),
                       ),
                       Expanded(
                         child: Container(),

@@ -90,7 +90,7 @@ class _LoginFormState extends State<LoginForm> {
                     },
                     child: TextFormField(
                       controller: _emailController,
-                      decoration: InputDecoration(
+                      decoration: const InputDecoration(
                         icon: Icon(Icons.email),
                         labelText: 'Email',
                       ),
@@ -104,7 +104,7 @@ class _LoginFormState extends State<LoginForm> {
                   TextFormField(
                     focusNode: _passwordFocus,
                     controller: _passwordController,
-                    decoration: InputDecoration(
+                    decoration: const InputDecoration(
                       icon: Icon(Icons.lock),
                       labelText: 'Password',
                     ),

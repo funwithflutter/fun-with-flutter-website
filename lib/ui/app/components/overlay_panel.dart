@@ -50,7 +50,7 @@ class _OverlayPannelState extends State<OverlayPannel>
             BlocProvider.of<AppStateBloc>(context)
                 .add(UpdateState(AppState.normal));
           },
-          child: ModalBarrier(
+          child: const ModalBarrier(
             color: Colors.black54,
           ),
         ),
@@ -69,7 +69,7 @@ class _OverlayPannelState extends State<OverlayPannel>
                     Align(
                       alignment: Alignment.topLeft,
                       child: IconButton(
-                        icon: Icon(Icons.close),
+                        icon: const Icon(Icons.close),
                         onPressed: () {
                           BlocProvider.of<AppStateBloc>(context)
                               .add(UpdateState(AppState.normal));

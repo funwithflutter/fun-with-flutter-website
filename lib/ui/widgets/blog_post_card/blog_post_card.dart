@@ -34,7 +34,7 @@ class BlogPostCard extends StatelessWidget {
                   child: Text(
                     post?.title,
                     overflow: TextOverflow.ellipsis,
-                    style: Theme.of(context).textTheme.headline,
+                    style: Theme.of(context).textTheme.headline5,
                   ),
                 ),
                 Padding(

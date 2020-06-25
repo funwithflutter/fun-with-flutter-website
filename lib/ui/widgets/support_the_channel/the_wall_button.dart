@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:fun_with_flutter/ui/widgets/support_the_channel/notice_me_animation.dart';
-import 'package:fun_with_flutter/ui/widgets/support_the_channel/thank_you.dart';
 
 class TheWallButton extends StatefulWidget {
   const TheWallButton({Key key, this.callback}) : super(key: key);

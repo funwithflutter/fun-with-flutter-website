@@ -17,7 +17,7 @@ class SliverIntroductionHeader extends StatelessWidget {
               padding: const EdgeInsets.all(16.0),
               child: Text(
                 'Welcome',
-                style: Theme.of(context).textTheme.display2,
+                style: Theme.of(context).textTheme.headline4,
               ),
             ),
           ),
@@ -25,7 +25,7 @@ class SliverIntroductionHeader extends StatelessWidget {
             child: Padding(
               padding: const EdgeInsets.all(8.0),
               child: Text('This website is made entirely in Flutter!', textAlign: TextAlign.center,
-                  style: Theme.of(context).textTheme.headline),
+                  style: Theme.of(context).textTheme.headline5),
             ),
           ),
           Center(

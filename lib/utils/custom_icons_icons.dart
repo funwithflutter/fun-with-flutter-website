@@ -29,11 +29,11 @@ class CustomIcons {
   static const _kFontFam = 'CustomIcons';
 
   static const IconData coffee = IconData(0xe800, fontFamily: _kFontFam);
-  static const IconData github_circled =
+  static const IconData githubCircled =
       IconData(0xf09b, fontFamily: _kFontFam);
   static const IconData youtube = IconData(0xf167, fontFamily: _kFontFam);
   static const IconData google = IconData(0xf1a0, fontFamily: _kFontFam);
   static const IconData medium = IconData(0xf23a, fontFamily: _kFontFam);
-  static const IconData twitter_squared =
+  static const IconData twitterSquared =
       IconData(0xf304, fontFamily: _kFontFam);
 }

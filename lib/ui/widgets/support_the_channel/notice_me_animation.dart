@@ -9,7 +9,7 @@ class NoticeMeAnimation extends AnimatedWidget {
           key: key,
           listenable: scale,
         );
-  Animation<double> get _scale => listenable;
+  Animation<double> get _scale => listenable as Animation<double>;
 
   final Widget child;
 

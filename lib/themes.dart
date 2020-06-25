@@ -25,7 +25,7 @@ class AppTheme {
     return ThemeData(
       primaryColor: primaryColor,
       accentColor: accentColor,
-      buttonTheme: const ButtonThemeData(textTheme: ButtonTextTheme.normal),
+      buttonTheme: const ButtonThemeData(),
       dividerColor: accentColor,
       errorColor: errorColor,
       fontFamily: fontFamilyDefault,

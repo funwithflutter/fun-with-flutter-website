@@ -95,13 +95,15 @@ class RegisterState {
 
   @override
   String toString() {
-    return '''RegisterState {
+    return '''
+    RegisterState {
       isEmailValid: $isEmailValid,
       isPasswordValid: $isPasswordValid,
       isSubmitting: $isSubmitting,
       isSuccess: $isSuccess,
       isFailure: $isFailure,
       errorMessage: $errorMessage,
-    }''';
+    }
+    ''';
   }
 }

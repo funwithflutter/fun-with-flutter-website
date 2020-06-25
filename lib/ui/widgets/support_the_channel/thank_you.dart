@@ -38,7 +38,6 @@ class _ThankYouState extends State<ThankYou> {
   Widget build(BuildContext context) {
     return Center(
       child: FractionallySizedBox(
-        alignment: Alignment.center,
         heightFactor: 0.9,
         widthFactor: 0.9,
         child: Container(
@@ -56,7 +55,7 @@ class _ThankYouState extends State<ThankYou> {
                     child: Padding(
                       padding: const EdgeInsets.only(top: 8, left: 8),
                       child: IconButton(
-                        icon: Icon(Icons.close),
+                        icon: const Icon(Icons.close),
                         onPressed: () {
                           widget.onClosePressed();
                         },
@@ -81,7 +80,7 @@ class _ThankYouState extends State<ThankYou> {
                 child: Text(
                   'The wall of supporters',
                   textAlign: TextAlign.center,
-                  style: Theme.of(context).textTheme.title,
+                  style: Theme.of(context).textTheme.headline6,
                 ),
               ),
               Padding(
@@ -89,7 +88,7 @@ class _ThankYouState extends State<ThankYou> {
                 child: Text(
                   'Support the channel on Patreon and find extra goodies',
                   textAlign: TextAlign.center,
-                  style: Theme.of(context).textTheme.subhead.copyWith(
+                  style: Theme.of(context).textTheme.subtitle1.copyWith(
                         color: AppTheme.accentColor,
                       ),
                 ),
@@ -104,7 +103,7 @@ class _ThankYouState extends State<ThankYou> {
                     'Click here to explore',
                     style: Theme.of(context)
                         .textTheme
-                        .subhead
+                        .subtitle1
                         .copyWith(color: Colors.white),
                   ),
                 ),
@@ -113,19 +112,15 @@ class _ThankYouState extends State<ThankYou> {
                 child: Stack(
                   children: <Widget>[
                     RandomlyPositionedWidget(
-                      child: Container(
-                        child: Text(
-                          'LEON',
-                          style: Theme.of(context).textTheme.title,
-                        ),
+                      child: Text(
+                        'LEON',
+                        style: Theme.of(context).textTheme.headline6 ,
                       ),
                     ),
                     RandomlyPositionedWidget(
-                      child: Container(
-                        child: Text(
-                          'GH',
-                          style: Theme.of(context).textTheme.title,
-                        ),
+                      child: Text(
+                        'GH',
+                        style: Theme.of(context).textTheme.headline6,
                       ),
                     )
                   ],
