@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../application/authentication/bloc.dart';
+import '../../../application/auth/auth_bloc.dart';
 import '../../../application/blog/blog_bloc.dart';
 import '../../../application/blog/blog_state.dart';
 import '../../themes.dart';
@@ -68,8 +68,8 @@ class _HomePageState extends State<HomePage>
   Widget build(BuildContext context) {
     return Stack(
       children: <Widget>[
-        BlocListener<AuthenticationBloc, AuthenticationState>(
-          listener: (BuildContext context, AuthenticationState state) {
+        BlocListener<AuthBloc, AuthState>(
+          listener: (context, state) {
             if (state is Authenticated) {
               setState(() {
                 _isAuthenticated = true;
@@ -270,8 +270,9 @@ class SliverMotivateLogin extends StatelessWidget {
   Widget build(BuildContext context) {
     return const SliverToBoxAdapter(
       child: Center(
-          child: Text(
-              'Sign in to reveal which YouTube channel I think currently provides the best Flutter content.')),
+        child: Text(
+            'Sign in to reveal which YouTube channel I think currently provides the best Flutter content.'),
+      ),
     );
   }
 }

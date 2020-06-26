@@ -1,1 +1,0 @@
-enum AppState { normal, account }

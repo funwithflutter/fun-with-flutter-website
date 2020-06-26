@@ -3,17 +3,12 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../application/app_state/app_state_bloc.dart';
-import '../../application/app_state/app_state_event.dart';
-import '../../application/app_state/app_state_state.dart';
-import '../../application/authentication/authentication_bloc.dart';
-import '../../application/authentication/authentication_state.dart';
-import '../widgets/account/account.dart';
+import '../../application/auth/auth_bloc.dart';
 import '../widgets/menu_drawer/menu_drawer.dart';
 import 'components/app_bar.dart';
 import 'components/app_page.dart';
 import 'components/error_listener.dart';
-import 'components/overlay_panel.dart';
+
 
 class App extends StatefulWidget {
   const App({Key key}) : super(key: key);
@@ -84,11 +79,12 @@ class _AppState extends State<App> with SingleTickerProviderStateMixin {
         menuVisible: _menuIsVisible,
       ),
       body: ErrorListener(
-        child: BlocListener<AuthenticationBloc, AuthenticationState>(
+        child: BlocListener<AuthBloc, AuthState>(
           listener: (context, state) {
-            BlocProvider.of<AppStateBloc>(context).add(
-              UpdateState(AppState.normal),
-            );
+            // TODO
+            // BlocProvider.of<AppStateBloc>(context).add(
+            //   UpdateState(AppState.normal),
+            // );
           },
           child: AnimatedBuilder(
             animation: _menuAnimation,
@@ -106,17 +102,6 @@ class _AppState extends State<App> with SingleTickerProviderStateMixin {
                         ),
                       ),
                     ),
-                  BlocBuilder<AppStateBloc, AppState>(
-                    builder: (_, state) {
-                      if (state == AppState.account) {
-                        return const OverlayPannel(
-                          child: AccountPage(),
-                        );
-                      } else {
-                        return Container();
-                      }
-                    },
-                  )
                 ],
               );
             },
@@ -127,6 +112,7 @@ class _AppState extends State<App> with SingleTickerProviderStateMixin {
   }
 }
 
+// TODO make real menu
 Decoration _menuShadowDecoration(bool shouldDisplay) {
   if (shouldDisplay) {
     return const BoxDecoration(

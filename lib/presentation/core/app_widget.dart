@@ -1,6 +1,7 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 
-import '../app/app.dart';
+import '../routes/router.gr.dart';
 import '../themes.dart';
 
 class MyApp extends StatelessWidget {
@@ -11,10 +12,8 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Fun with Flutter',
       theme: AppTheme.theme(),
-      // initialRoute: '/', // Render Home page from initial route
-      // onGenerateRoute: RouteGenerator.generateRoute,
+      builder: ExtendedNavigator(router: Router()),
       debugShowCheckedModeBanner: false,
-      home: const App(),
     );
   }
 }
