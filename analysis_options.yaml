@@ -7,6 +7,16 @@ include: package:lint/analysis_options.yaml
 # https://github.com/dart-lang/sdk/tree/master/pkg/analyzer#configuring-the-analyzer
 
 analyzer:
+  exclude:
+  - "**/*.g.dart"
+  - "**/*.gr.dart"
+  - "**/*.iconfig.dart"
+  - "**/*.freezed.dart"
+  # - 'bin/cache/**'
+  # - "lib/**/*.g.dart"
+  # - "lib/**/*.gr.dart"
+  # - "lib/**/*.freezed.dart"
+  # - "lib/injection.iconfig.dart"
   strong-mode:
     implicit-casts: false
     implicit-dynamic: false
@@ -21,12 +31,7 @@ analyzer:
     # Stream and not importing dart:async
     # Please see https://github.com/flutter/flutter/pull/24528 for details.
     sdk_version_async_exported_from_core: ignore
-  exclude:
-    - 'bin/cache/**'
-    - "lib/**/*.g.dart"
-    - "lib/**/*.gr.dart"
-    - "lib/**/*.freezed.dart"
-    - "lib/injection.iconfig.dart"
+
 linter:
   rules:
    - prefer_relative_imports

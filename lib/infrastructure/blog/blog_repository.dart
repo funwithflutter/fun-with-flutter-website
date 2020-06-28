@@ -1,7 +1,9 @@
+import 'package:dartz/dartz.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:injectable/injectable.dart';
 
 import '../../domain/blog/blog.dart';
+import '../../domain/blog/blog_failure.dart';
 import '../../domain/blog/i_blog_repository.dart';
 import '../core/urls.dart';
 import 'blog_api.dart';
@@ -12,14 +14,14 @@ class BlogRepository implements IBlogRepository {
   final BlogApi _blogApi = BlogApi('$blogProductionUrl/index.json');
 
   @override
-  Future<Blog> getBlogData() async {
+  Future<Either<BlogFailure, Blog>> getBlogData() async {
     try {
       final data = await _blogApi.fetchData();
       final blog = Blog.fromJson(data);
-      return blog;
-    } catch (e) {
+      return right(blog);
+    } on Exception catch (e) {
       debugPrint(e.toString());
-      rethrow;
+      return left(const BlogFailure.serverError());
     }
   }
 }

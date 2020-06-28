@@ -27,14 +27,22 @@ class BlogBloc extends Bloc<BlogEvent, BlogState> {
   ) async* {
     yield const BlogState.loading();
     yield* event.map(fetch: (e) async* {
-      try {
-        final Blog blog = await _blogRepository.getBlogData();
-        final List<String> tags = blog.tags.map((Tag tag) => tag.name).toList();
-        yield BlogState.loaded(blog, tags);
-        return;
-      } catch (_) {
-        yield const BlogState.error();
-      }
+      // try {
+      final blogOption = await _blogRepository.getBlogData();
+      yield blogOption.fold(
+        (e) => const BlogState.error(),
+        (blog) {
+          final List<String> tags =
+              blog.tags.map((Tag tag) => tag.name).toList();
+          return BlogState.loaded(blog, tags);
+        },
+      );
+      // final List<String> tags = blog.tags.map((Tag tag) => tag.name).toList();
+      // yield BlogState.loaded(blog, tags);
+      //   return;
+      // } catch (_) {
+      //   yield const BlogState.error();
+      // }
     });
   }
 }

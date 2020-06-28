@@ -204,7 +204,7 @@ class _NoBlogPosts extends StatelessWidget {
     return const SliverToBoxAdapter(
       child: Center(
         child: Text(
-          'Blog content could not be loaded',
+          'No blog content to show :(',
           style: TextStyle(fontSize: 18, color: AppTheme.errorColor),
         ),
       ),

@@ -15,8 +15,7 @@ class BlogApi {
           json.decode(response.body) as Map<String, dynamic>;
       return result;
     } else {
-      throw Exception(
-          'Error fetching blog posts: ${response.statusCode} ${response.statusCode}');
+      throw Exception('Error fetching blog posts: ${response.statusCode}');
     }
   }
 }
