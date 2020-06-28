@@ -6,7 +6,7 @@ class AppTheme {
   static const Color accentColor = Color.fromRGBO(255, 86, 120, 1);
   static const Color alternateColor = Color.fromRGBO(255, 224, 116, 1);
   static const Color fadedBlackColor = Color.fromRGBO(32, 33, 36, 1);
-  static Color errorColor = Colors.red[300];
+  static const Color errorColor = Color(0xFFe63946);
 
   static const fontFamilyWorkSans = 'WorkSans';
   static const fontFamilyOpenSans = 'OpenSans';

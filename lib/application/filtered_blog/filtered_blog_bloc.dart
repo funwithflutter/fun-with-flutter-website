@@ -2,20 +2,25 @@ import 'dart:async';
 
 import 'package:bloc/bloc.dart';
 import 'package:flutter/foundation.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
 
 import '../../domain/blog/blog.dart';
 import '../../domain/blog/tag.dart';
-import '../blog/bloc.dart';
-import 'filtered_blog_event.dart';
-import 'filtered_blog_state.dart';
+import '../blog/blog_bloc.dart';
 
-class FilteredBlogBloc extends Bloc<FilteredBlogEvent, FilteredBlogState> {
-  FilteredBlogBloc({@required this.blogBloc}) {
+part 'filtered_blog_bloc.freezed.dart';
+part 'filtered_blog_event.dart';
+part 'filtered_blog_state.dart';
+
+class FilterBlogBloc extends Bloc<FilterBlogEvent, FilterBlogState> {
+  FilterBlogBloc({@required this.blogBloc}) {
     _blogSubscription = blogBloc.listen((blogState) {
-      if (blogState is BlogLoaded) {
-        add(
-            UpdateFilteredBlog((blogBloc.state as BlogLoaded).blog));
-      }
+      blogState.maybeMap(
+        loaded: (blogState) {
+          add(FilterBlogEvent.update(blogState.blog));
+        },
+        orElse: () {},
+      );
     });
   }
 
@@ -23,52 +28,66 @@ class FilteredBlogBloc extends Bloc<FilteredBlogEvent, FilteredBlogState> {
   StreamSubscription _blogSubscription;
 
   @override
-  FilteredBlogState get initialState {
-    if (blogBloc.state is BlogLoaded) {
-      return FilteredBlogLoaded((blogBloc.state as BlogLoaded).blog, '');
-    } else {
-      return FilteredBlogLoading();
-    }
+  FilterBlogState get initialState {
+    return blogBloc.state.maybeMap(
+      loaded: (state) => FilterBlogState.loaded(state.blog, ''),
+      orElse: () => const FilterBlogState.loading(),
+    );
   }
 
   @override
-  Stream<FilteredBlogState> mapEventToState(
-    FilteredBlogEvent event,
+  Stream<FilterBlogState> mapEventToState(
+    FilterBlogEvent event,
   ) async* {
-    if (event is UpdateFilteredBlog || event is ClearFilters) {
-      yield* _mapUpdateFilterToState();
-    } else if (event is FilterByTag) {
-      yield* _mapTagFilterToState(event);
-    }
+    yield* event.map(
+      update: (_) async* {
+        yield* _mapUpdateFilterToState();
+      },
+      filterByTag: (e) async* {
+        yield* _mapTagFilterToState(e);
+      },
+      clearFilters: (_) async* {},
+    );
   }
 
-  Stream<FilteredBlogState> _mapUpdateFilterToState() async* {
-    if (blogBloc.state is BlogLoaded) {
-      yield FilteredBlogLoaded((blogBloc.state as BlogLoaded).blog, '');
-    } else if (blogBloc.state is BlogError) {
-      yield FilteredBlogError();
-    }
+  Stream<FilterBlogState> _mapUpdateFilterToState() async* {
+    yield* blogBloc.state.maybeMap(
+      loaded: (s) async* {
+        yield FilterBlogState.loaded(s.blog, 'tagFilter');
+      },
+      orElse: () async* {
+        yield const FilterBlogState.error();
+      },
+    );
   }
 
-  Stream<FilteredBlogState> _mapTagFilterToState(FilterByTag event) async* {
-    try {
-      if (blogBloc.state is BlogLoaded) {
-        if (state is FilteredBlogLoaded) {
-          final String currentTag =
-              (state as FilteredBlogLoaded).tagFilter;
-          // Test if this filter has already been applied. If yes clear filters and return.
-          if (currentTag == event.tagFilter) {
-            yield* _mapUpdateFilterToState();
-            return;
-          }
-        }
-        final Blog filteredBlog = _mapTagFilterToFilteredBlog(
-            (blogBloc.state as BlogLoaded).blog, event.tagFilter);
-        yield FilteredBlogLoaded(filteredBlog, event.tagFilter);
-      }
-    } catch (e) {
-      yield FilteredBlogError();
-    }
+  Stream<FilterBlogState> _mapTagFilterToState(_FilterByTag event) async* {
+    yield* blogBloc.state.maybeMap(
+      loaded: (blogState) async* {
+        yield* state.maybeMap(
+          loaded: (s) async* {
+            final currentTag = s.tagFilter;
+            if (currentTag == event.tag) {
+              yield* _mapUpdateFilterToState();
+              return;
+            }
+            try {
+              final filteredBlog =
+                  _mapTagFilterToFilteredBlog(blogState.blog, event.tag);
+              yield FilterBlogState.loaded(filteredBlog, event.tag);
+            } catch (_) {
+              yield const FilterBlogState.error();
+            }
+          },
+          orElse: () async* {
+            yield const FilterBlogState.error();
+          },
+        );
+      },
+      orElse: () async* {
+        yield const FilterBlogState.error();
+      },
+    );
   }
 
   Blog _mapTagFilterToFilteredBlog(Blog blog, String tagFilter) {

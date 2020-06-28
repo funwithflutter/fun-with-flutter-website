@@ -1,29 +1,35 @@
-import 'package:meta/meta.dart';
+part of 'blog_bloc.dart';
 
-import '../../domain/blog/blog.dart';
-
-@immutable
-abstract class BlogState {
-  const BlogState();
+@freezed
+abstract class BlogState with _$BlogState {
+  const factory BlogState.initial() = Initial;
+  const factory BlogState.loading() = Loading;
+  const factory BlogState.error() = Error;
+  const factory BlogState.loaded(Blog blog, List<String> tags) = Loaded;
 }
 
-/// This is the default state
-class BlogLoading extends BlogState {
-  @override
-  String toString() => 'BlogLoading';
-}
+// @immutable
+// abstract class BlogState {
+//   const BlogState();
+// }
 
-class BlogError extends BlogState {
-  @override
-  String toString() => 'BlogError';
-}
+// /// This is the default state
+// class BlogLoading extends BlogState {
+//   @override
+//   String toString() => 'BlogLoading';
+// }
 
-class BlogLoaded extends BlogState {
-  const BlogLoaded(this.blog, this.tags) : super();
+// class BlogError extends BlogState {
+//   @override
+//   String toString() => 'BlogError';
+// }
 
-  final Blog blog;
-  final List<String> tags;
+// class BlogLoaded extends BlogState {
+//   const BlogLoaded(this.blog, this.tags) : super();
 
-  @override
-  String toString() => 'BlogLoaded';
-}
+//   final Blog blog;
+//   final List<String> tags;
+
+//   @override
+//   String toString() => 'BlogLoaded';
+// }

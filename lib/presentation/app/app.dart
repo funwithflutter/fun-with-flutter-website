@@ -9,7 +9,6 @@ import 'components/app_bar.dart';
 import 'components/app_page.dart';
 import 'components/error_listener.dart';
 
-
 class App extends StatefulWidget {
   const App({Key key}) : super(key: key);
 
@@ -39,7 +38,7 @@ class _AppState extends State<App> with SingleTickerProviderStateMixin {
     super.initState();
   }
 
-  void _menuVisibilityStatusChange(status) {
+  void _menuVisibilityStatusChange(AnimationStatus status) {
     if (status == AnimationStatus.forward) {
       setState(() {
         _menuIsVisible = true;

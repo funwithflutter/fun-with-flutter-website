@@ -1,31 +1,35 @@
-import 'package:meta/meta.dart';
-
-import '../../domain/blog/blog.dart';
-
-@immutable
-abstract class FilteredBlogEvent {
-  const FilteredBlogEvent();
+part of 'filtered_blog_bloc.dart';
+@freezed
+abstract class FilterBlogEvent with _$FilterBlogEvent{
+  const factory FilterBlogEvent.update(Blog blog) = _Update;
+  const factory FilterBlogEvent.filterByTag(String tag) = _FilterByTag;
+  const factory FilterBlogEvent.clearFilters() = _ClearFilters;
 }
 
-class UpdateFilteredBlog extends FilteredBlogEvent {
-  const UpdateFilteredBlog(this.blog);
+// @immutable
+// abstract class FilteredBlogEvent {
+//   const FilteredBlogEvent();
+// }
 
-  final Blog blog;
+// class UpdateFilteredBlog extends FilteredBlogEvent {
+//   const UpdateFilteredBlog(this.blog);
 
-  @override
-  String toString() => 'UpdateFilteredBlog';
-}
+//   final Blog blog;
 
-class FilterByTag extends FilteredBlogEvent {
-  const FilterByTag(this.tagFilter);
+//   @override
+//   String toString() => 'UpdateFilteredBlog';
+// }
 
-  final String tagFilter;
+// class FilterByTag extends FilteredBlogEvent {
+//   const FilterByTag(this.tagFilter);
 
-  @override
-  String toString() => 'FilterByTag';
-}
+//   final String tagFilter;
 
-class ClearFilters extends FilteredBlogEvent {
-  @override
-  String toString() => 'ClearFilters';
-}
+//   @override
+//   String toString() => 'FilterByTag';
+// }
+
+// class ClearFilters extends FilteredBlogEvent {
+//   @override
+//   String toString() => 'ClearFilters';
+// }

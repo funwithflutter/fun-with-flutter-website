@@ -6,10 +6,10 @@ import '../../domain/blog/i_blog_repository.dart';
 import '../core/urls.dart';
 import 'blog_api.dart';
 
-@prod
+@dev
 @Injectable(as: IBlogRepository)
-class BlogRepository implements IBlogRepository {
-  final BlogApi _blogApi = BlogApi('$blogProductionUrl/index.json');
+class DevBlogRepository implements IBlogRepository {
+  final BlogApi _blogApi = BlogApi('$blogTestingUrl/index.json');
 
   @override
   Future<Blog> getBlogData() async {

@@ -4,7 +4,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../application/auth/auth_bloc.dart';
 import '../../../application/blog/blog_bloc.dart';
-import '../../../application/blog/blog_state.dart';
 import '../../themes.dart';
 import '../../widgets/blog_post_card/blog_post_card.dart';
 import '../../widgets/support_the_channel/thank_you.dart';
@@ -83,26 +82,6 @@ class _HomePageState extends State<HomePage>
           },
           child: BlocBuilder<BlogBloc, BlogState>(
             builder: (BuildContext context, BlogState state) {
-              int crossAxisCount = 1;
-              final width = MediaQuery.of(context).size.width;
-              double maxWidth = 1200;
-              if (width >= 1200) {
-                crossAxisCount = 3;
-                maxWidth = 1200;
-              } else if (width >= 900) {
-                crossAxisCount = 2;
-                maxWidth = 800;
-              } else if (width >= 420) {
-                crossAxisCount = 1;
-                maxWidth = 400;
-              } else {
-                maxWidth = width;
-              }
-              if (state is BlogLoaded) {
-                _numberOfBlogsToLoad = (state.blog.pages.length >= 5)
-                    ? 6
-                    : state.blog.pages.length;
-              }
               return Center(
                 child: CustomScrollView(
                   controller: _scrollController,
@@ -113,31 +92,7 @@ class _HomePageState extends State<HomePage>
                     const SliverToBoxAdapter(
                       child: Center(child: HeaderWidget('Recent blog posts')),
                     ),
-                    if (state is BlogLoading)
-                      const SliverToBoxAdapter(
-                          child: Center(child: CircularProgressIndicator())),
-                    if (state is BlogLoaded)
-                      SliverPadding(
-                          padding: EdgeInsets.symmetric(
-                            horizontal:
-                                (MediaQuery.of(context).size.width - maxWidth) /
-                                    2,
-                          ),
-                          sliver: SliverGrid(
-                            delegate: SliverChildBuilderDelegate(
-                              (context, index) {
-                                return BlogPostCard(
-                                  key: ValueKey(state.blog.pages[index].title),
-                                  post: state.blog.pages[index],
-                                );
-                              },
-                              childCount: _numberOfBlogsToLoad,
-                            ),
-                            gridDelegate:
-                                SliverGridDelegateWithFixedCrossAxisCount(
-                                    crossAxisCount: crossAxisCount,
-                                    childAspectRatio: 10 / 9),
-                          )),
+                    _displayPosts(state),
                   ],
                 ),
               );
@@ -181,6 +136,93 @@ class _HomePageState extends State<HomePage>
           ),
         )
       ],
+    );
+  }
+
+  Widget _displayPosts(BlogState state) {
+    int crossAxisCount = 1;
+    final width = MediaQuery.of(context).size.width;
+    double maxWidth = 1200;
+    if (width >= 1200) {
+      crossAxisCount = 3;
+      maxWidth = 1200;
+    } else if (width >= 900) {
+      crossAxisCount = 2;
+      maxWidth = 800;
+    } else if (width >= 420) {
+      crossAxisCount = 1;
+      maxWidth = 400;
+    } else {
+      maxWidth = width;
+    }
+    // TODO make map on state
+    return state.map(
+      initial: (_) {
+        return const _LoadingIndicator();
+      },
+      loading: (_) {
+        return const _LoadingIndicator();
+      },
+      error: (_) {
+        return _NoBlogPosts();
+      },
+      loaded: (state) {
+        _numberOfBlogsToLoad =
+            (state.blog.pages.length >= 5) ? 6 : state.blog.pages.length;
+        return SliverPadding(
+          padding: EdgeInsets.symmetric(
+            horizontal: (MediaQuery.of(context).size.width - maxWidth) / 2,
+          ),
+          sliver: SliverGrid(
+            delegate: SliverChildBuilderDelegate(
+              (context, index) {
+                return BlogPostCard(
+                  key: ValueKey(state.blog.pages[index].title),
+                  post: state.blog.pages[index],
+                );
+              },
+              childCount: _numberOfBlogsToLoad,
+            ),
+            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: crossAxisCount,
+              childAspectRatio: 10 / 9,
+            ),
+          ),
+        );
+      },
+    );
+  }
+}
+
+class _NoBlogPosts extends StatelessWidget {
+  const _NoBlogPosts({
+    Key key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return const SliverToBoxAdapter(
+      child: Center(
+        child: Text(
+          'Blog content could not be loaded',
+          style: TextStyle(fontSize: 18, color: AppTheme.errorColor),
+        ),
+      ),
+    );
+  }
+}
+
+class _LoadingIndicator extends StatelessWidget {
+  const _LoadingIndicator({
+    Key key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return const SliverToBoxAdapter(
+      child: Center(
+        child: CircularProgressIndicator(),
+      ),
     );
   }
 }

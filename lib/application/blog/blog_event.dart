@@ -1,11 +1,6 @@
-import 'package:meta/meta.dart';
+part of 'blog_bloc.dart';
 
-@immutable
-abstract class BlogEvent {
-  const BlogEvent();
-}
-
-class Fetch extends BlogEvent {
-  @override
-  String toString() => 'Fetch';
+@freezed
+abstract class BlogEvent with _$BlogEvent {
+  const factory BlogEvent.fetch() = _Fetch;
 }

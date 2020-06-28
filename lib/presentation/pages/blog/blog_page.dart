@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../application/filtered_blog/filtered_blog_bloc.dart';
-import '../../../application/filtered_blog/filtered_blog_state.dart';
 import '../../utils/tag_name_generator.dart';
 import '../../widgets/blog_post_card/blog_post_card.dart';
 import '../../widgets/error/error_widget.dart';
@@ -54,16 +53,19 @@ class FilteredBlogPageState extends State<FilteredBlogPage>
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<FilteredBlogBloc, FilteredBlogState>(
-      builder: (BuildContext context, FilteredBlogState state) {
-        if (state is FilteredBlogLoading) {
+    return BlocBuilder<FilterBlogBloc, FilterBlogState>(
+      builder: (BuildContext context, FilterBlogState state) {
+        return state.map(error: (_) {
+          return const CustomError(
+            errorMessage: 'Blog data could not be loaded',
+          );
+        }, loading: (_) {
           return Center(
             child: Container(
                 height: double.infinity,
                 child: const CircularProgressIndicator()),
           );
-        }
-        if (state is FilteredBlogLoaded) {
+        }, loaded: (filterBlog) {
           _restartAnimation();
           int crossAxisCount = 1;
           final width = MediaQuery.of(context).size.width;
@@ -91,7 +93,7 @@ class FilteredBlogPageState extends State<FilteredBlogPage>
                   padding: const EdgeInsets.only(left: 32, top: 16.0),
                   child: Text(
                     TagDisplayNameGenerator.mapTagToDisplayName(
-                        state.tagFilter),
+                        filterBlog.tagFilter),
                     style: Theme.of(context).textTheme.headline6,
                   ),
                 ),
@@ -110,10 +112,10 @@ class FilteredBlogPageState extends State<FilteredBlogPage>
                             childAspectRatio: 10 / 9,
                           ),
                           // physics: _bouncingScrollPhysics,
-                          itemCount: state.filteredBlog.pages.length,
+                          itemCount: filterBlog.filteredBlog.pages.length,
                           itemBuilder: (context, index) {
                             return BlogPostCard(
-                                post: state.filteredBlog.pages[index]);
+                                post: filterBlog.filteredBlog.pages[index]);
                           },
                         ),
                       ),
@@ -123,10 +125,20 @@ class FilteredBlogPageState extends State<FilteredBlogPage>
               ],
             ),
           );
-        }
-        return const CustomError(
-          errorMessage: 'Blog data could not be loaded',
-        );
+        });
+        // if (state is FilteredBlogLoading) {
+        //   return Center(
+        //     child: Container(
+        //         height: double.infinity,
+        //         child: const CircularProgressIndicator()),
+        //   );
+        // }
+        // if (state is FilteredBlogLoaded) {
+
+        // }
+        // return const CustomError(
+        //   errorMessage: 'Blog data could not be loaded',
+        // );
       },
     );
   }

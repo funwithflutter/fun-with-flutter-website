@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../application/blog/bloc.dart';
+import '../../../application/blog/blog_bloc.dart';
 import '../../components/snackbar.dart';
 
 class ErrorListener extends StatelessWidget {
@@ -15,17 +15,30 @@ class ErrorListener extends StatelessWidget {
       listeners: [
         BlocListener<BlogBloc, BlogState>(
           listener: (context, state) {
-            if (state is BlogError) {
-              Scaffold.of(context)
-                ..removeCurrentSnackBar()
-                ..showSnackBar(
-                  const SnackBar(
-                    content: ErrorSnackbar(
-                      message: 'Could not load blog data.',
-                    ),
-                  ),
-                );
-            }
+            state.maybeMap(
+                error: (error) {
+                  Scaffold.of(context)
+                    ..removeCurrentSnackBar()
+                    ..showSnackBar(
+                      const SnackBar(
+                        content: ErrorSnackbar(
+                          message: 'Could not load blog data.',
+                        ),
+                      ),
+                    );
+                },
+                orElse: () {});
+            // if (state is BlogError) {
+            //   Scaffold.of(context)
+            //     ..removeCurrentSnackBar()
+            //     ..showSnackBar(
+            //       const SnackBar(
+            //         content: ErrorSnackbar(
+            //           message: 'Could not load blog data.',
+            //         ),
+            //       ),
+            //     );
+            // }
           },
         ),
         // BlocListener<LoginBloc, LoginState>(

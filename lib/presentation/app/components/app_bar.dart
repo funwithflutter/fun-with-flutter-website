@@ -30,7 +30,7 @@ class FunWithAppBar extends StatelessWidget implements PreferredSizeWidget {
 
   void _signInPressed(Size dimens, BuildContext context) {
     if (dimens.width >= kTabletBreakpoint) {
-      showModal(
+      showModal<AdaptiveDialog>(
         context: context,
         configuration: const FadeScaleTransitionConfiguration(),
         builder: (BuildContext context) {
@@ -41,7 +41,7 @@ class FunWithAppBar extends StatelessWidget implements PreferredSizeWidget {
       );
     } else {
       ExtendedNavigator.of(context).push(
-        MaterialPageRoute(
+        MaterialPageRoute<SignInPage>(
           fullscreenDialog: true,
           builder: (_) => const SignInPage(),
         ),

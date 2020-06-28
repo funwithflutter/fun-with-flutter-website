@@ -1,11 +1,9 @@
 import 'dart:convert';
-import 'package:flutter/widgets.dart';
+
 import 'package:http/http.dart' as http;
 
-@immutable
 class BlogApi {
-  const BlogApi({@required this.uri});
-
+  BlogApi(this.uri);
   final String uri;
 
   Future<Map<String, dynamic>> fetchData() async {

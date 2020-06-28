@@ -1,30 +1,36 @@
-import 'package:meta/meta.dart';
+part of 'filtered_blog_bloc.dart';
 
-import '../../domain/blog/blog.dart';
-
-@immutable
-abstract class FilteredBlogState  {
-  const FilteredBlogState();
+@freezed
+abstract class FilterBlogState with _$FilterBlogState {
+  const factory FilterBlogState.error() = _Error;
+  const factory FilterBlogState.loading() = _Loading;
+  const factory FilterBlogState.loaded(Blog filteredBlog, String tagFilter) =
+      _Loaded;
 }
 
-class FilteredBlogError extends FilteredBlogState {
-  @override
-  String toString() => 'FilteredBlogError';
-}
+// @immutable
+// abstract class FilteredBlogState  {
+//   const FilteredBlogState();
+// }
 
-class FilteredBlogLoading extends FilteredBlogState {
-  @override
-  String toString() => 'FilteredBlogLoading';
-}
+// class FilteredBlogError extends FilteredBlogState {
+//   @override
+//   String toString() => 'FilteredBlogError';
+// }
 
-class FilteredBlogLoaded extends FilteredBlogState {
-  const FilteredBlogLoaded(this.filteredBlog, this.tagFilter);
+// class FilteredBlogLoading extends FilteredBlogState {
+//   @override
+//   String toString() => 'FilteredBlogLoading';
+// }
 
-  final Blog filteredBlog;
-  final String tagFilter;
+// class FilteredBlogLoaded extends FilteredBlogState {
+//   const FilteredBlogLoaded(this.filteredBlog, this.tagFilter);
 
-  @override
-  String toString() {
-    return 'FilteredBlogLoaded { filteredBlog: $filteredBlog, singleTagFilter: $tagFilter}';
-  }
-}
+//   final Blog filteredBlog;
+//   final String tagFilter;
+
+//   @override
+//   String toString() {
+//     return 'FilteredBlogLoaded { filteredBlog: $filteredBlog, singleTagFilter: $tagFilter}';
+//   }
+// }

@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../application/filtered_blog/filtered_blog_bloc.dart';
-import '../../../application/filtered_blog/filtered_blog_event.dart';
-import '../../../application/filtered_blog/filtered_blog_state.dart';
 import '../../../application/page/page_bloc.dart';
 import '../../../application/page/page_event.dart';
 import '../../../application/page/page_state.dart';
@@ -16,7 +14,7 @@ class MenuDrawer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final filteredBlogBloc = BlocProvider.of<FilteredBlogBloc>(context);
+    final filteredBlogBloc = BlocProvider.of<FilterBlogBloc>(context);
     final pageBloc = BlocProvider.of<PageBloc>(context);
     return SingleChildScrollView(
       child: Container(
@@ -31,34 +29,53 @@ class MenuDrawer extends StatelessWidget {
                 iconData: Icons.widgets,
                 lable: 'Custom Widgets',
                 onPressed: () {
-                  filteredBlogBloc.add(ClearFilters());
+                  filteredBlogBloc.add(const FilterBlogEvent.clearFilters());
                   pageBloc.add(const UpdatePage(PageState.packages));
                 }),
             _MenuSection(
               title: 'Tags',
-              child: BlocBuilder<FilteredBlogBloc, FilteredBlogState>(
-                builder: (BuildContext context, FilteredBlogState state) {
-                  if (state is FilteredBlogLoading) {
-                    return const Padding(
+              child: BlocBuilder<FilterBlogBloc, FilterBlogState>(
+                builder: (BuildContext context, FilterBlogState state) {
+                  return state.map(
+                    error: (_) => const CustomError(
+                      errorMessage: 'Tags could not be loaded',
+                    ),
+                    loading: (_) => const Padding(
                       padding: EdgeInsets.all(8.0),
                       child: Text('Loading data...'),
-                    );
-                  }
-                  if (state is FilteredBlogLoaded) {
-                    return Column(
+                    ),
+                    loaded: (data) => Column(
                       crossAxisAlignment: CrossAxisAlignment.end,
                       children: <Widget>[
-                        for (final tag in state.filteredBlog.tags)
+                        for (final tag in data.filteredBlog.tags)
                           _Tag(
                             tagName: tag.name,
-                            currentFilter: state.tagFilter,
+                            currentFilter: data.tagFilter,
                           ),
                       ],
-                    );
-                  }
-                  return const CustomError(
-                    errorMessage: 'Tags could not be loaded',
+                    ),
                   );
+                  // if (state is FilteredBlogLoading) {
+                  //   return const Padding(
+                  //     padding: EdgeInsets.all(8.0),
+                  //     child: Text('Loading data...'),
+                  //   );
+                  // }
+                  // if (state is FilteredBlogLoaded) {
+                  //   return Column(
+                  //     crossAxisAlignment: CrossAxisAlignment.end,
+                  //     children: <Widget>[
+                  //       for (final tag in state.filteredBlog.tags)
+                  //         _Tag(
+                  //           tagName: tag.name,
+                  //           currentFilter: state.tagFilter,
+                  //         ),
+                  //     ],
+                  //   );
+                  // }
+                  // return const CustomError(
+                  //   errorMessage: 'Tags could not be loaded',
+                  // );
                 },
               ),
             ),
@@ -67,7 +84,7 @@ class MenuDrawer extends StatelessWidget {
                 iconData: Icons.question_answer,
                 lable: 'About',
                 onPressed: () {
-                  filteredBlogBloc.add(ClearFilters());
+                  filteredBlogBloc.add(const FilterBlogEvent.clearFilters());
                   pageBloc.add(const UpdatePage(PageState.about));
                 },
               ),
@@ -138,7 +155,7 @@ class _Tag extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final filteredBlogBloc = BlocProvider.of<FilteredBlogBloc>(context);
+    final filteredBlogBloc = BlocProvider.of<FilterBlogBloc>(context);
     final pageBloc = BlocProvider.of<PageBloc>(context);
     final iconData =
         (tagName == currentFilter) ? Icons.label : Icons.label_outline;
@@ -147,7 +164,7 @@ class _Tag extends StatelessWidget {
       lable: tagName,
       onPressed: () {
         pageBloc.add(const UpdatePage(PageState.blog));
-        filteredBlogBloc.add(FilterByTag(tagName));
+        filteredBlogBloc.add(FilterBlogEvent.filterByTag(tagName));
       },
     );
   }

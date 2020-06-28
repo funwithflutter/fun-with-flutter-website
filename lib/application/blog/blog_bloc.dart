@@ -1,43 +1,40 @@
-import 'dart:async';
-
 import 'package:bloc/bloc.dart';
-import 'package:flutter/material.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:injectable/injectable.dart';
 
 import '../../domain/blog/blog.dart';
+import '../../domain/blog/i_blog_repository.dart';
 import '../../domain/blog/tag.dart';
-import '../../infrastructure/blog/blog_repository.dart';
-import 'blog_event.dart';
-import 'blog_state.dart';
 
+part 'blog_bloc.freezed.dart';
+part 'blog_event.dart';
+part 'blog_state.dart';
+
+@injectable
 class BlogBloc extends Bloc<BlogEvent, BlogState> {
-  BlogBloc({@required BlogRepository blogRepository})
-      : assert(blogRepository != null),
-        _blogRepository = blogRepository;
+  BlogBloc(this._blogRepository);
 
-  final BlogRepository _blogRepository;
+  final IBlogRepository _blogRepository;
 
   @override
-  BlogState get initialState => BlogLoading();
+  BlogState get initialState {
+    return const BlogState.initial();
+  }
 
   @override
   Stream<BlogState> mapEventToState(
     BlogEvent event,
   ) async* {
-    if (event is Fetch) {
-      yield* _mapFetchToState();
-    }
-  }
-
-  Stream<BlogState> _mapFetchToState() async* {
-    try {
-      if ((state is BlogLoading) || (state is BlogError)) {
+    yield const BlogState.loading();
+    yield* event.map(fetch: (e) async* {
+      try {
         final Blog blog = await _blogRepository.getBlogData();
         final List<String> tags = blog.tags.map((Tag tag) => tag.name).toList();
-        yield BlogLoaded(blog, tags);
+        yield BlogState.loaded(blog, tags);
         return;
+      } catch (_) {
+        yield const BlogState.error();
       }
-    } catch (_) {
-      yield BlogError();
-    }
+    });
   }
 }
