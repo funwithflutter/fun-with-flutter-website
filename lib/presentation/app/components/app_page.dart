@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../application/page/page_bloc.dart';
-import '../../../application/page/page_state.dart';
 import '../../pages/about/about_page.dart';
 import '../../pages/blog/blog_page.dart';
 import '../../pages/home/home_page.dart';
@@ -27,8 +26,9 @@ class AppPage extends StatelessWidget {
             break;
           default:
             return const CustomError(
-              errorMessage:
-                  'Whoops, you found something that has not yet been implemented',
+              errorMessage: '''
+                  Whoops, you found something that should not exist. Or maybe it should and it\'s an error. Who knows?
+                  ''',
             );
             break;
         }

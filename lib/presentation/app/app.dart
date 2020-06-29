@@ -1,51 +1,114 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:fun_with_flutter/application/blog/blog_bloc.dart';
 
+import '../../application/page/page_bloc.dart';
 import '../../infrastructure/core/urls.dart' as url;
 import '../common/adaptive_scaffold.dart';
 import '../components/accent_button.dart';
-import '../pages/home/home_page.dart';
 import '../utils/custom_icons_icons.dart';
 import '../utils/url_handler.dart';
+import 'components/app_page.dart';
 
-class App extends StatelessWidget {
+@immutable
+class _AppDesitination {
+  final AdaptiveScaffoldDestination destination;
+  final PageState page;
+
+  const _AppDesitination({
+    @required this.destination,
+    @required this.page,
+  });
+}
+
+class App extends StatefulWidget {
   const App({Key key}) : super(key: key);
+
+  @override
+  _AppState createState() => _AppState();
+}
+
+class _AppState extends State<App> {
+  int _currentIndex;
+
+  List<_AppDesitination> get _destinations => const [
+        _AppDesitination(
+          destination: AdaptiveScaffoldDestination(
+            title: 'YouTube Videos',
+            icon: CustomIcons.youtube,
+          ),
+          page: PageState.home,
+        ),
+        _AppDesitination(
+          destination: AdaptiveScaffoldDestination(
+            title: 'Blog Posts',
+            icon: Icons.description,
+          ),
+          page: PageState.blog,
+        ),
+        _AppDesitination(
+          destination: AdaptiveScaffoldDestination(
+            title: 'Courses',
+            icon: Icons.school,
+          ),
+          page: PageState.packages,
+        ),
+        _AppDesitination(
+          destination: AdaptiveScaffoldDestination(
+            title: 'Tags',
+            icon: Icons.label,
+          ),
+          page: PageState.packages,
+        ),
+        _AppDesitination(
+          destination: AdaptiveScaffoldDestination(
+            title: 'Contact Us',
+            icon: Icons.contact_phone,
+          ),
+          page: PageState.about,
+        ),
+      ];
+
+  void _onNavigation(
+    int index,
+  ) {
+    setState(() {
+      _currentIndex = index;
+    });
+    BlocProvider.of<PageBloc>(context).add(
+      PageEvent.update(_destinations[index].page),
+    );
+  }
+
+  void _homePressed() {
+    setState(() {
+      _currentIndex = null;
+    });
+    BlocProvider.of<PageBloc>(context).add(
+      const PageEvent.update(PageState.home),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
     return AdaptiveScaffold(
-      currentIndex: 0,
-      destinations: const [
-        AdaptiveScaffoldDestination(
-          title: 'YouTube Videos',
-          icon: CustomIcons.youtube,
-        ),
-        AdaptiveScaffoldDestination(
-          title: 'Blog Posts',
-          icon: Icons.description,
-        ),
-        AdaptiveScaffoldDestination(
-          title: 'Courses',
-          icon: Icons.school,
-        ),
-        AdaptiveScaffoldDestination(
-          title: 'Tags',
-          icon: Icons.label,
-        ),
-      ],
+      currentIndex: _currentIndex,
+      destinations: _destinations.map((e) => e.destination).toList(),
       onNavigationIndexChange: (index) {
-        print('move to $index');
+        _onNavigation(index);
       },
-      actions: [
-        const Padding(
+      homePressed: _homePressed,
+      actions: const [
+        Padding(
           padding: EdgeInsets.symmetric(horizontal: 8.0),
           child: _SubscribeButton(),
         ),
-        const _BrightnessButton(),
-        const _MoreButton()
+        _BrightnessButton(),
+        _MoreButton()
       ],
-      body: HomePage(),
+      body: const AppPage(),
     );
   }
 }

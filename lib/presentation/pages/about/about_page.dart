@@ -1,7 +1,7 @@
 import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flutter/material.dart';
 
-import '../../components/icon_bar.dart';
+import '../../components/info_bar.dart';
 import 'data/data.dart';
 
 class AboutPage extends StatelessWidget {
@@ -47,7 +47,7 @@ class AboutPage extends StatelessWidget {
             const SizedBox(
               height: 32,
             ),
-            const IconBar(),
+            const InfoBar(),
           ],
         ),
       ),

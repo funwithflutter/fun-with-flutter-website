@@ -1,17 +1,6 @@
-import 'package:meta/meta.dart';
+part of 'page_bloc.dart';
 
-import 'page_state.dart';
-
-@immutable
-abstract class PageEvent {
-  const PageEvent();
-}
-
-class UpdatePage extends PageEvent {
-  const UpdatePage(this.page);
-
-  final PageState page;
-
-  @override
-  String toString() => 'UpdatePage {page: $page}';
+@freezed
+abstract class PageEvent with _$PageEvent {
+  const factory PageEvent.update(PageState page) = _Update;
 }

@@ -1,13 +1,66 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:universal_html/prefer_universal/html.dart' as html;
 
 import '../../infrastructure/core/urls.dart' as url;
 import '../core/themes.dart';
 import '../utils/custom_icons_icons.dart';
+import '../utils/url_handler.dart';
 
-class IconBar extends StatelessWidget {
-  const IconBar({
+class InfoBar extends StatelessWidget {
+  const InfoBar({Key key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        RichText(
+          text: TextSpan(
+            children: [
+              const TextSpan(text: 'Made with love in '),
+              TextSpan(
+                text: 'Flutter',
+                recognizer: TapGestureRecognizer()
+                  ..onTap = () {
+                    launchURL(url.flutterDev);
+                  },
+                style: TextStyle(color: Theme.of(context).accentColor),
+              ),
+              const TextSpan(text: ' by '),
+              TextSpan(
+                text: 'Gordon Hayes',
+                recognizer: TapGestureRecognizer()
+                  ..onTap = () {
+                    launchURL(url.funWithTwitter);
+                  },
+                style: TextStyle(color: Theme.of(context).accentColor),
+              ),
+            ],
+            style: Theme.of(context).textTheme.caption,
+          ),
+        ),
+        const _IconBar(),
+        Text('Copyright FunWithFlutter © 2020',
+            style: Theme.of(context).textTheme.overline),
+      ],
+    );
+  }
+}
+
+class SliverBottomInfoBar extends StatelessWidget {
+  const SliverBottomInfoBar({
+    Key key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return const SliverToBoxAdapter(
+      child: InfoBar(),
+    );
+  }
+}
+
+class _IconBar extends StatelessWidget {
+  const _IconBar({
     Key key,
   }) : super(key: key);
 
@@ -56,8 +109,7 @@ class _IconBarButtonState extends State<_IconBarButton> {
   Color _color = _stationaryColor;
 
   void _onTap() {
-    // UrlUtils.open(widget.url);
-    html.window.open(widget.url, null);
+    launchURL(widget.url);
   }
 
   void _changeButtonColor(Color color) {

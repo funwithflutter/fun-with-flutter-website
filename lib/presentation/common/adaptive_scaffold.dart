@@ -37,16 +37,20 @@ class AdaptiveScaffold extends StatefulWidget {
   final FloatingActionButton floatingActionButton;
   final Color backgroundColor;
 
+  final VoidCallback homePressed;
+
   const AdaptiveScaffold({
+    Key key,
     this.title,
-    this.body,
     this.actions = const [],
+    this.body,
     @required this.currentIndex,
     @required this.destinations,
     this.onNavigationIndexChange,
     this.floatingActionButton,
     this.backgroundColor = const Color(0xFFFAFAFA),
-  });
+    @required this.homePressed,
+  }) : super(key: key);
 
   @override
   _AdaptiveScaffoldState createState() => _AdaptiveScaffoldState();
@@ -67,14 +71,17 @@ class _AdaptiveScaffoldState extends State<AdaptiveScaffold> {
                 children: [
                   ConstrainedBox(
                     constraints: const BoxConstraints(maxWidth: 180),
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(
-                        vertical: 32.0,
-                      ),
-                      child: Text(
-                        'Fun with Flutter',
-                        style: GoogleFonts.firaCode(
-                          textStyle: const TextStyle(fontSize: 32),
+                    child: InkWell(
+                      onTap: widget.homePressed,
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(
+                          vertical: 32.0,
+                        ),
+                        child: Text(
+                          'Fun with Flutter',
+                          style: GoogleFonts.firaCode(
+                            textStyle: const TextStyle(fontSize: 32),
+                          ),
                         ),
                       ),
                     ),
@@ -82,17 +89,20 @@ class _AdaptiveScaffoldState extends State<AdaptiveScaffold> {
                   for (var d in widget.destinations)
                     Padding(
                       padding: const EdgeInsets.symmetric(vertical: 16.0),
-                      child: ListTile(
-                        leading: Icon(d.icon),
-                        title: Text(
-                          d.title,
-                          style: GoogleFonts.firaCode(
-                            textStyle: const TextStyle(fontSize: 18),
+                      child: ListTileTheme(
+                        selectedColor: Theme.of(context).accentColor,
+                        child: ListTile(
+                          leading: Icon(d.icon),
+                          title: Text(
+                            d.title,
+                            style: GoogleFonts.firaCode(
+                              textStyle: const TextStyle(fontSize: 18),
+                            ),
                           ),
+                          selected: widget.destinations.indexOf(d) ==
+                              widget.currentIndex,
+                          onTap: () => _destinationTapped(d),
                         ),
-                        selected: widget.destinations.indexOf(d) ==
-                            widget.currentIndex,
-                        onTap: () => _destinationTapped(d),
                       ),
                     ),
                 ],

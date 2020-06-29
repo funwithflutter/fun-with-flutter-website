@@ -40,7 +40,6 @@ class AppTheme {
             surface: surfaceColor,
             onSurface: surfaceColor,
           ),
-
       // fontFamily: fontFamilyDefault,
       // textTheme: GoogleFonts.firaCodeTextTheme(
       //   ThemeData.light().textTheme,

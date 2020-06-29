@@ -1,6 +1,10 @@
 import 'dart:async';
 import 'package:bloc/bloc.dart';
-import './bloc.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
+
+part 'page_bloc.freezed.dart';
+part 'page_event.dart';
+part 'page_state.dart';
 
 class PageBloc extends Bloc<PageEvent, PageState> {
   @override
@@ -10,8 +14,10 @@ class PageBloc extends Bloc<PageEvent, PageState> {
   Stream<PageState> mapEventToState(
     PageEvent event,
   ) async* {
-    if (event is UpdatePage) {
-      yield event.page;
-    }
+    yield* event.map(
+      update: (e) async* {
+        yield e.page;
+      },
+    );
   }
 }
