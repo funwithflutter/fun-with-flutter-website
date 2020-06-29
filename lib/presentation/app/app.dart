@@ -1,130 +1,101 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../application/auth/auth_bloc.dart';
-import '../widgets/menu_drawer/menu_drawer.dart';
-import 'components/app_bar.dart';
-import 'components/app_page.dart';
-import 'components/error_listener.dart';
+import '../common/adaptive_scaffold.dart';
+import '../components/accent_button.dart';
+import '../pages/home/home_page.dart';
+import '../utils/custom_icons_icons.dart';
 
-class App extends StatefulWidget {
+class App extends StatelessWidget {
   const App({Key key}) : super(key: key);
 
   @override
-  _AppState createState() => _AppState();
+  Widget build(BuildContext context) {
+    return AdaptiveScaffold(
+      currentIndex: 0,
+      destinations: const [
+        AdaptiveScaffoldDestination(
+          title: 'YouTube Videos',
+          icon: CustomIcons.youtube,
+        ),
+        AdaptiveScaffoldDestination(
+          title: 'Blog Posts',
+          icon: Icons.description,
+        ),
+        AdaptiveScaffoldDestination(
+          title: 'Courses',
+          icon: Icons.school,
+        ),
+        AdaptiveScaffoldDestination(
+          title: 'Tags',
+          icon: Icons.label,
+        ),
+      ],
+      onNavigationIndexChange: (index) {
+        print('move to $index');
+      },
+      actions: [
+        const Padding(
+          padding: EdgeInsets.symmetric(horizontal: 8.0),
+          child: _SubscribeButton(),
+        ),
+        const _BrightnessButton(),
+        const _MoreButton()
+      ],
+      body: HomePage(),
+    );
+  }
 }
 
-class _AppState extends State<App> with SingleTickerProviderStateMixin {
-  AnimationController _controller;
-  Animation<double> _menuAnimation;
-  final Duration animationDuration = const Duration(milliseconds: 400);
-  static const double _menuSize = 300;
-  final Tween<double> _tween = Tween<double>()
-    ..begin = 0
-    ..end = _menuSize;
-
-  bool _menuIsVisible = false;
-  bool isSmallScreen = false;
-
-  @override
-  void initState() {
-    _controller = AnimationController(vsync: this, duration: animationDuration);
-    _menuAnimation = _tween
-        .animate(CurvedAnimation(parent: _controller, curve: Curves.ease));
-    _controller.addStatusListener(_menuVisibilityStatusChange);
-
-    super.initState();
-  }
-
-  void _menuVisibilityStatusChange(AnimationStatus status) {
-    if (status == AnimationStatus.forward) {
-      setState(() {
-        _menuIsVisible = true;
-      });
-    } else if (status == AnimationStatus.dismissed) {
-      setState(() {
-        _menuIsVisible = false;
-      });
-    }
-  }
-
-  @override
-  void dispose() {
-    _controller.dispose();
-    super.dispose();
-  }
-
-  void _setScreenSize(Size screenSize) {
-    if (screenSize.width < 1800 && isSmallScreen != true) {
-      setState(() {
-        isSmallScreen = true;
-      });
-    } else if (screenSize.width >= 1800 && isSmallScreen == true) {
-      setState(() {
-        isSmallScreen = false;
-      });
-    } // TODO(Anyone): Need to refine this entire process.
-  }
+class _MoreButton extends StatelessWidget {
+  const _MoreButton({
+    Key key,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    _setScreenSize(MediaQuery.of(context).size);
-    return Scaffold(
-      appBar: FunWithAppBar(
-        animationController: _controller,
-        menuAnimation: _menuAnimation,
-        menuVisible: _menuIsVisible,
-      ),
-      body: ErrorListener(
-        child: BlocListener<AuthBloc, AuthState>(
-          listener: (context, state) {
-            // TODO
-            // BlocProvider.of<AppStateBloc>(context).add(
-            //   UpdateState(AppState.normal),
-            // );
-          },
-          child: AnimatedBuilder(
-            animation: _menuAnimation,
-            builder: (context, widget) {
-              return Stack(
-                children: <Widget>[
-                  const AppPage(),
-                  if (_menuIsVisible)
-                    Transform.translate(
-                      offset: Offset(-_menuSize + _menuAnimation.value, 0),
-                      child: Container(
-                        decoration: _menuShadowDecoration(isSmallScreen),
-                        child: const MenuDrawer(
-                          width: _menuSize,
-                        ),
-                      ),
-                    ),
-                ],
-              );
-            },
-          ),
-        ),
-      ),
+    return IconButton(
+      icon: const Icon(Icons.more_vert),
+      onPressed: () {
+        print('todo');
+      },
     );
   }
 }
 
-// TODO make real menu
-Decoration _menuShadowDecoration(bool shouldDisplay) {
-  if (shouldDisplay) {
-    return const BoxDecoration(
-      boxShadow: [
-        BoxShadow(
-          color: Colors.grey,
-          offset: Offset(5.0, 10.0),
-          blurRadius: 5.0,
-          spreadRadius: 2.0,
-        )
-      ],
+class _BrightnessButton extends StatelessWidget {
+  const _BrightnessButton({Key key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return IconButton(
+      icon: const Icon(Icons.brightness_2),
+      onPressed: () {
+        print('switch brightness');
+      },
     );
-  } else {
-    return null;
+  }
+}
+
+class _SubscribeButton extends StatelessWidget {
+  const _SubscribeButton({
+    Key key,
+  }) : super(key: key);
+
+  static const Size _buttonSize = Size(168, 54);
+
+  @override
+  Widget build(BuildContext context) {
+    return Center(
+      child: SizedBox(
+        width: _buttonSize.width,
+        height: _buttonSize.height,
+        child: AccentButton(
+          lable: 'Subscribe on YouTube',
+          onPressed: () {},
+        ),
+      ),
+    );
   }
 }

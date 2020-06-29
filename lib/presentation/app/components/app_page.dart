@@ -6,11 +6,9 @@ import '../../../application/page/page_state.dart';
 import '../../pages/about/about_page.dart';
 import '../../pages/blog/blog_page.dart';
 import '../../pages/home/home_page.dart';
-import '../../pages/packages/packages_page.dart';
 import '../../widgets/error/error_widget.dart';
 
 class AppPage extends StatelessWidget {
-
   const AppPage();
 
   @override
@@ -23,9 +21,6 @@ class AppPage extends StatelessWidget {
             break;
           case PageState.blog:
             return FilteredBlogPage();
-            break;
-          case PageState.packages:
-            return PackagesPage();
             break;
           case PageState.about:
             return AboutPage();

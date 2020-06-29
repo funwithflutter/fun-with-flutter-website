@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../themes.dart';
+import '../core/themes.dart';
 import '../widgets/error/error_widget.dart';
 
 class LoadingSnackbar extends StatelessWidget {
@@ -19,7 +19,9 @@ class LoadingSnackbar extends StatelessWidget {
           data: Theme.of(context).copyWith(accentColor: AppTheme.accentColor),
           child: const CircularProgressIndicator(),
         ),
-        const SizedBox(width: 16,),
+        const SizedBox(
+          width: 16,
+        ),
         Text(
           message,
           style: Theme.of(context).textTheme.headline6,
@@ -42,8 +44,14 @@ class InfoSnackbar extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: <Widget>[
-        const Icon(Icons.info_outline, size: 32, color: AppTheme.accentColor,),
-        const SizedBox(width: 16,),
+        const Icon(
+          Icons.info_outline,
+          size: 32,
+          color: AppTheme.accentColor,
+        ),
+        const SizedBox(
+          width: 16,
+        ),
         Text(
           message,
           style: Theme.of(context).textTheme.headline6,
@@ -66,8 +74,14 @@ class SuccessSnackbar extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: <Widget>[
-        const Icon(Icons.check, size: 32, color: AppTheme.primaryColor,),
-        const SizedBox(width: 16,),
+        const Icon(
+          Icons.check,
+          size: 32,
+          color: AppTheme.primaryColor,
+        ),
+        const SizedBox(
+          width: 16,
+        ),
         Text(
           message,
           style: Theme.of(context).textTheme.headline6,
@@ -95,7 +109,9 @@ class ErrorSnackbar extends StatelessWidget {
           size: 32,
           color: AppTheme.errorColor,
         ),
-        const SizedBox(width: 16,),
+        const SizedBox(
+          width: 16,
+        ),
         CustomError(
           errorMessage: message,
         ),

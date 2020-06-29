@@ -7,5 +7,6 @@ import '../sign_in/sign_in_page.dart';
 class $Router {
   @initial
   App app;
+  // HomePage homePage;
   SignInPage signInPage;
 }

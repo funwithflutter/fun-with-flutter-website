@@ -19,29 +19,28 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  # State management 
   flutter_bloc: ^4.0.1
   bloc: ^4.0.0
+  freezed_annotation: ^0.11.0
+  uuid: ^2.1.0
+  # UI and Nav
   animated_text_kit: ^2.2.0
   universal_html: ^1.2.3
-  http: ^0.12.1
-  wave_slider: ^0.2.0
-  splash_tap: ^0.1.2
-  firebase_auth: ^0.16.1
-  
-  after_layout: ^1.0.7+2
   confetti: ^0.5.2
-  equatable: ^1.2.0
-  rxdart: ^0.24.1
+  # Network
+  http: ^0.12.1
+  firebase_auth: ^0.16.1
+  after_layout: ^1.0.7+2
   google_sign_in: ^4.5.1
-  freezed_annotation: ^0.11.0
   dartz: ^0.9.1
   kt_dart: ^0.7.0+1
-  uuid: ^2.1.0
   get_it: ^4.0.2
   injectable: ^0.4.0+1
   auto_route: ^0.5.0
   flushbar: ^1.10.4
   animations: ^1.1.1
+  google_fonts: ^1.1.0
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
@@ -73,6 +72,7 @@ flutter:
   # To add assets to your application, add an assets section, like this:
   assets:
    - assets/images/funwith_favicon.png
+   - assets/images/course_background.png
   #  - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see

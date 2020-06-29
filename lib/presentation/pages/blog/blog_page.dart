@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../application/filtered_blog/filtered_blog_bloc.dart';
 import '../../utils/tag_name_generator.dart';
-import '../../widgets/blog_post_card/blog_post_card.dart';
+import '../../blog/blog_post_card.dart';
 import '../../widgets/error/error_widget.dart';
 
 class FilteredBlogPage extends StatefulWidget {

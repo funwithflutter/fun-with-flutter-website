@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../application/blog/blog_bloc.dart';
-import '../../../widgets/blog_post_card/blog_post_card.dart';
+import '../../../blog/blog_post_card.dart';
 import '../../../widgets/error/error_widget.dart';
 
 class RecentBlogs extends StatelessWidget {

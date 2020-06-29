@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:universal_html/prefer_universal/html.dart' as html;
 
 import '../../infrastructure/core/urls.dart' as url;
-import '../themes.dart';
+import '../core/themes.dart';
 import '../utils/custom_icons_icons.dart';
 
 class IconBar extends StatelessWidget {
@@ -51,13 +51,13 @@ class _IconBarButton extends StatefulWidget {
 }
 
 class _IconBarButtonState extends State<_IconBarButton> {
-  static const Color _stationaryColor = AppTheme.accentColor;
-  static const Color _hoverColor = AppTheme.primaryColor;
+  static const Color _stationaryColor = AppTheme.primaryColor;
+  static const Color _hoverColor = AppTheme.accentColor;
   Color _color = _stationaryColor;
 
   void _onTap() {
     // UrlUtils.open(widget.url);
-     html.window.open(widget.url, null);
+    html.window.open(widget.url, null);
   }
 
   void _changeButtonColor(Color color) {
@@ -86,7 +86,7 @@ class _IconBarButtonState extends State<_IconBarButton> {
           child: Icon(
             widget.iconData,
             color: _color,
-            size: 64,
+            size: 32,
           ),
         ),
       ),
