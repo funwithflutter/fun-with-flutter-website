@@ -15,6 +15,8 @@ const funWithPatreon = 'https://www.patreon.com/funwithflutter';
 const funWithTwitter = 'https://twitter.com/FunFlutter';
 const funWithMedium = ''; // TODO(Gordon): medium
 
+const flutterDev = 'https://flutter.dev';
+
 const PackageUrl waveSliderPackage = PackageUrl(
     pubUrl: 'https://pub.dev/packages/wave_slider',
     youtubeUrl:

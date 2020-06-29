@@ -31,10 +31,10 @@ class IconBar extends StatelessWidget {
           iconData: CustomIcons.twitterSquared,
           url: url.funWithTwitter,
         ),
-        _IconBarButton(
-          iconData: CustomIcons.coffee,
-          url: url.funWithPatreon,
-        ),
+        // _IconBarButton(
+        //   iconData: CustomIcons.coffee,
+        //   url: url.funWithPatreon,
+        // ),
       ],
     );
   }

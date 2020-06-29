@@ -1,12 +1,14 @@
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../../../application/blog/blog_bloc.dart';
+import '../../../infrastructure/core/urls.dart' as url;
 import '../../blog/blog_post_card.dart';
 import '../../components/icon_bar.dart';
-import '../../core/themes.dart';
+import '../../utils/url_handler.dart';
 import 'components/sliver_course_header.dart';
 
 class HomePage extends StatefulWidget {
@@ -38,9 +40,7 @@ class _HomePageState extends State<HomePage>
                     const SliverCourseHeader(),
                     const _SliverHeader(lable: 'Recent blog posts'),
                     _displayPosts(state, constraints.maxWidth),
-                    const SliverToBoxAdapter(
-                      child: IconBar(),
-                    )
+                    const _SliverBottomInfoBar()
                   ],
                 );
               },
@@ -68,6 +68,58 @@ class _HomePageState extends State<HomePage>
           width: maxWidth,
         );
       },
+    );
+  }
+}
+
+class _SliverBottomInfoBar extends StatelessWidget {
+  const _SliverBottomInfoBar({
+    Key key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return SliverToBoxAdapter(
+      child: Column(
+        children: [
+          RichText(
+            text: TextSpan(
+              children: [
+                const TextSpan(text: 'Made with love in '),
+                TextSpan(
+                  text: 'Flutter',
+                  recognizer: TapGestureRecognizer()
+                    ..onTap = () {
+                      launchURL(url.flutterDev);
+                    },
+                  style: TextStyle(color: Theme.of(context).accentColor),
+                ),
+                const TextSpan(text: ' by '),
+                TextSpan(
+                  text: 'Gordon Hayes',
+                  recognizer: TapGestureRecognizer()
+                    ..onTap = () {
+                      launchURL(url.funWithTwitter);
+                    },
+                  style: TextStyle(color: Theme.of(context).accentColor),
+                ),
+              ],
+              style: Theme.of(context).textTheme.caption,
+            ),
+          ),
+          const IconBar(),
+          Text('Copyright FunWithFlutter © 2020',
+              style: Theme.of(context).textTheme.overline),
+
+          // Linkify(
+          //   onOpen: (link) {
+          //     launchURL(link.url);
+          //   },
+          //   text: "Made by https://cretezy.com\n\nMail: example@gmail.com",
+          // ),
+          // const Text('Copyright FunWithFlutter © 2020')
+        ],
+      ),
     );
   }
 }
@@ -161,7 +213,7 @@ class _NoBlogPosts extends StatelessWidget {
       child: Center(
         child: Text(
           'No blog content to show :(',
-          style: TextStyle(fontSize: 18, color: AppTheme.errorColor),
+          style: TextStyle(fontSize: 18),
         ),
       ),
     );
