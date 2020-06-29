@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../../domain/blog/post_data.dart';
 import '../../infrastructure/url_repository.dart' as url_repository;
-import '../../plugins/url_launcher/url_launcher.dart';
+import '../utils/url_handler.dart';
 
 class BlogPostCard extends StatelessWidget {
   const BlogPostCard({Key key, this.post}) : super(key: key);
@@ -18,7 +18,7 @@ class BlogPostCard extends StatelessWidget {
     return Center(
       child: InkWell(
         onTap: () {
-          UrlUtils.open(post.uri);
+          launchURL(post.uri);
         },
         child: Center(
           child: ConstrainedBox(
@@ -60,10 +60,10 @@ class BlogPostCard extends StatelessWidget {
                     ),
                   ),
                   Row(
-                    children: [
-                      const _Tag(),
-                      const _Tag(),
-                      const _Tag(),
+                    children: const [
+                      _Tag(),
+                      _Tag(),
+                      _Tag(),
                     ],
                   )
                 ],

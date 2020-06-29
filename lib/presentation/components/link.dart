@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../plugins/url_launcher/url_launcher.dart';
+import '../utils/url_handler.dart';
 
 class Link extends StatelessWidget {
   const Link(
@@ -22,7 +22,7 @@ class Link extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        UrlUtils.open(url);
+        launchURL(url);
       },
       child: Padding(
         padding: padding,

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
+import '../../../../infrastructure/core/urls.dart' as url;
 import '../../../components/accent_button.dart';
+import '../../../utils/url_handler.dart';
 
 class SliverCourseHeader extends StatelessWidget {
   const SliverCourseHeader({
@@ -52,7 +54,9 @@ class SliverCourseHeader extends StatelessWidget {
                   ),
                   AccentButton(
                     lable: 'Enroll for \$15',
-                    onPressed: () {},
+                    onPressed: () {
+                      launchURL(url.courseAnimationPerf);
+                    },
                   )
                 ],
               ),

@@ -2,10 +2,12 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 
+import '../../infrastructure/core/urls.dart' as url;
 import '../common/adaptive_scaffold.dart';
 import '../components/accent_button.dart';
 import '../pages/home/home_page.dart';
 import '../utils/custom_icons_icons.dart';
+import '../utils/url_handler.dart';
 
 class App extends StatelessWidget {
   const App({Key key}) : super(key: key);
@@ -58,7 +60,7 @@ class _MoreButton extends StatelessWidget {
     return IconButton(
       icon: const Icon(Icons.more_vert),
       onPressed: () {
-        print('todo');
+        print('more pressed');
       },
     );
   }
@@ -93,7 +95,9 @@ class _SubscribeButton extends StatelessWidget {
         height: _buttonSize.height,
         child: AccentButton(
           lable: 'Subscribe on YouTube',
-          onPressed: () {},
+          onPressed: () {
+            launchURL(url.funWithYouTubeSubscribeUrl);
+          },
         ),
       ),
     );

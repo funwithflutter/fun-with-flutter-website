@@ -4,6 +4,12 @@ const blogTestingUrl = 'http://localhost:8000';
 const blogProductionUrl = 'https://fun-with-blog.firebaseapp.com';
 
 const funWithYouTubeUrl = 'https://www.youtube.com/funwithflutter';
+const funWithYouTubeSubscribeUrl =
+    'https://www.youtube.com/funwithflutter/?sub_confirmation=1';
+
+const courseAnimationPerf =
+    'https://courses.funwith.app/p/mastering-animation-in-flutter/?product_id=1679475&coupon_code=FUN';
+
 const funWithGithubUrl = 'https://github.com/funwithflutter';
 const funWithPatreon = 'https://www.patreon.com/funwithflutter';
 const funWithTwitter = 'https://twitter.com/FunFlutter';

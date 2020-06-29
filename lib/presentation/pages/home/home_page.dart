@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:fun_with_flutter/presentation/components/icon_bar.dart';
-import 'package:fun_with_flutter/presentation/pages/home/components/sliver_course_header.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../../../application/blog/blog_bloc.dart';
-import '../../core/themes.dart';
 import '../../blog/blog_post_card.dart';
+import '../../components/icon_bar.dart';
+import '../../core/themes.dart';
+import 'components/sliver_course_header.dart';
 
 class HomePage extends StatefulWidget {
   @override
