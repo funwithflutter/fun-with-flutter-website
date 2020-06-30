@@ -5,6 +5,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../application/auth/auth_bloc.dart';
 import '../../application/page/page_bloc.dart';
 import '../../infrastructure/core/urls.dart' as url;
 import '../common/adaptive_dialog.dart';
@@ -35,15 +36,22 @@ class App extends StatefulWidget {
 }
 
 class _AppState extends State<App> {
-  int _currentIndex;
+  int _currentIndex = 0;
 
   List<_AppDesitination> get _destinations => const [
+        _AppDesitination(
+          destination: AdaptiveScaffoldDestination(
+            title: 'Home',
+            icon: Icons.home,
+          ),
+          page: PageState.home,
+        ),
         _AppDesitination(
           destination: AdaptiveScaffoldDestination(
             title: 'YouTube Videos',
             icon: CustomIcons.youtube,
           ),
-          page: PageState.home,
+          page: PageState.packages,
         ),
         _AppDesitination(
           destination: AdaptiveScaffoldDestination(
@@ -88,7 +96,7 @@ class _AppState extends State<App> {
 
   void _homePressed() {
     setState(() {
-      _currentIndex = null;
+      _currentIndex = 0;
     });
     BlocProvider.of<PageBloc>(context).add(
       const PageEvent.update(PageState.home),
@@ -113,43 +121,6 @@ class _AppState extends State<App> {
         _MoreButton()
       ],
       body: const AppPage(),
-    );
-  }
-}
-
-class _MoreButton extends StatelessWidget {
-  const _MoreButton({
-    Key key,
-  }) : super(key: key);
-
-  void _signInPressed(BuildContext context) {
-    if (MediaQuery.of(context).size.width >= kTabletBreakpoint) {
-      showModal<SignInPage>(
-        context: context,
-        configuration: const FadeScaleTransitionConfiguration(),
-        builder: (BuildContext context) {
-          return const AdaptiveDialog(
-            child: SignInPage(),
-          );
-        },
-      );
-    } else {
-      ExtendedNavigator.of(context).push(
-        MaterialPageRoute<SignInPage>(
-          fullscreenDialog: true,
-          builder: (_) => const SignInPage(),
-        ),
-      );
-    }
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return IconButton(
-      icon: const Icon(Icons.more_vert),
-      onPressed: () {
-        _signInPressed(context);
-      },
     );
   }
 }
@@ -191,3 +162,103 @@ class _SubscribeButton extends StatelessWidget {
     );
   }
 }
+
+class _MoreButton extends StatefulWidget {
+  const _MoreButton({
+    Key key,
+  }) : super(key: key);
+
+  @override
+  __MoreButtonState createState() => __MoreButtonState();
+}
+
+class __MoreButtonState extends State<_MoreButton> {
+  bool isAuthenticated = false;
+
+  void _signInPressed() {
+    if (MediaQuery.of(context).size.width >= kTabletBreakpoint) {
+      showModal<SignInPage>(
+        context: context,
+        configuration: const FadeScaleTransitionConfiguration(),
+        builder: (BuildContext context) {
+          return const AdaptiveDialog(
+            child: SignInPage(),
+          );
+        },
+      );
+    } else {
+      ExtendedNavigator.of(context).push(
+        MaterialPageRoute<SignInPage>(
+          fullscreenDialog: true,
+          builder: (_) => const SignInPage(),
+        ),
+      );
+    }
+  }
+
+  void _signOutPressed() {
+    BlocProvider.of<AuthBloc>(context).add(const AuthEvent.signOut());
+  }
+
+  void _select(_PopupMenuOptions menu) {
+    if (isAuthenticated) {
+      _signOutPressed();
+    } else {
+      _signInPressed();
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocBuilder<AuthBloc, AuthState>(
+      builder: (context, state) {
+        isAuthenticated = state.map(
+          initial: (_) => false,
+          authenticated: (_) => true,
+          unauthenticated: (_) => false,
+        );
+        return PopupMenuButton(
+          offset: const Offset(0, 100),
+          elevation: 3.2,
+          initialValue: _choices[0],
+          tooltip: 'Additional options',
+          onSelected: _select,
+          itemBuilder: (BuildContext context) {
+            return _choices.map((_PopupMenuOptions choice) {
+              return PopupMenuItem(
+                value: choice,
+                child: isAuthenticated
+                    ? const _MenuOptionText(label: 'Sign Out')
+                    : const _MenuOptionText(label: 'Sign In'),
+              );
+            }).toList();
+          },
+        );
+      },
+    );
+  }
+}
+
+class _MenuOptionText extends StatelessWidget {
+  const _MenuOptionText({Key key, this.label}) : super(key: key);
+
+  final String label;
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Text(label),
+    );
+  }
+}
+
+class _PopupMenuOptions {
+  const _PopupMenuOptions({this.title, this.icon});
+  final String title;
+  final IconData icon;
+}
+
+List<_PopupMenuOptions> _choices = const [
+  _PopupMenuOptions(title: 'Auth', icon: Icons.lock),
+];

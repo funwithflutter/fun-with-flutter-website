@@ -13,14 +13,12 @@ import 'package:fun_with_flutter/infrastructure/blog/blog_repository.dart';
 import 'package:fun_with_flutter/domain/blog/i_blog_repository.dart';
 import 'package:fun_with_flutter/infrastructure/blog/dev_blog_repository.dart';
 import 'package:fun_with_flutter/application/auth/sign_in_form/sign_in_form_bloc.dart';
-import 'package:fun_with_flutter/infrastructure/blog/blog_injectable_module.dart';
 import 'package:fun_with_flutter/application/auth/auth_bloc.dart';
 import 'package:fun_with_flutter/application/blog/blog_bloc.dart';
 import 'package:get_it/get_it.dart';
 
 void $initGetIt(GetIt g, {String environment}) {
   final firebaseInjectableModule = _$FirebaseInjectableModule();
-  final registerModule = _$RegisterModule();
   g.registerLazySingleton<FirebaseAuth>(
       () => firebaseInjectableModule.firebaseAuth);
   g.registerLazySingleton<GoogleSignIn>(
@@ -28,8 +26,6 @@ void $initGetIt(GetIt g, {String environment}) {
   g.registerLazySingleton<IAuthFacade>(
       () => FirebaseAuthFacade(g<FirebaseAuth>(), g<GoogleSignIn>()));
   g.registerFactory<SignInFormBloc>(() => SignInFormBloc(g<IAuthFacade>()));
-  g.registerFactory<String>(() => registerModule.baseUrl,
-      instanceName: 'BaseUrl');
   g.registerFactory<AuthBloc>(() => AuthBloc(g<IAuthFacade>()));
   g.registerFactory<BlogBloc>(() => BlogBloc(g<IBlogRepository>()));
 
@@ -45,5 +41,3 @@ void $initGetIt(GetIt g, {String environment}) {
 }
 
 class _$FirebaseInjectableModule extends FirebaseInjectableModule {}
-
-class _$RegisterModule extends RegisterModule {}

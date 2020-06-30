@@ -18,6 +18,7 @@ class CustomError extends StatelessWidget {
         child: Text(
           errorMessage,
           overflow: TextOverflow.fade,
+          textAlign: TextAlign.center,
           style: Theme.of(context).textTheme.headline6.copyWith(
                 color: AppTheme.errorColor,
               ),

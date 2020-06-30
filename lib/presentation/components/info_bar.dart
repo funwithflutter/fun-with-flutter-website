@@ -16,7 +16,7 @@ class InfoBar extends StatelessWidget {
         RichText(
           text: TextSpan(
             children: [
-              const TextSpan(text: 'Made with love in '),
+              const TextSpan(text: 'Made in '),
               TextSpan(
                 text: 'Flutter',
                 recognizer: TapGestureRecognizer()
