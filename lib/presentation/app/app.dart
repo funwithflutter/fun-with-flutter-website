@@ -1,13 +1,17 @@
 import 'dart:ui';
 
+import 'package:animations/animations.dart';
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:fun_with_flutter/application/blog/blog_bloc.dart';
 
 import '../../application/page/page_bloc.dart';
 import '../../infrastructure/core/urls.dart' as url;
+import '../common/adaptive_dialog.dart';
 import '../common/adaptive_scaffold.dart';
 import '../components/accent_button.dart';
+import '../core/constants.dart';
+import '../sign_in/sign_in_page.dart';
 import '../utils/custom_icons_icons.dart';
 import '../utils/url_handler.dart';
 import 'components/app_page.dart';
@@ -118,12 +122,33 @@ class _MoreButton extends StatelessWidget {
     Key key,
   }) : super(key: key);
 
+  void _signInPressed(BuildContext context) {
+    if (MediaQuery.of(context).size.width >= kTabletBreakpoint) {
+      showModal<SignInPage>(
+        context: context,
+        configuration: const FadeScaleTransitionConfiguration(),
+        builder: (BuildContext context) {
+          return const AdaptiveDialog(
+            child: SignInPage(),
+          );
+        },
+      );
+    } else {
+      ExtendedNavigator.of(context).push(
+        MaterialPageRoute<SignInPage>(
+          fullscreenDialog: true,
+          builder: (_) => const SignInPage(),
+        ),
+      );
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return IconButton(
       icon: const Icon(Icons.more_vert),
       onPressed: () {
-        print('more pressed');
+        _signInPressed(context);
       },
     );
   }

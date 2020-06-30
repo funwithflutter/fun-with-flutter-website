@@ -23,6 +23,8 @@ class SignInForm extends StatelessWidget {
                   emailAlreadyInUse: (_) => 'Email already in use',
                   invalidEmailAndPasswordCombination: (_) =>
                       'Invalid email and password combination',
+                  userDisabled: (_) =>
+                      'User disabled. Please contact the site administrator for assistance',
                 ),
               ).show(context);
             },

@@ -21,6 +21,11 @@ analyzer:
     implicit-casts: false
     implicit-dynamic: false
   errors:
+    # TODO: enable these two lint once firebase_auth throws 
+    # [PlatformException] or some other exception that can be caught 
+    argument_type_not_assignable: ignore
+    switch_expression_not_assignable: ignore
+    
     # treat missing required parameters as a warning (not a hint)
     missing_required_param: error
     # treat missing returns as a warning (not a hint)

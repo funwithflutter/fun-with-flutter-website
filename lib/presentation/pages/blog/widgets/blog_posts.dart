@@ -17,16 +17,7 @@ class BlogPosts extends StatelessWidget {
 
   static const double padding = 16;
 
-  // bool _shouldLimitNumberOfBlogs() {
-  //   if (limitNumberOfBlogs == null) {
-  //     return false;
-  //   } else {
-  //     return true;
-  //   }
-  // }
-
   int _numberOfBlogsToShow(int numberOfBlogsAvailable) {
-    print(numberOfBlogsAvailable);
     if (limitNumberOfBlogs == null) {
       return numberOfBlogsAvailable;
     }
@@ -52,9 +43,6 @@ class BlogPosts extends StatelessWidget {
       crossAxisSpacing = 0;
       childAspectRation = availableWidth / BlogPostCard.cardHeight;
     }
-
-    // final _numberOfBlogsToLoad =
-    //     (state.blog.pages.length >= 5) ? 6 : state.blog.pages.length;
 
     return SliverPadding(
       padding: const EdgeInsets.all(padding),

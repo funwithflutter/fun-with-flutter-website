@@ -27,7 +27,7 @@ class AppPage extends StatelessWidget {
           default:
             return const CustomError(
               errorMessage: '''
-                  Whoops, you found something that should not exist. Or maybe it should and it\'s an error. Who knows?
+                  Whoops, you found something that should not exist. Or maybe it should and it's an error. Who knows?
                   ''',
             );
             break;

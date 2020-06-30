@@ -32,7 +32,6 @@ class FirebaseAuthFacade implements IAuthFacade {
         .map((firebaseUser) => optionOf(firebaseUser?.toDomain()));
   }
 
-
   @override
   Future<Either<AuthFailure, Unit>> registerWithEmailAndPassword({
     @required EmailAddress emailAddress,
@@ -46,13 +45,25 @@ class FirebaseAuthFacade implements IAuthFacade {
         password: passwordStr,
       );
       return right(unit);
-    } on PlatformException catch (e) {
-      if (e.code == 'ERROR_EMAIL_ALREADY_IN_USE') {
-        return left(const AuthFailure.emailAlreadyInUse());
-      } else {
-        return left(const AuthFailure.serverError());
+    } catch (e) {
+      debugPrint(e.code);
+      switch (e.code) {
+        case "auth/email-already-in-use":
+          return left(const AuthFailure.emailAlreadyInUse());
+          break;
+        default:
+          return left(const AuthFailure.serverError());
       }
     }
+
+    /// The below works on mobile. Not on Web
+    // on PlatformException catch (e) {
+    //   if (e.code == 'ERROR_EMAIL_ALREADY_IN_USE') {
+    //     return left(const AuthFailure.emailAlreadyInUse());
+    //   } else {
+    //     return left(const AuthFailure.serverError());
+    //   }
+    // }
   }
 
   @override
@@ -68,14 +79,29 @@ class FirebaseAuthFacade implements IAuthFacade {
         password: passwordStr,
       );
       return right(unit);
-    } on PlatformException catch (e) {
-      if (e.code == 'ERROR_WRONG_PASSWORD' ||
-          e.code == 'ERROR_USER_NOT_FOUND') {
-        return left(const AuthFailure.invalidEmailAndPasswordCombination());
-      } else {
-        return left(const AuthFailure.serverError());
+    } catch (e) {
+      switch (e.code) {
+        case "auth/wrong-password":
+        case "auth/user-not-found":
+          return left(const AuthFailure.invalidEmailAndPasswordCombination());
+          break;
+        case "auth/user-disabled":
+          return left(const AuthFailure.userDisabled());
+          break;
+        default:
+          return left(const AuthFailure.serverError());
       }
     }
+
+    /// The below works on mobile. Not on web
+    // on PlatformException catch (e) {
+    //   if (e.code == 'ERROR_WRONG_PASSWORD' ||
+    //       e.code == 'ERROR_USER_NOT_FOUND') {
+    //     return left(const AuthFailure.invalidEmailAndPasswordCombination());
+    //   } else {
+    //     return left(const AuthFailure.serverError());
+    //   }
+    // }
   }
 
   @override
