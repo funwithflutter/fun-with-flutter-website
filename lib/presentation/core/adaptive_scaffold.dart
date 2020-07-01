@@ -67,45 +67,49 @@ class _AdaptiveScaffoldState extends State<AdaptiveScaffold> {
             child: Container(
               // color: const Color(0xFFF2F2F2),
               color: Theme.of(context).colorScheme.surface,
-              child: Column(
-                children: [
-                  ConstrainedBox(
-                    constraints: const BoxConstraints(maxWidth: 180),
-                    child: InkWell(
-                      onTap: widget.homePressed,
-                      child: Padding(
-                        padding: const EdgeInsets.symmetric(
-                          vertical: 32.0,
-                        ),
-                        child: Text(
-                          'Fun with Flutter',
-                          style: GoogleFonts.firaCode(
-                            textStyle: const TextStyle(fontSize: 32),
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),
-                  for (var d in widget.destinations)
-                    Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 16.0),
-                      child: ListTileTheme(
-                        selectedColor: Theme.of(context).accentColor,
-                        child: ListTile(
-                          leading: Icon(d.icon),
-                          title: Text(
-                            d.title,
-                            style: GoogleFonts.firaCode(
-                              textStyle: const TextStyle(fontSize: 18),
+              child: Scrollbar(
+                child: SingleChildScrollView(
+                  child: Column(
+                    children: [
+                      ConstrainedBox(
+                        constraints: const BoxConstraints(maxWidth: 180),
+                        child: InkWell(
+                          onTap: widget.homePressed,
+                          child: Padding(
+                            padding: const EdgeInsets.symmetric(
+                              vertical: 32.0,
+                            ),
+                            child: Text(
+                              'Fun with Flutter',
+                              style: GoogleFonts.firaCode(
+                                textStyle: const TextStyle(fontSize: 32),
+                              ),
                             ),
                           ),
-                          selected: widget.destinations.indexOf(d) ==
-                              widget.currentIndex,
-                          onTap: () => _destinationTapped(d),
                         ),
                       ),
-                    ),
-                ],
+                      for (var d in widget.destinations)
+                        Padding(
+                          padding: const EdgeInsets.symmetric(vertical: 16.0),
+                          child: ListTileTheme(
+                            selectedColor: Theme.of(context).accentColor,
+                            child: ListTile(
+                              leading: Icon(d.icon),
+                              title: Text(
+                                d.title,
+                                style: GoogleFonts.firaCode(
+                                  textStyle: const TextStyle(fontSize: 18),
+                                ),
+                              ),
+                              selected: widget.destinations.indexOf(d) ==
+                                  widget.currentIndex,
+                              onTap: () => _destinationTapped(d),
+                            ),
+                          ),
+                        ),
+                    ],
+                  ),
+                ),
               ),
             ),
           ),

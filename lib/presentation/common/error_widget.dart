@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../core/themes.dart';
+import '../core/themes.dart';
 
 @immutable
 class CustomError extends StatelessWidget {

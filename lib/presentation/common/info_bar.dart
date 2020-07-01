@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 
 import '../../infrastructure/core/urls.dart' as url;
 import '../core/themes.dart';
-import '../utils/custom_icons_icons.dart';
-import '../utils/url_handler.dart';
+import '../core/utils/custom_icons_icons.dart';
+import '../core/utils/url_handler.dart';
 
 class InfoBar extends StatelessWidget {
   const InfoBar({Key key}) : super(key: key);
@@ -54,7 +54,10 @@ class SliverBottomInfoBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const SliverToBoxAdapter(
-      child: InfoBar(),
+      child: Padding(
+        padding: EdgeInsets.symmetric(vertical: 16.0),
+        child: InfoBar(),
+      ),
     );
   }
 }

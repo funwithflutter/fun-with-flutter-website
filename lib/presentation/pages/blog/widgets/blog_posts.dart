@@ -1,21 +1,24 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 
-import '../../../../application/blog/blog_bloc.dart';
-import '../../../blog/blog_post_card.dart';
+import '../../../../domain/blog/blog.dart';
+import 'blog_post_card.dart';
 
 class BlogPosts extends StatelessWidget {
   const BlogPosts({
     Key key,
-    @required this.state,
+    @required this.blog,
     @required this.width,
+    @required this.maxWidth,
     this.limitNumberOfBlogs,
   }) : super(key: key);
 
-  final Loaded state;
+  final Blog blog;
   final double width;
+  final double maxWidth;
   final int limitNumberOfBlogs;
 
-  static const double padding = 16;
+  // static const double padding = 26;
 
   int _numberOfBlogsToShow(int numberOfBlogsAvailable) {
     if (limitNumberOfBlogs == null) {
@@ -29,26 +32,25 @@ class BlogPosts extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     int crossAxisCount;
-    double crossAxisSpacing;
+    // double crossAxisSpacing;
     double childAspectRation;
 
-    final availableWidth = width - (padding * 2);
+    final padding = (maxWidth - width) / 2;
 
-    if (availableWidth >= BlogPostCard.cardWidth * 2) {
+    if (maxWidth >= BlogPostCard.cardWidth * 2) {
       crossAxisCount = 2;
-      crossAxisSpacing = availableWidth - (BlogPostCard.cardWidth * 2);
-      childAspectRation = (availableWidth / 2) / BlogPostCard.cardHeight;
+      // crossAxisSpacing = width - (BlogPostCard.cardWidth * 2);
+      childAspectRation = (width / 2) / BlogPostCard.cardHeight;
     } else {
       crossAxisCount = 1;
-      crossAxisSpacing = 0;
-      childAspectRation = availableWidth / BlogPostCard.cardHeight;
+      // crossAxisSpacing = 0;
+      childAspectRation = width / BlogPostCard.cardHeight;
     }
-
     return SliverPadding(
-      padding: const EdgeInsets.all(padding),
+      padding: EdgeInsets.symmetric(horizontal: padding),
       sliver: SliverGrid(
         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisSpacing: crossAxisSpacing,
+          crossAxisSpacing: 8,
           mainAxisSpacing: 16,
           crossAxisCount: crossAxisCount,
           childAspectRatio: childAspectRation,
@@ -56,11 +58,11 @@ class BlogPosts extends StatelessWidget {
         delegate: SliverChildBuilderDelegate(
           (context, index) {
             return BlogPostCard(
-              key: ValueKey(state.blog.pages[index].title),
-              post: state.blog.pages[index],
+              key: ValueKey(blog.pages[index].title),
+              post: blog.pages[index],
             );
           },
-          childCount: _numberOfBlogsToShow(state.blog.pages.length),
+          childCount: _numberOfBlogsToShow(blog.pages.length),
         ),
       ),
     );
@@ -76,9 +78,12 @@ class NoBlogPosts extends StatelessWidget {
   Widget build(BuildContext context) {
     return const SliverToBoxAdapter(
       child: Center(
-        child: Text(
-          'No blog content to show :(',
-          style: TextStyle(fontSize: 18),
+        child: Padding(
+          padding: EdgeInsets.symmetric(horizontal: 8.0, vertical: 16),
+          child: Text(
+            'No blog content to show :(',
+            style: TextStyle(fontSize: 18),
+          ),
         ),
       ),
     );

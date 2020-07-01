@@ -1,7 +1,7 @@
 import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flutter/material.dart';
 
-import '../../components/info_bar.dart';
+import '../../common/info_bar.dart';
 import 'data/data.dart';
 
 class AboutPage extends StatelessWidget {
@@ -36,8 +36,11 @@ class AboutPage extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: const <Widget>[
                       _Text(aboutIntro),
+                      Text('\n'),
                       _Text(aboutGoal),
+                      Text('\n'),
                       _Text(aboutConclussion),
+                      Text('\n'),
                       _Text('- Gordon'),
                     ],
                   ),

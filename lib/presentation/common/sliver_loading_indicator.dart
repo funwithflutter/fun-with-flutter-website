@@ -9,7 +9,10 @@ class SliverLoadingIndicator extends StatelessWidget {
   Widget build(BuildContext context) {
     return const SliverToBoxAdapter(
       child: Center(
-        child: CircularProgressIndicator(),
+        child: Padding(
+          padding: EdgeInsets.symmetric(horizontal: 8.0, vertical: 16),
+          child: CircularProgressIndicator(),
+        ),
       ),
     );
   }

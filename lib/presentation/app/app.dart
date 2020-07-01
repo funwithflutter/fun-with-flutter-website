@@ -8,14 +8,15 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../application/auth/auth_bloc.dart';
 import '../../application/page/page_bloc.dart';
 import '../../infrastructure/core/urls.dart' as url;
-import '../common/adaptive_dialog.dart';
-import '../common/adaptive_scaffold.dart';
-import '../components/accent_button.dart';
+import '../common/accent_button.dart';
+import '../core/adaptive_dialog.dart';
+import '../core/adaptive_scaffold.dart';
 import '../core/constants.dart';
+import '../core/utils/custom_icons_icons.dart';
+import '../core/utils/url_handler.dart';
 import '../sign_in/sign_in_page.dart';
-import '../utils/custom_icons_icons.dart';
-import '../utils/url_handler.dart';
 import 'components/app_page.dart';
+import 'components/error_listener.dart';
 
 @immutable
 class _AppDesitination {
@@ -105,22 +106,24 @@ class _AppState extends State<App> {
 
   @override
   Widget build(BuildContext context) {
-    return AdaptiveScaffold(
-      currentIndex: _currentIndex,
-      destinations: _destinations.map((e) => e.destination).toList(),
-      onNavigationIndexChange: (index) {
-        _onNavigation(index);
-      },
-      homePressed: _homePressed,
-      actions: const [
-        Padding(
-          padding: EdgeInsets.symmetric(horizontal: 8.0),
-          child: _SubscribeButton(),
-        ),
-        _BrightnessButton(),
-        _MoreButton()
-      ],
-      body: const AppPage(),
+    return ErrorListener(
+      child: AdaptiveScaffold(
+        currentIndex: _currentIndex,
+        destinations: _destinations.map((e) => e.destination).toList(),
+        onNavigationIndexChange: (index) {
+          _onNavigation(index);
+        },
+        homePressed: _homePressed,
+        actions: const [
+          Padding(
+            padding: EdgeInsets.symmetric(horizontal: 8.0),
+            child: _SubscribeButton(),
+          ),
+          _BrightnessButton(),
+          _MoreButton()
+        ],
+        body: const AppPage(),
+      ),
     );
   }
 }

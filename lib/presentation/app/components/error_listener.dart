@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../application/blog/blog_bloc.dart';
-import '../../components/snackbar.dart';
+import '../../core/constants.dart';
+import '../../core/notification_helper.dart';
 
 class ErrorListener extends StatelessWidget {
   const ErrorListener({Key key, this.child}) : super(key: key);
@@ -16,46 +17,16 @@ class ErrorListener extends StatelessWidget {
         BlocListener<BlogBloc, BlogState>(
           listener: (context, state) {
             state.maybeMap(
-                error: (error) {
-                  Scaffold.of(context)
-                    ..removeCurrentSnackBar()
-                    ..showSnackBar(
-                      const SnackBar(
-                        content: ErrorSnackbar(
-                          message: 'Could not load blog data.',
-                        ),
-                      ),
-                    );
-                },
-                orElse: () {});
-            // if (state is BlogError) {
-            //   Scaffold.of(context)
-            //     ..removeCurrentSnackBar()
-            //     ..showSnackBar(
-            //       const SnackBar(
-            //         content: ErrorSnackbar(
-            //           message: 'Could not load blog data.',
-            //         ),
-            //       ),
-            //     );
-            // }
+              error: (error) {
+                NotificationHelper.error(
+                  message: 'Could not load blog data',
+                  isPhone: isPhoneSize(context),
+                ).show(context);
+              },
+              orElse: () {},
+            );
           },
         ),
-        // BlocListener<LoginBloc, LoginState>(
-        //   listener: (context, state) {
-        //     if (state.isFailure) {
-        //       Scaffold.of(context)
-        //         ..removeCurrentSnackBar()
-        //         ..showSnackBar(
-        //           SnackBar(
-        //             content: const ErrorSnackbar(
-        //               message: 'Error signing in.',
-        //             ),
-        //           ),
-        //         );
-        //     }
-        //   },
-        // )
       ],
       child: child,
     );
