@@ -32,6 +32,9 @@ void main() {
         create: (context) {
           return FilterBlogBloc(blogBloc: BlocProvider.of<BlogBloc>(context));
         },
+        // lazy loading off to allow blog filtering before
+        // the blog page has been accessed
+        lazy: false,
       ),
       BlocProvider<PageBloc>(create: (context) {
         return PageBloc();

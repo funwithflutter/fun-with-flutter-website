@@ -5,6 +5,7 @@ import '../../common/info_bar.dart';
 import 'data/data.dart';
 
 class AboutPage extends StatelessWidget {
+  const AboutPage();
   @override
   Widget build(BuildContext context) {
     return Center(

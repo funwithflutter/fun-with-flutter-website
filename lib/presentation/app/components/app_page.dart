@@ -16,13 +16,13 @@ class AppPage extends StatelessWidget {
       builder: (BuildContext context, PageState state) {
         switch (state) {
           case PageState.home:
-            return HomePage();
+            return const HomePage();
             break;
           case PageState.blog:
-            return FilteredBlogPage();
+            return const FilteredBlogPage();
             break;
           case PageState.about:
-            return AboutPage();
+            return const AboutPage();
             break;
           default:
             return const CustomError(

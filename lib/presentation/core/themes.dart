@@ -40,6 +40,18 @@ class AppTheme {
             surface: surfaceColor,
             onSurface: surfaceColor,
           ),
+      navigationRailTheme: const NavigationRailThemeData(
+        backgroundColor: surfaceColor,
+        selectedIconTheme: IconThemeData(color: accentColor),
+        unselectedIconTheme: IconThemeData(color: Colors.black54),
+      ),
+      bottomNavigationBarTheme: const BottomNavigationBarThemeData(
+        selectedIconTheme: IconThemeData(color: accentColor),
+        unselectedIconTheme: IconThemeData(
+          color: Colors.black54,
+        ),
+        backgroundColor: surfaceColor,
+      ),
       // fontFamily: fontFamilyDefault,
       // textTheme: GoogleFonts.firaCodeTextTheme(
       //   ThemeData.light().textTheme,

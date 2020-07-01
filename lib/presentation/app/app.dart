@@ -37,8 +37,6 @@ class App extends StatefulWidget {
 }
 
 class _AppState extends State<App> {
-  int _currentIndex = 0;
-
   List<_AppDesitination> get _destinations => const [
         _AppDesitination(
           destination: AdaptiveScaffoldDestination(
@@ -70,13 +68,6 @@ class _AppState extends State<App> {
         ),
         _AppDesitination(
           destination: AdaptiveScaffoldDestination(
-            title: 'Tags',
-            icon: Icons.label,
-          ),
-          page: PageState.packages,
-        ),
-        _AppDesitination(
-          destination: AdaptiveScaffoldDestination(
             title: 'Contact Us',
             icon: Icons.contact_phone,
           ),
@@ -87,42 +78,44 @@ class _AppState extends State<App> {
   void _onNavigation(
     int index,
   ) {
-    setState(() {
-      _currentIndex = index;
-    });
     BlocProvider.of<PageBloc>(context).add(
       PageEvent.update(_destinations[index].page),
     );
   }
 
   void _homePressed() {
-    setState(() {
-      _currentIndex = 0;
-    });
     BlocProvider.of<PageBloc>(context).add(
       const PageEvent.update(PageState.home),
     );
   }
 
+  int _getPageIndex(PageState page) {
+    return _destinations.indexWhere((element) => element.page == page);
+  }
+
   @override
   Widget build(BuildContext context) {
     return ErrorListener(
-      child: AdaptiveScaffold(
-        currentIndex: _currentIndex,
-        destinations: _destinations.map((e) => e.destination).toList(),
-        onNavigationIndexChange: (index) {
-          _onNavigation(index);
+      child: BlocBuilder<PageBloc, PageState>(
+        builder: (context, pageState) {
+          return AdaptiveScaffold(
+            currentIndex: _getPageIndex(pageState),
+            destinations: _destinations.map((e) => e.destination).toList(),
+            onNavigationIndexChange: (index) {
+              _onNavigation(index);
+            },
+            homePressed: _homePressed,
+            actions: const [
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: 8.0),
+                child: _SubscribeButton(),
+              ),
+              _BrightnessButton(),
+              _MoreButton()
+            ],
+            body: const AppPage(),
+          );
         },
-        homePressed: _homePressed,
-        actions: const [
-          Padding(
-            padding: EdgeInsets.symmetric(horizontal: 8.0),
-            child: _SubscribeButton(),
-          ),
-          _BrightnessButton(),
-          _MoreButton()
-        ],
-        body: const AppPage(),
       ),
     );
   }
@@ -151,15 +144,18 @@ class _SubscribeButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: SizedBox(
-        width: _buttonSize.width,
-        height: _buttonSize.height,
-        child: AccentButton(
-          lable: 'Subscribe on YouTube',
-          onPressed: () {
-            launchURL(url.funWithYouTubeSubscribeUrl);
-          },
+    return Visibility(
+      visible: MediaQuery.of(context).size.width > kTabletBreakpoint,
+      child: Center(
+        child: SizedBox(
+          width: _buttonSize.width,
+          height: _buttonSize.height,
+          child: AccentButton(
+            lable: 'Subscribe on YouTube',
+            onPressed: () {
+              launchURL(url.funWithYouTubeSubscribeUrl);
+            },
+          ),
         ),
       ),
     );

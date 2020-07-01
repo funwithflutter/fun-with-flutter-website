@@ -3,6 +3,7 @@ import 'package:flutter/rendering.dart';
 
 import '../../../../domain/blog/blog.dart';
 import 'blog_post_card.dart';
+import 'tag_widgets.dart';
 
 class BlogPosts extends StatelessWidget {
   const BlogPosts({
@@ -10,6 +11,7 @@ class BlogPosts extends StatelessWidget {
     @required this.blog,
     @required this.width,
     @required this.maxWidth,
+    @required this.onTagTap,
     this.limitNumberOfBlogs,
   }) : super(key: key);
 
@@ -17,8 +19,7 @@ class BlogPosts extends StatelessWidget {
   final double width;
   final double maxWidth;
   final int limitNumberOfBlogs;
-
-  // static const double padding = 26;
+  final OnTagTap onTagTap;
 
   int _numberOfBlogsToShow(int numberOfBlogsAvailable) {
     if (limitNumberOfBlogs == null) {
@@ -32,18 +33,15 @@ class BlogPosts extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     int crossAxisCount;
-    // double crossAxisSpacing;
     double childAspectRation;
 
     final padding = (maxWidth - width) / 2;
 
     if (maxWidth >= BlogPostCard.cardWidth * 2) {
       crossAxisCount = 2;
-      // crossAxisSpacing = width - (BlogPostCard.cardWidth * 2);
       childAspectRation = (width / 2) / BlogPostCard.cardHeight;
     } else {
       crossAxisCount = 1;
-      // crossAxisSpacing = 0;
       childAspectRation = width / BlogPostCard.cardHeight;
     }
     return SliverPadding(
@@ -60,6 +58,7 @@ class BlogPosts extends StatelessWidget {
             return BlogPostCard(
               key: ValueKey(blog.pages[index].title),
               post: blog.pages[index],
+              onTagTap: onTagTap,
             );
           },
           childCount: _numberOfBlogsToShow(blog.pages.length),

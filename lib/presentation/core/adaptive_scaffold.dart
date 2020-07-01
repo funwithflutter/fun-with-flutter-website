@@ -35,7 +35,7 @@ class AdaptiveScaffold extends StatefulWidget {
   final List<AdaptiveScaffoldDestination> destinations;
   final ValueChanged<int> onNavigationIndexChange;
   final FloatingActionButton floatingActionButton;
-  final Color backgroundColor;
+  // final Color backgroundColor;
 
   final VoidCallback homePressed;
 
@@ -48,7 +48,7 @@ class AdaptiveScaffold extends StatefulWidget {
     @required this.destinations,
     this.onNavigationIndexChange,
     this.floatingActionButton,
-    this.backgroundColor = const Color(0xFFFAFAFA),
+    // this.backgroundColor = const Color(0xFFFAFAFA),
     @required this.homePressed,
   }) : super(key: key);
 
@@ -65,7 +65,6 @@ class _AdaptiveScaffoldState extends State<AdaptiveScaffold> {
         children: [
           Drawer(
             child: Container(
-              // color: const Color(0xFFF2F2F2),
               color: Theme.of(context).colorScheme.surface,
               child: Scrollbar(
                 child: SingleChildScrollView(
@@ -124,7 +123,7 @@ class _AdaptiveScaffoldState extends State<AdaptiveScaffold> {
               ),
               extendBodyBehindAppBar: true,
               body: widget.body,
-              backgroundColor: widget.backgroundColor,
+              backgroundColor: Theme.of(context).colorScheme.surface,
               floatingActionButton: widget.floatingActionButton,
             ),
           ),
@@ -156,13 +155,16 @@ class _AdaptiveScaffoldState extends State<AdaptiveScaffold> {
           ),
           Expanded(
             child: Scaffold(
+              extendBodyBehindAppBar: true,
               appBar: AppBar(
                 title: widget.title,
                 actions: widget.actions,
                 backgroundColor: Colors.transparent,
+                toolbarHeight: 86,
+                elevation: 0,
               ),
               body: widget.body,
-              backgroundColor: widget.backgroundColor,
+              backgroundColor: Theme.of(context).colorScheme.surface,
             ),
           ),
         ],
@@ -174,11 +176,12 @@ class _AdaptiveScaffoldState extends State<AdaptiveScaffold> {
       appBar: AppBar(
         title: widget.title,
         actions: widget.actions,
-        backgroundColor: Colors.transparent,
+        backgroundColor: Theme.of(context).colorScheme.surface,
+        elevation: 1,
       ),
       body: widget.body,
-      backgroundColor: widget.backgroundColor,
       bottomNavigationBar: BottomNavigationBar(
+        showSelectedLabels: false,
         items: [
           ...widget.destinations.map(
             (d) => BottomNavigationBarItem(

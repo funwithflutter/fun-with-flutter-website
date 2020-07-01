@@ -15,13 +15,14 @@ PostData _$PostDataFromJson(Map<String, dynamic> json) {
 class _$PostDataTearOff {
   const _$PostDataTearOff();
 
-  _PostData call(
-      String description, String title, String uri, String thumbnail) {
+  _PostData call(String description, String title, String uri, String thumbnail,
+      [List<String> tags = const ['']]) {
     return _PostData(
       description,
       title,
       uri,
       thumbnail,
+      tags,
     );
   }
 }
@@ -34,6 +35,7 @@ mixin _$PostData {
   String get title;
   String get uri;
   String get thumbnail;
+  List<String> get tags;
 
   Map<String, dynamic> toJson();
   $PostDataCopyWith<PostData> get copyWith;
@@ -42,7 +44,12 @@ mixin _$PostData {
 abstract class $PostDataCopyWith<$Res> {
   factory $PostDataCopyWith(PostData value, $Res Function(PostData) then) =
       _$PostDataCopyWithImpl<$Res>;
-  $Res call({String description, String title, String uri, String thumbnail});
+  $Res call(
+      {String description,
+      String title,
+      String uri,
+      String thumbnail,
+      List<String> tags});
 }
 
 class _$PostDataCopyWithImpl<$Res> implements $PostDataCopyWith<$Res> {
@@ -58,6 +65,7 @@ class _$PostDataCopyWithImpl<$Res> implements $PostDataCopyWith<$Res> {
     Object title = freezed,
     Object uri = freezed,
     Object thumbnail = freezed,
+    Object tags = freezed,
   }) {
     return _then(_value.copyWith(
       description:
@@ -65,6 +73,7 @@ class _$PostDataCopyWithImpl<$Res> implements $PostDataCopyWith<$Res> {
       title: title == freezed ? _value.title : title as String,
       uri: uri == freezed ? _value.uri : uri as String,
       thumbnail: thumbnail == freezed ? _value.thumbnail : thumbnail as String,
+      tags: tags == freezed ? _value.tags : tags as List<String>,
     ));
   }
 }
@@ -73,7 +82,12 @@ abstract class _$PostDataCopyWith<$Res> implements $PostDataCopyWith<$Res> {
   factory _$PostDataCopyWith(_PostData value, $Res Function(_PostData) then) =
       __$PostDataCopyWithImpl<$Res>;
   @override
-  $Res call({String description, String title, String uri, String thumbnail});
+  $Res call(
+      {String description,
+      String title,
+      String uri,
+      String thumbnail,
+      List<String> tags});
 }
 
 class __$PostDataCopyWithImpl<$Res> extends _$PostDataCopyWithImpl<$Res>
@@ -90,23 +104,27 @@ class __$PostDataCopyWithImpl<$Res> extends _$PostDataCopyWithImpl<$Res>
     Object title = freezed,
     Object uri = freezed,
     Object thumbnail = freezed,
+    Object tags = freezed,
   }) {
     return _then(_PostData(
       description == freezed ? _value.description : description as String,
       title == freezed ? _value.title : title as String,
       uri == freezed ? _value.uri : uri as String,
       thumbnail == freezed ? _value.thumbnail : thumbnail as String,
+      tags == freezed ? _value.tags : tags as List<String>,
     ));
   }
 }
 
 @JsonSerializable()
 class _$_PostData implements _PostData {
-  const _$_PostData(this.description, this.title, this.uri, this.thumbnail)
+  const _$_PostData(this.description, this.title, this.uri, this.thumbnail,
+      [this.tags = const ['']])
       : assert(description != null),
         assert(title != null),
         assert(uri != null),
-        assert(thumbnail != null);
+        assert(thumbnail != null),
+        assert(tags != null);
 
   factory _$_PostData.fromJson(Map<String, dynamic> json) =>
       _$_$_PostDataFromJson(json);
@@ -119,10 +137,13 @@ class _$_PostData implements _PostData {
   final String uri;
   @override
   final String thumbnail;
+  @JsonKey(defaultValue: const [''])
+  @override
+  final List<String> tags;
 
   @override
   String toString() {
-    return 'PostData(description: $description, title: $title, uri: $uri, thumbnail: $thumbnail)';
+    return 'PostData(description: $description, title: $title, uri: $uri, thumbnail: $thumbnail, tags: $tags)';
   }
 
   @override
@@ -138,7 +159,9 @@ class _$_PostData implements _PostData {
                 const DeepCollectionEquality().equals(other.uri, uri)) &&
             (identical(other.thumbnail, thumbnail) ||
                 const DeepCollectionEquality()
-                    .equals(other.thumbnail, thumbnail)));
+                    .equals(other.thumbnail, thumbnail)) &&
+            (identical(other.tags, tags) ||
+                const DeepCollectionEquality().equals(other.tags, tags)));
   }
 
   @override
@@ -147,7 +170,8 @@ class _$_PostData implements _PostData {
       const DeepCollectionEquality().hash(description) ^
       const DeepCollectionEquality().hash(title) ^
       const DeepCollectionEquality().hash(uri) ^
-      const DeepCollectionEquality().hash(thumbnail);
+      const DeepCollectionEquality().hash(thumbnail) ^
+      const DeepCollectionEquality().hash(tags);
 
   @override
   _$PostDataCopyWith<_PostData> get copyWith =>
@@ -161,8 +185,8 @@ class _$_PostData implements _PostData {
 
 abstract class _PostData implements PostData {
   const factory _PostData(
-          String description, String title, String uri, String thumbnail) =
-      _$_PostData;
+      String description, String title, String uri, String thumbnail,
+      [List<String> tags]) = _$_PostData;
 
   factory _PostData.fromJson(Map<String, dynamic> json) = _$_PostData.fromJson;
 
@@ -174,6 +198,8 @@ abstract class _PostData implements PostData {
   String get uri;
   @override
   String get thumbnail;
+  @override
+  List<String> get tags;
   @override
   _$PostDataCopyWith<_PostData> get copyWith;
 }
