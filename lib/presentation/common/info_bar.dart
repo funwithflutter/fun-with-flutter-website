@@ -2,7 +2,6 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
 import '../../infrastructure/core/urls.dart' as url;
-import '../core/themes.dart';
 import '../core/utils/custom_icons_icons.dart';
 import '../core/utils/url_handler.dart';
 
@@ -11,37 +10,39 @@ class InfoBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        RichText(
-          text: TextSpan(
-            children: [
-              const TextSpan(text: 'Made in '),
-              TextSpan(
-                text: 'Flutter',
-                recognizer: TapGestureRecognizer()
-                  ..onTap = () {
-                    launchURL(url.flutterDev);
-                  },
-                style: TextStyle(color: Theme.of(context).accentColor),
-              ),
-              const TextSpan(text: ' by '),
-              TextSpan(
-                text: 'Gordon Hayes',
-                recognizer: TapGestureRecognizer()
-                  ..onTap = () {
-                    launchURL(url.funWithTwitter);
-                  },
-                style: TextStyle(color: Theme.of(context).accentColor),
-              ),
-            ],
-            style: Theme.of(context).textTheme.caption,
+    return Center(
+      child: Column(
+        children: [
+          RichText(
+            text: TextSpan(
+              children: [
+                const TextSpan(text: 'Made in '),
+                TextSpan(
+                  text: 'Flutter',
+                  recognizer: TapGestureRecognizer()
+                    ..onTap = () {
+                      launchURL(url.flutterDev);
+                    },
+                  style: TextStyle(color: Theme.of(context).accentColor),
+                ),
+                const TextSpan(text: ' by '),
+                TextSpan(
+                  text: 'Gordon Hayes',
+                  recognizer: TapGestureRecognizer()
+                    ..onTap = () {
+                      launchURL(url.funWithTwitter);
+                    },
+                  style: TextStyle(color: Theme.of(context).accentColor),
+                ),
+              ],
+              style: Theme.of(context).textTheme.caption,
+            ),
           ),
-        ),
-        const _IconBar(),
-        Text('Copyright FunWithFlutter © 2020',
-            style: Theme.of(context).textTheme.overline),
-      ],
+          const _IconBar(),
+          Text('Copyright FunWithFlutter © 2020',
+              style: Theme.of(context).textTheme.overline),
+        ],
+      ),
     );
   }
 }
@@ -107,26 +108,33 @@ class _IconBarButton extends StatefulWidget {
 }
 
 class _IconBarButtonState extends State<_IconBarButton> {
-  static const Color _stationaryColor = AppTheme.primaryColor;
-  static const Color _hoverColor = AppTheme.accentColor;
-  Color _color = _stationaryColor;
+  // static const Color _stationaryColor = Colors.white;
+  // static const Color _hoverColor = AppTheme.accentColor;
+  // Color _color = _stationaryColor;
+  bool _onHover = false;
 
   void _onTap() {
     launchURL(widget.url);
   }
 
-  void _changeButtonColor(Color color) {
+  // void _changeButtonColor(Color color) {
+  //   setState(() {
+  //     _color = color;
+  //   });
+  // }
+
+  void _onPointerEnter(PointerEnterEvent event) {
+    // _changeButtonColor(_hoverColor);
     setState(() {
-      _color = color;
+      _onHover = true;
     });
   }
 
-  void _onPointerEnter(PointerEnterEvent event) {
-    _changeButtonColor(_hoverColor);
-  }
-
   void _onPointerExit(PointerExitEvent event) {
-    _changeButtonColor(_stationaryColor);
+    // _changeButtonColor(_stationaryColor);
+    setState(() {
+      _onHover = false;
+    });
   }
 
   @override
@@ -140,7 +148,7 @@ class _IconBarButtonState extends State<_IconBarButton> {
           padding: const EdgeInsets.all(8.0),
           child: Icon(
             widget.iconData,
-            color: _color,
+            color: _onHover ? Theme.of(context).accentColor : null,
             size: 32,
           ),
         ),

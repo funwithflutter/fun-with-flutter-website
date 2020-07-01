@@ -8,6 +8,7 @@ import 'application/blog/blog_bloc.dart';
 import 'application/filtered_blog/filtered_blog_bloc.dart';
 import 'application/page/page_bloc.dart';
 import 'application/simple_bloc_delegate.dart';
+import 'application/theme/bloc/theme_bloc.dart';
 import 'injection.dart';
 import 'presentation/core/app_widget.dart';
 
@@ -38,6 +39,9 @@ void main() {
       ),
       BlocProvider<PageBloc>(create: (context) {
         return PageBloc();
+      }),
+      BlocProvider<ThemeBloc>(create: (context) {
+        return ThemeBloc();
       }),
     ],
     child: const MyApp(),

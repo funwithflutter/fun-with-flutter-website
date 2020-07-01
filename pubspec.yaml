@@ -87,16 +87,6 @@ flutter:
   # "family" key with the font family name, and a "fonts" key with a
   # list giving the asset and other descriptors for the font. For
   # example:
-  fonts:
-    - family: CustomIcons
-      fonts:
-        - asset: assets/icons/CustomIcons.ttf
-    - family: WorkSans
-      fonts:
-        - asset: assets/OpenSans-Regular.ttf
-    - family: OpenSans
-      fonts:
-        - asset: assets/OpenSans-Regular.ttf
   #   - family: Trajan Pro
   #     fonts:
   #       - asset: fonts/TrajanPro.ttf

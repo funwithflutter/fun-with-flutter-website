@@ -15,7 +15,6 @@ import 'package:fun_with_flutter/infrastructure/blog/dev_blog_repository.dart';
 import 'package:fun_with_flutter/application/auth/sign_in_form/sign_in_form_bloc.dart';
 import 'package:fun_with_flutter/application/auth/auth_bloc.dart';
 import 'package:fun_with_flutter/application/blog/blog_bloc.dart';
-import 'package:fun_with_flutter/application/filtered_blog/filtered_blog_bloc.dart';
 import 'package:get_it/get_it.dart';
 
 void $initGetIt(GetIt g, {String environment}) {
@@ -29,8 +28,6 @@ void $initGetIt(GetIt g, {String environment}) {
   g.registerFactory<SignInFormBloc>(() => SignInFormBloc(g<IAuthFacade>()));
   g.registerFactory<AuthBloc>(() => AuthBloc(g<IAuthFacade>()));
   g.registerFactory<BlogBloc>(() => BlogBloc(g<IBlogRepository>()));
-  g.registerFactory<FilterBlogBloc>(
-      () => FilterBlogBloc(blogBloc: g<BlogBloc>()));
 
   //Register prod Dependencies --------
   if (environment == 'prod') {

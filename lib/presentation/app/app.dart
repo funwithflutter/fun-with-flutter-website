@@ -7,6 +7,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../application/auth/auth_bloc.dart';
 import '../../application/page/page_bloc.dart';
+import '../../application/theme/bloc/theme_bloc.dart';
 import '../../infrastructure/core/urls.dart' as url;
 import '../common/accent_button.dart';
 import '../core/adaptive_dialog.dart';
@@ -124,12 +125,16 @@ class _AppState extends State<App> {
 class _BrightnessButton extends StatelessWidget {
   const _BrightnessButton({Key key}) : super(key: key);
 
+  void _changeTheme(BuildContext context) {
+    context.bloc<ThemeBloc>().add(const ThemeEvent.switchTheme());
+  }
+
   @override
   Widget build(BuildContext context) {
     return IconButton(
       icon: const Icon(Icons.brightness_2),
       onPressed: () {
-        print('switch brightness');
+        _changeTheme(context);
       },
     );
   }

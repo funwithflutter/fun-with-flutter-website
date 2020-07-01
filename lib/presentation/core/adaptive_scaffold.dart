@@ -123,7 +123,6 @@ class _AdaptiveScaffoldState extends State<AdaptiveScaffold> {
               ),
               extendBodyBehindAppBar: true,
               body: widget.body,
-              backgroundColor: Theme.of(context).colorScheme.surface,
               floatingActionButton: widget.floatingActionButton,
             ),
           ),
@@ -164,7 +163,6 @@ class _AdaptiveScaffoldState extends State<AdaptiveScaffold> {
                 elevation: 0,
               ),
               body: widget.body,
-              backgroundColor: Theme.of(context).colorScheme.surface,
             ),
           ),
         ],
@@ -181,6 +179,13 @@ class _AdaptiveScaffoldState extends State<AdaptiveScaffold> {
       ),
       body: widget.body,
       bottomNavigationBar: BottomNavigationBar(
+        elevation: 3.2,
+        type: BottomNavigationBarType.shifting,
+        backgroundColor: Theme.of(context).colorScheme.surface,
+        // backgroundColor: Colors.red,
+        // selectedItemColor: Colors.black,
+        // unselectedItemColor: Colors.white,
+        showUnselectedLabels: false,
         showSelectedLabels: false,
         items: [
           ...widget.destinations.map(
