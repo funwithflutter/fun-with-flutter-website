@@ -6,6 +6,6 @@ const kSideMenuWidth = 200.0;
 
 const kMaxBodyWidth = 850.0;
 
-bool isPhoneSize(BuildContext context) {
-  return MediaQuery.of(context).size.width < kTabletBreakpoint;
+bool isPhoneSize(Size screenSize) {
+  return screenSize.width < kTabletBreakpoint;
 }

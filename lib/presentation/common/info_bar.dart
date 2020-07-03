@@ -10,38 +10,41 @@ class InfoBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: Column(
-        children: [
-          RichText(
-            text: TextSpan(
-              children: [
-                const TextSpan(text: 'Made in '),
-                TextSpan(
-                  text: 'Flutter',
-                  recognizer: TapGestureRecognizer()
-                    ..onTap = () {
-                      launchURL(url.flutterDev);
-                    },
-                  style: TextStyle(color: Theme.of(context).accentColor),
-                ),
-                const TextSpan(text: ' by '),
-                TextSpan(
-                  text: 'Gordon Hayes',
-                  recognizer: TapGestureRecognizer()
-                    ..onTap = () {
-                      launchURL(url.funWithTwitter);
-                    },
-                  style: TextStyle(color: Theme.of(context).accentColor),
-                ),
-              ],
-              style: Theme.of(context).textTheme.caption,
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Center(
+        child: Column(
+          children: [
+            RichText(
+              text: TextSpan(
+                children: [
+                  const TextSpan(text: 'Made in '),
+                  TextSpan(
+                    text: 'Flutter',
+                    recognizer: TapGestureRecognizer()
+                      ..onTap = () {
+                        launchURL(url.flutterDev);
+                      },
+                    style: TextStyle(color: Theme.of(context).accentColor),
+                  ),
+                  const TextSpan(text: ' by '),
+                  TextSpan(
+                    text: 'Gordon Hayes',
+                    recognizer: TapGestureRecognizer()
+                      ..onTap = () {
+                        launchURL(url.funWithTwitter);
+                      },
+                    style: TextStyle(color: Theme.of(context).accentColor),
+                  ),
+                ],
+                style: Theme.of(context).textTheme.caption,
+              ),
             ),
-          ),
-          const _IconBar(),
-          Text('Copyright FunWithFlutter © 2020',
-              style: Theme.of(context).textTheme.overline),
-        ],
+            const _IconBar(),
+            Text('Copyright FunWithFlutter © 2020',
+                style: Theme.of(context).textTheme.overline),
+          ],
+        ),
       ),
     );
   }

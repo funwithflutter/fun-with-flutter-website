@@ -3,8 +3,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../application/page/page_bloc.dart';
 import '../../common/error_widget.dart';
-import '../../pages/about/about_page.dart';
 import '../../pages/blog/blog_page.dart';
+import '../../pages/contact/contact_page.dart';
 import '../../pages/home/home_page.dart';
 
 class AppPage extends StatelessWidget {
@@ -21,8 +21,8 @@ class AppPage extends StatelessWidget {
           case PageState.blog:
             return const FilteredBlogPage();
             break;
-          case PageState.about:
-            return const AboutPage();
+          case PageState.contact:
+            return const ContactUsPage();
             break;
           default:
             return const CustomError(

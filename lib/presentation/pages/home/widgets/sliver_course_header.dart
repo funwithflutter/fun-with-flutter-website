@@ -57,7 +57,7 @@ class SliverCourseHeader extends StatelessWidget {
                         ),
                       ),
                       AccentButton(
-                        lable: 'Start',
+                        label: 'Start',
                         onPressed: () {
                           launchURL(url.courseAnimationPerf);
                         },

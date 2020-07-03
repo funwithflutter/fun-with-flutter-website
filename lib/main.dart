@@ -5,6 +5,7 @@ import 'package:injectable/injectable.dart';
 
 import 'application/auth/auth_bloc.dart';
 import 'application/blog/blog_bloc.dart';
+import 'application/contact_form/bloc/contact_form_bloc.dart';
 import 'application/filtered_blog/filtered_blog_bloc.dart';
 import 'application/page/page_bloc.dart';
 import 'application/simple_bloc_delegate.dart';
@@ -14,11 +15,13 @@ import 'presentation/core/app_widget.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
-  configureInjection(Environment.dev);
+  String env = Environment.prod;
   assert(() {
+    env = Environment.dev;
     BlocSupervisor.delegate = SimpleBlocDelegate();
     return true;
   }());
+  configureInjection(env);
 
   runApp(MultiBlocProvider(
     providers: [
@@ -28,6 +31,9 @@ void main() {
       ),
       BlocProvider<BlogBloc>(
         create: (context) => getIt<BlogBloc>()..add(const BlogEvent.fetch()),
+      ),
+      BlocProvider<ContactFormBloc>(
+        create: (context) => getIt<ContactFormBloc>(),
       ),
       BlocProvider<FilterBlogBloc>(
         create: (context) {

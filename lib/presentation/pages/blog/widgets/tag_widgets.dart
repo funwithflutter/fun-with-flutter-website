@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../../../core/themes.dart';
+
 class TagConfiguartion {
   final String tag;
   final double height;
@@ -16,9 +18,9 @@ class TagConfiguartion {
 
   Color get getColor {
     if (!isSelected) {
-      return color.withAlpha(180);
+      return AppTheme.accentColor;
     }
-    return color;
+    return AppTheme.primaryColor;
   }
 }
 
@@ -36,20 +38,40 @@ class TagWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return InkWell(
-      onTap: () {
-        onTap(tagConfig.tag);
-      },
-      child: Container(
-        margin: const EdgeInsets.all(8),
-        padding: const EdgeInsets.all(8),
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(5),
-          color: tagConfig.getColor,
+    List<BoxShadow> shadow;
+    final translate = Matrix4.identity();
+    if (tagConfig.isSelected) {
+      translate.translate(0, -5);
+      shadow = [
+        const BoxShadow(
+          color: Colors.black26,
+          spreadRadius: 3,
+          blurRadius: 7,
+          offset: Offset(0, 3),
         ),
-        height: tagConfig.height,
-        child:
-            Text(tagConfig.tag, style: TextStyle(fontSize: tagConfig.fontSize)),
+      ];
+    }
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: InkWell(
+        onTap: () {
+          onTap(tagConfig.tag);
+        },
+        child: AnimatedContainer(
+          duration: const Duration(milliseconds: 200),
+          padding: const EdgeInsets.all(8),
+          transform: translate,
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(5),
+            boxShadow: shadow,
+            color: tagConfig.getColor,
+          ),
+          height: tagConfig.height,
+          child: Text(
+            tagConfig.tag,
+            style: TextStyle(fontSize: tagConfig.fontSize, color: Colors.white),
+          ),
+        ),
       ),
     );
   }

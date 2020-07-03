@@ -12,9 +12,12 @@ import 'package:fun_with_flutter/domain/auth/i_auth_facade.dart';
 import 'package:fun_with_flutter/infrastructure/blog/blog_repository.dart';
 import 'package:fun_with_flutter/domain/blog/i_blog_repository.dart';
 import 'package:fun_with_flutter/infrastructure/blog/dev_blog_repository.dart';
+import 'package:fun_with_flutter/infrastructure/contact_form/contact_form_repository.dart';
+import 'package:fun_with_flutter/domain/contact_form/i_contact_form_repository.dart';
 import 'package:fun_with_flutter/application/auth/sign_in_form/sign_in_form_bloc.dart';
 import 'package:fun_with_flutter/application/auth/auth_bloc.dart';
 import 'package:fun_with_flutter/application/blog/blog_bloc.dart';
+import 'package:fun_with_flutter/application/contact_form/bloc/contact_form_bloc.dart';
 import 'package:get_it/get_it.dart';
 
 void $initGetIt(GetIt g, {String environment}) {
@@ -25,9 +28,12 @@ void $initGetIt(GetIt g, {String environment}) {
       () => firebaseInjectableModule.googleSignIn);
   g.registerLazySingleton<IAuthFacade>(
       () => FirebaseAuthFacade(g<FirebaseAuth>(), g<GoogleSignIn>()));
+  g.registerFactory<IContactFormRepository>(() => ContactFormRepository());
   g.registerFactory<SignInFormBloc>(() => SignInFormBloc(g<IAuthFacade>()));
   g.registerFactory<AuthBloc>(() => AuthBloc(g<IAuthFacade>()));
   g.registerFactory<BlogBloc>(() => BlogBloc(g<IBlogRepository>()));
+  g.registerFactory<ContactFormBloc>(
+      () => ContactFormBloc(g<IContactFormRepository>()));
 
   //Register prod Dependencies --------
   if (environment == 'prod') {

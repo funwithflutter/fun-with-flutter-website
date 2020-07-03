@@ -13,6 +13,7 @@ import '../common/accent_button.dart';
 import '../core/adaptive_dialog.dart';
 import '../core/adaptive_scaffold.dart';
 import '../core/constants.dart';
+import '../core/extensions.dart';
 import '../core/utils/custom_icons_icons.dart';
 import '../core/utils/url_handler.dart';
 import '../sign_in/sign_in_page.dart';
@@ -46,13 +47,13 @@ class _AppState extends State<App> {
           ),
           page: PageState.home,
         ),
-        _AppDesitination(
-          destination: AdaptiveScaffoldDestination(
-            title: 'YouTube Videos',
-            icon: CustomIcons.youtube,
-          ),
-          page: PageState.packages,
-        ),
+        // _AppDesitination(
+        //   destination: AdaptiveScaffoldDestination(
+        //     title: 'YouTube Videos',
+        //     icon: CustomIcons.youtube,
+        //   ),
+        //   page: PageState.packages,
+        // ),
         _AppDesitination(
           destination: AdaptiveScaffoldDestination(
             title: 'Blog Posts',
@@ -60,19 +61,19 @@ class _AppState extends State<App> {
           ),
           page: PageState.blog,
         ),
-        _AppDesitination(
-          destination: AdaptiveScaffoldDestination(
-            title: 'Courses',
-            icon: Icons.school,
-          ),
-          page: PageState.packages,
-        ),
+        // _AppDesitination(
+        //   destination: AdaptiveScaffoldDestination(
+        //     title: 'Courses',
+        //     icon: Icons.school,
+        //   ),
+        //   page: PageState.packages,
+        // ),
         _AppDesitination(
           destination: AdaptiveScaffoldDestination(
             title: 'Contact Us',
             icon: Icons.contact_phone,
           ),
-          page: PageState.about,
+          page: PageState.contact,
         ),
       ];
 
@@ -131,10 +132,17 @@ class _BrightnessButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return IconButton(
-      icon: const Icon(Icons.brightness_2),
-      onPressed: () {
-        _changeTheme(context);
+    return BlocBuilder<ThemeBloc, ThemeState>(
+      builder: (context, state) {
+        return IconButton(
+          icon: state.map(
+            light: (_) => const Icon(Icons.brightness_2),
+            dark: (_) => const Icon(Icons.wb_sunny),
+          ),
+          onPressed: () {
+            _changeTheme(context);
+          },
+        );
       },
     );
   }
@@ -150,13 +158,13 @@ class _SubscribeButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Visibility(
-      visible: MediaQuery.of(context).size.width > kTabletBreakpoint,
+      visible: context.mediaSize.width > kTabletBreakpoint,
       child: Center(
         child: SizedBox(
           width: _buttonSize.width,
           height: _buttonSize.height,
           child: AccentButton(
-            lable: 'Subscribe on YouTube',
+            label: 'Subscribe on YouTube',
             onPressed: () {
               launchURL(url.funWithYouTubeSubscribeUrl);
             },
@@ -180,7 +188,7 @@ class __MoreButtonState extends State<_MoreButton> {
   bool isAuthenticated = false;
 
   void _signInPressed() {
-    if (MediaQuery.of(context).size.width >= kTabletBreakpoint) {
+    if (context.mediaSize.width >= kTabletBreakpoint) {
       showModal<SignInPage>(
         context: context,
         configuration: const FadeScaleTransitionConfiguration(),

@@ -27,6 +27,10 @@ class _$FilterBlogEventTearOff {
   _ClearFilters clearFilters() {
     return const _ClearFilters();
   }
+
+  _ErrorFromBlog errorFromBlog() {
+    return const _ErrorFromBlog();
+  }
 }
 
 // ignore: unused_element
@@ -38,12 +42,14 @@ mixin _$FilterBlogEvent {
     @required Result update(Blog blog),
     @required Result filterByTag(String tag),
     @required Result clearFilters(),
+    @required Result errorFromBlog(),
   });
   @optionalTypeArgs
   Result maybeWhen<Result extends Object>({
     Result update(Blog blog),
     Result filterByTag(String tag),
     Result clearFilters(),
+    Result errorFromBlog(),
     @required Result orElse(),
   });
   @optionalTypeArgs
@@ -51,12 +57,14 @@ mixin _$FilterBlogEvent {
     @required Result update(_Update value),
     @required Result filterByTag(_FilterByTag value),
     @required Result clearFilters(_ClearFilters value),
+    @required Result errorFromBlog(_ErrorFromBlog value),
   });
   @optionalTypeArgs
   Result maybeMap<Result extends Object>({
     Result update(_Update value),
     Result filterByTag(_FilterByTag value),
     Result clearFilters(_ClearFilters value),
+    Result errorFromBlog(_ErrorFromBlog value),
     @required Result orElse(),
   });
 }
@@ -153,10 +161,12 @@ class _$_Update with DiagnosticableTreeMixin implements _Update {
     @required Result update(Blog blog),
     @required Result filterByTag(String tag),
     @required Result clearFilters(),
+    @required Result errorFromBlog(),
   }) {
     assert(update != null);
     assert(filterByTag != null);
     assert(clearFilters != null);
+    assert(errorFromBlog != null);
     return update(blog);
   }
 
@@ -166,6 +176,7 @@ class _$_Update with DiagnosticableTreeMixin implements _Update {
     Result update(Blog blog),
     Result filterByTag(String tag),
     Result clearFilters(),
+    Result errorFromBlog(),
     @required Result orElse(),
   }) {
     assert(orElse != null);
@@ -181,10 +192,12 @@ class _$_Update with DiagnosticableTreeMixin implements _Update {
     @required Result update(_Update value),
     @required Result filterByTag(_FilterByTag value),
     @required Result clearFilters(_ClearFilters value),
+    @required Result errorFromBlog(_ErrorFromBlog value),
   }) {
     assert(update != null);
     assert(filterByTag != null);
     assert(clearFilters != null);
+    assert(errorFromBlog != null);
     return update(this);
   }
 
@@ -194,6 +207,7 @@ class _$_Update with DiagnosticableTreeMixin implements _Update {
     Result update(_Update value),
     Result filterByTag(_FilterByTag value),
     Result clearFilters(_ClearFilters value),
+    Result errorFromBlog(_ErrorFromBlog value),
     @required Result orElse(),
   }) {
     assert(orElse != null);
@@ -279,10 +293,12 @@ class _$_FilterByTag with DiagnosticableTreeMixin implements _FilterByTag {
     @required Result update(Blog blog),
     @required Result filterByTag(String tag),
     @required Result clearFilters(),
+    @required Result errorFromBlog(),
   }) {
     assert(update != null);
     assert(filterByTag != null);
     assert(clearFilters != null);
+    assert(errorFromBlog != null);
     return filterByTag(tag);
   }
 
@@ -292,6 +308,7 @@ class _$_FilterByTag with DiagnosticableTreeMixin implements _FilterByTag {
     Result update(Blog blog),
     Result filterByTag(String tag),
     Result clearFilters(),
+    Result errorFromBlog(),
     @required Result orElse(),
   }) {
     assert(orElse != null);
@@ -307,10 +324,12 @@ class _$_FilterByTag with DiagnosticableTreeMixin implements _FilterByTag {
     @required Result update(_Update value),
     @required Result filterByTag(_FilterByTag value),
     @required Result clearFilters(_ClearFilters value),
+    @required Result errorFromBlog(_ErrorFromBlog value),
   }) {
     assert(update != null);
     assert(filterByTag != null);
     assert(clearFilters != null);
+    assert(errorFromBlog != null);
     return filterByTag(this);
   }
 
@@ -320,6 +339,7 @@ class _$_FilterByTag with DiagnosticableTreeMixin implements _FilterByTag {
     Result update(_Update value),
     Result filterByTag(_FilterByTag value),
     Result clearFilters(_ClearFilters value),
+    Result errorFromBlog(_ErrorFromBlog value),
     @required Result orElse(),
   }) {
     assert(orElse != null);
@@ -383,10 +403,12 @@ class _$_ClearFilters with DiagnosticableTreeMixin implements _ClearFilters {
     @required Result update(Blog blog),
     @required Result filterByTag(String tag),
     @required Result clearFilters(),
+    @required Result errorFromBlog(),
   }) {
     assert(update != null);
     assert(filterByTag != null);
     assert(clearFilters != null);
+    assert(errorFromBlog != null);
     return clearFilters();
   }
 
@@ -396,6 +418,7 @@ class _$_ClearFilters with DiagnosticableTreeMixin implements _ClearFilters {
     Result update(Blog blog),
     Result filterByTag(String tag),
     Result clearFilters(),
+    Result errorFromBlog(),
     @required Result orElse(),
   }) {
     assert(orElse != null);
@@ -411,10 +434,12 @@ class _$_ClearFilters with DiagnosticableTreeMixin implements _ClearFilters {
     @required Result update(_Update value),
     @required Result filterByTag(_FilterByTag value),
     @required Result clearFilters(_ClearFilters value),
+    @required Result errorFromBlog(_ErrorFromBlog value),
   }) {
     assert(update != null);
     assert(filterByTag != null);
     assert(clearFilters != null);
+    assert(errorFromBlog != null);
     return clearFilters(this);
   }
 
@@ -424,6 +449,7 @@ class _$_ClearFilters with DiagnosticableTreeMixin implements _ClearFilters {
     Result update(_Update value),
     Result filterByTag(_FilterByTag value),
     Result clearFilters(_ClearFilters value),
+    Result errorFromBlog(_ErrorFromBlog value),
     @required Result orElse(),
   }) {
     assert(orElse != null);
@@ -436,6 +462,113 @@ class _$_ClearFilters with DiagnosticableTreeMixin implements _ClearFilters {
 
 abstract class _ClearFilters implements FilterBlogEvent {
   const factory _ClearFilters() = _$_ClearFilters;
+}
+
+abstract class _$ErrorFromBlogCopyWith<$Res> {
+  factory _$ErrorFromBlogCopyWith(
+          _ErrorFromBlog value, $Res Function(_ErrorFromBlog) then) =
+      __$ErrorFromBlogCopyWithImpl<$Res>;
+}
+
+class __$ErrorFromBlogCopyWithImpl<$Res>
+    extends _$FilterBlogEventCopyWithImpl<$Res>
+    implements _$ErrorFromBlogCopyWith<$Res> {
+  __$ErrorFromBlogCopyWithImpl(
+      _ErrorFromBlog _value, $Res Function(_ErrorFromBlog) _then)
+      : super(_value, (v) => _then(v as _ErrorFromBlog));
+
+  @override
+  _ErrorFromBlog get _value => super._value as _ErrorFromBlog;
+}
+
+class _$_ErrorFromBlog with DiagnosticableTreeMixin implements _ErrorFromBlog {
+  const _$_ErrorFromBlog();
+
+  @override
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+    return 'FilterBlogEvent.errorFromBlog()';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('type', 'FilterBlogEvent.errorFromBlog'));
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) || (other is _ErrorFromBlog);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  Result when<Result extends Object>({
+    @required Result update(Blog blog),
+    @required Result filterByTag(String tag),
+    @required Result clearFilters(),
+    @required Result errorFromBlog(),
+  }) {
+    assert(update != null);
+    assert(filterByTag != null);
+    assert(clearFilters != null);
+    assert(errorFromBlog != null);
+    return errorFromBlog();
+  }
+
+  @override
+  @optionalTypeArgs
+  Result maybeWhen<Result extends Object>({
+    Result update(Blog blog),
+    Result filterByTag(String tag),
+    Result clearFilters(),
+    Result errorFromBlog(),
+    @required Result orElse(),
+  }) {
+    assert(orElse != null);
+    if (errorFromBlog != null) {
+      return errorFromBlog();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  Result map<Result extends Object>({
+    @required Result update(_Update value),
+    @required Result filterByTag(_FilterByTag value),
+    @required Result clearFilters(_ClearFilters value),
+    @required Result errorFromBlog(_ErrorFromBlog value),
+  }) {
+    assert(update != null);
+    assert(filterByTag != null);
+    assert(clearFilters != null);
+    assert(errorFromBlog != null);
+    return errorFromBlog(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  Result maybeMap<Result extends Object>({
+    Result update(_Update value),
+    Result filterByTag(_FilterByTag value),
+    Result clearFilters(_ClearFilters value),
+    Result errorFromBlog(_ErrorFromBlog value),
+    @required Result orElse(),
+  }) {
+    assert(orElse != null);
+    if (errorFromBlog != null) {
+      return errorFromBlog(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _ErrorFromBlog implements FilterBlogEvent {
+  const factory _ErrorFromBlog() = _$_ErrorFromBlog;
 }
 
 class _$FilterBlogStateTearOff {

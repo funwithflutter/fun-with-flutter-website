@@ -5,13 +5,13 @@ class AccentButton extends StatelessWidget {
   const AccentButton({
     Key key,
     @required this.onPressed,
-    @required this.lable,
+    @required this.label,
   })  : assert(onPressed != null),
-        assert(lable != null),
+        assert(label != null),
         super(key: key);
 
   final VoidCallback onPressed;
-  final String lable;
+  final String label;
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +22,7 @@ class AccentButton extends StatelessWidget {
         borderRadius: BorderRadius.circular(8),
       ),
       child: Text(
-        lable,
+        label,
         style: GoogleFonts.firaCode(
           textStyle: const TextStyle(fontSize: 18, color: Colors.white),
         ),

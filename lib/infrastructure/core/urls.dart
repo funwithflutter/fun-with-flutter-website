@@ -1,7 +1,7 @@
 import 'package:meta/meta.dart';
 
 const blogTestingUrl = 'http://localhost:8000';
-const blogProductionUrl = 'https://fun-with-blog.firebaseapp.com';
+const blogProductionUrl = 'https://blog.funwith.app';
 
 const funWithYouTubeUrl = 'https://www.youtube.com/funwithflutter';
 const funWithYouTubeSubscribeUrl =

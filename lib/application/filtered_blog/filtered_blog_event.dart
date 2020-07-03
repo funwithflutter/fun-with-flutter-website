@@ -1,9 +1,11 @@
 part of 'filtered_blog_bloc.dart';
+
 @freezed
-abstract class FilterBlogEvent with _$FilterBlogEvent{
+abstract class FilterBlogEvent with _$FilterBlogEvent {
   const factory FilterBlogEvent.update(Blog blog) = _Update;
   const factory FilterBlogEvent.filterByTag(String tag) = _FilterByTag;
   const factory FilterBlogEvent.clearFilters() = _ClearFilters;
+  const factory FilterBlogEvent.errorFromBlog() = _ErrorFromBlog;
 }
 
 // @immutable

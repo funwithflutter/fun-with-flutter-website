@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../application/auth/sign_in_form/sign_in_form_bloc.dart';
 import '../../core/constants.dart';
+import '../../core/extensions.dart';
 import '../../core/notification_helper.dart';
 
 class SignInForm extends StatelessWidget {
@@ -27,7 +28,7 @@ class SignInForm extends StatelessWidget {
                   userDisabled: (_) =>
                       'User disabled. Please contact the site administrator for assistance',
                 ),
-                isPhone: isPhoneSize(context),
+                isPhone: isPhoneSize(context.mediaSize),
               ).show(context);
             },
             (_) {

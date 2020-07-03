@@ -19,7 +19,9 @@ class FilterBlogBloc extends Bloc<FilterBlogEvent, FilterBlogState> {
         loaded: (blogState) {
           add(FilterBlogEvent.update(blogState.blog));
         },
-        orElse: () {},
+        orElse: () {
+          add(const FilterBlogEvent.errorFromBlog());
+        },
       );
     });
   }
@@ -29,9 +31,11 @@ class FilterBlogBloc extends Bloc<FilterBlogEvent, FilterBlogState> {
 
   @override
   FilterBlogState get initialState {
-    return blogBloc.state.maybeMap(
-      loaded: (state) => FilterBlogState.loaded(state.blog, ''),
-      orElse: () => const FilterBlogState.loading(),
+    return blogBloc.state.map(
+      initial: (_) => const FilterBlogState.loading(),
+      loading: (_) => const FilterBlogState.loading(),
+      error: (_) => const FilterBlogState.error(),
+      loaded: (s) => FilterBlogState.loaded(s.blog, ''),
     );
   }
 
@@ -46,7 +50,16 @@ class FilterBlogBloc extends Bloc<FilterBlogEvent, FilterBlogState> {
       filterByTag: (e) async* {
         yield* _mapTagFilterToState(e);
       },
-      clearFilters: (_) async* {},
+      clearFilters: (_) async* {
+        yield* blogBloc.state.maybeMap(loaded: (s) async* {
+          yield FilterBlogState.loaded(s.blog, '');
+        }, orElse: () async* {
+          yield const FilterBlogState.error();
+        });
+      },
+      errorFromBlog: (_) async* {
+        yield const FilterBlogState.error();
+      },
     );
   }
 
