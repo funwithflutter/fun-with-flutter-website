@@ -12,14 +12,9 @@ part 'blog_state.dart';
 
 @injectable
 class BlogBloc extends Bloc<BlogEvent, BlogState> {
-  BlogBloc(this._blogRepository);
+  BlogBloc(this._blogRepository) : super(const BlogState.initial());
 
   final IBlogRepository _blogRepository;
-
-  @override
-  BlogState get initialState {
-    return const BlogState.initial();
-  }
 
   @override
   Stream<BlogState> mapEventToState(

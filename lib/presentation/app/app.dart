@@ -14,7 +14,6 @@ import '../core/adaptive_dialog.dart';
 import '../core/adaptive_scaffold.dart';
 import '../core/constants.dart';
 import '../core/extensions.dart';
-import '../core/utils/custom_icons_icons.dart';
 import '../core/utils/url_handler.dart';
 import '../sign_in/sign_in_page.dart';
 import 'components/app_page.dart';

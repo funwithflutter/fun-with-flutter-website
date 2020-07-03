@@ -20,8 +20,8 @@ dependencies:
   flutter:
     sdk: flutter
   # State management 
-  flutter_bloc: ^4.0.1
-  bloc: ^4.0.0
+  flutter_bloc: ^5.0.0
+  bloc: ^5.0.0
   freezed_annotation: ^0.11.0
   uuid: ^2.1.0
   # UI and Nav

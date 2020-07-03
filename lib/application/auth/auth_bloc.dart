@@ -18,12 +18,8 @@ part 'auth_state.dart';
 class AuthBloc extends Bloc<AuthEvent, AuthState> {
   final IAuthFacade _authFacade;
 
-  AuthBloc(this._authFacade);
-
-  @override
-  AuthState get initialState {
+  AuthBloc(this._authFacade) : super(const AuthState.initial()) {
     _subscribeToAuthStateChanged();
-    return const AuthState.initial();
   }
 
   StreamSubscription<Option<User>> _authStateStreamSubscription;

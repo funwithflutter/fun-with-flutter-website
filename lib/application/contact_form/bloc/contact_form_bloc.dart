@@ -19,10 +19,8 @@ part 'contact_form_state.dart';
 class ContactFormBloc extends Bloc<ContactFormEvent, ContactFormState> {
   final IContactFormRepository _contactFormRepository;
 
-  ContactFormBloc(this._contactFormRepository);
-
-  @override
-  ContactFormState get initialState => ContactFormState.initial();
+  ContactFormBloc(this._contactFormRepository)
+      : super(ContactFormState.initial());
 
   @override
   Stream<ContactFormState> mapEventToState(

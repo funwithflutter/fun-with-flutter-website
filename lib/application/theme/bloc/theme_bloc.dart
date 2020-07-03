@@ -10,8 +10,7 @@ part 'theme_state.dart';
 part 'theme_bloc.freezed.dart';
 
 class ThemeBloc extends Bloc<ThemeEvent, ThemeState> {
-  @override
-  ThemeState get initialState => const ThemeState.light();
+  ThemeBloc() : super(const ThemeState.light());
 
   @override
   Stream<ThemeState> mapEventToState(

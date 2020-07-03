@@ -13,7 +13,13 @@ part 'filtered_blog_event.dart';
 part 'filtered_blog_state.dart';
 
 class FilterBlogBloc extends Bloc<FilterBlogEvent, FilterBlogState> {
-  FilterBlogBloc({@required this.blogBloc}) {
+  FilterBlogBloc({@required this.blogBloc})
+      : super(blogBloc.state.map(
+          initial: (_) => const FilterBlogState.loading(),
+          loading: (_) => const FilterBlogState.loading(),
+          error: (_) => const FilterBlogState.error(),
+          loaded: (s) => FilterBlogState.loaded(s.blog, ''),
+        )) {
     _blogSubscription = blogBloc.listen((blogState) {
       blogState.maybeMap(
         loaded: (blogState) {
@@ -28,16 +34,6 @@ class FilterBlogBloc extends Bloc<FilterBlogEvent, FilterBlogState> {
 
   final BlogBloc blogBloc;
   StreamSubscription _blogSubscription;
-
-  @override
-  FilterBlogState get initialState {
-    return blogBloc.state.map(
-      initial: (_) => const FilterBlogState.loading(),
-      loading: (_) => const FilterBlogState.loading(),
-      error: (_) => const FilterBlogState.error(),
-      loaded: (s) => FilterBlogState.loaded(s.blog, ''),
-    );
-  }
 
   @override
   Stream<FilterBlogState> mapEventToState(

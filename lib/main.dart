@@ -8,7 +8,7 @@ import 'application/blog/blog_bloc.dart';
 import 'application/contact_form/bloc/contact_form_bloc.dart';
 import 'application/filtered_blog/filtered_blog_bloc.dart';
 import 'application/page/page_bloc.dart';
-import 'application/simple_bloc_delegate.dart';
+import 'application/simple_bloc_observer.dart';
 import 'application/theme/bloc/theme_bloc.dart';
 import 'injection.dart';
 import 'presentation/core/app_widget.dart';
@@ -18,7 +18,7 @@ void main() {
   String env = Environment.prod;
   assert(() {
     env = Environment.dev;
-    BlocSupervisor.delegate = SimpleBlocDelegate();
+    Bloc.observer = SimpleBlocObserver();
     return true;
   }());
   configureInjection(env);
