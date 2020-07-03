@@ -20,7 +20,7 @@ class SignInForm extends StatelessWidget {
             (failure) {
               NotificationHelper.error(
                 message: failure.map(
-                  cancelledByUser: (_) => 'Cancelled',
+                  cancelledByUser: (_) => 'Sign in cancelled',
                   serverError: (_) => 'Server error',
                   emailAlreadyInUse: (_) => 'Email already in use',
                   invalidEmailAndPasswordCombination: (_) =>

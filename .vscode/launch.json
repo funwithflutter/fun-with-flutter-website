@@ -7,7 +7,13 @@
         {
             "name": "Flutter",
             "request": "launch",
-            "type": "dart"
+            "type": "dart",
+            "args": [
+                "--web-hostname",
+                "localhost",
+                "--web-port",
+                "5000"
+            ]
         }
     ]
 }
