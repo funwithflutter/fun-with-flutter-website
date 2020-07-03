@@ -1,5 +1,14 @@
 {
   "projects": {
     "default": "fun-with"
+  },
+  "targets": {
+    "fun-with": {
+      "hosting": {
+        "app": [
+          "fun-with"
+        ]
+      }
+    }
   }
 }
