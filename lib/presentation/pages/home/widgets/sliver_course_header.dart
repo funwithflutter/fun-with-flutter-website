@@ -23,7 +23,8 @@ class SliverCourseHeader extends StatelessWidget {
                 decoration: const BoxDecoration(
                   image: DecorationImage(
                     fit: BoxFit.cover,
-                    image: ExactAssetImage('images/course_background.png'),
+                    image:
+                        ExactAssetImage('assets/images/course_background.png'),
                   ),
                 ),
               ),
