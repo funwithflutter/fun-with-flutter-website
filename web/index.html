@@ -1,14 +1,37 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 
 <head>
   <meta charset="UTF-8">
+  <meta content="IE=Edge" http-equiv="X-UA-Compatible">
+  <meta name="description" content="A new Flutter project.">
+
+  <!-- Preconect -->
+  <link rel="preconnect" href="https://firebaseremoteconfig.googleapis.com">
+  <link rel="preconnect" href="https://apis.google.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  
+
+  <!-- Preload -->
+  <link rel="preload" href="main.dart.js" as="script">
+  <link rel="preload" href="assets/fonts/MaterialIcons-Regular.ttf" as="font">
+  <link rel="preload" href="assets/packages/cupertino_icons/assets/CupertinoIcons.ttf" as="font">
+  <link rel="preload" href="assets/assets/icons/CustomIcons.ttf" as="font">
+
+  <!-- iOS meta tags & icons -->
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="apple-mobile-web-app-title" content="fun_with_flutter_website">
+  <link rel="apple-touch-icon" href="icons/Icon-192.png">
+
+  <!-- Google sign in -->
   <meta name="google-signin-client_id"
     content="1006728819313-5sr9q5ph7be2qmsvmi68dvct1vf7lcmt.apps.googleusercontent.com">
-  <title></title>
-  <!-- <script defer src="main.dart.js" type="application/javascript"></script> -->
-  <link rel="icon" href="/assets/images/funwith_favicon.png">
+  <!-- Favicon -->
+  <link rel="shortcut icon" type="image/png" href="/assets/images/funwith_favicon.png" />
 
+  <title>fun_with_flutter_website</title>
+  <link rel="manifest" href="manifest.json">
   <style>
     /* Center the loader */
     #loader {
@@ -57,7 +80,6 @@
       }
     }
   </style>
-
 </head>
 
 <body>
@@ -88,16 +110,16 @@
   <div id="loader"></div>
 
 
-  <!-- TODO serviceWorker -->
-  <!-- <script>
+  <!-- This script installs service_worker.js to provide PWA functionality to
+       application. For more information, see:
+       https://developers.google.com/web/fundamentals/primers/service-workers -->
+  <script>
     if ('serviceWorker' in navigator) {
       window.addEventListener('load', function () {
         navigator.serviceWorker.register('flutter_service_worker.js');
       });
     }
-  </script> -->
-
-
+  </script>
   <script src="main.dart.js" type="application/javascript"></script>
   <script>
     const firebaseConfig = {
@@ -112,10 +134,6 @@
     firebase.initializeApp(firebaseConfig);
     var perf = firebase.performance();
   </script>
-
-
-
-
 </body>
 
 </html>
