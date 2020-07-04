@@ -15,7 +15,7 @@ import '../core/adaptive_scaffold.dart';
 import '../core/constants.dart';
 import '../core/extensions.dart';
 import '../core/utils/url_handler.dart';
-import '../sign_in/sign_in_page.dart';
+import '../sign_in/sign_in_page.dart' deferred as sign_in;
 import 'components/app_page.dart';
 import 'components/error_listener.dart';
 
@@ -112,7 +112,7 @@ class _AppState extends State<App> {
                 child: _SubscribeButton(),
               ),
               _BrightnessButton(),
-              _MoreButton()
+              _MenuButton()
             ],
             body: const AppPage(),
           );
@@ -174,34 +174,35 @@ class _SubscribeButton extends StatelessWidget {
   }
 }
 
-class _MoreButton extends StatefulWidget {
-  const _MoreButton({
+class _MenuButton extends StatefulWidget {
+  const _MenuButton({
     Key key,
   }) : super(key: key);
 
   @override
-  __MoreButtonState createState() => __MoreButtonState();
+  _MenuButtonState createState() => _MenuButtonState();
 }
 
-class __MoreButtonState extends State<_MoreButton> {
+class _MenuButtonState extends State<_MenuButton> {
   bool isAuthenticated = false;
 
-  void _signInPressed() {
+  Future<void> _signInPressed() async {
+    await sign_in.loadLibrary();
     if (context.mediaSize.width >= kTabletBreakpoint) {
-      showModal<SignInPage>(
+      showModal<dynamic>(
         context: context,
         configuration: const FadeScaleTransitionConfiguration(),
         builder: (BuildContext context) {
-          return const AdaptiveDialog(
-            child: SignInPage(),
+          return AdaptiveDialog(
+            child: sign_in.SignInPage(),
           );
         },
       );
     } else {
-      ExtendedNavigator.of(context).push(
-        MaterialPageRoute<SignInPage>(
+      ExtendedNavigator.of(context).push<dynamic>(
+        MaterialPageRoute<dynamic>(
           fullscreenDialog: true,
-          builder: (_) => const SignInPage(),
+          builder: (_) => sign_in.SignInPage(),
         ),
       );
     }

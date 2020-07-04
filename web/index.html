@@ -8,6 +8,56 @@
   <title></title>
   <!-- <script defer src="main.dart.js" type="application/javascript"></script> -->
   <link rel="icon" href="/assets/images/funwith_favicon.png">
+
+  <style>
+    /* Center the loader */
+    #loader {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      width: 150px;
+      height: 150px;
+      margin: -75px 0 0 -75px;
+      border: 8px solid #f3f3f3;
+      border-radius: 50%;
+      border-top: 8px solid #284B63;
+      width: 80px;
+      height: 80px;
+      -webkit-animation: spin 1s linear infinite;
+      animation: spin s linear infinite;
+    }
+
+    @-webkit-keyframes spin {
+      0% {
+        -webkit-transform: rotate(0deg);
+      }
+
+      100% {
+        -webkit-transform: rotate(360deg);
+      }
+    }
+
+    @keyframes spin {
+      0% {
+        transform: rotate(0deg);
+      }
+
+      100% {
+        transform: rotate(360deg);
+      }
+    }
+
+    @keyframes spin {
+      0% {
+        transform: rotate(0deg);
+      }
+
+      100% {
+        transform: rotate(360deg);
+      }
+    }
+  </style>
+
 </head>
 
 <body>
@@ -40,6 +90,13 @@
 
   <!-- Initialize Firebase -->
   <!-- <script src="/__/firebase/init.js"></script> -->
+  <div id="loader"></div>
+
+  <script>
+    $(window).on("load", function () {
+      $("#loader").fadeOut("slow");
+    })
+  </script>
 
   <script>
     if ('serviceWorker' in navigator) {
@@ -49,14 +106,9 @@
     }
   </script>
 
-  <!-- Initialize Performance Monitoring and get a reference to the service -->
+
+  <script src="main.dart.js" type="application/javascript"></script>
   <script>
-    // document.addEventListener('keydown', function (event) {
-    //   // console.log('event key'+event.code);
-    //   if (event.code == 'Tab') {
-    //     event.preventDefault();
-    //   }
-    // });
     const firebaseConfig = {
       apiKey: "AIzaSyD8JoU_58xKlQFvva7nS7VHTKc1vUkaosk",
       authDomain: "fuwith.app",
@@ -69,7 +121,9 @@
     firebase.initializeApp(firebaseConfig);
     var perf = firebase.performance();
   </script>
-  <script src="main.dart.js" type="application/javascript"></script>
+
+
+
 
 </body>
 
